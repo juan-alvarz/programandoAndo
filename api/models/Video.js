@@ -7,13 +7,7 @@ const VideoSchema = new Schema(
     },
     description: {
       type: String,
-    },
-    courses: {
-      type: Array,
-    },
-    image: {
-      type: String,
-    },
+    },   
     duration: {
       type: String,
     },
