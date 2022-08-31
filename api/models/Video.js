@@ -4,21 +4,20 @@ const VideoSchema = new Schema(
   {
     name: {
       type: String,
+      unique: true
     },
     description: {
-      type: String,
-    },
-    courses: {
-      type: Array,
-    },
-    image: {
       type: String,
     },
     duration: {
       type: String,
     },
     difficult: {
-      type: String,
+      type: ['principiante', 'intermedio', 'avanzado'],
+      default: 'principiante'
+    },
+    url: {
+      type: String
     },
   },
   {
