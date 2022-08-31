@@ -12,8 +12,8 @@ const CourseSchema = new Schema(
       type: String,
     },
     videos: {
-      type: mongoose.Types.ObjectId,
-      ref: "Video",
+      type: Schema.Types.ObjectId,
+      ref: 'Video'
     },
     image: {
       type: String,
