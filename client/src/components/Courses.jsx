@@ -1,7 +1,10 @@
 import React from "react";
+import data from "../utils/data"
 
 function Courses() {
-  return <div>Courses</div>;
+  console.log(data)
+  
+  return <div>Courseswagawggwagwawgagwg</div>;
 }
 
 export default Courses;

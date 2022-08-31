@@ -1,11 +1,7 @@
-<<<<<<< HEAD
+
 import React from 'react'
 
-export const NavBar = () => {
-  return (
-    <div>NavBar</div>
-  )
-=======
+
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -174,5 +170,5 @@ export default function NavBar() {
       )}
     </Disclosure>
   );
->>>>>>> 895499a51d34f6070bdc06e58c8ac7f144d3d512
+
 }

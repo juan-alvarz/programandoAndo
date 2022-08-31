@@ -1,4 +1,4 @@
-[
+const  data=[
     {
     name: 'Front-End',
     description: 'Aguante el Front',
@@ -64,3 +64,6 @@
         image: 'urlSchool'
     }
 ]
+
+
+export default data;
