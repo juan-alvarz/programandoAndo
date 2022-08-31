@@ -1,4 +1,4 @@
-[
+const data = [
     {
     name: 'Front-End',
     description: 'Aguante el Front',
@@ -6,9 +6,11 @@
         name: 'Javascript',
         description: 'Aguante Javascript',
         videos: [{
-            name: 'Console.log con Midu',
+            name: 'Console.log',
             description: 'Console.log explicado por Midu',
             duration: '10:00min',
+            author: 'Midu',
+            profile: 'urlChannel',
             difficult: 'principiante',
             url: 'urlCursoJavascriptMidu'
             },
@@ -16,6 +18,8 @@
             name: 'For con Midu',
             description: 'For explicado por Midu',
             duration: '15:00min',
+            author: 'Midu',
+            profile: 'urlChannel',
             difficult: 'principiante',
             url: 'urlCursoJavascriptMidu'
             },
@@ -23,6 +27,8 @@
             name: 'Map con Midu',
             description: 'Map explicado por Midu',
             duration: '20:00min',
+            author: 'Midu',
+            profile: 'urlChannel',
             difficult: 'principiante',
             url: 'urlCursoJavascriptMidu'
             }
@@ -41,6 +47,8 @@
                 name: 'Routes con Midu',
                 description: 'Routes explicado por Midu',
                 duration: '10:00min',
+                author: 'Midu',
+                profile: 'urlChannel',
                 difficult: 'principiante',
                 url: 'urlCursoNodeMidu'
                 },
@@ -48,6 +56,8 @@
                 name: 'Modelos con Midu',
                 description: 'Modelos explicado por Midu',
                 duration: '15:00min',
+                author: 'Midu',
+                profile: 'urlChannel',
                 difficult: 'principiante',
                 url: 'urlCursoNodeMidu'
                 },
@@ -55,6 +65,8 @@
                 name: 'Middlewares con Midu',
                 description: 'Middlewares explicado por Midu',
                 duration: '20:00min',
+                author: 'Midu',
+                profile: 'urlChannel',
                 difficult: 'principiante',
                 url: 'urlCursoNodeMidu'
                 }
@@ -64,3 +76,5 @@
         image: 'urlSchool'
     }
 ]
+
+export default data
