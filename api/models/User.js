@@ -13,8 +13,7 @@ const UserSchema = new Schema(
       type: String,
     },
     schools: {
-      type: Schema.Types.ObjectId,
-      default: [],
+      type: [Schema.Types.ObjectId],
       ref: 'School'
     },
     contributor: { type: Boolean },

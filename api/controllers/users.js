@@ -28,7 +28,7 @@ const createUser = async (req, res, next) => {
     try {
         const body = req.body;
         const user = await usersModel.create(body);
-        return res.json
+        return res.json(user)
     } catch (e) {
         return res.json(e.message)
     }
