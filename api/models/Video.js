@@ -22,7 +22,7 @@ const VideoSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: true,
+    // versionKey: true,
   }
 );
 

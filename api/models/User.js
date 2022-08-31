@@ -14,6 +14,7 @@ const UserSchema = new Schema(
     },
     schools: {
       type: Schema.Types.ObjectId,
+      default: [],
       ref: 'School'
     },
     contributor: { type: Boolean },
@@ -22,7 +23,7 @@ const UserSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: true,
+    // versionKey: true,
   }
 );
 
