@@ -1,4 +1,6 @@
 const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const Video = require("./Video.js");
 
 const CourseSchema = new Schema(
   {
@@ -10,7 +12,8 @@ const CourseSchema = new Schema(
       type: String,
     },
     videos: {
-      type: Array,
+      type: mongoose.Types.ObjectId,
+      ref: "Video",
     },
     image: {
       type: String,
