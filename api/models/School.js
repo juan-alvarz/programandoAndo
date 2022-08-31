@@ -9,8 +9,9 @@ const SchoolSchema = new Schema(
     description: {
       type: String,
     },
-    courses: {
-      type: Array,
+    course: {
+      type: Schema.Types.ObjectId,
+      ref: 'Course'
     },
     image: {
       type: String,
