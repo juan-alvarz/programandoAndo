@@ -18,7 +18,7 @@ const SchoolSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: true,
+    //versionKey: true,
   }
 );
 

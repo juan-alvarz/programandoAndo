@@ -8,8 +8,8 @@ const VideoSchema = new Schema(
     description: {
       type: String,
     },
-    courses: {
-      type: Array,
+    url: {
+      type: String,
     },
     image: {
       type: String,
@@ -23,7 +23,7 @@ const VideoSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: true,
+    //versionKey: true,
   }
 );
 
