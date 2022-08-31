@@ -6,10 +6,12 @@ import LandingPage from "./components/LandingPage";
 import NavBar from "./components/NavBar";
 import Courses from "./components/Courses";
 import { useSelector } from "react-redux";
+import schools from "./utils/data";
 
 function App() {
   const { courses } = useSelector((state) => state.programandoando);
   console.log(courses);
+  console.log(schools);
   return (
     <BrowserRouter>
       <div className="App">
