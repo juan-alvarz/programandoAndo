@@ -13,7 +13,7 @@ const getAllUsers = async (req, res, next) => {
 const getUserById = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const user = await usersModel.findById(id).exec().populate('schools');
+        const user = await usersModel.findById(id).exec();
         if (!user) {
             res.status(404)
             return res.send('Usuario inexistente')
