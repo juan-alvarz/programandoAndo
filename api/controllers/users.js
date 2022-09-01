@@ -15,6 +15,7 @@ const getUserById = async (req, res, next) => {
         const { id } = req.params;
         const user = await usersModel.findById(id).exec().populate('schools');
         if (!user) {
+            res.status(404)
             return res.send('Usuario inexistente')
         }
         return res.json(user)
@@ -28,6 +29,7 @@ const createUser = async (req, res, next) => {
     try {
         const body = req.body;
         const user = await usersModel.create(body);
+        res.status(201)
         return res.json(user)
     } catch (e) {
         return res.json(e.message)
