@@ -9,7 +9,7 @@ const SchoolSchema = new Schema(
     description: {
       type: String,
     },
-    course: {
+    courses: {
       type: [Schema.Types.ObjectId],
       ref: "Course",
     },
@@ -19,7 +19,7 @@ const SchoolSchema = new Schema(
   },
   {
     timestamps: true,
-    //versionKey: true,
+    versionKey: false,
   }
 );
 
