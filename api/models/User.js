@@ -13,8 +13,8 @@ const UserSchema = new Schema(
       type: String,
     },
     schools: {
-      type: Schema.Types.ObjectId,
-      ref: 'School'
+      type: [Schema.Types.ObjectId],
+      ref: "School",
     },
     contributor: { type: Boolean },
     banned: { type: Boolean },
@@ -22,7 +22,7 @@ const UserSchema = new Schema(
   },
   {
     timestamps: true,
-    //versionKey: true,
+    //versionKey: false,
   }
 );
 

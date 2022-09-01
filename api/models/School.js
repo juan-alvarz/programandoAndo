@@ -10,8 +10,8 @@ const SchoolSchema = new Schema(
       type: String,
     },
     course: {
-      type: Schema.Types.ObjectId,
-      ref: 'Course'
+      type: [Schema.Types.ObjectId],
+      ref: "Course",
     },
     image: {
       type: String,
