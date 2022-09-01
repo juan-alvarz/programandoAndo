@@ -3,15 +3,14 @@ const {schoolModel, courseModel} = require('../models')
 // ============================= GET SCHOOLS DATABASE ========================
 
 const getAllSchool = async (req,res) =>{
-    const {name} = req.body    
-    const data = await schoolModel.find({}).populate('courses')
-    .populate({
+    const {name} = req.body
+    const data = await schoolModel.find({}).populate({
         path: 'courses',
-        populate: {
+        populate :{
             path: 'videos'
         }
-    })   
-
+    }) //.populate('videos')
+   // data = JSON.parse(data)
     try {
         if(name){
             const find = await schoolModel.findOne({name:name})
