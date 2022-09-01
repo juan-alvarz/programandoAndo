@@ -19,7 +19,7 @@ const CourseSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: true,
+    versionKey: false,
   }
 );
 

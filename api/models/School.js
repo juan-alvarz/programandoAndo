@@ -9,8 +9,8 @@ const SchoolSchema = new Schema(
     description: {
       type: String,
     },
-    course: {
-      type: Schema.Types.ObjectId,
+    courses: {
+      type: [Schema.Types.ObjectId],
       ref: 'Course'
     },
     image: {
@@ -19,7 +19,7 @@ const SchoolSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: true,
+    versionKey: false,
   }
 );
 

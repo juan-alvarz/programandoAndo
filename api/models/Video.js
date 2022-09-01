@@ -9,10 +9,7 @@ const VideoSchema = new Schema(
     description: {
       type: String,
 
-    },   
-
-    
-
+    },  
     duration: {
       type: String,
     },
@@ -26,7 +23,7 @@ const VideoSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: true,
+    versionKey: false,
   }
 );
 
