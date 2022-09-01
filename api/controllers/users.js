@@ -2,7 +2,13 @@ const { usersModel } = require("../models/index");
 
 const getAllUsers = async (req, res, next) => {
     try {
-        const users = await usersModel.find({}).populate('schools')
+        const users = await usersModel.find({}).populate({
+            path: 'schools',
+            populate: {
+                path: "courses",
+                populate: { path: "videos" }
+            }
+        })
         return res.json(users)
     } catch (e) {
         // res.status(e.response.status)
@@ -13,7 +19,13 @@ const getAllUsers = async (req, res, next) => {
 const getUserById = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const user = await usersModel.findById(id).exec();
+        const user = await usersModel.findById(id).populate({
+            path: 'schools',
+            populate: {
+                path: "courses",
+                populate: { path: "videos" }
+            }
+        });
         if (!user) {
             res.status(404)
             return res.send('Usuario inexistente')
