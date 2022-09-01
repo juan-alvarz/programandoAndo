@@ -1,25 +1,34 @@
-const {check} = require('express-validator');
+const { check } = require('express-validator');
 const validateResults = require('../utils/handleValidator');
 
 const validatorCreateUser = [
     check("name")
-    .exists()
-    .notEmpty(),
+        .exists()
+        .notEmpty(),
 
     check("email")
-    .exists()
-    .notEmpty(),
+        .exists()
+        .notEmpty()
+        .isEmail(),
 
     check("password")
-    .exists()
-    .notEmpty(),
+        .exists()
+        .notEmpty(),
 
     check("contributor")
-    .exists()
-    .notEmpty(),
+        .exists()
+        .notEmpty(),
 
-    (req,res,next) =>{
-        return validateResults(req,res,next)
+    check("banned")
+        .exists()
+        .notEmpty(),
+
+    check("isAdmin")
+        .exists()
+        .notEmpty(),
+
+    (req, res, next) => {
+        return validateResults(req, res, next)
     }
 ];
 
