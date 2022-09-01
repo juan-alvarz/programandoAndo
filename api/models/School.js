@@ -11,7 +11,7 @@ const SchoolSchema = new Schema(
     },
     courses: {
       type: [Schema.Types.ObjectId],
-      ref: 'Course'
+      ref: "Course",
     },
     image: {
       type: String,
