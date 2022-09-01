@@ -1,4 +1,6 @@
 const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const Video = require("./Video.js");
 
 const CourseSchema = new Schema(
   {

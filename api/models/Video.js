@@ -4,25 +4,32 @@ const VideoSchema = new Schema(
   {
     name: {
       type: String,
-      unique: true
+      unique: true,
     },
     description: {
+      type: String,
+    },
+    author: {
+      type: String,
+    },
+    profile: {
       type: String,
     },
     duration: {
       type: String,
     },
     difficult: {
-      type: ['principiante', 'intermedio', 'avanzado'],
-      default: 'principiante'
+      type: String,
+      enum: ["principiante", "intermedio", "avanzado"],
+      default: "principiante",
     },
     url: {
-      type: String
+      type: String,
     },
   },
   {
     timestamps: true,
-    //versionKey: false,
+    //versionKey: true,
   }
 );
 
