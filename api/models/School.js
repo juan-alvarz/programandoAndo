@@ -9,17 +9,19 @@ const SchoolSchema = new Schema(
     description: {
       type: String,
     },
-    course: {
-      type: Schema.Types.ObjectId,
-      ref: 'Course'
-    },
+    courses: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
     image: {
       type: String,
     },
   },
   {
     timestamps: true,
-    // versionKey: true,
+    versionKey: false,
   }
 );
 
