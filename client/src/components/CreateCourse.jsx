@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 // import { NavLink } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
+import { useForm } from "react-hook-form";
 import { schools } from "../utils/schools";
 import { lenguages } from "../utils/lenguages";
 
 export default function CreateCourse() {
+  // react-hook-forms
+  const { register, handleSubmit, watch, formState } = useForm();
+
+  const sendSubmit = (data) => {
+    alert("Validacion Exitosa!!!");
+  };
+
   const [input, setInput] = useState({
     name: "",
     video: "",
@@ -53,11 +61,21 @@ export default function CreateCourse() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(input);
-    alert("Funciona");
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(input);
+  //   alert("Video Creado");
+  //   setInput({
+  //     name: "",
+  //     video: "",
+  //     canal: "",
+  //     description: "",
+  //     author: "",
+  //     image: "",
+  //     schools: [],
+  //     lenguages: [],
+  //   });
+  // };
   return (
     <>
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
