@@ -9,6 +9,7 @@ import LandingPage from "./components/LandingPage";
 import NavBar from "./components/NavBar";
 import Courses from "./components/Courses";
 import { useSelector } from "react-redux";
+import Video from "./components/Video";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/video" element={<Video />} />
         </Routes>
       </div>
     </BrowserRouter>
