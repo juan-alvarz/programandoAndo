@@ -10,7 +10,7 @@ const CourseSchema = new Schema(
       type: String,
     },
     videos: {
-      type: Schema.Types.ObjectId,
+      type: [Schema.Types.ObjectId],
       ref: 'Video'
     },
     image: {
@@ -19,7 +19,7 @@ const CourseSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: true,
+    //versionKey: true,
   }
 );
 
