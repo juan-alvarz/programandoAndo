@@ -9,8 +9,8 @@ const getAllSchool = async (req, res) => {
     populate: {
       path: "videos",
     },
-  });
-
+  }); //.populate('videos')
+  // data = JSON.parse(data)
   try {
     if (name) {
       const find = await schoolModel.findOne({ name: name });
