@@ -28,7 +28,7 @@ const getUserById = async (req, res, next) => {
         });
         if (!user) {
             res.status(404)
-            return res.send('Usuario inexistente')
+            return res.send("user doesn't exist")
         }
         return res.json(user)
 
