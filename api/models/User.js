@@ -12,10 +12,10 @@ const UserSchema = new Schema(
     password: {
       type: String,
     },
-    schools: {
-      type: [Schema.Types.ObjectId],
+    schools: [{
+      type: Schema.Types.ObjectId,
       ref: 'School'
-    },
+    }],
     contributor: { type: Boolean },
     banned: { type: Boolean },
     isAdmin: { type: Boolean, default: false },
