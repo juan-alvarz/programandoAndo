@@ -1,5 +1,5 @@
-const {matchedData} = require ('express-validator')
-const {courseModel} = require ('../models')
+const { matchedData } = require('express-validator')
+const { courseModel } = require('../models')
 const { handleHttpError } = require('../utils/handleError');
 
 
@@ -13,21 +13,20 @@ const getCourses = async (req, res) => {
 // OBTENER DETALLE DE UN CURSO DE LA BASE DE DATOS
 const getCourseById = async (req, res) => {
     try {
-     //   req = matchedData(req);
-        const {id} = req.params;
+        //   req = matchedData(req);
+        const { id } = req.params;
         const data = await courseModel.findById(id).populate('videos');
-        res.send( {data} );
-   } catch (error) {
-       handleHttpError(res, 'ERROR_GET_COURSE')
-   }
+        res.json(data);
+    } catch (error) {
+        handleHttpError(res, 'ERROR_GET_COURSE')
+    }
 }
 
 // CREAR CURSO EN LA BASE DE DATOS
 const createCourse = async (req, res) => {
     const body = req.body
-    console.log(body)
     const data = await courseModel.create(body)
-    res.send({data})
+    res.json(data)
 }
 
 
