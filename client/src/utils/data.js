@@ -62,7 +62,39 @@ const  data=[
             image: 'urlCourse'
         }],
         image: 'urlSchool'
-    }
+    },
+    {
+        name: 'Full-Stack',
+        description: 'Aguante el Full Stack aplication',
+        course: [{
+            name: 'Javascript-react-node',
+            description: 'Aguante react-express',
+            videos: [{
+                name: 'Console.log con Midu',
+                description: 'Console.log explicado por Midu',
+                duration: '10:00min',
+                difficult: 'principiante',
+                url: 'urlCursoJavascriptMidu'
+                },
+                {
+                name: 'For con Midu',
+                description: 'For explicado por Midu',
+                duration: '15:00min',
+                difficult: 'principiante',
+                url: 'urlCursoJavascriptMidu'
+                },
+                {
+                name: 'Map con Midu',
+                description: 'Map explicado por Midu',
+                duration: '20:00min',
+                difficult: 'principiante',
+                url: 'urlCursoJavascriptMidu'
+                }
+            ],
+            image: 'urlCourse'
+        }],
+        image: 'urlSchool'
+        }
 ]
 
 
