@@ -1,10 +1,16 @@
-const {schoolModel} = require('../models')
+const {schoolModel, courseModel} = require('../models')
 
 // ============================= GET SCHOOLS DATABASE ========================
 
 const getAllSchool = async (req,res) =>{
-    const {name} = req.body
-    const data = await schoolModel.find({})
+    const {name} = req.body    
+    const data = await schoolModel.find({}).populate('courses')
+    .populate({
+        path: 'courses',
+        populate: {
+            path: 'videos'
+        }
+    })   
 
     try {
         if(name){
@@ -15,7 +21,7 @@ const getAllSchool = async (req,res) =>{
                 res.send(find)
             }
         }else{
-            res.send(data)
+            res.json(data)
         }
     } catch (error) {
         console.log(error)
