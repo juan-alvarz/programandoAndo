@@ -2,7 +2,15 @@ const { usersModel } = require("../models/index");
 
 const getAllUsers = async (req, res, next) => {
     try {
-        const users = await usersModel.find({}).populate('schools')
+        const users = await usersModel.find({}).populate({
+            path:'schools',
+            populate :{
+                path: 'courses',
+                populate: {
+                    path :'videos'
+                }
+            }
+        })
         return res.json(users)
     } catch (e) {
         // res.status(e.response.status)
