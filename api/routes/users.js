@@ -20,7 +20,7 @@ router.post("/", validatorCreateUser, createUser);
 
 router.put('/:id', validatorGetUsers, updateUser);
 
-router.patch('/:id', validatorGetUsers, restoreUser)
+router.patch('/:id', validatorGetUsers, restoreUser);
 
 router.delete('/:id', validatorGetUsers, softDeleteUser)
 

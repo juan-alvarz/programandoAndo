@@ -66,21 +66,59 @@ const createVideo = async (req, res) => {
 const deleteVideo = async (req, res) => {
   try {
     const { id } = req.params;
-    if (id) {
-      const videoToDelete = await Video.findById(id);
-      if (!videoToDelete)
-        return res.status(404).json({ message: "inexistent id" });
-      await Video.deleteOne({ id: id });
-      return res.status(200).json({ message: "deleted succesfully" });
+    const videoToDelete = await Video.findById(id);
+    if (!videoToDelete) {
+      return res.status(404).json({ message: "inexistent id" })
     }
-    return res.status(400).json({ message: "id is required" });
+    const data = await Video.deleteOne({ _id: id });
+    return res.status(200).json({ message: "deleted succesfully" });
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error.message);
   }
 };
+
+const softDeleteVideo = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const data = await Video.delete({ _id: id });
+    return res.json(data)
+  } catch (e) {
+    return res.json(e.message)
+  }
+};
+
+const restoreVideo = async (req, res, next) => {
+  try{
+    const {id} = req.params;
+    const data = await Video.restore({_id: id});
+    return res.json(data)
+  } catch (e) {
+    return res.json(e.message)
+  }
+};
+
+const updateVideo = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const data = await Video.updateOne({ _id: id }, body);
+    if (!data.modifiedCount) {
+      res.status(422)
+      return res.send('Fail in the query')
+    }
+    res.status(201);
+    return res.send('The user was updated')
+  } catch (e) {
+    return res.json(e.message)
+  }
+};
+
 module.exports = {
   deleteVideo,
   getVideos,
   getVideo,
   createVideo,
+  softDeleteVideo,
+  restoreVideo,
+  updateVideo
 };
