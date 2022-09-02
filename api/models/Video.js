@@ -36,3 +36,4 @@ const VideoSchema = new Schema(
 const VideoModel = model("Video", VideoSchema);
 
 module.exports = VideoModel;
+//esquema video

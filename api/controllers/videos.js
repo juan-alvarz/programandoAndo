@@ -1,5 +1,5 @@
 const Video = require("../models/Video.js");
-const { videoModel } = require("../models");
+//const { videoModel } = require("../models");
 const getVideos = async (req, res) => {
   try {
     const data = await Video.find({});
@@ -19,23 +19,12 @@ const getVideo = async (req, res) => {
       }
       return res.status(200).json(videoId);
     }
-    return res.status(500).json({ message: "id is required" });
+    return res.status(400).json({ message: "id is required" });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
-/* 
-  {
-    "name": "",
-    "description": "",
-    "author": "",
-    "profile": "",
-    "url": "",
-    "image": "",
-    "duration": "",
-    "difficult": ""
-  }
-*/
+
 const createVideo = async (req, res) => {
   try {
     const {
@@ -60,7 +49,6 @@ const createVideo = async (req, res) => {
     });
     await newVideo.save();
     return res.status(200).json(newVideo);
-    // return res.status(200).send("Video created");
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

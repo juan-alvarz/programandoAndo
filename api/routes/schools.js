@@ -1,13 +1,17 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
-const {getAllSchool,getSchoolId,createSchool}= require('../controllers/schools')
-const {validatorCreateSchool} = require('../validators/schools')
+const {
+  getAllSchool,
+  getSchoolId,
+  createSchool,
+} = require("../controllers/schools");
+const { validatorCreateSchool } = require("../validators/schools");
 
-router.get('/',getAllSchool);
+router.get("/", getAllSchool);
 
-router.get('/:id',getSchoolId);
+router.get("/:id", getSchoolId);
 
-router.post('/',validatorCreateSchool,createSchool);
-
+router.post("/", validatorCreateSchool, createSchool);
 
 module.exports = router;
+//ruta school
