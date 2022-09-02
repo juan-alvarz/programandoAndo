@@ -1,9 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import data from "../utils/data"
+import data1 from "../utils/data"
 
 export const DetailSchool = () => {
-    
+  let data=data1
   return (
     <div>
         {
