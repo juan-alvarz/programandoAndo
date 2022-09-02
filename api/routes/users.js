@@ -4,7 +4,9 @@ const {
   getAllUsers,
   createUser,
   getUserById,
-  updateUser
+  updateUser,
+  softDeleteUser,
+  restoreUser
 } = require("../controllers/users");
 const { validatorCreateUser, validatorGetUsers } = require("../validators/users");
 
@@ -16,5 +18,10 @@ router.get("/:id", validatorGetUsers, getUserById);
 
 router.post("/", validatorCreateUser, createUser);
 
-router.put('/', updateUser)
+router.put('/:id', validatorGetUsers, updateUser);
+
+router.patch('/:id', validatorGetUsers, restoreUser)
+
+router.delete('/:id', validatorGetUsers, softDeleteUser)
+
 
