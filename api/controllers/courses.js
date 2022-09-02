@@ -16,17 +16,28 @@ const getCourseById = async (req, res) => {
         //   req = matchedData(req);
         const { id } = req.params;
         const data = await courseModel.findById(id).populate('videos');
+<<<<<<< HEAD
         res.json(data);
     } catch (error) {
         handleHttpError(res, 'ERROR_GET_COURSE')
     }
+=======
+        res.send(data);
+   } catch (error) {
+       handleHttpError(res, 'ERROR_GET_COURSE')
+   }
+>>>>>>> back
 }
 
 // CREAR CURSO EN LA BASE DE DATOS
 const createCourse = async (req, res) => {
     const body = req.body
     const data = await courseModel.create(body)
+<<<<<<< HEAD
     res.json(data)
+=======
+    res.send(data)
+>>>>>>> back
 }
 
 

@@ -2,8 +2,13 @@ const { schoolModel, courseModel } = require('../models')
 
 // ============================= GET SCHOOLS DATABASE ========================
 
+<<<<<<< HEAD
 const getAllSchool = async (req, res) => {
     const { name } = req.query
+=======
+const getAllSchool = async (req,res) =>{
+    const {name} = req.query
+>>>>>>> back
     const data = await schoolModel.find({}).populate({
         path: 'courses',
         populate: {
@@ -12,6 +17,7 @@ const getAllSchool = async (req, res) => {
     }) //.populate('videos')
     // data = JSON.parse(data)
     try {
+<<<<<<< HEAD
         if (name) {
             const find = await schoolModel.findOne({ name: name })
             if (!find) {
@@ -21,6 +27,22 @@ const getAllSchool = async (req, res) => {
             }
         } else {
             res.send(data)
+=======
+        if(name){
+            const find = await schoolModel.findOne({name:name}).populate({
+                path: 'courses',
+                populate :{
+                    path: 'videos'
+                } 
+            })
+            if(!find){
+                res.send({msg: "School doesnt exist" })         
+            }else{
+                res.send(find)
+            }
+        }else{
+            res.json(data)
+>>>>>>> back
         }
     } catch (error) {
         console.log(error)
