@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import LandingPage from "./components/LandingPage";
 import NavBar from "./components/NavBar";
 import Courses from "./components/Courses";
+import Error404 from "./components/Error404"
 import { useSelector } from "react-redux";
 
 function App() {
@@ -14,12 +15,12 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <NavBar />
-        <h1>Hello World!!!</h1>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path='*' element={<Error404/>}/>
         </Routes>
       </div>
     </BrowserRouter>
