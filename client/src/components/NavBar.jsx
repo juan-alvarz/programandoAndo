@@ -218,7 +218,10 @@ export default function NavBar() {
                     aria-current={item.current ? "page" : undefined}
                   >
                     {item.name}
+                    
                   </Disclosure.Button>
+                  
+                  
                 ))}
               </div>
             </Disclosure.Panel>

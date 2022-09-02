@@ -4,6 +4,10 @@ import { NavLink, useLocation } from "react-router-dom";
 import data from "../utils/data"
 import Video from "./Video";
 import Course from "./Course";
+import { Paginated } from "./Paginated";
+import { Videos } from "./Videos";
+import { useEffect } from "react";
+
 
 
 function Courses() {
@@ -18,53 +22,52 @@ function Courses() {
     }
   }
 
+
+console.log(cursosfiltrados)
+
  
   
 
   
-  return <div className=" text-black flex items-center justify-center" style={{padding:40}}>
-           <div class="max-w-md">
+  return <div className="h-1000 p-100" >
+           <div className="">
+            
              {cursosfiltrados.length>0 ? 
 
-             <div className="flex items-center justify-center">
+                        <div className="">
                          <Course name={cursosfiltrados[0].name} description={cursosfiltrados[0].description}></Course>
                          </div>
               :<span>error</span>
              }
            </div>
+           <div >
              {
               cursosfiltrados.length>0 ? 
               
               
               cursosfiltrados.map((elemento,index)=>{
-                console.log(elemento)
+                
                  return (
                      <div key={index}>
                          
-                         <hr></hr>
-                         <div className="flex justify-between">
+                        
+                         <div className="justify-center">
                             
                          
                              {elemento.course.map((el,index)=>{
                                  return(
-                                   <div key={index}>
-                                      <h2>{el.name}</h2>
+                                   <div className="justify-center" key={index}>
+                                      <div className="grid justify-items-center mt-4 mb-4 bg-gray-200 p-20">
+                                      <h2 className="text-2xl">{el.name}</h2>
                                       <p>{el.description}</p>
                                       <p>Imagen: {el.image}</p>
-                                      {
-                                        el.videos.map((elemento,index)=>{
-                                          return(
-                                              <div key={index} style={{margin:10}} className="clablock p-6 max-w-sm bg-gray-800 rounded-lg border border-gray-200   hover:bg-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 shadow-2xl">
-                                                <NavLink to="/video">
-                                                <h3 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-gray-800">{elemento.name}</h3>
-                                                <p className="font-normal text-gray-400 dark:text-gray-900">{elemento.description}</p>
-                                                </NavLink>
-                                              </div>
-                                          )
-                                     })
-          
-        
-                                      }
+                                      
+                                      </div>
+                                      
+                                      <Videos videos={el.videos} name={name}></Videos>
+                                     
+                                     
+                                    
                                    </div>
                                  )
                              })
@@ -78,6 +81,7 @@ function Courses() {
               }):
               <span>Error span</span>
              } 
+            </div>
         </div>;
 }
 
