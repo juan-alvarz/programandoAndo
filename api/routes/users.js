@@ -4,6 +4,7 @@ const {
   getAllUsers,
   createUser,
   getUserById,
+  updateMany
 } = require("../controllers/users");
 const validatorCreateUser = require("../validators/users");
 
@@ -14,3 +15,6 @@ router.get("/", getAllUsers);
 router.get("/:id", getUserById);
 
 router.post("/", validatorCreateUser, createUser);
+
+router.put('/', updateMany)
+

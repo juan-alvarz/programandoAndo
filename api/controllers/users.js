@@ -1,4 +1,5 @@
 const { usersModel } = require("../models/index");
+const UserModel = require("../models/User");
 
 const getAllUsers = async (req, res, next) => {
   try {
@@ -61,8 +62,25 @@ const createUser = async (req, res, next) => {
   }
 };
 
+const updateMany = async (req, res, next) => {
+  try {
+    const {id} = req.query;
+    const body = req.body;
+    const data = await UserModel.updateOne({_id: id}, body);
+    if(!data.modifiedCount){
+      res.status(422)
+      return res.send('Fail in the query')
+    }
+    res.status(201);
+    return res.send('The user was updated')
+  } catch (e) {
+    return res.json(e.message)
+  }
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
+  updateMany
 };
