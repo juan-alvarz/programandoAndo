@@ -6,9 +6,7 @@ const getAllUsers = async (req, res, next) => {
       path: "schools",
       populate: {
         path: "courses",
-        populate: {
-          path: "videos",
-        },
+        populate: { path: "videos" },
       },
     });
     return res.json(users);
@@ -21,10 +19,16 @@ const getAllUsers = async (req, res, next) => {
 const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await usersModel.findById(id).exec();
+    const user = await usersModel.findById(id).populate({
+      path: "schools",
+      populate: {
+        path: "courses",
+        populate: { path: "videos" },
+      },
+    });
     if (!user) {
       res.status(404);
-      return res.send("Usuario inexistente");
+      return res.send("user doesn't exist");
     }
     return res.json(user);
   } catch (e) {

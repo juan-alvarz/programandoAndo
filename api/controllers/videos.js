@@ -24,7 +24,18 @@ const getVideo = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-
+/* 
+  {
+    "name": "",
+    "description": "",
+    "author": "",
+    "profile": "",
+    "url": "",
+    "image": "",
+    "duration": "",
+    "difficult": ""
+  }
+*/
 const createVideo = async (req, res) => {
   try {
     const {
@@ -48,7 +59,8 @@ const createVideo = async (req, res) => {
       difficult,
     });
     await newVideo.save();
-    return res.status(200).send("Video created");
+    return res.status(200).json(newVideo);
+    // return res.status(200).send("Video created");
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

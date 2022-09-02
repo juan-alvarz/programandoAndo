@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 const { matchedData } = require("express-validator");
 const { courseModel } = require("../models");
 const { handleHttpError } = require("../utils/handleError");
+=======
+const { matchedData } = require('express-validator')
+const { courseModel } = require('../models')
+const { handleHttpError } = require('../utils/handleError');
+
+>>>>>>> back
 
 // OBTENER LISTA DE CURSOS DE LA BASE DE DATOS
 const getCourses = async (req, res) => {
@@ -10,6 +17,7 @@ const getCourses = async (req, res) => {
 
 // OBTENER DETALLE DE UN CURSO DE LA BASE DE DATOS
 const getCourseById = async (req, res) => {
+<<<<<<< HEAD
   try {
     //   req = matchedData(req);
     const { id } = req.params;
@@ -26,5 +34,35 @@ const createCourse = async (req, res) => {
   const data = await courseModel.create(body);
   return res.status(201).json(data);
 };
+=======
+    try {
+        //   req = matchedData(req);
+        const { id } = req.params;
+        const data = await courseModel.findById(id).populate('videos');
+<<<<<<< HEAD
+        res.json(data);
+    } catch (error) {
+        handleHttpError(res, 'ERROR_GET_COURSE')
+    }
+=======
+        res.send(data);
+   } catch (error) {
+       handleHttpError(res, 'ERROR_GET_COURSE')
+   }
+>>>>>>> back
+}
+
+// CREAR CURSO EN LA BASE DE DATOS
+const createCourse = async (req, res) => {
+    const body = req.body
+    const data = await courseModel.create(body)
+<<<<<<< HEAD
+    res.json(data)
+=======
+    res.send(data)
+>>>>>>> back
+}
+
+>>>>>>> back
 
 module.exports = { getCourses, createCourse, getCourseById };

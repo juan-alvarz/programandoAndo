@@ -1,12 +1,12 @@
 const { validationResult } = require("express-validator")
 
-const validateResults = (req,res,next) =>{
-    try{
+const validateResults = (req, res, next) => {
+    try {
         validationResult(req).throw()
         return next();
-    }catch(err){
+    } catch (err) {
         res.status(403)
-        res.send({errors: err.array() })
+        res.send({ errors: err.array() })
     }
 }
 
