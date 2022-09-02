@@ -12,7 +12,7 @@ export const Videos = (props) => {
       
      
     let videos = props.videos
-    console.log(videos)
+   
     const[paginaActual, setPaginaActual]= useState(1)
     const[videosPagina]= useState(4)
 
@@ -46,10 +46,10 @@ export const Videos = (props) => {
     return (
 
         <div >
-            <div className='grid justify-items-center mb-20'>
+            <div className='grid justify-items-center mb-5'>
             <Paginated setPagina={paginado} videos={videos.length} videosPagina={videosPagina} paginaActual={paginaActual} prev={prev} next={next}></Paginated>
             </div>
-            <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="flex justify-center mb-20">
 
             {
                 videosActuales.map((elemento, index) => {
