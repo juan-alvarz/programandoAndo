@@ -2,6 +2,15 @@ const Video = require("../models/Video.js");
 //const { videoModel } = require("../models");
 const getVideos = async (req, res) => {
   try {
+    const { name } = req.query;
+    if (name) {
+      const data = await Video.find({ name: { $regex: '.*' + name + '.*', $options: '<i>' } });
+      if (!data) {
+        res.status(404);
+        res.json({ message: 'Video not found' })
+      }
+      return res.json(data)
+    }
     const data = await Video.find({});
     res.status(200).json(data);
   } catch (error) {

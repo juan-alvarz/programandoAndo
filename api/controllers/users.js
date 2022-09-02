@@ -2,6 +2,21 @@ const { usersModel } = require("../models/index");
 
 const getAllUsers = async (req, res, next) => {
   try {
+    const { name } = req.query;
+    if (name) {
+      const data = await usersModel.find({ name: { $regex: '.*' + name + '.*', $options: '<i>' } }).populate({
+        path: "schools",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      });
+      if (!data) {
+        res.status(404);
+        res.json({ message: 'User not found' })
+      }
+      return res.json(data)
+    }
     const users = await usersModel.find({}).populate({
       path: "schools",
       populate: {
