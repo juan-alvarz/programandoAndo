@@ -6,13 +6,13 @@ const {
   getUserById,
   updateUser
 } = require("../controllers/users");
-const validatorCreateUser = require("../validators/users");
+const { validatorCreateUser, validatorGetUsers } = require("../validators/users");
 
 module.exports = router;
 
 router.get("/", getAllUsers);
 
-router.get("/:id", getUserById);
+router.get("/:id", validatorGetUsers, getUserById);
 
 router.post("/", validatorCreateUser, createUser);
 
