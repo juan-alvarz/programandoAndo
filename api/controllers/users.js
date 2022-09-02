@@ -1,0 +1,53 @@
+const { usersModel } = require("../models/index");
+
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await usersModel.find({}).populate({
+      path: "schools",
+      populate: {
+        path: "courses",
+        populate: { path: "videos" },
+      },
+    });
+    return res.json(users);
+  } catch (e) {
+    return res.status(400).json(e.message);
+  }
+};
+
+const getUserById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await usersModel.findById(id).populate({
+      path: "schools",
+      populate: {
+        path: "courses",
+        populate: { path: "videos" },
+      },
+    });
+    if (!user) {
+      res.status(404);
+      return res.send("user doesn't exist");
+    }
+    return res.json(user);
+  } catch (e) {
+    return res.json(e.message);
+  }
+};
+
+const createUser = async (req, res, next) => {
+  try {
+    const body = req.body;
+    const user = await usersModel.create(body);
+    res.status(201);
+    return res.json(user);
+  } catch (e) {
+    return res.json(e.message);
+  }
+};
+
+module.exports = {
+  getAllUsers,
+  getUserById,
+  createUser,
+};

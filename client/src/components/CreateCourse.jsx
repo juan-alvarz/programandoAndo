@@ -4,6 +4,7 @@ import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm, Controller } from "react-hook-form";
 import videos from "../utils/videos.json";
 import Swal from "sweetalert2";
+import NavBar from "./NavBar";
 
 export default function CreateCourse() {
   // react-hook-forms
@@ -49,6 +50,7 @@ export default function CreateCourse() {
 
   return (
     <>
+      <NavBar />
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
@@ -160,7 +162,7 @@ export default function CreateCourse() {
               <button
                 type="submit"
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                style={{ backgroundColor: "red" }}
+                // style={{ backgroundColor: "red" }}
                 disabled={Object.entries(errors).length === 0 ? "" : true}
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
