@@ -62,7 +62,7 @@ const createUser = async (req, res, next) => {
   }
 };
 
-const updateMany = async (req, res, next) => {
+const updateUser = async (req, res, next) => {
   try {
     const {id} = req.query;
     const body = req.body;
@@ -82,5 +82,5 @@ module.exports = {
   getAllUsers,
   getUserById,
   createUser,
-  updateMany
+  updateUser
 };
