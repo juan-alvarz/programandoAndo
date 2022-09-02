@@ -17,15 +17,15 @@ router.get("/", getVideos);
 
 router.get("/:id", validatorGetVideo, getVideo);
 
-router.delete("/:id", deleteVideo);
+router.delete("/:id", validatorGetVideo, deleteVideo);
 
-router.delete('/softDelete/:id', softDeleteVideo);
+router.delete('/softDelete/:id', validatorGetVideo, softDeleteVideo);
 
-router.patch('/:id', restoreVideo);
+router.patch('/:id', validatorGetVideo, restoreVideo);
 
 router.put('/:id', updateVideo);
 
-router.post("/", createVideo);
+router.post("/", validatorCreateVideo, createVideo);
 
 module.exports = router;
 //ruta videos
