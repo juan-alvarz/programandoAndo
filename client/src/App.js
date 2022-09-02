@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import LandingPage from "./components/LandingPage";
 import NavBar from "./components/NavBar";
 import Courses from "./components/Courses";
+import Error404 from "./components/Error404"
 import { useSelector } from "react-redux";
 import Video from "./components/Video";
 
@@ -21,13 +22,13 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <NavBar />
-        
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/video" element={<Video />} />
+          <Route path='*' element={<Error404/>}/>
         </Routes>
       </div>
     </BrowserRouter>

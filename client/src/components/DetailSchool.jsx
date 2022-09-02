@@ -17,7 +17,6 @@ export const DetailSchool = () => {
             }):
             <span>Error</span>
         }
-        
+
     </div>
-  )
-}
+)}
