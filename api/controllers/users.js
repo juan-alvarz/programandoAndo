@@ -11,8 +11,7 @@ const getAllUsers = async (req, res, next) => {
     });
     return res.json(users);
   } catch (e) {
-    // res.status(e.response.status)
-    return res.json(e.message);
+    return res.status(400).json(e.message);
   }
 };
 
@@ -46,14 +45,6 @@ const createUser = async (req, res, next) => {
     return res.json(e.message);
   }
 };
-
-// const updateUserSchool = async (req, res, next) => {
-//     try {
-
-//     } catch (e) {
-
-//     }
-// }
 
 module.exports = {
   getAllUsers,

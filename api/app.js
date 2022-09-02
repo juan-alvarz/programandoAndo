@@ -17,4 +17,5 @@ app.use("/api", require("./routes"));
 
 app.listen(port, () => console.log(`App lista en puerto: ${port}`));
 
+// ejecuta la conección a Atlas
 dbConnect();

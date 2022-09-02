@@ -4,7 +4,8 @@ const router = express.Router();
 
 const PATH_ROUTES = __dirname; // el path donde se encuentra este archivo
 
-const removeExtension = (fileName) => { // va a coger el fileName (ej: courses.js) y le sacamos el js
+const removeExtension = (fileName) => {
+  // va a coger el fileName (ej: courses.js) y le sacamos el js
   return fileName.split(".").shift();
 };
 

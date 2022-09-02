@@ -26,5 +26,5 @@ const SchoolSchema = new Schema(
 );
 
 const SchoolModel = model("School", SchoolSchema);
-
+// model School
 module.exports = SchoolModel;

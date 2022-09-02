@@ -1,4 +1,4 @@
-const { schoolModel, courseModel } = require("../models");
+const { schoolModel } = require("../models");
 
 // ============================= GET SCHOOLS DATABASE ========================
 
@@ -9,8 +9,7 @@ const getAllSchool = async (req, res) => {
     populate: {
       path: "videos",
     },
-  }); //.populate('videos')
-  // data = JSON.parse(data)
+  });
   try {
     if (name) {
       const find = await schoolModel.findOne({ name: name }).populate({
@@ -41,7 +40,12 @@ const getSchoolId = async (req, res) => {
     if (!id) {
       res.send({ msg: "ID its necessary" });
     } else {
-      const find = await schoolModel.findById(id);
+      const find = await schoolModel.findById(id).populate({
+        path: "courses",
+        populate: {
+          path: "videos",
+        },
+      });
       if (!find) {
         res.send({ msg: "School doesnt exist" });
       } else {

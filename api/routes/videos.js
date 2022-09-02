@@ -14,3 +14,4 @@ router.delete("/:id", deleteVideo);
 router.post("/", createVideo);
 
 module.exports = router;
+//ruta videos
