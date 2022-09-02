@@ -18,7 +18,11 @@ const getAllSchool = async (req,res) =>{
                 path: 'courses',
                 populate :{
                     path: 'videos'
+<<<<<<< HEAD
                 }
+=======
+                } 
+>>>>>>> back
             })
             if(!find){
                 res.send({msg: "School doesnt exist" })         
@@ -26,7 +30,7 @@ const getAllSchool = async (req,res) =>{
                 res.send(find)
             }
         }else{
-            res.send(data)
+            res.json(data)
         }
     } catch (error) {
         console.log(error)
