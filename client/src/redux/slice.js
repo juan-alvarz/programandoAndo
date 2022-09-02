@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const slice = createSlice({
   name: "programandoando",
   initialState: {
-    courses: ["uñas acrilicas"],
+    courses: [],
     users: [],
     detail: {},
   },

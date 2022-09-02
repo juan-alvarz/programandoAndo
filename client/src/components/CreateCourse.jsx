@@ -1,81 +1,52 @@
 import React, { useState } from "react";
-// import { NavLink } from "react-router-dom";
+import Select from "react-select";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
-import { useForm } from "react-hook-form";
-import { schools } from "../utils/schools";
-import { lenguages } from "../utils/lenguages";
+import { useForm, Controller } from "react-hook-form";
+import videos from "../utils/videos.json";
+import Swal from "sweetalert2";
 
 export default function CreateCourse() {
   // react-hook-forms
-  const { register, handleSubmit, watch, formState } = useForm();
-
-  const sendSubmit = (data) => {
-    alert("Validacion Exitosa!!!");
-  };
-
-  const [input, setInput] = useState({
-    name: "",
-    video: "",
-    canal: "",
-    description: "",
-    author: "",
-    image: "",
-    schools: [],
-    lenguages: [],
+  const {
+    control,
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: "",
+      image: "",
+      description: "",
+      videos: [],
+    },
   });
 
-  const handleChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
+  const onSubmit = (data) => {
+    console.log(data);
+    Swal.fire({
+      title: "Create Course",
+      text: "Course Created Successfully",
+      icon: "success",
+      confirmButtonText: "Back",
     });
   };
+  const [video, setVideo] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState();
 
-  const handleSelectSchools = (e) => {
-    if (e.target.value !== "All")
-      setInput({
-        ...input,
-        schools: [...input.schools, e.target.value],
-      });
+  const handleSelect = (data) => {
+    setSelectedOptions(data);
   };
 
-  const handleSelectLenguages = (e) => {
-    if (e.target.value !== "All")
-      setInput({
-        ...input,
-        lenguages: [...input.lenguages, e.target.value],
-      });
-  };
+  const optionList = videos?.map((video) => {
+    return {
+      value: video.name,
+      label: video.name,
+    };
+  });
 
-  const handleDeleteSchools = (e) => {
-    setInput({
-      ...input,
-      schools: input.schools.filter((school) => school !== e),
-    });
-  };
+  // console.log(optionList);
 
-  const handleDeleteLenguages = (e) => {
-    setInput({
-      ...input,
-      lenguages: input.lenguages.filter((lenguage) => lenguage !== e),
-    });
-  };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(input);
-  //   alert("Video Creado");
-  //   setInput({
-  //     name: "",
-  //     video: "",
-  //     canal: "",
-  //     description: "",
-  //     author: "",
-  //     image: "",
-  //     schools: [],
-  //     lenguages: [],
-  //   });
-  // };
   return (
     <>
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -87,148 +58,99 @@ export default function CreateCourse() {
               alt="Workflow"
             />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Video creation form
+              Create Course
             </h2>
           </div>
           <form
             className="mt-8 space-y-6"
-            onSubmit={(e) => handleSubmit(e)}
+            onSubmit={handleSubmit(onSubmit)}
             action="#"
             method="POST"
           >
-            {/* <input type="hidden" name="remember" defaultValue="true" /> */}
-
             <div>
               <input
-                id="name-video"
-                value={input.name}
                 name="name"
                 type="text"
                 autoComplete="off"
-                required
                 className="relative block w-full appearance-none rounded-b-md rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Video Name"
-                onChange={(e) => handleChange(e)}
+                {...register("name", {
+                  required: true,
+                  pattern: {
+                    value: /^[A-Za-z]+$/i,
+                    message: "Name invalid",
+                  },
+                })}
               />
+              {errors.name?.type === "required" && (
+                <small className="text-red-600">Input empty</small>
+              )}
+              {errors.name?.type === "pattern" && (
+                <small className="">{errors.name.message}</small>
+              )}
             </div>
 
             <div>
               <input
-                id="video"
-                value={input.video}
-                name="video"
+                name="image"
                 type="text"
                 autoComplete="off"
-                required
                 className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="http:// URL(video)"
-                onChange={(e) => handleChange(e)}
+                placeholder="Image or Logo course"
+                {...register("image", { required: true })}
               />
-            </div>
-
-            <div>
-              <input
-                id="canal"
-                value={input.canal}
-                name="canal"
-                type="text"
-                autoComplete="off"
-                required
-                className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="http:// URL(canal)"
-                onChange={(e) => handleChange(e)}
-              />
+              {errors.image?.type === "required" && (
+                <small className="text-red-600">Input empty</small>
+              )}
             </div>
 
             <div>
               <textarea
                 style={{ resize: "none" }}
-                id="description"
-                value={input.description}
                 name="description"
                 autoComplete="off"
-                required
                 className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Description"
-                onChange={(e) => handleChange(e)}
+                {...register("description", { required: true })}
               />
+              {errors.description?.type === "required" && (
+                <small className="text-red-600">Input empty</small>
+              )}
             </div>
 
-            <div>
-              <input
-                id="author"
-                value={input.author}
-                name="author"
-                type="text"
-                autoComplete="off"
-                required
-                className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Author"
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
+            <Select
+              name="video"
+              options={optionList}
+              placeholder="All Videos"
+              value={selectedOptions}
+              onChange={handleSelect}
+              isSearchable={true}
+              // isMulti
+              // {...register("video", { required: false })}
+            />
 
-            <div>
-              <input
-                id="image"
-                value={input.image}
-                name="image"
-                type="text"
-                autoComplete="off"
-                required
-                className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Photo of the Author or Logo"
-                onChange={(e) => handleChange(e)}
-              />
-            </div>
-
-            <select
-              name="schools"
-              id="countries"
+            {/* <select
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              onChange={(e) => handleSelectSchools(e)}
+              name="videos"
+              control={control}
+              {...register("videos")}
             >
-              <option value="All">Schools</option>
-              {schools?.map((school, index) => (
-                <option value={school.name} key={index}>
-                  {school.name}
+           
+              <option value="All">Videos</option>
+              {videos?.map((video, index) => (
+                <option value={video.name} key={index}>
+                  {video.name}
                 </option>
               ))}
-            </select>
+            </select> */}
             <div className="">
-              {input.schools.map((school, index) => (
+              {video.map((v, index) => (
                 <div key={index} className="">
                   <span
-                    className="cursor-pointer bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 hover:bg-red-700"
-                    onClick={() => handleDeleteSchools(school)}
+                    className="cursor-pointer bg-red-100 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-200 dark:text-gray-900 hover:bg-red-500"
+                    // onClick={() => handleDeleteSchools(video)}
                   >
-                    {school}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <select
-              name="lenguages"
-              id="countries"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              onChange={(e) => handleSelectLenguages(e)}
-            >
-              <option value="All">Lenguages or Frameworks</option>
-              {lenguages?.map((lenguage, index) => (
-                <option value={lenguage.name} key={index}>
-                  {lenguage.name}
-                </option>
-              ))}
-            </select>
-            <div className="">
-              {input.lenguages.map((lenguage, index) => (
-                <div key={index} className="">
-                  <span
-                    className="cursor-pointer bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900 hover:bg-red-700"
-                    onClick={() => handleDeleteLenguages(lenguage)}
-                  >
-                    {lenguage}
+                    {v.name}
                   </span>
                 </div>
               ))}
@@ -238,7 +160,8 @@ export default function CreateCourse() {
               <button
                 type="submit"
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                // disabled={Object.entries(errors).length === 0 ? "" : true}
+                style={{ backgroundColor: "red" }}
+                disabled={Object.entries(errors).length === 0 ? "" : true}
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon
@@ -246,7 +169,7 @@ export default function CreateCourse() {
                     aria-hidden="true"
                   />
                 </span>
-                Video Create
+                Create Course
               </button>
             </div>
           </form>

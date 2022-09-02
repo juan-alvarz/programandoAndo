@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <NavBar />
-        {/* <h1>Hello World!!!</h1> */}
+
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
