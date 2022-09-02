@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-//función para conectar a atlas
 const dbConnect = () => {
   const DB_URI = process.env.DB_URI;
   mongoose.connect(
