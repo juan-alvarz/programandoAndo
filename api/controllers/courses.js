@@ -16,7 +16,7 @@ const getCourseById = async (req, res) => {
      //   req = matchedData(req);
         const {id} = req.params;
         const data = await courseModel.findById(id).populate('videos');
-        res.send( {data} );
+        res.send(data);
    } catch (error) {
        handleHttpError(res, 'ERROR_GET_COURSE')
    }
@@ -27,7 +27,7 @@ const createCourse = async (req, res) => {
     const body = req.body
     console.log(body)
     const data = await courseModel.create(body)
-    res.send({data})
+    res.send(data)
 }
 
 

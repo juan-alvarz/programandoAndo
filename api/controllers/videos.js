@@ -48,7 +48,7 @@ const createVideo = async (req, res) => {
       difficult,
     });
     await newVideo.save();
-    return res.status(200).send("Video created");
+    return res.status(200).send(newVideo);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
