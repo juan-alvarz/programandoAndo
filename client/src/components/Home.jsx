@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar";
 function Home() {
   return (
     <div>
+      <NavBar />
       <div className="flex justify-center mt-2">
       <SearchBar/>
       </div>
