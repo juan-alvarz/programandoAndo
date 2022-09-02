@@ -27,7 +27,8 @@ const getAllUsers = async (req, res, next) => {
     });
     return res.json(users);
   } catch (e) {
-    return res.status(400).json(e.message);
+    res.status(e.response.status)
+    return res.json(e.message);
   }
 };
 
@@ -47,6 +48,7 @@ const getUserById = async (req, res, next) => {
     }
     return res.json(user);
   } catch (e) {
+    res.status(e.response.status)
     return res.json(e.message);
   }
 };
@@ -74,6 +76,7 @@ const updateUser = async (req, res, next) => {
     res.status(201);
     return res.send('The user was updated')
   } catch (e) {
+    res.status(e.response.status)
     return res.json(e.message)
   }
 };

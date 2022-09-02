@@ -66,13 +66,14 @@ const createVideo = async (req, res) => {
 const deleteVideo = async (req, res) => {
   try {
     const { id } = req.params;
-    const videoToDelete = await Video.findById(id);
-    if (!videoToDelete) {
-      return res.status(404).json({ message: "inexistent id" })
-    }
+    // const videoToDelete = await Video.findById(id);
+    // if (!videoToDelete) {
+    //   return res.status(404).json({ message: "inexistent id" })
+    // }
     const data = await Video.deleteOne({ _id: id });
     return res.status(200).json({ message: "deleted succesfully" });
   } catch (error) {
+    res.status(e.response.status)
     return res.status(400).json(error.message);
   }
 };
@@ -83,6 +84,7 @@ const softDeleteVideo = async (req, res, next) => {
     const data = await Video.delete({ _id: id });
     return res.json(data)
   } catch (e) {
+    res.status(e.response.status)
     return res.json(e.message)
   }
 };
