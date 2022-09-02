@@ -3,6 +3,9 @@ const {
   getCourses,
   getCourseById,
   createCourse,
+  updateCourse,
+  softDeleteCourse,
+  restoreCourse,
 } = require("../controllers/courses");
 const {validatorCreateCourse, validatorGetCourse} = require('../validators/courses')
 const router = express.Router();
@@ -14,5 +17,11 @@ router.get("/", getCourses);
 router.get("/:id", validatorGetCourse, getCourseById);
 
 router.post("/", validatorCreateCourse, createCourse);
+
+router.put('/:id', validatorGetCourse, updateCourse)
+
+router.delete('/:id', validatorGetCourse, softDeleteCourse)
+
+router.patch('/:id', validatorGetCourse, restoreCourse)
 
 module.exports = router;

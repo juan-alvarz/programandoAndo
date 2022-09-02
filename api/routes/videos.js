@@ -9,14 +9,22 @@ const {
   updateVideo
 } = require("../controllers/videos");
 const router = express.Router();
+const { validatorCreateVideo, validatorGetVideo } = require("../validators/videos");
+
 
 //http://localhost/track, GET, POST, DELETE, PUT
 router.get("/", getVideos);
-router.get("/:id", getVideo);
+
+router.get("/:id", validatorGetVideo, getVideo);
+
 router.delete("/:id", deleteVideo);
+
 router.delete('/softDelete/:id', softDeleteVideo);
+
 router.patch('/:id', restoreVideo);
+
 router.put('/:id', updateVideo);
+
 router.post("/", createVideo);
 
 module.exports = router;

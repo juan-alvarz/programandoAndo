@@ -1,21 +1,27 @@
 const { check } = require("express-validator");
 const validateResults = require("../utils/handleValidator");
 
-const validatorCreateSchool = [
+const validatorCreateVideo = [
   check("name").exists().notEmpty(),
 
   check("description").exists().notEmpty(),
 
-  check("courses").exists().notEmpty(),
+  check("author").exists().notEmpty(),
 
-  check("image").exists().notEmpty(),
+  check("profile").exists().notEmpty(),
+
+  check("duration").exists().notEmpty(),
+
+  check("difficult").exists().notEmpty(),
+
+  check("url").exists().notEmpty().isURL(),
 
   (req, res, next) => {
     return validateResults(req, res, next);
   },
 ];
 
-const validatorGetSchool = [
+const validatorGetVideo = [
   check('id')
   .exists()
   .notEmpty()
@@ -25,4 +31,5 @@ const validatorGetSchool = [
   }
 ];
 
-module.exports = { validatorCreateSchool, validatorGetSchool };
+
+module.exports = { validatorCreateVideo, validatorGetVideo };
