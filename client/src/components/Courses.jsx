@@ -13,7 +13,8 @@ import { useEffect } from "react";
 function Courses() {
   const location = useLocation()
   const name=location.state
-  let cursos= data;
+  let cursos= data
+  
   
   let cursosfiltrados=[]
   for(let i=0; i< cursos.length;i++){
@@ -23,7 +24,7 @@ function Courses() {
   }
 
 
-console.log(cursosfiltrados)
+
 
  
   
@@ -51,10 +52,10 @@ console.log(cursosfiltrados)
                      <div key={index}>
                          
                         
-                         <div className="justify-center">
+                         <div className="justify-center" style={{width:"70%"}}>
                             
                          
-                             {elemento.course.map((el,index)=>{
+                             {elemento.courses.map((el,index)=>{
                                  return(
                                    <div className="justify-center" key={index}>
                                       <div className="grid justify-items-center mt-4 mb-4 bg-gray-200 p-20">
