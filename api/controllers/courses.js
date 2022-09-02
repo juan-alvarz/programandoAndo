@@ -5,7 +5,6 @@ const { handleHttpError } = require("../utils/handleError");
 // OBTENER LISTA DE CURSOS DE LA BASE DE DATOS
 const getCourses = async (req, res) => {
   const data = await courseModel.find({}).populate("videos");
-
   res.status(200).send(data);
 };
 
@@ -15,7 +14,7 @@ const getCourseById = async (req, res) => {
     //   req = matchedData(req);
     const { id } = req.params;
     const data = await courseModel.findById(id).populate("videos");
-    res.send({ data });
+    res.send(data);
   } catch (error) {
     handleHttpError(res, "ERROR_GET_COURSE");
   }
@@ -24,9 +23,8 @@ const getCourseById = async (req, res) => {
 // CREAR CURSO EN LA BASE DE DATOS
 const createCourse = async (req, res) => {
   const body = req.body;
-  console.log(body);
   const data = await courseModel.create(body);
-  res.send({ data });
+  return res.status(201).json(data);
 };
 
 module.exports = { getCourses, createCourse, getCourseById };

@@ -11,10 +11,12 @@ const CourseSchema = new Schema(
     description: {
       type: String,
     },
-    videos: {
-      type: [Schema.Types.ObjectId],
-      ref: "Video",
-    },
+    videos: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Video",
+      },
+    ],
     image: {
       type: String,
     },
