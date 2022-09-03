@@ -47,7 +47,7 @@ export const getAllSchools = () => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
-export const getAllSchoolByName = (name) => (dispatch) => {
+export const getSchoolByName = (name) => (dispatch) => {
   axios
     .get(`http://localhost:3001/api/schools?name=${name}`)
     .then((res) => dispatch(getAllSchool(res.data)))
