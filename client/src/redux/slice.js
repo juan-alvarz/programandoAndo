@@ -20,9 +20,9 @@ export const slice = createSlice({
     getCourseById: (state, action) => {
       state.course = action.payload;
     },
-    // createCourse: (state) => {
-    //   state;
-    // },
+    createCourse: (state) => {
+      return { ...state };
+    },
 
     // ========= schools ===========
     getAllSchool: (state, action) => {
@@ -31,9 +31,9 @@ export const slice = createSlice({
     getSchoolId: (state, action) => {
       state.school = action.payload;
     },
-    // createSchool: (state) => {
-    //   state;
-    // },
+    createSchool: (state, action) => {
+      return { ...state };
+    },
 
     // ========= users ===========
     getAllUsers: (state, action) => {
@@ -42,9 +42,9 @@ export const slice = createSlice({
     getUserById: (state, action) => {
       state.user = action.payload;
     },
-    // createUser: (state) => {
-    //   state;
-    // },
+    createUser: (state) => {
+      return { ...state };
+    },
 
     // ========= videos ===========
     getVideos: (state, action) => {
@@ -53,9 +53,12 @@ export const slice = createSlice({
     getVideo: (state, action) => {
       state.video = action.payload;
     },
-    // createVideo: (state) => {
-    //   state;
-    // },
+    createVideo: (state) => {
+      return { ...state };
+    },
+    clearVideo: (state, action) => {
+      state.video = action.payload.object;
+    },
   },
 });
 
@@ -72,6 +75,7 @@ export const {
   getVideos,
   getVideo,
   createVideo,
+  clearVideo,
 } = slice.actions;
 
 export default slice.reducer;

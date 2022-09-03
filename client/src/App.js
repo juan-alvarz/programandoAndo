@@ -24,7 +24,7 @@ function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/createCourse" element={<CreateCourse />} />
           <Route path="/aboutUs" element={<AboutUs />} />
-          <Route path="/video" element={<Video />} />
+          <Route path="/video/:idVideo" element={<Video />} />
           <Route path="/donators" element={<Donators />} />
           <Route path="*" element={<Error404 />} />
         </Routes>

@@ -23,19 +23,19 @@ export const getAllCourses = () => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
+export const getCourse = (id) => (dispatch) => {
+  axios
+    .get(`http://localhost:3001/api/courses/${id}`)
+    .then((res) => dispatch(getCourseById(res.data)))
+    .catch((e) => console.log(e));
+};
+
 export const createsCourse = (payload) => async (dispatch) => {
   const response = await axios.post(
     "http://localhost:3001/api/courses",
     payload
   );
   return response;
-};
-
-export const getCourse = (id) => (dispatch) => {
-  axios
-    .get(`http://localhost:3001/api/courses/${id}`)
-    .then((res) => dispatch(getCourseById(res.data)))
-    .catch((e) => console.log(e));
 };
 
 // ============================ Schools ============================
@@ -111,3 +111,11 @@ export const createsVideo = (payload) => async (dispatch) => {
   );
   return response;
 };
+
+// ============================ Clear ============================
+export function clearFilter() {
+  return {
+    type: "CLEAR_FILTER",
+    payload: { array: [], object: {} },
+  };
+}
