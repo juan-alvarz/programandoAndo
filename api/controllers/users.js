@@ -109,3 +109,13 @@ module.exports = {
   softDeleteUser,
   restoreUser
 };
+
+// Concatenar videos-cursos-escuelas, lógica
+
+// const {schools, ...body} = req.body;
+// if(schools.length) {
+    //   const user = await UserModel.findById(id);
+    //   console.log(user, 'user')
+    //   user.schools = user.schools.concat(schools);
+    //   await user.save()
+    // }
