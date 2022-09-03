@@ -17,6 +17,17 @@ const validatorCreateUser = [
   (req, res, next) => {
     return validateResults(req, res, next);
   },
+
 ];
-//
-module.exports = validatorCreateUser;
+
+const validatorGetUsers = [
+  check('id')
+    .exists()
+    .notEmpty()
+    .isMongoId(),
+  (req, res, next) => {
+    return validateResults(req, res, next)
+  }
+]
+
+module.exports = {validatorCreateUser, validatorGetUsers};
