@@ -11,6 +11,7 @@ import { useDispatch, useSelector} from "react-redux"
 import {getAllSchools} from "../redux/actions"
 import { useState } from "react";
 import { CourseDetail } from "./CourseDetail";
+import NavBar from "./NavBar"
 
 
 
@@ -45,13 +46,14 @@ function Courses() {
   
 
   
-  return <div className="h-1000 p-100" >
-           <div className="">
+  return <div  >
+           <NavBar/>
+           <div >
             
              {cursosfiltrados.length>0 ? 
                         
 
-                        <div className="">
+                        <div >
                          <Course name={cursosfiltrados[0].name} description={cursosfiltrados[0].description} ></Course>
                          
                          
@@ -71,7 +73,7 @@ function Courses() {
                      <div key={index}>
                          
                         
-                         <div className="" style={{}}>
+                         <div >
                             
                          
                              {elemento.courses.map((el,index)=>{
