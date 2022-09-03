@@ -16,6 +16,7 @@ export default function OneCourseDetail() {
   }, [dispatch]);
 
   console.log(course);
+
   if (!Object.keys(course).length) {
     return <h1>Cargando!</h1>;
   } else {
@@ -24,10 +25,20 @@ export default function OneCourseDetail() {
         <NavBar />
         <div className="justify-center">
           <div className="grid justify-items-center mt-4  bg-gray-200 pt-5 border-t-4 border-indigo-300">
-            <h2 className="text-2xl mb-10">{course.name}</h2>
+            <h2
+              className="text-2xl mb-10"
+              style={{ fontWeight: "600", fontSize: "1.5rem" }}
+            >
+              {course.name}
+            </h2>
+            <span
+              style={{ fontSize: "1.2rem", textAlign: "center", width: "50%" }}
+            >
+              {course.description}
+            </span>
             <div className="mt-10 ">
               <img
-                style={{ maxHeight: 150, maxWidth: 300 }}
+                style={{ maxHeight: 150, maxWidth: 300, borderRadius: "5px" }}
                 className="mb-10"
                 src={course.image}
               ></img>
