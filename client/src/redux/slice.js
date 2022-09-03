@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const slice = createSlice({
   name: "programandoando",
   initialState: {
+<<<<<<< HEAD
     courses: [],
     course: {},
     schools: [],
@@ -55,10 +56,23 @@ export const slice = createSlice({
     },
     // createVideo: (state) => {
     //   state;
+=======
+    courses: ["uñas acrilicas"],
+    users: [],
+    detail: {},
+  },
+  reducers: {
+    // getAllCharacters: (state, action) => {
+    //   state.characters = action.payload;
+    // },
+    // getCharacterById: (state, action) => {
+    //   state.detail = action.payload;
+>>>>>>> 5789ac6 (redux and navbar)
     // },
   },
 });
 
+<<<<<<< HEAD
 export const {
   getCourses,
   getCourseById,
@@ -73,5 +87,8 @@ export const {
   getVideo,
   createVideo,
 } = slice.actions;
+=======
+// export const { getAllCharacters, getCharacterById } = characterSlice.actions;
+>>>>>>> 5789ac6 (redux and navbar)
 
 export default slice.reducer;

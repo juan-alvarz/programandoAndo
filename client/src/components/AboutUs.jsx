@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 
@@ -484,6 +485,11 @@ function AboutUs() {
       <Footer />
     </section>
   );
+=======
+
+function AboutUs() {
+  return <div>AboutUs</div>;
+>>>>>>> 5789ac6 (redux and navbar)
 }
 
 export default AboutUs;

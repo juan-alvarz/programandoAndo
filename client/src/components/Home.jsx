@@ -1,8 +1,11 @@
 import React from "react";
 import NavBar from "./NavBar";
+<<<<<<< HEAD
 import data from "../utils/data"
 import Footer from "./Footer";
 import SearchBar from "./SearchBar";
+=======
+>>>>>>> 5789ac6 (redux and navbar)
 
 function Home() {
   return (

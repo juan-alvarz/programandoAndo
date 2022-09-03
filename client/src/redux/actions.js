@@ -1,4 +1,5 @@
 import axios from "axios";
+<<<<<<< HEAD
 import {
   getCourses,
   getCourseById,
@@ -111,3 +112,20 @@ export const createsVideo = (payload) => async (dispatch) => {
   );
   return response;
 };
+=======
+import { getAllCharacters, getCharacterById } from "./characterSlice";
+
+// export const getCharacters = () => (dispatch) => {
+//   axios
+//     .get("https://rickandmortyapi.com/api/character")
+//     .then((res) => dispatch(getAllCharacters(res.data.results)))
+//     .catch((e) => console.log(e));
+// };
+
+// export const getCharactersById = (id) => (dispatch) => {
+//   axios
+//     .get(`https://rickandmortyapi.com/api/character/${id}`)
+//     .then((res) => dispatch(getCharacterById(res.data)))
+//     .catch((e) => console.log(e));
+// };
+>>>>>>> 5789ac6 (redux and navbar)

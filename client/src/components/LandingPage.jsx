@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import { NavLink } from "react-router-dom";
 
 function LandingPage() {
@@ -9,6 +10,11 @@ function LandingPage() {
       </NavLink>
     </div>
   );
+=======
+
+function LandingPage() {
+  return <div>LandingPage</div>;
+>>>>>>> 5789ac6 (redux and navbar)
 }
 
 export default LandingPage;
