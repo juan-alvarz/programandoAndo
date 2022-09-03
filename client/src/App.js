@@ -21,10 +21,12 @@ function App() {
       <div className="App">
 =======
 import { useSelector } from "react-redux";
+import schools from "./utils/data";
 
 function App() {
   const { courses } = useSelector((state) => state.programandoando);
   console.log(courses);
+  console.log(schools);
   return (
     <BrowserRouter>
       <div className="App">
