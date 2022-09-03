@@ -1,33 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getVideoById, clearFilter } from "../redux/actions";
-import NavBar from "./NavBar";
-import SearchBar from "./SearchBar";
-
-function Video() {
-  const dispatch = useDispatch();
+import { getVideoById } from "../redux/actions";
+export default function Video() {
+  const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
-
-  console.log(idVideo);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getVideoById(idVideo));
-    return () => {
-      dispatch(clearFilter());
-    };
-  }, [dispatch, idVideo]);
-
-  const { video } = useSelector((state) => state.programandoando);
+  }, [dispatch]);
   console.log(video);
-
   return (
     <div>
-      <NavBar />
-      <SearchBar />
-      <h1>trabajando en este componente</h1>
+      <h1>{video.name}</h1>
     </div>
   );
 }
-
-export default Video;
