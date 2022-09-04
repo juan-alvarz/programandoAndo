@@ -56,7 +56,7 @@ export const Videos = (props) => {
             <div key={index} style={{ justifyContent: "center" }}>
               <NavLink to={`/video/${elemento._id}`}>
                 <div
-                  style={{ margin: 10 }}
+                  style={{ margin: 10}}
                   className="w-80 h-80    p-6 bg-gray-900 rounded-lg border border-gray-200 hover:border-gray-800    hover:bg-gray-700 hover:text-black"
                 >
                   <h3 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-gray-800">
