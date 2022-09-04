@@ -14,6 +14,8 @@ export default function Video() {
 
   
 
+  //const courseSelect = course;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
