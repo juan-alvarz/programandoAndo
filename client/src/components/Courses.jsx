@@ -46,7 +46,7 @@ function Courses() {
   
 
   
-  return <div  >
+  return <div >
            <NavBar/>
            <div >
             
