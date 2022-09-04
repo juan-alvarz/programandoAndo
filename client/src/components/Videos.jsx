@@ -15,7 +15,8 @@ export const Videos = (props) => {
   }, [name]);
 
   let videos = props.videos;
-  console.log(videos);
+  let idCourse= props.idCourse
+  
   const [paginaActual, setPaginaActual] = useState(1);
   const [videosPagina] = useState(4);
 
@@ -23,6 +24,7 @@ export const Videos = (props) => {
   const primerVideo = ultimoVideo - videosPagina;
 
   const videosActuales = videos.slice(primerVideo, ultimoVideo);
+  
 
   const prev = () => {
     if (paginaActual > 1) {
@@ -57,7 +59,7 @@ export const Videos = (props) => {
           return (
             <div key={index} style={{ justifyContent: "center" }}>
               <NavLink
-                to={`/video/${elemento._id}`}
+                to={`/video/${elemento._id}/${idCourse}`}
                 state={(videos = videosActuales)}
               >
                 <div
