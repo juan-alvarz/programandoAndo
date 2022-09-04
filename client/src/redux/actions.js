@@ -127,3 +127,7 @@ export function orderByName(payload) {
 //     payload: { array: [], object: {} },
 //   };
 // }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 815555224827b182bb7379aa1dc5b6374b9fa5a8
