@@ -11,11 +11,13 @@ export const slice = createSlice({
     user: {},
     videos: [],
     video: {},
+    filters: [],
   },
   reducers: {
     // ========= Courses ===========
     getCourses: (state, action) => {
       state.courses = action.payload;
+      state.filters = action.payload;
     },
     getCourseById: (state, action) => {
       state.course = action.payload;
@@ -56,6 +58,10 @@ export const slice = createSlice({
     // createVideo: (state) => {
     //   state;
     // },
+    // ========== filters =========
+    sortAlpha: (state, action) => {
+      const allCourses = state.filters;
+    },
   },
 });
 
@@ -72,6 +78,7 @@ export const {
   getVideos,
   getVideo,
   createVideo,
+  sortAlpha,
 } = slice.actions;
 
 export default slice.reducer;

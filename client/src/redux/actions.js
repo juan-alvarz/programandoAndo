@@ -12,6 +12,7 @@ import {
   getVideos,
   getVideo,
   createVideo,
+  sortAlpha,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -111,3 +112,9 @@ export const createsVideo = (payload) => async (dispatch) => {
   );
   return response;
 };
+
+//=================== filters =====================
+/* export function filterCoursesByDuration(payload) {
+  return dispatch(sortAlpha(payload));
+}
+ */
