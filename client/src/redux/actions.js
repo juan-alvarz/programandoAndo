@@ -12,11 +12,7 @@ import {
   getVideos,
   getVideo,
   createVideo,
-<<<<<<< HEAD
-  clearVideo,
-=======
   sortAlpha,
->>>>>>> cf4d7cbe845127f418903bf0437fbc761fced7f9
 } from "./slice";
 
 // ============================ Courses ============================
@@ -117,25 +113,8 @@ export const createsVideo = (payload) => async (dispatch) => {
   return response;
 };
 
-<<<<<<< HEAD
-// ============================ Order ============================
-export function orderByName(payload) {
-  return {
-    type: "ORDER_BY_NAME",
-    payload,
-  };
-}
-// ============================ Clear ============================
-// export function clearFilter() {
-//   return {
-//     type: "CLEAR_FILTER",
-//     payload: { array: [], object: {} },
-//   };
-// }
-=======
 //=================== filters =====================
 /* export function filterCoursesByDuration(payload) {
   return dispatch(sortAlpha(payload));
 }
  */
->>>>>>> cf4d7cbe845127f418903bf0437fbc761fced7f9

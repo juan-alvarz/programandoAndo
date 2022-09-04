@@ -59,7 +59,7 @@ function Courses() {
                       <div className="justify-center" key={index}>
                         <CourseDetail element={el}></CourseDetail>
 
-                        <Videos videos={el.videos} name={name}></Videos>
+                        <Videos videos={el.videos} name={name} idCourse={el._id}></Videos>
                       </div>
                     );
                   })}
