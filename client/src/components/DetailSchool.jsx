@@ -11,7 +11,7 @@ export const DetailSchool = () => {
                 let name=elemento.name
                  return (
                     <div key={index}>
-                        <NavLink className="hover:bg-gray-600 hover:text-white" style={{margin:10,padding:3,borderRadius:3}} to="/courses" state={name=name}>{elemento.name}</NavLink>
+                        <NavLink className="hover:bg-gray-600 hover:text-white"  to="/courses" state={name=name}>{elemento.name}</NavLink>
                     </div>
                  )
             }):

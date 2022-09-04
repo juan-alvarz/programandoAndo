@@ -3,13 +3,17 @@ import NavBar from "./NavBar";
 import data from "../utils/data"
 import Footer from "./Footer";
 import SearchBar from "./SearchBar";
+import Carousel from "./Carousel";
 
 function Home() {
   return (
     <div>
       <NavBar />
-      <div className="flex justify-center mt-2">
+      <div className="flex justify-center content-center  mt-2">
       <SearchBar/>
+      </div>
+      <div>
+      <Carousel/>
       </div>
       <h1>{data.map(e => e.name + ' ')}</h1>
       <h1>{data.map(e => e.description + ' ')}</h1>

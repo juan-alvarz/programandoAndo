@@ -15,6 +15,7 @@ import CreateCourse from "./components/CreateCourse";
 import Error404 from "./components/Error404"
 import { useSelector } from "react-redux";
 import Video from "./components/Video";
+import Carousel from "./components/Carousel";
 
 
 

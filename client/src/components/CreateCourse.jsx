@@ -4,6 +4,7 @@ import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm, Controller } from "react-hook-form";
 import videos from "../utils/videos.json";
 import Swal from "sweetalert2";
+import NavBar from './NavBar.jsx'
 
 export default function CreateCourse() {
   // react-hook-forms
@@ -49,14 +50,11 @@ export default function CreateCourse() {
 
   return (
     <>
+    <NavBar/>
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
-            <img
-              className="mx-auto h-12 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-              alt="Workflow"
-            />
+            <svg className="mx-auto h-12 w-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Create Course
             </h2>
@@ -160,7 +158,7 @@ export default function CreateCourse() {
               <button
                 type="submit"
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                style={{ backgroundColor: "red" }}
+                // style={{ backgroundColor: "red" }}
                 disabled={Object.entries(errors).length === 0 ? "" : true}
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
