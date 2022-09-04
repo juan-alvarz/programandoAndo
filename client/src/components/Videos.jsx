@@ -33,7 +33,11 @@ export const Videos = (props) => {
   };
 
   const next = () => {
+<<<<<<< HEAD
     if (paginaActual < Math.ceil(videos.length / videosPagina)) {
+=======
+    if (paginaActual <= Math.ceil(videos.length / videosPagina)) {
+>>>>>>> Lucho
       setPaginaActual(paginaActual + 1);
     }
   };

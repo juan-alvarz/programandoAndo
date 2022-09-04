@@ -12,11 +12,13 @@ import {
   getVideos,
   getVideo,
   createVideo,
-<<<<<<< HEAD
   clearVideo,
+<<<<<<< HEAD
 =======
   sortAlpha,
 >>>>>>> agustin
+=======
+>>>>>>> Lucho
 } from "./slice";
 
 // ============================ Courses ============================
@@ -117,7 +119,6 @@ export const createsVideo = (payload) => async (dispatch) => {
   return response;
 };
 
-<<<<<<< HEAD
 // ============================ Order ============================
 export function orderByName(payload) {
   return {
@@ -132,6 +133,7 @@ export function orderByName(payload) {
 //     payload: { array: [], object: {} },
 //   };
 // }
+<<<<<<< HEAD
 =======
 //=================== filters =====================
 /* export function filterCoursesByDuration(payload) {
@@ -139,3 +141,5 @@ export function orderByName(payload) {
 }
  */
 >>>>>>> agustin
+=======
+>>>>>>> Lucho
