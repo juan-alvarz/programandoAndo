@@ -45,8 +45,8 @@ export default function AllCourses() {
       names.push(courses[i].name); //<-- esta cochinada no sirve
       //names.push(courses[i]["name"]); //se debe usar la nomenclatura ['atributo']
     }
-    const alphabetic = courses.sort((a, b) => a["name"].localeCompare(b.name));
-    console.log(alphabetic);
+    //const alphabetic = courses.sort((a, b) => a["name"].localeCompare(b.name));
+    //console.log(alphabetic);
     // courses es un array de 27 objetos con la propiedad name
     return (
       <div>
