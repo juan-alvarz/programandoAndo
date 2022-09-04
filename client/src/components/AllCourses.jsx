@@ -99,7 +99,8 @@ export default function AllCourses() {
               <option value={"allDurations"}>All Durations</option>
               <option value={"more1Day"}>More than 1 day</option>
               <option value={"more10h"}>More than 10 hours</option>
-              <option value={"less5hs"}>Less than 5 hours</option>
+              <option value={"less10h"}>Less than 10 hours</option>
+              <option value={"less5h"}>Less than 5 hours</option>
             </select>
           </div>
         </div>
