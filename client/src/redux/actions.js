@@ -12,11 +12,7 @@ import {
   getVideos,
   getVideo,
   createVideo,
-<<<<<<< HEAD
   clearVideo,
-=======
-  sortAlpha,
->>>>>>> cf4d7cbe845127f418903bf0437fbc761fced7f9
 } from "./slice";
 
 // ============================ Courses ============================

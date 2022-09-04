@@ -40,15 +40,13 @@ export default function AllCourses() {
   if (!courses.length) {
     return <div role="status">Cargando ando</div>;
   } else {
-    /* const names = [];
+    const names = [];
     for (let i = 1; i < courses.length; i++) {
-      // names.push(courses[i].name) <-- esta cochinada no sirve
-      names.push(courses[i]["name"]); //se debe usar la nomenclatura ['atributo']
+      names.push(courses[i].name); //<-- esta cochinada no sirve
+      //names.push(courses[i]["name"]); //se debe usar la nomenclatura ['atributo']
     }
-    const alphabetic = courses.sort((a, b) =>
-      a["name"].localeCompare(b.name)
-    );
-    console.log(alphabetic); */
+    const alphabetic = courses.sort((a, b) => a["name"].localeCompare(b.name));
+    console.log(alphabetic);
     // courses es un array de 27 objetos con la propiedad name
     return (
       <div>
