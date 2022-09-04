@@ -20,7 +20,7 @@ export default function OneCourseDetail() {
   console.log(course);
 
   if (!Object.keys(course).length) {
-    return <h1>Cargando!</h1>;
+    return <h1>Cargando ando!</h1>;
   } else {
     return (
       <div>
