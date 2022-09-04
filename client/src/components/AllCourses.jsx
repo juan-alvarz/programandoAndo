@@ -42,15 +42,7 @@ export default function AllCourses() {
   if (!courses.length) {
     return <div role="status">Cargando ando</div>;
   } else {
-    // const names = [];
-    // for (let i = 1; i < courses.length; i++) {
-    //   names.push(courses[i].name) //<-- esta cochinada no sirve
-    //   names.push(courses[i]["name"]); //se debe usar la nomenclatura ['atributo']
-    // }
-    // const alphabetic = courses.sort((a, b) =>
-    //   a["name"].localeCompare(b.name)
-    // );
-    // console.log(names); 
+
     // courses es un array de 27 objetos con la propiedad name
     return (
       <div>
@@ -103,7 +95,8 @@ export default function AllCourses() {
               <option value={"allDurations"}>All Durations</option>
               <option value={"more1Day"}>More than 1 day</option>
               <option value={"more10h"}>More than 10 hours</option>
-              <option value={"less5hs"}>Less than 5 hours</option>
+              <option value={"less10h"}>Less than 10 hours</option>
+              <option value={"less5h"}>Less than 5 hours</option>
             </select>
           </div>
         </div>

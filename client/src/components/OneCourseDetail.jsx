@@ -46,7 +46,7 @@ export default function OneCourseDetail() {
               ></img>
             </div>
           </div>
-          <Videos videos={window.courseSelect.videos} />
+          <Videos videos={window.courseSelect.videos} idCourse={idCourse} />
         </div>
       </div>
     );
