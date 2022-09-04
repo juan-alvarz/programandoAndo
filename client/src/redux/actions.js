@@ -12,6 +12,7 @@ import {
   getVideos,
   getVideo,
   createVideo,
+  clearVideo,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -112,10 +113,17 @@ export const createsVideo = (payload) => async (dispatch) => {
   return response;
 };
 
-// ============================ Clear ============================
-export function clearFilter() {
+// ============================ Order ============================
+export function orderByName(payload) {
   return {
-    type: "CLEAR_FILTER",
-    payload: { array: [], object: {} },
+    type: "ORDER_BY_NAME",
+    payload,
   };
 }
+// ============================ Clear ============================
+// export function clearFilter() {
+//   return {
+//     type: "CLEAR_FILTER",
+//     payload: { array: [], object: {} },
+//   };
+// }

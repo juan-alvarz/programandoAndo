@@ -10,6 +10,8 @@ export default function OneCourseDetail() {
   const { idCourse } = useParams();
   const { course } = useSelector((state) => state.programandoando);
 
+  window.courseSelect = course;
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCourse(idCourse));
@@ -44,7 +46,7 @@ export default function OneCourseDetail() {
               ></img>
             </div>
           </div>
-          <Videos videos={course.videos}></Videos>
+          <Videos videos={window.courseSelect.videos} />
         </div>
       </div>
     );

@@ -1,10 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { Paginated } from "./Paginated";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Videos = (props) => {
+  const { course } = useSelector((state) => state.programandoando);
+  const dispatch = useDispatch();
+
   let name = props.name;
   useEffect(() => {
     setPaginaActual(1);
@@ -28,7 +32,7 @@ export const Videos = (props) => {
     }
   };
   const next = () => {
-    if (paginaActual < Math.ceil(videos.length / videosPagina)) {
+    if (paginaActual <= videos.length) {
       setPaginaActual(paginaActual + 1);
     } else {
       setPaginaActual(paginaActual);
@@ -54,12 +58,15 @@ export const Videos = (props) => {
         {videosActuales.map((elemento, index) => {
           return (
             <div key={index} style={{ justifyContent: "center" }}>
-              <NavLink to={`/video/${elemento._id}`}>
+              <NavLink
+                to={`/video/${elemento._id}`}
+                state={(videos = videosActuales)}
+              >
                 <div
-                  style={{ margin: 10 }}
-                  className="w-80 h-80    p-6 bg-gray-900 rounded-lg border border-gray-200 hover:border-gray-800    hover:bg-gray-700 hover:text-black"
+                  style={{ margin: 10, backgroundColor: "red", color: "white" }}
+                  className="w-80 h-80    p-6 bg-gray-900 rounded-lg border border-gray-200 hover:border-gray-800    hover:bg-gray-700"
                 >
-                  <h3 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-gray-800">
+                  <h3 className="mb-2 text-2xl font-bold tracking-tight text-white ">
                     {elemento.name}
                   </h3>
                 </div>
