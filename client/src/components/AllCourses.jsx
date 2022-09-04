@@ -12,6 +12,8 @@ export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
 
+  const path = "courses"
+  console.log(path)
   // =============== Paginado =========================
   const [cursoActual, setCursoActual] = useState(1);
   const [cursosPagina] = useState(6);
@@ -40,15 +42,15 @@ export default function AllCourses() {
   if (!courses.length) {
     return <div role="status">Cargando ando</div>;
   } else {
-    /* const names = [];
-    for (let i = 1; i < courses.length; i++) {
-      // names.push(courses[i].name) <-- esta cochinada no sirve
-      names.push(courses[i]["name"]); //se debe usar la nomenclatura ['atributo']
-    }
-    const alphabetic = courses.sort((a, b) =>
-      a["name"].localeCompare(b.name)
-    );
-    console.log(alphabetic); */
+    // const names = [];
+    // for (let i = 1; i < courses.length; i++) {
+    //   names.push(courses[i].name) //<-- esta cochinada no sirve
+    //   names.push(courses[i]["name"]); //se debe usar la nomenclatura ['atributo']
+    // }
+    // const alphabetic = courses.sort((a, b) =>
+    //   a["name"].localeCompare(b.name)
+    // );
+    // console.log(names); 
     // courses es un array de 27 objetos con la propiedad name
     return (
       <div>
@@ -60,7 +62,7 @@ export default function AllCourses() {
             padding: "10px",
           }}
         >
-          <SearchBar />
+          <SearchBar path={path} />
         </div>
 
         <div

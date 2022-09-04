@@ -1,40 +1,41 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { getSchoolByName} from "../redux/actions";
+import { getCoursesByName,getAllSchoolByName,getVideoByName} from "../redux/actions";
 
-const SearchBar= (path,setCurrentPage) => {
+const SearchBar= ({path,setPagina}) => {
 
     const dispatch = useDispatch()
     const [name,setName] = useState('')
 
     const handleChange = (e) =>{
         e.preventDefault()
-        setName(e.target.value)
+        setName(e.target.value)        
     }
-
+    console.log(path)
     const handlerSubmit = (e) =>{
-        if(path === "schools"){
+        if(path.path === "schools"){
             e.preventDefault()     
             // dispatch(cleanFilter())  
-            // dispatch(getSchoolByName(name))
+            dispatch(getAllSchoolByName(name))
             setName('')
-            setCurrentPage(1)
+            setPagina(1)
         }
         if(path === "courses")
         {
             e.preventDefault()     
             // dispatch(cleanFilter())  
-            // dispatch(getAllSchoolByName(name))
+            dispatch(getCoursesByName(name))
             setName('')
-            setCurrentPage(1)
+            console.log(name)
+            // setPagina(1)
         }
         if(path === "videos"){
             e.preventDefault()     
             // dispatch(cleanFilter())  
-            // dispatch(getAllSchoolByName(name))
+            dispatch(getVideoByName(name))
             setName('')
-            setCurrentPage(1)
+            setPagina(1)
         }
     }   
     return (
@@ -46,7 +47,7 @@ const SearchBar= (path,setCurrentPage) => {
                     placeholder="Search course..."
                     onChange={(event) =>handleChange(event) }
                 />
-                <button type="submit" onChange={(event) =>handlerSubmit(event) } className="px-4 text-white bg-gray-800 rounded-full ">
+                <button type="submit" onClick={(event) =>handlerSubmit(event) } className="px-4 text-white bg-gray-800 rounded-full ">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5"

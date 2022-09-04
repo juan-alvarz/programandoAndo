@@ -24,20 +24,30 @@ export const Videos = (props) => {
 
   const videosActuales = videos.slice(primerVideo, ultimoVideo);
 
+  // const prev = () => {
+  //   if (paginaActual <= 1) {
+  //     setPaginaActual(paginaActual - 1);
+  //   } else {
+  //     setPaginaActual(paginaActual);
+  //   }
+  // };
+  // const next = () => {
+  //   if (paginaActual >= videos.length) {
+  //     setPaginaActual(paginaActual + 1);
+  //   } else {
+  //     setPaginaActual(paginaActual);
+  //   }
+  // };
   const prev = () => {
-    if (paginaActual > 1) {
-      setPaginaActual(paginaActual - 1);
-    } else {
-      setPaginaActual(paginaActual);
-    }
-  };
-  const next = () => {
-    if (paginaActual <= videos.length) {
-      setPaginaActual(paginaActual + 1);
-    } else {
-      setPaginaActual(paginaActual);
-    }
-  };
+		if (paginaActual <= 1) return;
+		paginado(paginaActual - 1);
+	};
+	const next = () => {
+		if (paginaActual >= videos.length) return;
+		paginado(paginaActual + 1);
+	};
+
+
   const paginado = (numeroPagina) => {
     setPaginaActual(numeroPagina);
   };

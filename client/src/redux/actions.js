@@ -13,6 +13,11 @@ import {
   getVideo,
   createVideo,
   clearVideo,
+  getCourseByName,
+  getSchoolsByName,
+  getVideosByName,
+  getCoursesByAZ,
+  getCoursesByZA
 } from "./slice";
 
 // ============================ Courses ============================
@@ -21,6 +26,20 @@ export const getAllCourses = () => (dispatch) => {
   axios
     .get("http://localhost:3001/api/courses")
     .then((res) => dispatch(getCourses(res.data)))
+    .catch((e) => console.log(e));
+};
+
+export const getAllCoursesAZ = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/courses")
+    .then((res) => dispatch(getCoursesByAZ(res.data)))
+    .catch((e) => console.log(e));
+};
+
+export const getAllCoursesZA = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/courses")
+    .then((res) => dispatch(getCoursesByZA(res.data)))
     .catch((e) => console.log(e));
 };
 
@@ -39,6 +58,13 @@ export const createsCourse = (payload) => async (dispatch) => {
   return response;
 };
 
+export const getCoursesByName = (name) => (dispatch) => {
+  axios
+    .get(`http://localhost:3001/api/courses?name=${name}`)
+    .then((res) => dispatch(getCourseByName(res.data)))
+    .catch((e) => console.log(e));
+};
+
 // ============================ Schools ============================
 
 export const getAllSchools = () => (dispatch) => {
@@ -51,7 +77,7 @@ export const getAllSchools = () => (dispatch) => {
 export const getAllSchoolByName = (name) => (dispatch) => {
   axios
     .get(`http://localhost:3001/api/schools?name=${name}`)
-    .then((res) => dispatch(getAllSchool(res.data)))
+    .then((res) => dispatch(getSchoolsByName(res.data)))
     .catch((e) => console.log(e));
 };
 
@@ -111,6 +137,13 @@ export const createsVideo = (payload) => async (dispatch) => {
     payload
   );
   return response;
+};
+
+export const getVideoByName = (name) => (dispatch) => {
+  axios
+    .get(`http://localhost:3001/api/schools?name=${name}`)
+    .then((res) => dispatch(getVideosByName(res.data)))
+    .catch((e) => console.log(e));
 };
 
 // ============================ Order ============================

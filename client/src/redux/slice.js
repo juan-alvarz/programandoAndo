@@ -20,11 +20,38 @@ export const slice = createSlice({
       state.courses = action.payload;
       state.filters = action.payload;
     },
+    getCoursesByAZ: (state, action) => {
+      state.filters = action.payload.sort(function(a,b){
+        if(a.name.toUpperCase() > b.name.toUpperCase()){
+          return 1;
+      }
+      if(b.name.toUpperCase() > a.name.toUpperCase()){
+          return -1;
+      }
+      return 0;
+      });
+      state.courses = action.payload;
+    },
+    getCoursesByZA: (state, action) => {
+      state.filters = action.payload.sort(function(a,b){
+        if(a.name.toUpperCase() > b.name.toUpperCase()){
+          return -1
+      }
+      if(b.name.toUpperCase() > a.name.toUpperCase()){
+          return 1
+      }
+      return 0
+      });
+      state.courses = action.payload;
+    },
     getCourseById: (state, action) => {
       state.course = action.payload;
     },
     createCourse: (state) => {
       return { ...state };
+    },
+    getCourseByName: (state, action) => {
+      state.courses = action.payload;
     },
 
     // ========= schools ===========
@@ -36,6 +63,9 @@ export const slice = createSlice({
     },
     createSchool: (state, action) => {
       return { ...state };
+    },
+    getSchoolsByName: (state, action) => {
+      state.courses = action.payload;
     },
 
     // ========= users ===========
@@ -63,6 +93,13 @@ export const slice = createSlice({
       state.video = action.payload.object;
       state.videos = action.payload.array;
     },
+    getVideosByName: (state, action) => {
+      state.courses = action.payload;
+    },
+    // getSchoolsByName: (state, action) => {
+    //   state.courses = action.payload;
+    // },
+    
     // filterByName: (state, action) => {
     //   state.stateFilter = action.payload;
     // },
@@ -100,6 +137,11 @@ export const {
   createVideo,
   clearVideo,
   orderFilter,
+  getCourseByName,
+  getSchoolsByName,
+  getVideosByName,
+  getCoursesByAZ,
+  getCoursesByZA,
 } = slice.actions;
 
 export default slice.reducer;
