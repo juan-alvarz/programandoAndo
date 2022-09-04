@@ -66,7 +66,6 @@ export const slice = createSlice({
     // filterByName: (state, action) => {
     //   state.stateFilter = action.payload;
     // },
-<<<<<<< HEAD
     orderFilter: (state, action) => {
       const sortedAlf =
         action.payload === "value"
@@ -82,11 +81,6 @@ export const slice = createSlice({
             });
 
       state.stateFilter = sortedAlf;
-=======
-    // ========== filters =========
-    sortAlpha: (state, action) => {
-      const allCourses = state.filters;
->>>>>>> cf4d7cbe845127f418903bf0437fbc761fced7f9
     },
   },
 });
@@ -104,12 +98,8 @@ export const {
   getVideos,
   getVideo,
   createVideo,
-<<<<<<< HEAD
   clearVideo,
   orderFilter,
-=======
-  sortAlpha,
->>>>>>> cf4d7cbe845127f418903bf0437fbc761fced7f9
 } = slice.actions;
 
 export default slice.reducer;
