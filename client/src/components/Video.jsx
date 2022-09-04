@@ -9,6 +9,8 @@ export default function Video() {
   const { video, course } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
 
+  //const courseSelect = course;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
