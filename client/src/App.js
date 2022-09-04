@@ -11,6 +11,8 @@ import Error404 from "./components/Error404";
 import { useSelector } from "react-redux";
 import Video from "./components/Video";
 import Donators from "./components/Donators";
+import AllCourses from "./components/AllCourses";
+import OneCourseDetail from "./components/OneCourseDetail";
 
 function App() {
   // const { courses } = useSelector((state) => state.programandoando);
@@ -36,11 +38,13 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/allCourses" element={<AllCourses />} />
+          <Route path="/course/:idCourse" element={<OneCourseDetail />} />
           <Route path="/courses" element={<Courses />} />
 <<<<<<< HEAD
           <Route path="/createCourse" element={<CreateCourse />} />
           <Route path="/aboutUs" element={<AboutUs />} />
-          <Route path="/video" element={<Video />} />
+          <Route path="/video/:idVideo" element={<Video />} />
           <Route path="/donators" element={<Donators />} />
           <Route path="*" element={<Error404 />} />
 =======

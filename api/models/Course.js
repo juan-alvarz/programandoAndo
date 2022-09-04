@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const mongoose = require("mongoose");
 const Video = require("./Video.js");
+const mongooseDelete = require ('mongoose-delete')
 
 const CourseSchema = new Schema(
   {
@@ -27,6 +28,7 @@ const CourseSchema = new Schema(
   }
 );
 
+CourseSchema.plugin(mongooseDelete, {overrideMethods: "all"});
 const CourseModel = model("Course", CourseSchema);
 
 module.exports = CourseModel;
