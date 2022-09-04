@@ -81,14 +81,6 @@ export const slice = createSlice({
             });
 
       state.stateFilter = sortedAlf;
-<<<<<<< HEAD
-=======
-    // ========== filters =========
-    sortAlpha: (state, action) => {
-      const allCourses = state.filters;
->>>>>>> agustin
-=======
->>>>>>> Lucho
     },
   },
 });
@@ -108,12 +100,6 @@ export const {
   createVideo,
   clearVideo,
   orderFilter,
-<<<<<<< HEAD
-=======
-  sortAlpha,
->>>>>>> agustin
-=======
->>>>>>> Lucho
 } = slice.actions;
 
 export default slice.reducer;
