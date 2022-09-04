@@ -32,10 +32,8 @@ export const Videos = (props) => {
     }
   };
   const next = () => {
-    if (paginaActual <= videos.length) {
+    if (paginaActual <= Math.ceil(videos.length / videosPagina)) {
       setPaginaActual(paginaActual + 1);
-    } else {
-      setPaginaActual(paginaActual);
     }
   };
   const paginado = (numeroPagina) => {
