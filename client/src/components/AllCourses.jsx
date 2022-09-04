@@ -11,6 +11,7 @@ import { sortAlpha } from "../redux/slice";
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
+
   // =============== Paginado =========================
   const [cursoActual, setCursoActual] = useState(1);
   const [cursosPagina] = useState(6);
@@ -32,11 +33,6 @@ export default function AllCourses() {
   };
   // ==============================================
 
-  /* function handleFilterDuration(e) {
-    dispatch(filterCoursesByDuration(e.target.value));
-    setCursoActual(1);
-  } */
-
   useEffect(() => {
     dispatch(getAllCourses());
   }, [dispatch]);
@@ -44,17 +40,16 @@ export default function AllCourses() {
   if (!courses.length) {
     return <div role="status">Cargando ando</div>;
   } else {
-    console.log(courses);
-    courses = courses.sort(function (a, b) {
-      if (a.name.toLowerCase() > b.name.toLowerCase()) {
-        return 1;
-      }
-      if (b.name.toLowerCase() > a.name.toLowerCase()) {
-        return -1;
-      }
-      return 0;
-    });
-    console.log(courses);
+    /* const names = [];
+    for (let i = 1; i < courses.length; i++) {
+      // names.push(courses[i].name) <-- esta cochinada no sirve
+      names.push(courses[i]["name"]); //se debe usar la nomenclatura ['atributo']
+    }
+    const alphabetic = courses.sort((a, b) =>
+      a["name"].localeCompare(b.name)
+    );
+    console.log(alphabetic); */
+    // courses es un array de 27 objetos con la propiedad name
     return (
       <div>
         <NavBar />
@@ -72,8 +67,8 @@ export default function AllCourses() {
           style={{
             display: "flex",
             justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
+            flexDirection: "row",
+            alignItems: "baseline",
           }}
         >
           <div style={{ display: "flex" }}>
@@ -82,15 +77,15 @@ export default function AllCourses() {
             </span>
             <label
               for="default-toggle"
-              class="inline-flex relative items-center mb-4 cursor-pointer"
+              className="inline-flex relative items-center mb-4 cursor-pointer"
             >
               <input
                 type="checkbox"
                 value=""
                 id="default-toggle"
-                class="sr-only peer"
+                className="sr-only peer"
               />
-              <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+              <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
             <span style={{ paddingRight: "10px", paddingLeft: "10px" }}>
               Z-A
@@ -101,7 +96,7 @@ export default function AllCourses() {
           <div style={{ paddingBottom: "10px" }}>
             <select
               id="countries"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               <option value={"allDurations"}>All Durations</option>
               <option value={"more1Day"}>More than 1 day</option>
@@ -110,8 +105,21 @@ export default function AllCourses() {
             </select>
           </div>
         </div>
-
-        <div className="grid gap-8 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 justify-items-center">
+        {/* Paginated */}
+        <div className="grid justify-items-center mb-20">
+          <Paginated
+            setPagina={paginado}
+            videos={courses.length}
+            videosPagina={cursosPagina}
+            paginaActual={cursoActual}
+            prev={prev}
+            next={next}
+          ></Paginated>
+        </div>
+        <div
+          className="grid gap-8 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 justify-items-center"
+          style={{ paddingBottom: "30px" }}
+        >
           {cursosActuales.map((course, index) => (
             <div
               key={index}
@@ -154,44 +162,9 @@ export default function AllCourses() {
             </div>
           ))}
         </div>
-        {/* Paginated */}
-        <div className="grid justify-items-center mb-20">
-          <Paginated
-            setPagina={paginado}
-            videos={courses.length}
-            videosPagina={cursosPagina}
-            paginaActual={cursoActual}
-            prev={prev}
-            next={next}
-          ></Paginated>
-        </div>
+
         <Footer />
       </div>
     );
   }
 }
-
-/* case SORT_NAME:
-      const doggys = state.dogs;
-      if (action.payload !== "all") {
-        let sortArr =
-          action.payload === "asc"
-            ? doggys.sort(function (a, b) {
-                if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                  return 1;
-                }
-                if (b.name.toLowerCase() > a.name.toLowerCase()) {
-                  return -1;
-                }
-                return 0;
-              })
-            : doggys.sort(function (a, b) {
-                if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
-                if (b.name.toLowerCase() > a.name.toLowerCase()) return 1;
-                return 0;
-              });
-        return {
-          ...state,
-          dogs: sortArr,
-        };
-      } */
