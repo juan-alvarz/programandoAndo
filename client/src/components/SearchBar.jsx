@@ -21,21 +21,21 @@ const SearchBar= (path,setCurrentPage) => {
             setName('')
             setCurrentPage(1)
         }
-        // if(path === "courses")
-        // {
-        //     e.preventDefault()     
-        //     // dispatch(cleanFilter())  
-        //     dispatch(getAllSchoolByName(name))
-        //     setName('')
-        //     setCurrentPage(1)
-        // }
-        // if(path === "videos"){
-        //     e.preventDefault()     
-        //     // dispatch(cleanFilter())  
-        //     dispatch(getAllSchoolByName(name))
-        //     setName('')
-        //     setCurrentPage(1)
-        // }
+        if(path === "courses")
+        {
+            e.preventDefault()     
+            // dispatch(cleanFilter())  
+            // dispatch(getAllSchoolByName(name))
+            setName('')
+            setCurrentPage(1)
+        }
+        if(path === "videos"){
+            e.preventDefault()     
+            // dispatch(cleanFilter())  
+            // dispatch(getAllSchoolByName(name))
+            setName('')
+            setCurrentPage(1)
+        }
     }   
     return (
         <div className="flex items-center">
