@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSchoolByName} from "../redux/actions";
+// import { getSchoolByName} from "../redux/actions";
 
 const SearchBar= (path,setCurrentPage) => {
 
@@ -17,7 +17,7 @@ const SearchBar= (path,setCurrentPage) => {
         if(path === "schools"){
             e.preventDefault()     
             // dispatch(cleanFilter())  
-            dispatch(getSchoolByName(name))
+            // dispatch(getSchoolByName(name))
             setName('')
             setCurrentPage(1)
         }
