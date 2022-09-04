@@ -181,10 +181,10 @@ function AboutUs() {
                     </ul>
                 </div>
             </div>  
-        </div>
-        <Footer/>
+      </div>
+      <Footer />
     </section>
-  )
+  );
 }
 
 export default AboutUs;

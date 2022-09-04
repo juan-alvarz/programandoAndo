@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Error404 = () => {
   return (
@@ -18,8 +18,8 @@ const Error404 = () => {
                 </NavLink>
             </div>
         </div>
-    </div>
-  )
-}
+      </div>
+  );
+};
 
 export default Error404;

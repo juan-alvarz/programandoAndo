@@ -1,5 +1,5 @@
-import React from 'react'
-import img from '../utils/images/SOYLUCHOICONO.png'
+import React from "react";
+import img from "../utils/images/SOYLUCHOICONO.png";
 
 const Footer = () => {
   return (
@@ -59,9 +59,9 @@ const Footer = () => {
                 </a>
 
             </div>
-        </div>
+      </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
