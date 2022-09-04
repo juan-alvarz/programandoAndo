@@ -5,11 +5,8 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllVideos, createsCourse, getAllCourses } from "../redux/actions";
 import Swal from "sweetalert2";
-<<<<<<< HEAD
 import NavBar from './NavBar.jsx'
-=======
-import NavBar from "./NavBar";
->>>>>>> f1f233cbb4b2acd3d59abb0c46127afd163f8193
+
 
 export default function CreateCourse() {
   const { videos, courses } = useSelector((state) => state.programandoando);
