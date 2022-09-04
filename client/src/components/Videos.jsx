@@ -52,12 +52,13 @@ export const Videos = (props) => {
       </div>
       <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {videosActuales.map((elemento, index) => {
+          
           return (
             <div key={index} style={{ justifyContent: "center" }}>
               <NavLink to={`/video/${elemento._id}`}>
                 <div
-                  style={{ margin: 10 }}
-                  className="w-80 h-80    p-6 bg-gray-900 rounded-lg border border-gray-200 hover:border-gray-800    hover:bg-gray-700 hover:text-black"
+                  style={{ margin: 10,boxShadow: '2px 2px 9px #312928'}}
+                  className="rounded-lg w-80 h-80 p-6 transition ease-in-out delay-150 bg-gray-800 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-800 duration-300"
                 >
                   <h3 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-gray-800">
                     {elemento.name}

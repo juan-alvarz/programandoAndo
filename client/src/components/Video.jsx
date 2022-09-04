@@ -14,6 +14,7 @@ export default function Video() {
   return (
     <div>
       <h1>{video.name}</h1>
+      
     </div>
   );
 }
