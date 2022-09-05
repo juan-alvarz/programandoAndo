@@ -13,7 +13,7 @@ const SearchBar= ({path,setPagina}) => {
         e.preventDefault()
         setName(e.target.value)        
     }
-    console.log(path)
+    // console.log(path)
     const handlerSubmit = (e) =>{
         if(path === "schools"){
             e.preventDefault()     
@@ -28,7 +28,7 @@ const SearchBar= ({path,setPagina}) => {
             // dispatch(cleanFilter())  
             dispatch(getCoursesByName(name))
             setName('')
-            console.log(name)
+            // console.log(name)
             // setPagina(1)
         }
         if(path === "videos"){
