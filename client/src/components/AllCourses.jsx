@@ -12,7 +12,14 @@ import { getAllCoursesAZ, getAllCoursesZA } from "../redux/actions";
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
+  
+     // =============== Paginado =========================
+     const [cursoActual, setCursoActual] = useState(1);
+     const [cursosPagina] = useState(6);
+     const ultimoCurso = cursoActual * cursosPagina;
+     const primerCurso = ultimoCurso - cursosPagina;
 
+<<<<<<< HEAD
   const path = "courses";
   console.log(path);
   // =============== Paginado =========================
@@ -21,6 +28,117 @@ export default function AllCourses() {
   const ultimoCurso = cursoActual * cursosPagina;
   const primerCurso = ultimoCurso - cursosPagina;
   const cursosActuales = courses.slice(primerCurso, ultimoCurso);
+=======
+  useEffect(() => {
+    dispatch(getAllCourses());
+  }, [dispatch]);    
+    
+
+  
+  // const duration = courses.map(e => e.videos.map(e => e.duration))
+  // let example = duration[0][0]
+  // console.log(example.length)
+
+  // const toSeconds = (time) => {
+  //   if(time.length >5){
+  //     let parse = time.split(':')
+  //     let newParse = [parseInt(parse[0])*3600,parseInt(parse[1],10) *60, parseInt(parse[2],10) ]
+  //     let sumParse = newParse[0] + newParse[1] +newParse[2]
+  //     return sumParse  
+  //   }
+  //   if(time.length <=5){
+  //     let parse = time.split(':')
+  //     let newParse = [parseInt(parse[0],10) *60, parseInt(parse[1],10) ]
+  //     let sumParse = newParse[0] + newParse[1]    
+  //     return sumParse   
+  //   }    
+  // }
+  
+  // let secondsDuration = duration.map(e => e.map( e=> toSeconds(e)) )
+  // let oneDuration = secondsDuration.map(e => e.reduce((sum,a) => sum +a ,0))
+
+  // console.log(toSeconds("9:44:55"));
+  // console.log(secondsDuration)
+  // console.log(oneDuration)
+
+
+  // //==================================================================
+  let finallyOneDuration = (time) =>{
+      //let totalSeconds = 28565;
+    let hours = Math.floor(time / 3600);
+    time %= 3600;
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    
+    // console.log("hours: " + hours);
+    // console.log("minutes: " + minutes);
+    // console.log("seconds: " + seconds);
+    
+    // If you want strings with leading zeroes:
+    minutes = String(minutes).padStart(2, "0");
+    hours = String(hours).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
+    
+    let stringNumber = `${hours}h ${minutes}min ${seconds}seg`
+    return stringNumber
+    // console.log(hours + ":" + minutes + ":" + seconds);
+    }
+    
+  //   let final = oneDuration.map(e => finallyOneDuration(e))
+
+  //   console.log(final)
+    
+  // console.log(duration)
+
+ 
+  
+  const path = "courses"
+  // console.log(path)
+  
+
+  
+  if (!courses.length) {   
+    return <div role="status">Cargando ando</div>;
+    
+  } else {    
+  
+
+  let durationCourse = (course) =>{
+    let temporaly = course.videos.map(e => e.duration)
+
+    const toSeconds = (time) => {
+      if(time.length >5){
+        let parse = time.split(':')
+        let newParse = [parseInt(parse[0])*3600,parseInt(parse[1],10) *60, parseInt(parse[2],10) ]
+        let sumParse = newParse[0] + newParse[1] +newParse[2]
+        return sumParse  
+      }
+      if(time.length <=5){
+        let parse = time.split(':')
+        let newParse = [parseInt(parse[0],10) *60, parseInt(parse[1],10) ]
+        let sumParse = newParse[0] + newParse[1]    
+        return sumParse   
+      }    
+    }
+    let secondsDuration = temporaly.map(( e=> toSeconds(e)) )
+    console.log(secondsDuration)
+    let oneDuration = secondsDuration.reduce((sum,a) => sum +a ,0)
+    console.log(oneDuration)
+    
+    let object = {
+      ...course,
+      duration: oneDuration
+    }
+    console.log(object.duration)
+    return object
+    // course.duration = oneDuration
+  }
+  
+  console.log(durationCourse(courses[0])) 
+  let coursesPow = courses.map(e =>durationCourse(e))
+  console.log(coursesPow)
+  const cursosActuales = coursesPow.slice(primerCurso, ultimoCurso);
+>>>>>>> Roge
   const prev = () => {
     if (cursoActual > 1) {
       setCursoActual(cursoActual - 1);
@@ -35,6 +153,7 @@ export default function AllCourses() {
     setCursoActual(numeroPagina);
   };
   // ==============================================
+<<<<<<< HEAD
 
   useEffect(() => {
     dispatch(getAllCourses());
@@ -51,6 +170,9 @@ export default function AllCourses() {
   if (!courses.length) {
     return <div role="status">Cargando ando</div>;
   } else {
+=======
+    // courses es un array de 27 objetos con la propiedad name
+>>>>>>> Roge
     return (
       <div>
         <NavBar />
@@ -148,7 +270,7 @@ export default function AllCourses() {
                     {course.name}
                   </h5>
                   <span style={{ fontSize: "1.2rem" }}>
-                    <strong>Time Inversion: </strong>56:53:64
+                    <strong>Time Inversion: </strong>{finallyOneDuration(course.duration)}
                   </span>
                 </NavLink>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">

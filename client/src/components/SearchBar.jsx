@@ -5,6 +5,7 @@ import { getCoursesByName,getAllSchoolByName,getVideoByName} from "../redux/acti
 
 const SearchBar= ({path,setPagina}) => {
 
+    
     const dispatch = useDispatch()
     const [name,setName] = useState('')
 
@@ -12,9 +13,9 @@ const SearchBar= ({path,setPagina}) => {
         e.preventDefault()
         setName(e.target.value)        
     }
-    console.log(path)
+    // console.log(path)
     const handlerSubmit = (e) =>{
-        if(path.path === "schools"){
+        if(path === "schools"){
             e.preventDefault()     
             // dispatch(cleanFilter())  
             dispatch(getAllSchoolByName(name))
@@ -27,7 +28,7 @@ const SearchBar= ({path,setPagina}) => {
             // dispatch(cleanFilter())  
             dispatch(getCoursesByName(name))
             setName('')
-            console.log(name)
+            // console.log(name)
             // setPagina(1)
         }
         if(path === "videos"){

@@ -12,7 +12,7 @@ export const Paginated = ({
   for (let i = 1; i <= Math.ceil(videos / videosPagina); i++) {
     numeroPaginas.push(i);
   }
-  console.log(numeroPaginas);
+  // console.log(numeroPaginas);
   return (
     <div>
       <nav>
