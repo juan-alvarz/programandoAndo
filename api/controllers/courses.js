@@ -12,8 +12,8 @@ const getCourses = async (req, res) => {
         .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
         .populate("videos");
       console.log(nombre);
-      if (!nombre) {
-        res.send({ msg: `The Course with the name: ${name} does not exist` });
+      if (!nombre.length) {
+        res.send({ msg: "error" });
       } else {
         res.send(nombre);
       }
@@ -58,7 +58,6 @@ const createCourse = async (req, res) => {
     })
   );
   const duration = durationCourse(videosFind);
-  console.log(duration);
 
   try {
     if (!find) {

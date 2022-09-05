@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getVideoById, clearVideo,getCourse } from "../redux/actions";
+import { getVideoById, clearVideo, getCourse } from "../redux/actions";
 import NavBar from "./NavBar";
 import { Videos } from "./Videos";
 
 export default function Video() {
   const { video, course } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
-  const {idCourse}= useParams()
-
-  
-
-  
+  const { idCourse } = useParams();
 
   //const courseSelect = course;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
- 
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
   }, [idVideo]);
-  if (!Object.keys(course).length ) {
+  if (!Object.keys(course).length) {
     return <h2>Cargando Video!</h2>;
   } else {
     return (
@@ -32,8 +27,8 @@ export default function Video() {
         <div>
           <div className=" flex">
             <iframe
-              width="2800"
-              height="515"
+              width="2800px"
+              height="515px"
               src={video.url}
               title="YouTube video player"
               frameBorder="0"

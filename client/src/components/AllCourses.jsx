@@ -31,6 +31,7 @@ export default function AllCourses() {
     dispatch(getAllCourses());
   }, [dispatch, coursesPowFilter]);
 
+  console.log(courses);
   // //===================================================
   let finallyOneDuration = (time) => {
     let hours = Math.floor(time / 3600);
@@ -46,9 +47,25 @@ export default function AllCourses() {
   };
 
   const path = "courses";
-
-  if (!courses.length) {
-    return <div role="status">Cargando ando</div>;
+  if (courses.msg === "error") {
+    return (
+      <div>
+        <div>
+          <NavBar />
+        </div>
+        <SearchBar path={path} />
+        <h1>Error buscando curso</h1>
+      </div>
+    );
+  } else if (!courses.length) {
+    return (
+      <div>
+        {/* <div>
+          <SearchBar path={path} />
+        </div> */}
+        <div role="status">Cargando ando!</div>
+      </div>
+    );
   } else {
     let durationCourse = (course) => {
       let temporaly = course.videos.map((e) => e.duration);
@@ -101,18 +118,23 @@ export default function AllCourses() {
     const handleFilterDuration = (e) => {
       if (e.target.value === "allDurations") {
         dispatch(getAllCourses());
+        setCursoActual(1);
       }
       if (e.target.value === "10hmore") {
         dispatch(getCourses10more());
+        setCursoActual(1);
       }
       if (e.target.value === "10h") {
         dispatch(getCourses10h());
+        setCursoActual(1);
       }
       if (e.target.value === "5h") {
         dispatch(getCourses5h());
+        setCursoActual(1);
       }
       if (e.target.value === "3h") {
         dispatch(getCourses3h());
+        setCursoActual(1);
       }
     };
 
