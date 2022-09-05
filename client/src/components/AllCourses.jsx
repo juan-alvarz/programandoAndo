@@ -217,6 +217,7 @@ export default function AllCourses() {
                   value=""
                   id="default-toggle"
                   className="sr-only peer"
+                  onChange={(e) => handleFilterAlph(e)}
                 />
                 <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
               </label>
@@ -230,11 +231,13 @@ export default function AllCourses() {
               <select
                 id="countries"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                onChange={(e) => handleFilterDuration(e)}
               >
                 <option value={"allDurations"}>All Durations</option>
-                <option value={"more1Day"}>More than 1 day</option>
-                <option value={"more10h"}>More than 10 hours</option>
-                <option value={"less5hs"}>Less than 5 hours</option>
+                <option value={"10hmore"}>More than 10 hours</option>
+                <option value={"10h"}>Up to 10 hours</option>
+                <option value={"5h"}>Up to 5 hours</option>
+                <option value={"3h"}>Up to 3 hours</option>
               </select>
             </div>
           </div>
@@ -284,7 +287,8 @@ export default function AllCourses() {
                     {course.name}
                   </h5>
                   <span style={{ fontSize: "1.2rem" }}>
-                    <strong>Time Inversion: </strong>56:53:64
+                    <strong>Time Inversion: </strong>
+                    {finallyOneDuration(course.duration)}
                   </span>
                 </div>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">

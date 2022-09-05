@@ -10,8 +10,6 @@ export default function Video() {
   const { idVideo } = useParams();
   const { idCourse } = useParams();
 
-  //const courseSelect = course;
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -80,7 +78,7 @@ export default function Video() {
             </div>
           </div>
           {/* Courses */}
-          <Videos videos={course.videos} />
+          <Videos videos={course.videos} idCourse={idCourse} />
         </div>
       </div>
     );
