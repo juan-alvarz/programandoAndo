@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
 import { Paginated } from "./Paginated";
+import Loader from "./Loader";
 import Footer from "./Footer";
 import {
   getAllCoursesAZ,
@@ -97,10 +98,7 @@ export default function AllCourses() {
     /* ======================Loading page====================== */
     return (
       <div>
-        {/* <div>
-          <SearchBar path={path} />
-        </div> */}
-        <div role="status">Cargando ando!</div>
+        <Loader />
       </div>
     );
   } else {
