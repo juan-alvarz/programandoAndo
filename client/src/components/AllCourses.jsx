@@ -14,6 +14,7 @@ import {
   getCourses5h,
   getCourses3h,
 } from "../redux/actions";
+import imageNotFound from "../utils/images/404person.png";
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
@@ -47,17 +48,53 @@ export default function AllCourses() {
   };
 
   const path = "courses";
+
+  /*==================course not found page========================== */
   if (courses.msg === "error") {
     return (
       <div>
         <div>
           <NavBar />
         </div>
-        <SearchBar path={path} />
-        <h1>Error buscando curso</h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "10px",
+          }}
+        >
+          <SearchBar path={path} setPagina={setCursoActual} />
+        </div>
+        <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "90%",
+              margin: "auto",
+            }}
+          >
+            <img
+              src={imageNotFound}
+              alt="notfound"
+              style={{ width: "35%", marginTop: 40 }}
+            />
+            <h1
+              style={{
+                fontSize: "2rem",
+                padding: "30px",
+              }}
+            >
+              Course not found
+            </h1>
+            <span>no results found, please try another course</span>
+          </div>
+        </div>
       </div>
     );
   } else if (!courses.length) {
+    /* ======================Loading page====================== */
     return (
       <div>
         {/* <div>
@@ -67,6 +104,7 @@ export default function AllCourses() {
       </div>
     );
   } else {
+    /* =======================All correct!=================== */
     let durationCourse = (course) => {
       let temporaly = course.videos.map((e) => e.duration);
 
@@ -165,7 +203,7 @@ export default function AllCourses() {
             padding: "10px",
           }}
         >
-          <SearchBar path={path} />
+          <SearchBar path={path} setPagina={setCursoActual} />
         </div>
 
         <div

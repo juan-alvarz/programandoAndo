@@ -16,19 +16,15 @@ const SearchBar = ({ path, setPagina }) => {
     e.preventDefault();
     setName(e.target.value);
     //============ actualización en tiempo real =======
-    /* if (path === "courses") {
+    if (path === "courses") {
       if (e.target.value === "") {
-        console.log(e.target.value);
-        e.preventDefault();
         dispatch(getAllCourses());
         setPagina(1);
       } else {
-        console.log(e.target.value);
-        e.preventDefault();
         dispatch(getCoursesByName(name));
         setPagina(1);
       }
-    } */
+    }
   };
   // console.log(path)
   const handlerSubmit = (e) => {
@@ -44,7 +40,6 @@ const SearchBar = ({ path, setPagina }) => {
       // dispatch(cleanFilter())
       dispatch(getCoursesByName(name));
       setName("");
-      setPagina(1);
 
       // console.log(name)
     }
