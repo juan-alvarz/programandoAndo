@@ -1,4 +1,7 @@
 #archivos a ignorar
 node_modules/
 
+#variables de entorno
 .env
+
+#paquetes instalados
