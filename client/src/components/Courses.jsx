@@ -58,8 +58,9 @@ function Courses() {
                     return (
                       <div className="justify-center" key={index}>
                         <CourseDetail element={el}></CourseDetail>
-
+                        <div  style={{paddingLeft:"4%"}} >
                         <Videos videos={el.videos} name={name} idCourse={el._id}></Videos>
+                        </div>
                       </div>
                     );
                   })}
