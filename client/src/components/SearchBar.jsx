@@ -56,15 +56,11 @@ const SearchBar = ({ path, setPagina }) => {
       <div className="flex space-x-1">
         <input
           type="text"
-          className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-full focus:border-yellow-400 focus:ring-yellow-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          className="block w-full px-4 py-1 font-s text-sm text-gray-700 bg-white border rounded-full focus:border-yellow-400 focus:ring-yellow-300 focus:outline-none focus:ring focus:ring-opacity-40"
           placeholder="Search course..."
-          onChange={(event) => handleChange(event)}
+          onChange={(e) => handleChange(e)}
         />
-        <button
-          type="submit"
-          onClick={(event) => handlerSubmit(event)}
-          className="px-4 text-white bg-gray-800 rounded-full "
-        >
+        <button className="px-4 text-white bg-gray-800 rounded-full ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"
