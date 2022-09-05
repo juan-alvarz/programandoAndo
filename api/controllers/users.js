@@ -12,7 +12,7 @@ const getAllUsers = async (req, res, next) => {
           populate: { path: "videos" },
         },
       });
-      if (!data) {
+      if (!data.length) {
         res.status(404);
         res.json({ message: 'User not found' })
       }
@@ -27,7 +27,7 @@ const getAllUsers = async (req, res, next) => {
     });
     return res.json(users);
   } catch (e) {
-    res.status(e.response.status)
+    // res.status(e.response)
     return res.json(e.message);
   }
 };
@@ -48,7 +48,7 @@ const getUserById = async (req, res, next) => {
     }
     return res.json(user);
   } catch (e) {
-    res.status(e.response.status)
+    // res.status(e.response.status)
     return res.json(e.message);
   }
 };
@@ -76,7 +76,7 @@ const updateUser = async (req, res, next) => {
     res.status(201);
     return res.send('The user was updated')
   } catch (e) {
-    res.status(e.response.status)
+    // res.status(e.response.status)
     return res.json(e.message)
   }
 };

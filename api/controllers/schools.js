@@ -12,26 +12,24 @@ const getAllSchool = async (req, res) => {
   });
   try {
     if (name) {
-      const nombre = await schoolModel.find({name: { $regex: '.*' + name + '.*', $options: '<i>' } }).populate({
-          path: "courses",
-          populate: {
-            path: "videos",
-          },
-        });
+      const nombre = await schoolModel.find({ name: { $regex: '.*' + name + '.*', $options: '<i>' } }).populate({
+        path: "courses",
+        populate: {
+          path: "videos",
+        },
+      });
       // const nombre = data.filter(
       //   e => e.name.toLowerCase().includes(name.toLowerCase()))
-      console.log(nombre)
-      if (!nombre) {
-        res.send({ msg: "School doesnt exist" });
-     } else {
-        res.send(nombre);
+      if (!nombre.length) {
+        res.status(404)
+        return res.json({ msg: "School doesnt exist" });
       }
-    } else {
-      res.send(data)
+      return res.json(nombre);
     }
-    }
-   catch (error) {
-    console.log(error);
+    return res.json(data)
+  }
+  catch (e) {
+    return res.json(e.message);
   }
 };
 
@@ -57,8 +55,8 @@ const getSchoolId = async (req, res) => {
         res.send(find);
       }
     }
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    return res.json(e.message);
   }
 };
 
@@ -87,16 +85,16 @@ const createSchool = async (req, res) => {
 // ===========================UPDATE SCHOOL ====================================
 
 const updateSchool = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
   const body = req.body
   try {
-    const actualizado = await schoolModel.updateOne({_id: id }, body)
+    const actualizado = await schoolModel.updateOne({ _id: id }, body)
     if (!actualizado.modifiedCount) {
-     res.status(422).send('Fail in the query')
-  }
+      res.status(422).send('Fail in the query')
+    }
     res.status(201).send('The School was updated')
-  } catch (error) {
-    res.status(404).send({msg: 'The School could not be updated'})
+  } catch (e) {
+    return res.json(e.message);
   }
 }
 
@@ -105,9 +103,9 @@ const updateSchool = async (req, res) => {
 
 
 const softDeleteSchool = async (req, res) => {
-  const {id} = req.params
-  try{
-    const deleted = await schoolModel.delete({_id: id});
+  const { id } = req.params
+  try {
+    const deleted = await schoolModel.delete({ _id: id });
     res.status(200).send(deleted)
   } catch (error) {
     res.json(error.message)
@@ -119,13 +117,13 @@ const softDeleteSchool = async (req, res) => {
 
 
 const restoreSchool = async (req, res) => {
-  const {id} = req.params;
-  try{
-    const restored = await schoolModel.restore({_id:id});
+  const { id } = req.params;
+  try {
+    const restored = await schoolModel.restore({ _id: id });
     res.status(200).send(restored)
   } catch (error) {
     res.status(400).send(error.message)
   }
 }
 
-module.exports = { getAllSchool, getSchoolId, createSchool, restoreSchool, softDeleteSchool, updateSchool};
+module.exports = { getAllSchool, getSchoolId, createSchool, restoreSchool, softDeleteSchool, updateSchool };

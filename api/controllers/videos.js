@@ -5,10 +5,10 @@ const getVideos = async (req, res) => {
     const { name } = req.query;
     if (name) {
       const data = await Video.find({ name: { $regex: '.*' + name + '.*', $options: '<i>' } });
-      if (!data) {
-        res.status(404);
-        res.json({ message: 'Video not found' })
-      }
+      // if (!data.length) {
+      //   res.status(404);
+      //   res.json({ message: 'Video not found' })
+      // }
       return res.json(data)
     }
     const data = await Video.find({});
