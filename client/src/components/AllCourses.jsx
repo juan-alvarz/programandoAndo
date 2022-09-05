@@ -7,13 +7,14 @@ import SearchBar from "./SearchBar";
 import { Paginated } from "./Paginated";
 import Footer from "./Footer";
 import { sortAlpha } from "../redux/slice";
+import { getAllCoursesAZ, getAllCoursesZA } from "../redux/actions";
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
 
-  const path = "courses"
-  console.log(path)
+  const path = "courses";
+  console.log(path);
   // =============== Paginado =========================
   const [cursoActual, setCursoActual] = useState(1);
   const [cursosPagina] = useState(6);
@@ -39,11 +40,17 @@ export default function AllCourses() {
     dispatch(getAllCourses());
   }, [dispatch]);
 
+  // ====== handles ========
+  const handleFilterAlph = (e) => {
+    console.log(e.target.checked);
+    e.target.checked === true
+      ? dispatch(getAllCoursesZA())
+      : dispatch(getAllCoursesAZ());
+  };
+
   if (!courses.length) {
     return <div role="status">Cargando ando</div>;
   } else {
-
-    // courses es un array de 27 objetos con la propiedad name
     return (
       <div>
         <NavBar />
@@ -78,6 +85,8 @@ export default function AllCourses() {
                 value=""
                 id="default-toggle"
                 className="sr-only peer"
+                onChange={(e) => handleFilterAlph(e)}
+                //onClick={(e) => handleFilterAlph(e)}
               />
               <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
             </label>
@@ -119,7 +128,7 @@ export default function AllCourses() {
             <div
               key={index}
               class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
-              style={{ maxHeight: 700, maxWidth: 500, minWidth: 300 }}
+              style={{ maxHeight: 700, maxWidth: 500, minWidth: 500 }}
             >
               <NavLink to={`/course/${course._id}`}>
                 <img

@@ -9,7 +9,7 @@ import img from "../utils/images/ICONOSOYLUCHO.png";
 
 const navigation = [
   { name: "Courses", href: "/allCourses", current: false },
-  { name: "Home", href: "/home", current: false },
+  { name: "Home", href: "/", current: false },
   { name: "About us", href: "/aboutUs", current: false },
   { name: "Create course", href: "/createCourse", current: false },
 ];
@@ -39,7 +39,7 @@ export default function NavBar() {
                 </div>
                 <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-center">
                   <div className="flex flex-shrink-0 items-center">
-                    <NavLink to="/home">
+                    <NavLink to="/">
                       <img
                         className="block h-4 w-auto lg:hidden"
                         src={img}
@@ -170,4 +170,3 @@ export default function NavBar() {
     </Disclosure>
   );
 }
-
