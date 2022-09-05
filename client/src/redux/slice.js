@@ -20,27 +20,49 @@ export const slice = createSlice({
       state.courses = action.payload;
       state.filters = action.payload;
     },
+    //
+    getCourse10more: (state, action) => {
+      state.courses = action.payload.filter(
+        (course) => course.duration > 36000
+      );
+    },
+    getCourse10h: (state, action) => {
+      state.courses = action.payload.filter(
+        (course) => course.duration < 36000
+      );
+    },
+    getCourse5h: (state, action) => {
+      state.courses = action.payload.filter(
+        (course) => course.duration < 18000
+      );
+    },
+    getCourse3h: (state, action) => {
+      state.courses = action.payload.filter(
+        (course) => course.duration < 10800
+      );
+    },
+    //
     getCoursesByAZ: (state, action) => {
-      state.filters = action.payload.sort(function(a,b){
-        if(a.name.toUpperCase() > b.name.toUpperCase()){
+      state.filters = action.payload.sort(function (a, b) {
+        if (a.name.toUpperCase() > b.name.toUpperCase()) {
           return 1;
-      }
-      if(b.name.toUpperCase() > a.name.toUpperCase()){
+        }
+        if (b.name.toUpperCase() > a.name.toUpperCase()) {
           return -1;
-      }
-      return 0;
+        }
+        return 0;
       });
       state.courses = action.payload;
     },
     getCoursesByZA: (state, action) => {
-      state.filters = action.payload.sort(function(a,b){
-        if(a.name.toUpperCase() > b.name.toUpperCase()){
-          return -1
-      }
-      if(b.name.toUpperCase() > a.name.toUpperCase()){
-          return 1
-      }
-      return 0
+      state.filters = action.payload.sort(function (a, b) {
+        if (a.name.toUpperCase() > b.name.toUpperCase()) {
+          return -1;
+        }
+        if (b.name.toUpperCase() > a.name.toUpperCase()) {
+          return 1;
+        }
+        return 0;
       });
       state.courses = action.payload;
     },
@@ -99,7 +121,7 @@ export const slice = createSlice({
     // getSchoolsByName: (state, action) => {
     //   state.courses = action.payload;
     // },
-    
+
     // filterByName: (state, action) => {
     //   state.stateFilter = action.payload;
     // },
@@ -142,6 +164,11 @@ export const {
   getVideosByName,
   getCoursesByAZ,
   getCoursesByZA,
+
+  getCourse10more,
+  getCourse10h,
+  getCourse5h,
+  getCourse3h,
 } = slice.actions;
 
 export default slice.reducer;

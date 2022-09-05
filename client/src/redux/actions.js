@@ -17,7 +17,11 @@ import {
   getSchoolsByName,
   getVideosByName,
   getCoursesByAZ,
-  getCoursesByZA
+  getCoursesByZA,
+  getCourse10more,
+  getCourse10h,
+  getCourse5h,
+  getCourse3h,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -28,7 +32,35 @@ export const getAllCourses = () => (dispatch) => {
     .then((res) => dispatch(getCourses(res.data)))
     .catch((e) => console.log(e));
 };
+//=======
+export const getCourses10more = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/courses")
+    .then((res) => dispatch(getCourse10more(res.data)))
+    .catch((e) => console.log(e));
+};
 
+export const getCourses10h = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/courses")
+    .then((res) => dispatch(getCourse10h(res.data)))
+    .catch((e) => console.log(e));
+};
+
+export const getCourses5h = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/courses")
+    .then((res) => dispatch(getCourse5h(res.data)))
+    .catch((e) => console.log(e));
+};
+
+export const getCourses3h = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/courses")
+    .then((res) => dispatch(getCourse3h(res.data)))
+    .catch((e) => console.log(e));
+};
+//======
 export const getAllCoursesAZ = () => (dispatch) => {
   axios
     .get("http://localhost:3001/api/courses")
