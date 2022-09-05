@@ -25,7 +25,7 @@ export default function Video() {
         <div>
           <div className=" flex">
             <iframe
-              width="2800"
+              width="1800"
               height="515"
               src={video.url}
               title="YouTube video player"
@@ -36,7 +36,7 @@ export default function Video() {
             <div className="  px-10 flex flex-col justify-between">
               <div>
                 <h2 className="pt-5 text-xl font-bold">{video.name}</h2>
-                <h3 className="pb-5 text-lg font-semibold">{video.author}</h3>
+                <h3 className="pb-5 text-md font-semibold">{video.author}</h3>
               </div>
               <p className="pb-5 text-justify font-medium">
                 {video.description}
@@ -45,12 +45,15 @@ export default function Video() {
                 <p>{video.difficult}</p>
                 <p>{video.duration}</p>
               </div>
-              <a
-                href="https://www.youtube.com/c/codigofacilito"
-                className="flex justify-end font-medium text-blue-700"
-              >
-                {video.profile}
-              </a>
+              <div> 
+                <div>Perfil del profesor: </div>
+                <a
+                  href="https://www.youtube.com/c/codigofacilito"
+                  className="flex justify-end font-medium text-blue-700"
+                >
+                  {video.profile}
+                </a>
+              </div>
             </div>
           </div>
           <Videos videos={course.videos} />
