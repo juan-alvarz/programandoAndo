@@ -81,4 +81,8 @@ const SearchBar = ({ path, setPagina }) => {
   );
 };
 
+<<<<<<< HEAD
 export default SearchBar;
+=======
+export default SearchBar;
+>>>>>>> Roge

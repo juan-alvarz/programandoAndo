@@ -217,4 +217,8 @@ export default function NavBar() {
       }}
     </Disclosure>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Roge

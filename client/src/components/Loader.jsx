@@ -7,4 +7,8 @@ export default function Loader() {
       <img src={loader} alt="notFound" />
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Roge

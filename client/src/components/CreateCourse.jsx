@@ -226,4 +226,8 @@ export default function CreateCourse() {
       </div>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Roge
