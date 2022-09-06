@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCourses } from "../redux/actions";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
 import { Paginated } from "./Paginated";
 import Footer from "./Footer";
-import { sortAlpha } from "../redux/slice";
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
