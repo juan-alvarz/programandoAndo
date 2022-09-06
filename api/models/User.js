@@ -60,7 +60,13 @@ const UserSchema = new Schema(
     },
     scoring: {
       type: Schema.Types.ObjectId
-    }
+    },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+      }
+    ]
   },
   {
     timestamps: true,
