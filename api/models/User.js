@@ -20,12 +20,7 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-    // favorites: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Course",
-    //   },
-    // ],
+
     contributor: {
       type: Boolean,
       default: false,
