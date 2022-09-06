@@ -1,5 +1,4 @@
 const { usersModel } = require("../models/index");
-const UserModel = require("../models/User");
 const { encrypt, compare } = require("../utils/handlePassword");
 const { tokenSign } = require("../utils/handleJwt");
 const { handleHtppError } = require("../utils/handleError");
@@ -115,7 +114,7 @@ const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
-    const data = await UserModel.updateOne({ _id: id }, body);
+    const data = await usersModel.updateOne({ _id: id }, body);
     if (!data.modifiedCount) {
       handleHtppError(res, "Fail in the query", 422);
     }
@@ -129,7 +128,7 @@ const updateUser = async (req, res, next) => {
 const softDeleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await UserModel.delete({ _id: id });
+    const data = await usersModel.delete({ _id: id });
     return res.json(data);
   } catch (e) {
     return res.json(e.message);
@@ -139,7 +138,7 @@ const softDeleteUser = async (req, res, next) => {
 const restoreUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await UserModel.restore({ _id: id });
+    const data = await usersModel.restore({ _id: id });
     return res.json(data);
   } catch (e) {
     return res.json(e.message);
