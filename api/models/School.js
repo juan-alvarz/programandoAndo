@@ -24,7 +24,8 @@ const SchoolSchema = new Schema(
     },
     score: {
       type: mongoose.Decimal128,
-      get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(1))
+      get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(1)),
+      default: 0
     }
   },
   {
