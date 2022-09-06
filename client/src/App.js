@@ -12,11 +12,10 @@ import Video from "./components/Video";
 import Donators from "./components/Donators";
 import AllCourses from "./components/AllCourses";
 import OneCourseDetail from "./components/OneCourseDetail";
+import Login from "./components/Login";
+import CreateUser from "./components/CreateUser";
 
 function App() {
-  // const { courses } = useSelector((state) => state.programandoando);
-  // console.log(courses);
-  // console.log(schools);
   return (
     <BrowserRouter>
       <div className="App">
@@ -30,6 +29,9 @@ function App() {
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/video/:idVideo/:idCourse" element={<Video />} />
           <Route path="/donators" element={<Donators />} />
+          {/* Algunas rutas nuevas */}
+          <Route path="/loginUser" element={<Login />} />
+          <Route path="/createUser" element={<CreateUser />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
