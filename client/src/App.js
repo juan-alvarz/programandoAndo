@@ -21,14 +21,14 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<Home />} />
+          {/* <Route path="/" element={<LandingPage />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/allCourses" element={<AllCourses />} />
           <Route path="/course/:idCourse" element={<OneCourseDetail />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/createCourse" element={<CreateCourse />} />
           <Route path="/aboutUs" element={<AboutUs />} />
-          <Route path="/video/:idVideo" element={<Video />} />
+          <Route path="/video/:idVideo/:idCourse" element={<Video />} />
           <Route path="/donators" element={<Donators />} />
           <Route path="*" element={<Error404 />} />
         </Routes>

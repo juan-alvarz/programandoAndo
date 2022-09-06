@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getVideoById, clearVideo } from "../redux/actions";
+import { getVideoById, clearVideo, getCourse } from "../redux/actions";
 import NavBar from "./NavBar";
 import { Videos } from "./Videos";
 
 export default function Video() {
   const { video, course } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
+  const { idCourse } = useParams();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getVideoById(idVideo));
+    dispatch(getCourse(idCourse));
   }, [idVideo]);
   if (!Object.keys(course).length) {
     return <h2>Cargando Video!</h2>;
@@ -76,7 +78,7 @@ export default function Video() {
             </div>
           </div>
           {/* Courses */}
-          <Videos videos={course.videos} />
+          <Videos videos={course.videos} idCourse={idCourse} />
         </div>
       </div>
     );

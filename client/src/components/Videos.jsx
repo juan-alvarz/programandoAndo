@@ -15,7 +15,8 @@ export const Videos = (props) => {
   }, [name]);
 
   let videos = props.videos;
-  console.log(videos);
+  let idCourse = props.idCourse;
+
   const [paginaActual, setPaginaActual] = useState(1);
   const [videosPagina] = useState(4);
 
@@ -24,18 +25,32 @@ export const Videos = (props) => {
 
   const videosActuales = videos.slice(primerVideo, ultimoVideo);
 
+  // const prev = () => {
+  //   if (paginaActual <= 1) {
+  //     setPaginaActual(paginaActual - 1);
+  //   } else {
+  //     setPaginaActual(paginaActual);
+  //   }
+  // };
+  // const next = () => {
+  //   if (paginaActual >= videos.length) {
+  //     setPaginaActual(paginaActual + 1);
+  //   } else {
+  //     setPaginaActual(paginaActual);
+  //   }
+  // };
   const prev = () => {
     if (paginaActual > 1) {
       setPaginaActual(paginaActual - 1);
-    } else {
-      setPaginaActual(paginaActual);
     }
   };
+
   const next = () => {
     if (paginaActual <= Math.ceil(videos.length / videosPagina)) {
       setPaginaActual(paginaActual + 1);
     }
   };
+
   const paginado = (numeroPagina) => {
     setPaginaActual(numeroPagina);
   };
@@ -57,7 +72,7 @@ export const Videos = (props) => {
           return (
             <div key={index} style={{ justifyContent: "center" }}>
               <NavLink
-                to={`/video/${elemento._id}`}
+                to={`/video/${elemento._id}/${idCourse}`}
                 state={(videos = videosActuales)}
               >
                 <div

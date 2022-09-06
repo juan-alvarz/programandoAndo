@@ -1,19 +1,29 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import data1 from "../utils/data";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllSchools } from "../redux/actions";
+import { useEffect } from "react";
 
 export const DetailSchool = () => {
-  let data = data1;
+  const dispatch = useDispatch();
+  const { schools } = useSelector((state) => state.programandoando);
+
+  useEffect(() => {
+    dispatch(getAllSchools());
+  }, [dispatch]);
+
+  let data = schools;
+
   return (
-    <div >
+    <div>
       {data ? (
         data.map((elemento, index) => {
           let name = elemento.name;
           return (
-            <div key={index}>
+            <div className="hover:bg-sky-900" key={index}>
               <NavLink
-                className="text-white bg-gray-700 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2"
-                style={{ margin: 10, padding: 3, borderRadius: 3 }}
+                style={{ color: "rgb(201, 196, 184)" }}
+                className="text-white focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm mx-5 my-3 inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2"
                 to="/courses"
                 state={(name = name)}
               >
