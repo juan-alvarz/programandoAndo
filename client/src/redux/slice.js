@@ -53,6 +53,21 @@ export const slice = createSlice({
     getCourseByName: (state, action) => {
       state.courses = action.payload;
     },
+    getCourse10more: (state, action) => {
+      state.courses = action.payload.filter((course) => course.duration >36000);
+    },
+    getCourse10h: (state, action) => {
+      state.courses = action.payload.filter((course) => course.duration <36000);
+    },
+    getCourse5h: (state, action) => {
+      state.courses = action.payload.filter((course) => course.duration <18000);
+    },
+    getCourse3h: (state, action) => {
+      state.courses = action.payload.filter((course) => course.duration <10800);
+    },
+
+
+
 
     // ========= schools ===========
     getAllSchool: (state, action) => {
@@ -96,6 +111,7 @@ export const slice = createSlice({
     getVideosByName: (state, action) => {
       state.courses = action.payload;
     },
+
     // getSchoolsByName: (state, action) => {
     //   state.courses = action.payload;
     // },
@@ -142,6 +158,11 @@ export const {
   getVideosByName,
   getCoursesByAZ,
   getCoursesByZA,
+
+  getCourse10more,
+  getCourse10h,
+  getCourse5h,
+  getCourse3h
 } = slice.actions;
 
 export default slice.reducer;
