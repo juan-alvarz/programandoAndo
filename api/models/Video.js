@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const mongooseDelete = require('mongoose-delete');
+const mongooseDelete = require("mongoose-delete");
 
 const VideoSchema = new Schema(
   {
@@ -34,7 +34,7 @@ const VideoSchema = new Schema(
   }
 );
 
-VideoSchema.plugin(mongooseDelete, { overrideMethods: 'all' })
+VideoSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 
 const VideoModel = model("Video", VideoSchema);
 

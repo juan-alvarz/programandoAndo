@@ -3,14 +3,8 @@ const { schoolModel } = require("../models");
 // ============================= GET SCHOOLS DATABASE ========================
 
 const getAllSchool = async (req, res) => {
-  const { name } = req.query;
-  const data = await schoolModel.find({}).populate({
-    path: "courses",
-    populate: {
-      path: "videos",
-    },
-  });
   try {
+    const { name } = req.query;
     if (name) {
       const nombre = await schoolModel.find({ name: { $regex: '.*' + name + '.*', $options: '<i>' } }).populate({
         path: "courses",
@@ -26,13 +20,18 @@ const getAllSchool = async (req, res) => {
       }
       return res.json(nombre);
     }
+    const data = await schoolModel.find({}).populate({
+      path: "courses",
+      populate: {
+        path: "videos",
+      },
+    });
     return res.json(data)
   }
   catch (e) {
     return res.json(e.message);
   }
 };
-
 
 // ============================= GET ID SCHOOL ================================
 
@@ -60,7 +59,6 @@ const getSchoolId = async (req, res) => {
   }
 };
 
-
 // ===========================CREATE SCHOOL ====================================
 
 const createSchool = async (req, res) => {
@@ -80,7 +78,6 @@ const createSchool = async (req, res) => {
     res.send({ msg: "School already exist" });
   }
 };
-
 
 // ===========================UPDATE SCHOOL ====================================
 
@@ -112,18 +109,23 @@ const softDeleteSchool = async (req, res) => {
   }
 };
 
-
 // ===========================RESTORE SCHOOL ====================================
-
 
 const restoreSchool = async (req, res) => {
   const { id } = req.params;
   try {
     const restored = await schoolModel.restore({ _id: id });
-    res.status(200).send(restored)
+    res.status(200).send(restored);
   } catch (error) {
-    res.status(400).send(error.message)
+    res.status(400).send(error.message);
   }
-}
+};
 
-module.exports = { getAllSchool, getSchoolId, createSchool, restoreSchool, softDeleteSchool, updateSchool };
+module.exports = {
+  getAllSchool,
+  getSchoolId,
+  createSchool,
+  restoreSchool,
+  softDeleteSchool,
+  updateSchool,
+};

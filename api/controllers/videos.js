@@ -4,12 +4,14 @@ const getVideos = async (req, res) => {
   try {
     const { name } = req.query;
     if (name) {
-      const data = await Video.find({ name: { $regex: '.*' + name + '.*', $options: '<i>' } });
-      // if (!data.length) {
-      //   res.status(404);
-      //   res.json({ message: 'Video not found' })
-      // }
-      return res.json(data)
+      const data = await Video.find({
+        name: { $regex: ".*" + name + ".*", $options: "<i>" },
+      });
+      if (!data) {
+        res.status(404);
+        res.json({ message: "Video not found" });
+      }
+      return res.json(data);
     }
     const data = await Video.find({});
     res.status(200).json(data);
@@ -73,7 +75,7 @@ const deleteVideo = async (req, res) => {
     const data = await Video.deleteOne({ _id: id });
     return res.status(200).json({ message: "deleted succesfully" });
   } catch (error) {
-    res.status(e.response.status)
+    res.status(e.response.status);
     return res.status(400).json(error.message);
   }
 };
@@ -82,20 +84,20 @@ const softDeleteVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
     const data = await Video.delete({ _id: id });
-    return res.json(data)
+    return res.json(data);
   } catch (e) {
-    res.status(e.response.status)
-    return res.json(e.message)
+    res.status(e.response.status);
+    return res.json(e.message);
   }
 };
 
 const restoreVideo = async (req, res, next) => {
-  try{
-    const {id} = req.params;
-    const data = await Video.restore({_id: id});
-    return res.json(data)
+  try {
+    const { id } = req.params;
+    const data = await Video.restore({ _id: id });
+    return res.json(data);
   } catch (e) {
-    return res.json(e.message)
+    return res.json(e.message);
   }
 };
 
@@ -105,13 +107,13 @@ const updateVideo = async (req, res, next) => {
     const body = req.body;
     const data = await Video.updateOne({ _id: id }, body);
     if (!data.modifiedCount) {
-      res.status(422)
-      return res.send('Fail in the query')
+      res.status(422);
+      return res.send("Fail in the query");
     }
     res.status(201);
-    return res.send('The user was updated')
+    return res.send("The user was updated");
   } catch (e) {
-    return res.json(e.message)
+    return res.json(e.message);
   }
 };
 
@@ -122,5 +124,5 @@ module.exports = {
   createVideo,
   softDeleteVideo,
   restoreVideo,
-  updateVideo
+  updateVideo,
 };
