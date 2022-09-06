@@ -19,7 +19,8 @@
     "react-select": "^5.4.0",
     "styled-components": "^5.3.5",
     "sweetalert2": "^11.4.29",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "pure-react-carousel":"^1.29.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,4 +52,3 @@
     "tailwindcss": "^3.1.8"
   }
 }
-

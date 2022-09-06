@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getCourse } from "../redux/actions";
 import { Videos } from "./Videos";
 import NavBar from "./NavBar";
-
+import Loader from "./Loader";
 export default function OneCourseDetail() {
   const { idCourse } = useParams();
   const { course } = useSelector((state) => state.programandoando);
@@ -20,7 +20,7 @@ export default function OneCourseDetail() {
   console.log(course);
 
   if (!Object.keys(course).length) {
-    return <h1>Cargando ando!</h1>;
+    <Loader />;
   } else {
     return (
       <div>

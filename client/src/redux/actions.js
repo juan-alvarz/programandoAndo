@@ -18,11 +18,10 @@ import {
   getVideosByName,
   getCoursesByAZ,
   getCoursesByZA,
-
   getCourse10more,
   getCourse10h,
   getCourse5h,
-  getCourse3h
+  getCourse3h,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -33,7 +32,7 @@ export const getAllCourses = () => (dispatch) => {
     .then((res) => dispatch(getCourses(res.data)))
     .catch((e) => console.log(e));
 };
-
+//=======
 export const getCourses10more = () => (dispatch) => {
   axios
     .get("http://localhost:3001/api/courses")
@@ -61,7 +60,7 @@ export const getCourses3h = () => (dispatch) => {
     .then((res) => dispatch(getCourse3h(res.data)))
     .catch((e) => console.log(e));
 };
-
+//======
 export const getAllCoursesAZ = () => (dispatch) => {
   axios
     .get("http://localhost:3001/api/courses")

@@ -67,7 +67,7 @@ export const Videos = (props) => {
           next={next}
         ></Paginated>
       </div>
-      <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-8  items-center lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {videosActuales.map((elemento, index) => {
           return (
             <div key={index} style={{ justifyContent: "center" }}>
