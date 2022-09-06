@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCourses } from "../redux/actions";
+import { getAllCourses,getCourses10more,getCourses10h,getCourses5h,getCourses3h } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
@@ -87,7 +87,7 @@ export default function AllCourses() {
       dispatch(getCourses10more())
     }
     if(e.target.value === "10h"){
-      dispatch(getCoursesUntil10())
+      dispatch(getCourses10h())
     }
     if(e.target.value === "5h"){
       dispatch(getCourses5h())
