@@ -19,6 +19,13 @@ const SchoolSchema = new Schema(
     image: {
       type: String,
     },
+    isCustom: {
+      type: Boolean
+    },
+    score: {
+      type: mongoose.Decimal128,
+      get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(1))
+    }
   },
   {
     timestamps: true,

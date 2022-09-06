@@ -20,18 +20,47 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-    // favorites: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Course",
-    //   },
-    // ],
     contributor: {
-      type: Boolean,
+      type: Number,
       default: false,
     },
     banned: { type: Boolean, default: false },
-    isAdmin: { type: Boolean, default: false },
+    role: {
+      type: String,
+      enum: ["Owner", "Admind", "User"],
+      default: "User",
+    },
+    userName: {
+      type: String,
+      unique: true
+    },
+    notifications: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Notification'
+      }
+    ],
+    ownPath: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "School",
+      },
+    ],
+    language: {
+      type: String
+    },
+    country: {
+      type: String
+    },
+    birthday: {
+      type: Date
+    },
+    image: {
+      type: String
+    },
+    scoring: {
+      type: Schema.Types.ObjectId
+    }
   },
   {
     timestamps: true,
