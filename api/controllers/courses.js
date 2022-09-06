@@ -4,6 +4,7 @@ const { durationCourse } = require("../utils/durationSort.js");
 // OBTENER LISTA DE CURSOS DE LA BASE DE DATOS
 const getCourses = async (req, res) => {
   const { name } = req.query;
+  const { user } = req; // para saber el user que esta consumiendo esta ruta
 
   const data = await courseModel.find({}).populate("videos");
   try {
@@ -19,8 +20,9 @@ const getCourses = async (req, res) => {
       }
     } else {
       res.status(200).send(data);
+      // res.status(200).send({ data, user });
     }
-  } catch {
+  } catch (error) {
     console.log(error);
   }
 };

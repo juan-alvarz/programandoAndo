@@ -93,17 +93,15 @@ const userLogin = async (req, res, next) => {
       return;
     }
 
-    // user.set("password", undefined, { strict: false });
     const hashPassword = user.get("password");
     const checkPassword = await compare(password, hashPassword);
 
     if (!checkPassword) {
       handleHtppError(res, "Password Invalid", 401);
-      // res.status(401).send({ msg: "Password Invalid" });
       return;
     }
 
-    user.set("password", undefined, { strict: false });
+    user.set("password", undefined, { strict: false }); // oculto la password
 
     const data = {
       token: await tokenSign(user),

@@ -11,11 +11,13 @@ const {
   validatorCreateCourse,
   validatorGetCourse,
 } = require("../validators/courses");
+
+const { authMiddleware } = require("../middleware/session");
 const router = express.Router();
 
 // VAMOS A GENERAR LA RUTA DE LOS CURSOS -- CRUD EN LA PRIMERA FASE GETALL GETBYID Y CREATE
 
-router.get("/", getCourses);
+router.get("/", authMiddleware, getCourses);
 
 router.get("/:id", validatorGetCourse, getCourseById);
 
