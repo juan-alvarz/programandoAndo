@@ -15,7 +15,8 @@ export const Videos = (props) => {
   }, [name]);
 
   let videos = props.videos;
-  console.log(videos);
+  let idCourse = props.idCourse;
+
   const [paginaActual, setPaginaActual] = useState(1);
   const [videosPagina] = useState(4);
 
@@ -24,20 +25,32 @@ export const Videos = (props) => {
 
   const videosActuales = videos.slice(primerVideo, ultimoVideo);
 
+  // const prev = () => {
+  //   if (paginaActual <= 1) {
+  //     setPaginaActual(paginaActual - 1);
+  //   } else {
+  //     setPaginaActual(paginaActual);
+  //   }
+  // };
+  // const next = () => {
+  //   if (paginaActual >= videos.length) {
+  //     setPaginaActual(paginaActual + 1);
+  //   } else {
+  //     setPaginaActual(paginaActual);
+  //   }
+  // };
   const prev = () => {
     if (paginaActual > 1) {
       setPaginaActual(paginaActual - 1);
-    } else {
-      setPaginaActual(paginaActual);
     }
   };
+
   const next = () => {
-    if (paginaActual <= videos.length) {
+    if (paginaActual <= Math.ceil(videos.length / videosPagina)) {
       setPaginaActual(paginaActual + 1);
-    } else {
-      setPaginaActual(paginaActual);
     }
   };
+
   const paginado = (numeroPagina) => {
     setPaginaActual(numeroPagina);
   };
@@ -54,12 +67,12 @@ export const Videos = (props) => {
           next={next}
         ></Paginated>
       </div>
-      <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-8  items-center lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {videosActuales.map((elemento, index) => {
           return (
             <div key={index} style={{ justifyContent: "center" }}>
               <NavLink
-                to={`/video/${elemento._id}`}
+                to={`/video/${elemento._id}/${idCourse}`}
                 state={(videos = videosActuales)}
               >
                 <div
