@@ -1,22 +1,24 @@
 const { usersModel } = require("../models/index");
 const UserModel = require("../models/User");
-
+const { encrypt, compare } = require("../utils/handlePassword");
 const getAllUsers = async (req, res, next) => {
   try {
     const { name } = req.query;
     if (name) {
-      const data = await usersModel.find({ name: { $regex: '.*' + name + '.*', $options: '<i>' } }).populate({
-        path: "schools",
-        populate: {
-          path: "courses",
-          populate: { path: "videos" },
-        },
-      });
+      const data = await usersModel
+        .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
+        .populate({
+          path: "schools",
+          populate: {
+            path: "courses",
+            populate: { path: "videos" },
+          },
+        });
       if (!data) {
         res.status(404);
-        res.json({ message: 'User not found' })
+        res.json({ message: "User not found" });
       }
-      return res.json(data)
+      return res.json(data);
     }
     const users = await usersModel.find({}).populate({
       path: "schools",
@@ -27,7 +29,7 @@ const getAllUsers = async (req, res, next) => {
     });
     return res.json(users);
   } catch (e) {
-    res.status(e.response.status)
+    res.status(e.response.status);
     return res.json(e.message);
   }
 };
@@ -48,7 +50,7 @@ const getUserById = async (req, res, next) => {
     }
     return res.json(user);
   } catch (e) {
-    res.status(e.response.status)
+    res.status(e.response.status);
     return res.json(e.message);
   }
 };
@@ -56,9 +58,14 @@ const getUserById = async (req, res, next) => {
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;
-    const user = await usersModel.create(body);
-    res.status(201);
-    return res.json(user);
+
+    const password = await encrypt(body.password);
+
+    const newBody = { ...body, password };
+    const user = await usersModel.create(newBody);
+    user.set("password", undefined, { strict: false });
+
+    return res.status(201).json(user);
   } catch (e) {
     return res.json(e.message);
   }
@@ -70,36 +77,36 @@ const updateUser = async (req, res, next) => {
     const body = req.body;
     const data = await UserModel.updateOne({ _id: id }, body);
     if (!data.modifiedCount) {
-      res.status(422)
-      return res.send('Fail in the query')
+      res.status(422);
+      return res.send("Fail in the query");
     }
     res.status(201);
-    return res.send('The user was updated')
+    return res.send("The user was updated");
   } catch (e) {
-    res.status(e.response.status)
-    return res.json(e.message)
+    res.status(e.response.status);
+    return res.json(e.message);
   }
 };
 
 const softDeleteUser = async (req, res, next) => {
-  try{
-    const {id} = req.params;
-    const data = await UserModel.delete({_id: id});
-    return res.json(data)
+  try {
+    const { id } = req.params;
+    const data = await UserModel.delete({ _id: id });
+    return res.json(data);
   } catch (e) {
-    return res.json(e.message)
+    return res.json(e.message);
   }
 };
 
 const restoreUser = async (req, res, next) => {
-  try{
-    const {id} = req.params;
-    const data = await UserModel.restore({_id: id});
-    return res.json(data)
+  try {
+    const { id } = req.params;
+    const data = await UserModel.restore({ _id: id });
+    return res.json(data);
   } catch (e) {
-    return res.json(e.message)
+    return res.json(e.message);
   }
-}
+};
 
 module.exports = {
   getAllUsers,
@@ -107,5 +114,5 @@ module.exports = {
   createUser,
   updateUser,
   softDeleteUser,
-  restoreUser
+  restoreUser,
 };

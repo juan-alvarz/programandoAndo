@@ -6,9 +6,12 @@ const {
   getUserById,
   updateUser,
   softDeleteUser,
-  restoreUser
+  restoreUser,
 } = require("../controllers/users");
-const { validatorCreateUser, validatorGetUsers } = require("../validators/users");
+const {
+  validatorCreateUser,
+  validatorGetUsers,
+} = require("../validators/users");
 
 module.exports = router;
 
@@ -16,12 +19,10 @@ router.get("/", getAllUsers);
 
 router.get("/:id", validatorGetUsers, getUserById);
 
-router.post("/", validatorCreateUser, createUser);
+router.post("/register", validatorCreateUser, createUser);
 
-router.put('/:id', validatorGetUsers, updateUser);
+router.put("/:id", validatorGetUsers, updateUser);
 
-router.patch('/:id', validatorGetUsers, restoreUser);
+router.patch("/:id", validatorGetUsers, restoreUser);
 
-router.delete('/:id', validatorGetUsers, softDeleteUser)
-
-
+router.delete("/:id", validatorGetUsers, softDeleteUser);

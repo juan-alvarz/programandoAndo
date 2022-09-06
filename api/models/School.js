@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const mongooseDelete = require('mongoose-delete');
+const mongooseDelete = require("mongoose-delete");
 
 const SchoolSchema = new Schema(
   {
@@ -26,7 +26,7 @@ const SchoolSchema = new Schema(
   }
 );
 
-SchoolSchema.plugin(mongooseDelete, {overrideMethods: "all"});
+SchoolSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 
 const SchoolModel = model("School", SchoolSchema);
 // model School

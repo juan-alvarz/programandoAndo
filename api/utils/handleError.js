@@ -4,5 +4,3 @@ const handleHtppError = (res, message = "Somethings happens", code = 403) => {
 };
 
 module.exports = { handleHtppError };
-
-//

@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const mongooseDelete = require('mongoose-delete');
+const mongooseDelete = require("mongoose-delete");
 
 const UserSchema = new Schema(
   {
@@ -12,6 +12,7 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
+      select: false,
     },
     schools: [
       {
@@ -19,9 +20,17 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-
-    contributor: { type: Boolean },
-    banned: { type: Boolean },
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
+    contributor: {
+      type: Boolean,
+      default: false,
+    },
+    banned: { type: Boolean, default: false },
     isAdmin: { type: Boolean, default: false },
   },
   {
@@ -30,7 +39,7 @@ const UserSchema = new Schema(
   }
 );
 
-UserSchema.plugin(mongooseDelete, { overrideMethods: 'all' })
+UserSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 
 const UserModel = model("User", UserSchema);
 

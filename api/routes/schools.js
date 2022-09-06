@@ -6,21 +6,24 @@ const {
   createSchool,
   softDeleteSchool,
   restoreSchool,
-  updateSchool
+  updateSchool,
 } = require("../controllers/schools");
-const { validatorCreateSchool, validatorGetSchool } = require("../validators/schools");
+const {
+  validatorCreateSchool,
+  validatorGetSchool,
+} = require("../validators/schools");
 
 router.get("/", getAllSchool);
 
-router.get("/:id", validatorGetSchool,getSchoolId);
+router.get("/:id", validatorGetSchool, getSchoolId);
 
 router.post("/", validatorCreateSchool, createSchool);
 
-router.put('/:id', validatorGetSchool, updateSchool)
+router.put("/:id", validatorGetSchool, updateSchool);
 
-router.delete('/:id', validatorGetSchool, softDeleteSchool)
+router.delete("/:id", validatorGetSchool, softDeleteSchool);
 
-router.patch('/:id', validatorGetSchool, restoreSchool)
+router.patch("/:id", validatorGetSchool, restoreSchool);
 
 module.exports = router;
 //ruta school
