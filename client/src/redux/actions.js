@@ -22,6 +22,7 @@ import {
   getCourse10h,
   getCourse5h,
   getCourse3h,
+  loginUser
 } from "./slice";
 
 // ============================ Courses ============================
@@ -148,6 +149,11 @@ export const createsUser = (payload) => async (dispatch) => {
   return response;
 };
 
+/*export const login = (payload) => async (dispatch) => {
+  const response = await axios.post("http://localhost:3001/api/user", payload);
+  dispatch(loginUser(response.data))
+};*/
+
 // ============================ Videos ============================
 export const getAllVideos = () => (dispatch) => {
   axios
@@ -185,6 +191,8 @@ export function orderByName(payload) {
     payload,
   };
 }
+
+
 // ============================ Clear ============================
 // export function clearFilter() {
 //   return {

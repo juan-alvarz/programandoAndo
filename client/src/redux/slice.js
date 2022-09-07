@@ -9,10 +9,19 @@ export const slice = createSlice({
     schools: [],
     school: {},
     users: [],
-    user: {},
+    user: {token:"wgag",
+           user:{
+               _id:"12345",
+               name:"agustin",
+               email:"agustin@gmail.com",
+               role: "user"
+           }
+          
+         },
     videos: [],
     video: {},
     filters: [],
+    favoritesUser:[]
   },
   reducers: {
     // ========= Courses ===========
@@ -97,6 +106,18 @@ export const slice = createSlice({
     getUserById: (state, action) => {
       state.user = action.payload;
     },
+
+    loginUser: (state, action) => {
+      state.user = action.payload;
+    },
+
+
+
+
+
+
+
+
     createUser: (state) => {
       return { ...state };
     },
@@ -164,7 +185,7 @@ export const {
   getVideosByName,
   getCoursesByAZ,
   getCoursesByZA,
-
+  loginUser,
   getCourse10more,
   getCourse10h,
   getCourse5h,
