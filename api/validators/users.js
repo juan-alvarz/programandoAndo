@@ -12,8 +12,17 @@ const validatorCreateUser = [
 
   check("banned").exists().notEmpty(),
 
-  check("isAdmin").exists().notEmpty(),
+  check("role").exists().notEmpty(),
+  
+  check('userName').exists().notEmpty(),
 
+  check('ownPath').exists().notEmpty(),
+  
+  check('language').exists().notEmpty(),
+  
+  check('country').exists().notEmpty(),
+
+  check('birthday').exists().notEmpty(),
   (req, res, next) => {
     return validateResults(req, res, next);
   },

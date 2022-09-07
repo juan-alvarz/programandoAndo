@@ -27,19 +27,13 @@ const UserSchema = new Schema(
     banned: { type: Boolean, default: false },
     role: {
       type: String,
-      enum: ["Owner", "Admind", "User"],
+      enum: ["Owner", "Admin", "User"],
       default: "User",
     },
     userName: {
       type: String,
       unique: true
     },
-    notifications: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Notification'
-      }
-    ],
     ownPath: [
       {
         type: Schema.Types.ObjectId,
@@ -61,12 +55,6 @@ const UserSchema = new Schema(
     scoring: {
       type: Schema.Types.ObjectId
     },
-    comments: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'
-      }
-    ]
   },
   {
     timestamps: true,
