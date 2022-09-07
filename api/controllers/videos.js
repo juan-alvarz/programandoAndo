@@ -40,7 +40,7 @@ const getVideo = async (req, res) => {
 const createVideo = async (req, res) => {
   try {
     const myforo = await foroModel.create()
-    console.log(myforo)
+
     const {
       name,
       description,
@@ -60,10 +60,10 @@ const createVideo = async (req, res) => {
       image,
       duration,
       difficult,
-      myforo: myforo._id
+      foro: myforo._id
     });
     await newVideo.save();
-    return res.status(200).json(newVideo);
+    return res.status(200).json({video: newVideo, foro: myforo});
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

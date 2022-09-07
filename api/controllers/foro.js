@@ -75,36 +75,28 @@ const createForo = async (req, res) => {
       res.send({ msg: "The Foro Could not be created" });
     }
   };
-  
+  /* 
+  {
+    "authorComment": "63127d65452e091676932e21",
+    "content": "asdfsafsafasfasdfsa"
+  }
+  */
 const updateForo = async (req, res) => {
     const { id } = req.params;
-    const body = req.body;
+    const {commentId, ...body} = req.body;
     try {
-      const actualizado = await foroModel.updateOne({ _id: id }, body);
-      const foro = await foroModel.findOne({_id: id})
-      foro.populate(
-        { path: "comments",
-            populate: {
-            path: "authorComment",
-            select:'name',
-            // path: "answers",
-            // populate: {
-            //     path: "authorComment"
-            // } 
+      const foro = await foroModel.findById(id) 
+      if(commentId) {
+        const data = foro.comments.filter(x => x._id.toString() === commentId)
+        data[0]['answers'] = data[0]['answers'].concat(body);
+        foro.save();
+        return res.status(201).json('answere was update')
       }
-    }).populate({
-        path: "comments",
-        populate: {
-            path: "answers",
-        populate: {
-        path: "authorComment",
-        select:'name',
-        }
-    }
-});
-      res.status(201).send("Foro updated");
+      foro.comments = foro.comments.concat(body);
+      foro.save()
+      return res.status(201).send("Foro updated");
     } catch (error) {
-      res.status(404).send({ msg: "Foro not updated" });
+      res.status(404).json(error.message);
     }
   };
   
