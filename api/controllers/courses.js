@@ -12,7 +12,7 @@ const getCourses = async (req, res) => {
         .populate("videos");
       if (!nombre.length) {
         res.status(404)
-        return res.json({ 'course not found' });
+        return res.json('course not found');
       }
       return res.json(nombre);
     }
