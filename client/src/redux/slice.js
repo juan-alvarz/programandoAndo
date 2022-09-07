@@ -9,13 +9,7 @@ export const slice = createSlice({
     schools: [],
     school: {},
     users: [],
-    user: {token:"wgag",
-           user:{
-               _id:"12345",
-               name:"agustin",
-               email:"agustin@gmail.com",
-               role: "user"
-           }
+    user: {
           
          },
     videos: [],

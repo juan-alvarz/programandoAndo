@@ -153,9 +153,21 @@ export const createsUser = (payload) => async (dispatch) => {
 };
 
 export const userLogin = (payload) => async (dispatch) => {
+  
   const response = await axios
     .post("http://localhost:3001/api/users/login", payload)
-    .then((res) => dispatch(getSession(res.data)))
+    .then((res) =>{
+      window.localStorage.setItem(
+        "user", JSON.stringify(res.data));
+       
+        dispatch(getSession(res.data))
+
+
+    } 
+      
+      
+      )
+      
     .catch((e) => console.log(e));
   return response;
 };
@@ -163,7 +175,10 @@ export const userLogin = (payload) => async (dispatch) => {
 export const googleUserLogin = (payload) => async (dispatch) => {
   const response = await axios
     .post("http://localhost:3001/api/users/google_login", payload)
-    .then((res) => dispatch(getSession(res.data)))
+    .then((res) => {dispatch(getSession(res.data))
+      window.localStorage.setItem(
+        "user", JSON.stringify(res.data));     
+    })
     .catch((e) => console.log(e));
 
   return response;
@@ -176,16 +191,7 @@ export const googleUserLogin = (payload) => async (dispatch) => {
 };
 */
 
-export const login = (payload) => {
-  return axios
-    .post("http://localhost:3001/api/user" + payload)
-    .then((response) => {
-      if (response.data) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-      return response.data;
-    });
-};
+
 
 
 
