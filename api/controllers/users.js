@@ -3,6 +3,7 @@ const UserModel = require("../models/User");
 const { encrypt, compare } = require("../utils/handlePassword");
 const { tokenSign } = require("../utils/handleJwt");
 const { handleHtppError } = require("../utils/handleError");
+
 const getAllUsers = async (req, res, next) => {
   try {
     const { name } = req.query;
@@ -62,6 +63,7 @@ const getUserById = async (req, res, next) => {
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;
+    // console.log(body);
 
     const password = await encrypt(body.password); //encrypta la password
 
@@ -84,17 +86,22 @@ const createUser = async (req, res, next) => {
 const userLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await usersModel
-      .findOne({ email })
-      .select("password name isAdmin email");
+    const user = await usersModel.findOne({ email });
+    const hashPassword = await usersModel.findOne({ email }).select("password");
+    // console.log(hashPassword.password);
 
     if (!user) {
       handleHtppError(res, "User dont exists", 404);
       return;
     }
 
-    const hashPassword = user.get("password");
-    const checkPassword = await compare(password, hashPassword);
+    if (hashPassword.password === undefined) {
+      handleHtppError(res, "Please register a password", 404);
+      return;
+    }
+    // const hashPassword = user.get("password");
+    // console.log(hashPassword);
+    const checkPassword = await compare(password, hashPassword.password);
 
     if (!checkPassword) {
       handleHtppError(res, "Password Invalid", 401);
@@ -111,6 +118,37 @@ const userLogin = async (req, res, next) => {
     res.send(data);
   } catch (error) {
     console.log(error);
+  }
+};
+
+const googleUserLogin = async (req, res, next) => {
+  const { name, username, email } = req.body;
+  console.log(req.body);
+
+  let find = await usersModel.findOne({ email });
+  console.log(find);
+
+  if (!find) {
+    let user = await usersModel.create({
+      name,
+      username,
+      email,
+    });
+    user.set("password", undefined, { strict: false }); // oculto la password
+
+    const data = {
+      token: await tokenSign(user),
+      user,
+    };
+    console.log(data);
+    res.send(data);
+  } else {
+    const dataGoogle = {
+      token: await tokenSign(find),
+      user: find,
+    };
+    console.log(dataGoogle);
+    res.send(dataGoogle);
   }
 };
 
@@ -160,4 +198,5 @@ module.exports = {
   softDeleteUser,
   restoreUser,
   userLogin,
+  googleUserLogin,
 };

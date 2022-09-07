@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllVideos, createsCourse, getAllCourses } from "../redux/actions";
 import Swal from "sweetalert2";
 import NavBar from "./NavBar";
+import Google from "./Google";
 
 export default function CreateCourse() {
   const { videos, courses } = useSelector((state) => state.programandoando);
@@ -220,6 +221,11 @@ export default function CreateCourse() {
                 </span>
                 Create Course
               </button>
+              
+                <Google/>
+              
+              
+              
             </div>
           </form>
         </div>

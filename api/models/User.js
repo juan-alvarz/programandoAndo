@@ -6,6 +6,9 @@ const UserSchema = new Schema(
     name: {
       type: String,
     },
+    username: {
+      type: String,
+    },
     email: {
       type: String,
       unique: true,
@@ -20,6 +23,11 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
+    role: {
+      type: String,
+      enum: ["user", "admin", "owner"],
+      default: "user",
+    },
     // favorites: [
     //   {
     //     type: Schema.Types.ObjectId,
@@ -31,7 +39,6 @@ const UserSchema = new Schema(
       default: false,
     },
     banned: { type: Boolean, default: false },
-    isAdmin: { type: Boolean, default: false },
   },
   {
     timestamps: true,

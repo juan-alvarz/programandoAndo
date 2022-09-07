@@ -125,6 +125,12 @@ export const slice = createSlice({
     // filterByName: (state, action) => {
     //   state.stateFilter = action.payload;
     // },
+
+    // ============SESSION=====================
+    getSession: (state, action) => {
+      state.user = action.payload;
+    },
+
     orderFilter: (state, action) => {
       const sortedAlf =
         action.payload === "value"
@@ -169,6 +175,7 @@ export const {
   getCourse10h,
   getCourse5h,
   getCourse3h,
+  getSession,
 } = slice.actions;
 
 export default slice.reducer;
