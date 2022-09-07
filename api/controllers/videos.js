@@ -1,3 +1,4 @@
+const { foroModel } = require("../models/index.js");
 const Video = require("../models/Video.js");
 //const { videoModel } = require("../models");
 const getVideos = async (req, res) => {
@@ -6,7 +7,7 @@ const getVideos = async (req, res) => {
     if (name) {
       const data = await Video.find({
         name: { $regex: ".*" + name + ".*", $options: "<i>" },
-      });
+      }).populate('foro');
       if (!data) {
         res.status(404);
         res.json({ message: "Video not found" });
@@ -24,7 +25,7 @@ const getVideo = async (req, res) => {
   try {
     const { id } = req.params;
     if (id) {
-      const videoId = await Video.findById(id);
+      const videoId = await Video.findById(id).populate('foro');
       if (!videoId) {
         return res.status(404).json({ message: "inexistent id" });
       }
@@ -38,6 +39,8 @@ const getVideo = async (req, res) => {
 
 const createVideo = async (req, res) => {
   try {
+    const myforo = await foroModel.create()
+    console.log(myforo)
     const {
       name,
       description,
@@ -57,6 +60,7 @@ const createVideo = async (req, res) => {
       image,
       duration,
       difficult,
+      myforo: myforo._id
     });
     await newVideo.save();
     return res.status(200).json(newVideo);
@@ -94,7 +98,7 @@ const softDeleteVideo = async (req, res, next) => {
 const restoreVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await Video.restore({ _id: id });
+    const data = await Video.restore({ _id: id }).populate('foro');
     return res.json(data);
   } catch (e) {
     return res.json(e.message);

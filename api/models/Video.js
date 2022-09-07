@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 const mongooseDelete = require("mongoose-delete");
 
 const VideoSchema = new Schema(
@@ -27,6 +27,10 @@ const VideoSchema = new Schema(
     url: {
       type: String,
     },
+    foro: {
+       type: Schema.Types.ObjectId,
+       ref: 'Foro'
+    }
   },
   {
     timestamps: true,

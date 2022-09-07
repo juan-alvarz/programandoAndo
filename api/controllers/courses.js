@@ -1,17 +1,10 @@
 const { courseModel, schoolModel, videoModel } = require("../models");
 const { handleHttpError } = require("../utils/handleError");
-<<<<<<< HEAD
-const { durationCourse } = require("../utils/durationSort");
-// OBTENER LISTA DE CURSOS DE LA BASE DE DATOS
-const getCourses = async (req, res) => {
-  const { name } = req.query;
-=======
 const { durationCourse } = require("../utils/durationSort.js");
 // OBTENER LISTA DE CURSOS DE LA BASE DE DATOS
 const getCourses = async (req, res) => {
   const { name } = req.query;
   const { user } = req; // para saber el user que esta consumiendo esta ruta
->>>>>>> Roge
 
   const data = await courseModel.find({}).populate("videos");
   try {
@@ -27,14 +20,9 @@ const getCourses = async (req, res) => {
       }
     } else {
       res.status(200).send(data);
-<<<<<<< HEAD
-    }
-  } catch {
-=======
       // res.status(200).send({ data, user });
     }
   } catch (error) {
->>>>>>> Roge
     console.log(error);
   }
 };
