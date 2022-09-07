@@ -51,6 +51,9 @@ export default function Login() {
 
   const [error,setError]=useState("")
 
+  const[emailError,setEmailError]=useState("")
+  const[passError,setPassError]=useState("")
+
   
 
   const handleChange=(e)=>{
@@ -62,27 +65,52 @@ export default function Login() {
       }
   }
   const handleLogin=(e)=>{
-    e.preventDefault()
-    
-     dispatch(userLogin({email,password}))
-     setPassword("")
-     setEmail("")
 
-     setTimeout(function () {
-        let usuarioLocal=window.localStorage.getItem("user")
-        
-        if(usuarioLocal){
-          setError("login exitoso")
-          setTimeout(function () {
+    let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    e.preventDefault()
+    if(!emailRegex.test(email)){
+       setEmailError("email invalido")
+       setTimeout(function () {
+     
+        setEmailError("")
+    }, 3000)
+      
+    }
+    if(password.length>64 || password.length<8){
+       setPassError("El password debe tener entre 8 y 64 caracteres")
+       setTimeout(function () {
+     
+        setPassError("")
+    }, 3000)
+    }
+    else if(emailRegex.test(email)){
+      setEmailError("")
+      setPassError("")
+
+      dispatch(userLogin({email,password}))
+      setPassword("")
+      setEmail("")
+  
+      setTimeout(function () {
+         let usuarioLocal=window.localStorage.getItem("user")
+         
+         if(usuarioLocal){
+           setError("login exitoso")
+           setTimeout(function () {
+     
+             navigate("/");
+         }, 2000)
+         }else{
+           setError("login incorrecto")
+           setTimeout(function () {
+     
+            setError("")
+        }, 2000)
+         }
+       }, 500
+       )
+    }
     
-            navigate("/");
-        }, 2000
-        )
-        }else{
-          setError("login incorrecto")
-        }
-      }, 500
-      )
      
   }
   
@@ -128,6 +156,7 @@ export default function Login() {
                 placeholder="Email"
                 onChange={handleChange}
               />
+              <h4  className="text-red-600 mt-3">{emailError}</h4>
             </div>
             <div className="mb-2">
               <label
@@ -146,6 +175,8 @@ export default function Login() {
                 onChange={handleChange}
               />
               <img className="p-3" src={imagenVer} onClick={handleVer}></img>
+              <span className="text-red-600 mt-3">{passError}</span>
+
               </div>
             </div>
             <a
