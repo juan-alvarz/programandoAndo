@@ -6,9 +6,18 @@ const {
   getUserById,
   updateUser,
   softDeleteUser,
-  restoreUser
+  restoreUser,
+  userLogin,
+  googleUserLogin,
 } = require("../controllers/users");
-const { validatorCreateUser, validatorGetUsers } = require("../validators/users");
+const {
+  validatorCreateUser,
+  validatorGetUsers,
+  validatorLoginUser,
+  validatorGoogleLogin,
+} = require("../validators/users");
+
+const { googleMiddleware } = require("../middleware/googleSession");
 
 module.exports = router;
 
@@ -16,12 +25,19 @@ router.get("/", getAllUsers);
 
 router.get("/:id", validatorGetUsers, getUserById);
 
-router.post("/", validatorCreateUser, createUser);
+router.post("/register", validatorCreateUser, createUser);
 
-router.put('/:id', validatorGetUsers, updateUser);
+router.post("/login", validatorLoginUser, userLogin);
 
-router.patch('/:id', validatorGetUsers, restoreUser);
+router.post(
+  "/google_login",
+  googleMiddleware,
+  validatorGoogleLogin,
+  googleUserLogin
+);
 
-router.delete('/:id', validatorGetUsers, softDeleteUser)
+router.put("/:id", validatorGetUsers, updateUser);
 
+router.patch("/:id", validatorGetUsers, restoreUser);
 
+router.delete("/:id", validatorGetUsers, softDeleteUser);

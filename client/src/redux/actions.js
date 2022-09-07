@@ -22,7 +22,7 @@ import {
   getCourse10h,
   getCourse5h,
   getCourse3h,
-  loginUser
+  getSession,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -145,7 +145,27 @@ export const getUser = (id) => (dispatch) => {
 };
 
 export const createsUser = (payload) => async (dispatch) => {
-  const response = await axios.post("http://localhost:3001/api/users", payload);
+  const response = await axios.post(
+    "http://localhost:3001/api/users/register",
+    payload
+  );
+  return response;
+};
+
+export const userLogin = (payload) => async (dispatch) => {
+  const response = await axios
+    .post("http://localhost:3001/api/users/login", payload)
+    .then((res) => dispatch(getSession(res.data)))
+    .catch((e) => console.log(e));
+  return response;
+};
+
+export const googleUserLogin = (payload) => async (dispatch) => {
+  const response = await axios
+    .post("http://localhost:3001/api/users/google_login", payload)
+    .then((res) => dispatch(getSession(res.data)))
+    .catch((e) => console.log(e));
+
   return response;
 };
 
