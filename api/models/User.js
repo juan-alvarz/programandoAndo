@@ -20,6 +20,18 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
+    foros: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Foro",
+      },
+    ],
+    // favorites: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Course",
+    //   },
+    // ],
     contributor: {
       type: Number,
       default: false,

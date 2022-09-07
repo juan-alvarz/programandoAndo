@@ -805,8 +805,4 @@ const Carousel = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Carousel;
-=======
-export default Carousel;
->>>>>>> Roge
