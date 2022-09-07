@@ -1,13 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ver from "../utils/images/ver.png"
 import ocultar from "../utils/images/ojo.png"
+import {login} from "../redux/actions"
 
 export default function Login() {
 
-
+   const dispatch= useDispatch()
   //const {user}= useSelector(state => state.programandoando)
   //console.log(user)
   const [usuario,setUsuario]= useState({
@@ -66,10 +67,19 @@ export default function Login() {
       }
       
      )
+     //dispatch(login(usuario))
      setPassword("")
      setEmail("")
      
   }
+  
+  
+  
+  
+  
+  
+  
+  
   const handleVer=()=>{
     if(verPassword==="password"){
       setImagenVer(ver)

@@ -152,7 +152,26 @@ export const createsUser = (payload) => async (dispatch) => {
 /*export const login = (payload) => async (dispatch) => {
   const response = await axios.post("http://localhost:3001/api/user", payload);
   dispatch(loginUser(response.data))
-};*/
+
+};
+*/
+
+export const login = (payload) => {
+  return axios
+    .post("http://localhost:3001/api/user" + payload)
+    .then((response) => {
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
+      return response.data;
+    });
+};
+
+
+
+
+
+
 
 // ============================ Videos ============================
 export const getAllVideos = () => (dispatch) => {
