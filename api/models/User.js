@@ -28,18 +28,46 @@ const UserSchema = new Schema(
       enum: ["user", "admin", "owner"],
       default: "user",
     },
-    // favorites: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Course",
-    //   },
-    // ],
+    language: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+    birthday: {
+      type: Date,
+    },
+    ownPath: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "School",
+      },
+    ],
+    scoring: {
+      type: Schema.Types.ObjectId,
+    },
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
     contributor: {
-      type: Boolean,
-      default: false,
+      type: Number,
+      default: 0,
     },
     banned: { type: Boolean, default: false },
+    status: {
+      type: String,
+      enum: ["pending", "active"],
+      default: "pending",
+    },
+    confirmationCode: {
+      type: String,
+      unique: true,
+    },
   },
+
   {
     timestamps: true,
     versionKey: false,

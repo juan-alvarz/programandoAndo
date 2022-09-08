@@ -156,7 +156,13 @@ const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
-    const data = await UserModel.updateOne({ _id: id }, body);
+    const user = await UserModel.findById(id);
+    const data = await UserModel.updateOne(
+      { _id: id },
+      {
+        username: body.username ? body.username : user.username,
+      }
+    );
     if (!data.modifiedCount) {
       handleHtppError(res, "Fail in the query", 422);
       // res.status(422);

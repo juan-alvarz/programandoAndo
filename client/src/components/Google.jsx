@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Google() {
   const [user, setUser] = useState({});
   const dispatch = useDispatch()
-  //   function handleCallbackResponse(response) {
+  
   const handleCallbackResponse =  async (response) => {
     const token =response.credential
     // console.log(token)
