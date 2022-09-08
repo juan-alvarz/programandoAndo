@@ -60,7 +60,7 @@ const SearchBar = ({ path, setPagina }) => {
           placeholder="Search course..."
           onChange={(e) => handleChange(e)}
         />
-        <button className="px-4 text-white bg-gray-800 rounded-full ">
+        <button style={{backgroundColor: 'rgb(17, 52, 82)'}} className="px-4 text-white bg-gray-800 rounded-full ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"

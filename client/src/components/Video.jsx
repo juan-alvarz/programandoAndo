@@ -16,6 +16,7 @@ export default function Video() {
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
   }, [idVideo]);
+
   if (!Object.keys(course).length) {
     return <h2>Cargando Video!</h2>;
   } else {
@@ -47,7 +48,10 @@ export default function Video() {
                   className="pb-5 text-lg font-semibold"
                   style={{ fontSize: "15px", color: "rgb(17, 52, 82)" }}
                 >
-                  Autor: <a href={video.profile}>{video.author}</a>
+                  Autor:{" "}
+                  <a href={video.profile} target="_blank">
+                    {video.author}
+                  </a>
                 </h3>
               </div>
               <p
@@ -71,7 +75,11 @@ export default function Video() {
                 </p>
               </div>
               <p className="flex justify-end">
-                <a href={video.profile} className="text-blue-500">
+                <a
+                  href={video.profile}
+                  target="_blank"
+                  className="text-blue-500"
+                >
                   {video.profile}
                 </a>
               </p>

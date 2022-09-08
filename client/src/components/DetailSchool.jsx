@@ -22,12 +22,14 @@ export const DetailSchool = () => {
           return (
             <div className="hover:bg-sky-900" key={index}>
               <NavLink
-                style={{ color: "rgb(201, 196, 184)" }}
-                className="text-white focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-sm mx-5 my-3 inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2"
+                style={{ color: "rgb(201, 196, 184)", width: "100%", height: '100%' }}
+                className="text-white font-medium rounded-lg text-sm px-5 py-3 inline-flex items-center"
                 to="/courses"
                 state={(name = name)}
               >
-                {elemento.name}
+                <div>
+                  {elemento.name}
+                </div>
               </NavLink>
             </div>
           );
