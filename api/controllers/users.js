@@ -293,6 +293,8 @@ const updateUser = async (req, res, next) => {
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
           banned: body.banned ? body.banned : user.banned,
+          birthday: body.birthday ? body.birthday :user.birthday,
+          conuntry: body.conuntry ? body.country : user.country
         }
       );
       if (!data.modifiedCount) {
@@ -312,6 +314,8 @@ const updateUser = async (req, res, next) => {
           schools: body.schools ? body.schools : user.schools,
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
+          birthday: body.birthday ? body.birthday :user.birthday,
+          conuntry: body.conuntry ? body.country : user.country
         }
       );
       if (!data.modifiedCount) {
@@ -334,6 +338,8 @@ const updateUser = async (req, res, next) => {
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
           banned: body.banned ? body.banned : user.banned,
+          birthday: body.birthday ? body.birthday :user.birthday,
+          conuntry: body.conuntry ? body.country : user.country
         }
       );
       if (!data.modifiedCount) {
