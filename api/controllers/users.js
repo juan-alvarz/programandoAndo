@@ -213,13 +213,10 @@ const changePasswordRequest = async (req, res, next) => {
     {
       changePassCode: changePassToken,
     }
-  );  
+  );
   res.status(201);
   res.send(data);
-  sendChangePasswordEmail(
-    findUser.username, 
-    findUser.email, 
-    changePassToken);
+  sendChangePasswordEmail(findUser.username, findUser.email, changePassToken);
   return;
 };
 
