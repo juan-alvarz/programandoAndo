@@ -85,11 +85,10 @@ export default function CreateCourse() {
     /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
   let reg_exImg = /.*(png|jpg|jpeg|gif)$/;
   return (
-    <div style={{ height: "90vh" }}>
+    <div style={{ backgroundColor: "rgb(198, 198, 198)", height: "100vh"}}>
       <NavBar />
       <div
-        className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: "rgb(198, 198, 198)" }}
+        className="flex items-center justify-center pt-24 px-4 sm:px-6 lg:px-8"
       >
         <div className="w-full max-w-md space-y-8 font">
           <div
@@ -192,11 +191,11 @@ export default function CreateCourse() {
               className="font-light"
             />
 
-            <div className="">
+            <div style={{ overflow: "scroll", height: "160px", backgroundColor: 'rgb(198, 198, 198)', borderRadius: 5, borderWidth: 2, borderColor: 'white' }} className="">
               {video.map((v, index) => (
-                <div key={index} className="">
+                <div key={index} className="text-center">
                   <span
-                    className="cursor-pointer bg-red-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-200 dark:text-gray-900 hover:bg-red-500"
+                    className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
                     onClick={() => handleDeleteSelect(v)}
                   >
                     {v.label}

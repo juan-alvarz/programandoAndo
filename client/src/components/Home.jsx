@@ -20,9 +20,6 @@ function Home() {
   return (
     <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
       <NavBar />
-      <div>
-        <Carousel />
-      </div>
       <div class="py-10">
         <div
           style={{ backgroundColor: "rgb(17, 52, 82)" }}
@@ -57,6 +54,9 @@ function Home() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Carousel />
       </div>
       <Footer />
     </div>

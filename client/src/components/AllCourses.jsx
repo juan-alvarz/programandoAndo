@@ -53,7 +53,7 @@ export default function AllCourses() {
   /*==================course not found page========================== */
   if (courses.msg === "error") {
     return (
-      <div>
+      <div style={{backgroundColor: 'rgb(198, 198, 198)'}}>
         <div>
           <NavBar />
         </div>
@@ -61,7 +61,7 @@ export default function AllCourses() {
           style={{
             display: "flex",
             justifyContent: "center",
-            padding: "10px",
+            padding: "10px",  
           }}
         >
           <SearchBar path={path} setPagina={setCursoActual} />
@@ -192,10 +192,10 @@ export default function AllCourses() {
     };
     // ==============================================
     return (
-      <div>
+      <div style={{backgroundColor: 'rgb(198, 198, 198)'}}>
         <NavBar />
 
-        <div className="flex flex-col   items-center justify-between  px-5 py-10  lg:flex-row">
+        <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
           {/* Filtrados */}
           <div
             style={{
@@ -207,7 +207,7 @@ export default function AllCourses() {
               <span className="pr-2">A-Z</span>
               <label
                 for="default-toggle"
-                className="inline-flex relative items-center  cursor-pointer"
+                className="inline-flex relative items-center cursor-pointer"
               >
                 <div></div>
                 <input
@@ -217,7 +217,7 @@ export default function AllCourses() {
                   className="sr-only peer"
                   onChange={(e) => handleFilterAlph(e)}
                 />
-                <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
               </label>
               <span style={{ paddingRight: "10px", paddingLeft: "10px" }}>
                 Z-A
@@ -228,7 +228,8 @@ export default function AllCourses() {
             <div>
               <select
                 id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                style={{width: 130}}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% py-1"
                 onChange={(e) => handleFilterDuration(e)}
               >
                 <option value={"allDurations"}>All Durations</option>
@@ -258,45 +259,103 @@ export default function AllCourses() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-3 grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-          {/* className="grid gap-8 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 justify-items-center" */}
+        <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-8">
           {cursosActuales.map((course, index) => (
             <div
               key={index}
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
-              // className="px-10 flex flex-col justify-between"
+              style={{
+                maxWidth: 400,
+                height: 580,
+                backgroundColor: "rgb(17, 52, 82)",
+                marginTop: 5,
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: 30,
+                borderRadius: 10,
+              }}
             >
               <picture>
                 <NavLink to={`/course/${course._id}`}>
                   <img
-                    class="rounded-t-lg object-cover"
+                    className="rounded-t-lg object-cover"
                     src={course.image}
                     alt=""
                     style={{
+                      minHeight: 180,
+                      maxHeight: 180,
+                      width: "100%",
+                      objectFit: "cover",
+                      borderTopLeftRadius: 10,
+                      borderTopRightRadius: 10,
                       width: "500px",
                     }}
                   />
                 </NavLink>
               </picture>
 
-              <div className="p-5 ">
+              <div>
                 <div>
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  <h5 
+                    style={{
+                      fontSize: 20,
+                      display: "flex",
+                      color: "rgb(201, 196, 184)",
+                      justifyContent: "center",
+                      backgroundColor: 'rgb(55, 109, 109)',
+                      paddingTop: 10,
+                      paddingBottom: 10
+                    }}
+                    className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                     {course.name}
                   </h5>
-                  <span style={{ fontSize: "1.2rem" }}>
+                  
+                </div>
+                <p 
+                  style={{
+                    fontSize: 15,
+                    display: "flex",
+                    color: "rgb(201, 196, 184)",
+                    justifyContent: "center",
+                    minHeight: 180,
+                    paddingLeft: 35,
+                    paddingRight: 35,
+                    paddingTop: 20,
+                    textAlign: "center"
+                  }}
+                  className="mb-3 font-normal text-gray-700">
+                  {course.description}
+                </p>
+                <span 
+                    style={{
+                      fontSize: 15,
+                      display: "flex",
+                      color: "rgb(201, 196, 184)",
+                      justifyContent: "center",
+                      paddingTop: 10,
+                      paddingBottom: 20,
+                      paddingLeft: 35,
+                      paddingRight: 35,
+                      textAlign: "center"
+                    }}
+                  >
                     <strong>Time Inversion: </strong>
                     {finallyOneDuration(course.duration)}
                   </span>
-                </div>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                  {course.description}
-                </p>
                 <NavLink
                   to={`/course/${course._id}`}
-                  style={{ color: "white" }}
+                  style={{ 
+                    color: "white", 
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",}}
                 >
-                  <button className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                  <button 
+                    style={{
+                      backgroundColor: "rgb(17, 52, 82)",
+                      color: "rgb(201, 196, 184)",
+                    }}
+                    className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
                     Read more
                   </button>
                 </NavLink>

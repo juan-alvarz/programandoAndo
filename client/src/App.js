@@ -12,6 +12,7 @@ import Video from "./components/Video";
 import Donators from "./components/Donators";
 import AllCourses from "./components/AllCourses";
 import OneCourseDetail from "./components/OneCourseDetail";
+import Loader from "./components/Loader";
 
 function App() {
   // const { courses } = useSelector((state) => state.programandoando);

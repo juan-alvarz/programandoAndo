@@ -13,6 +13,7 @@ import { getAllSchools } from "../redux/actions";
 import { useState } from "react";
 import { CourseDetail } from "./CourseDetail";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 function Courses() {
   const dispatch = useDispatch();
@@ -33,13 +34,14 @@ function Courses() {
       cursosfiltrados.push(cursos[i]);
     }
   }
+  console.log(cursosfiltrados)
 
   return (
-    <div>
+    <div style={{backgroundColor: 'rgb(198, 198, 198)'}}>
       <NavBar />
       <div>
         {cursosfiltrados.length > 0 ? (
-          <div>
+          <div >
             <Course
               name={cursosfiltrados[0].name}
               description={cursosfiltrados[0].description}
@@ -57,9 +59,9 @@ function Courses() {
                 <div>
                   {elemento.courses.map((el, index) => {
                     return (
-                      <div className="justify-center" key={index}>
+                      <div key={index}>
                         <CourseDetail element={el}></CourseDetail>
-                        <div style={{ paddingLeft: "4%" }}>
+                        <div>
                           <Videos
                             videos={el.videos}
                             name={name}
@@ -77,6 +79,7 @@ function Courses() {
           <div></div>
         )}
       </div>
+      <Footer/>
     </div>
   );
 }

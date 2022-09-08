@@ -71,7 +71,6 @@ const Carousel = () => {
               <Slider>
                 <div>
                   {carouselCourses.map((e) => {
-                    console.log(e);
                     return (
                       <Slide key={e._id}>
                         <div
@@ -97,19 +96,16 @@ const Carousel = () => {
                             src={e.image}
                             alt="img not found"
                           />
-                          <div
-                            style={{
-                              marginTop: 20,
-                              marginLeft: 10,
-                              marginRight: 5,
-                            }}
-                          >
+                          <div>
                             <h2
                               style={{
                                 fontSize: 20,
                                 display: "flex",
                                 color: "rgb(201, 196, 184)",
                                 justifyContent: "center",
+                                backgroundColor: 'rgb(55, 109, 109)',
+                                paddingTop: 10,
+                                paddingBottom: 10
                               }}
                             >
                               {e.name}
@@ -121,7 +117,10 @@ const Carousel = () => {
                                   display: "flex",
                                   color: "rgb(201, 196, 184)",
                                   justifyContent: "center",
-                                  minHeight: 250,
+                                  minHeight: 230,
+                                  paddingLeft: 35,
+                                  paddingRight: 35,
+                                  textAlign: "center"
                                 }}
                               >
                                 {e.description}
@@ -137,10 +136,10 @@ const Carousel = () => {
                               >
                                 <button
                                   style={{
-                                    backgroundColor: "rgb(55, 109, 109)",
+                                    backgroundColor: "rgb(17, 52, 82)",
                                     color: "rgb(201, 196, 184)",
                                   }}
-                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 >
                                   Read more
                                 </button>
@@ -241,18 +240,16 @@ const Carousel = () => {
                             src={e.image}
                             alt="img not found"
                           />
-                          <div
-                            style={{
-                              marginTop: 20,
-                              marginLeft: 10,
-                              marginRight: 5,
-                            }}
-                          >
+                          <div>
                             <h2
                               style={{
+                                fontSize: 20,
                                 display: "flex",
                                 color: "rgb(201, 196, 184)",
                                 justifyContent: "center",
+                                backgroundColor: 'rgb(55, 109, 109)',
+                                paddingTop: 10,
+                                paddingBottom: 10
                               }}
                             >
                               {e.name}
@@ -260,10 +257,14 @@ const Carousel = () => {
                             <div style={{ marginTop: 40 }}>
                               <h3
                                 style={{
+                                  fontSize: 15,
                                   display: "flex",
                                   color: "rgb(201, 196, 184)",
                                   justifyContent: "center",
-                                  minHeight: 250,
+                                  minHeight: 230,
+                                  paddingLeft: 35,
+                                  paddingRight: 35,
+                                  textAlign: "center"
                                 }}
                               >
                                 {e.description}
@@ -279,10 +280,10 @@ const Carousel = () => {
                               >
                                 <button
                                   style={{
-                                    backgroundColor: "rgb(201, 196, 184)",
-                                    color: "rgb(17, 52, 82)",
+                                    backgroundColor: "rgb(17, 52, 82)",
+                                    color: "rgb(201, 196, 184)",
                                   }}
-                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 >
                                   Read more
                                 </button>
@@ -382,18 +383,16 @@ const Carousel = () => {
                             src={e.image}
                             alt="img not found"
                           />
-                          <div
-                            style={{
-                              marginTop: 20,
-                              marginLeft: 10,
-                              marginRight: 5,
-                            }}
-                          >
+                          <div>
                             <h2
                               style={{
+                                fontSize: 20,
                                 display: "flex",
                                 color: "rgb(201, 196, 184)",
                                 justifyContent: "center",
+                                backgroundColor: 'rgb(55, 109, 109)',
+                                paddingTop: 10,
+                                paddingBottom: 10,
                               }}
                             >
                               {e.name}
@@ -401,10 +400,14 @@ const Carousel = () => {
                             <div style={{ marginTop: 40 }}>
                               <h3
                                 style={{
+                                  fontSize: 15,
                                   display: "flex",
                                   color: "rgb(201, 196, 184)",
                                   justifyContent: "center",
-                                  minHeight: 250,
+                                  minHeight: 230,
+                                  paddingLeft: 35,
+                                  paddingRight: 35,
+                                  textAlign: "center"
                                 }}
                               >
                                 {e.description}
@@ -420,10 +423,10 @@ const Carousel = () => {
                               >
                                 <button
                                   style={{
-                                    backgroundColor: "rgb(201, 196, 184)",
-                                    color: "rgb(17, 52, 82)",
+                                    backgroundColor: "rgb(17, 52, 82)",
+                                    color: "rgb(201, 196, 184)",
                                   }}
-                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 >
                                   Read more
                                 </button>
