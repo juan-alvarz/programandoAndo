@@ -14,6 +14,7 @@ import AllCourses from "./components/AllCourses";
 import OneCourseDetail from "./components/OneCourseDetail";
 import Login from "./components/Login";
 import CreateUser from "./components/CreateUser";
+import ForgetPassword from "./components/ForgetPassword";
 import Sidebar from "./components/panelAdmin/Sidebar.jsx";
 // Panel Admin
 import VideosPA from "./components/panelAdmin/VideosPA";
@@ -42,6 +43,7 @@ function App() {
           {/* Algunas rutas nuevas */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<CreateUser />} />
+          <Route path="/forgetPassword" element={<ForgetPassword />} />
 
           <Route path="/sidebar" element={<Sidebar />} />
           {/* <Route path="/panelAdmin" element={<PanelAdmin />} /> */}
