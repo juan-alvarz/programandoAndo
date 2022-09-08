@@ -25,8 +25,8 @@ const getVideo = async (req, res) => {
   try {
     const { id } = req.params;
     if (id) {
-      const videoId = await Video.findById(id) //.populate('foro')
-      console.log(videoId.foro)
+      const videoId = await Video.findById(id); //.populate('foro')
+      console.log(videoId.foro);
       if (!videoId) {
         return res.status(404).json({ message: "inexistent id" });
       }
@@ -40,8 +40,8 @@ const getVideo = async (req, res) => {
 
 const createVideo = async (req, res) => {
   try {
-    const myforo = await foroModel.create({comments: []})
-    console.log(myforo)
+    const myforo = await foroModel.create({ comments: [] });
+    console.log(myforo);
     const {
       name,
       description,
@@ -51,7 +51,7 @@ const createVideo = async (req, res) => {
       image,
       duration,
       difficult,
-      foro
+      foro,
     } = req.body;
     const newVideo = new Video({
       name,
@@ -62,7 +62,7 @@ const createVideo = async (req, res) => {
       image,
       duration,
       difficult,
-      foro: myforo._id
+      foro: myforo._id,
     });
     await newVideo.save();
     return res.status(200).json(newVideo);
@@ -96,7 +96,7 @@ const softDeleteVideo = async (req, res, next) => {
 const restoreVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await Video.restore({ _id: id }).populate('foro');
+    const data = await Video.restore({ _id: id }).populate("foro");
     return res.json(data);
   } catch (e) {
     return res.json(e.message);
@@ -106,8 +106,8 @@ const restoreVideo = async (req, res, next) => {
 const updateVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const {body }= req.body;
-    const data = await Video.updateOne({ _id: id }, body)
+    const body = req.body;
+    const data = await Video.updateOne({ _id: id }, body);
     if (!data.modifiedCount) {
       res.status(422);
       return res.send("Fail in the query");
