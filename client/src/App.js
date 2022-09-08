@@ -22,6 +22,7 @@ import CoursesPA from "./components/panelAdmin/CoursesPA";
 import UsersPA from "./components/panelAdmin/UsersPA";
 import Administrator from "./components/panelAdmin/Administrator";
 import Baneos from "./components/panelAdmin/Baneos";
+import Loader from "./components/Loader";
 
 function App() {
   return (

@@ -4,11 +4,13 @@ import { NavLink, useParams } from "react-router-dom";
 import { Paginated } from "./Paginated";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Footer from "./Footer";
 
 export const Videos = (props) => {
   const { course } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
-
+  const {idVideo} = useParams()
+  
   let name = props.name;
   useEffect(() => {
     setPaginaActual(1);
@@ -57,7 +59,7 @@ export const Videos = (props) => {
 
   return (
     <div>
-      <div className="grid justify-items-center mb-20">
+      <div className="grid justify-items-center mt-10">
         <Paginated
           setPagina={paginado}
           videos={videos.length}
@@ -67,19 +69,20 @@ export const Videos = (props) => {
           next={next}
         ></Paginated>
       </div>
-      <div className="grid gap-8  items-center lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-8 lg:gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-10 justify-items-center">
         {videosActuales.map((elemento, index) => {
+          console.log(elemento)
           return (
-            <div key={index} style={{ justifyContent: "center" }}>
+            <div key={index}>
               <NavLink
                 to={`/video/${elemento._id}/${idCourse}`}
                 state={(videos = videosActuales)}
               >
                 <div
-                  style={{ margin: 10, boxShadow: "2px 2px 9px #312928" }}
-                  className="rounded-lg w-80 h-80 p-6 transition ease-in-out delay-150 bg-gray-800 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-800 duration-300"
+                  style={elemento._id === idVideo ? { margin: 10, backgroundColor: 'rgb(17, 52, 82)'} : { margin: 10, backgroundColor: 'rgb(55, 109, 109)'}}
+                  className="flex place-content-center rounded-lg w-80 h-80 p-6 transition ease-in-out delay-150 bg-gray-800 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-800 duration-300"
                 >
-                  <h3 className="mb-2 text-2xl font-bold tracking-tight text-white ">
+                  <h3 style={{}} className="flex items-center text-center text-md font-medium text-white w-52">
                     {elemento.name}
                   </h3>
                 </div>

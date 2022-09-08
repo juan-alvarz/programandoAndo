@@ -3,8 +3,8 @@ import loader from "../utils/images/loader.gif";
 
 export default function Loader() {
   return (
-    <div className="flex justify-items-center" style={{ width: "100%" }}>
-      <img src={loader} alt="notFound" />
+    <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh"}}>
+      <img src={loader} alt="loaderNotFound" />
     </div>
   );
 }

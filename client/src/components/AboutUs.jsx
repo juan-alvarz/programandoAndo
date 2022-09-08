@@ -1,6 +1,12 @@
 import React from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
+import Lucho from '../utils/images/LuisAboutUs1.png'
+import Santi from '../utils/images/SantiagoAboutUs1.png'
+import Agus from '../utils/images/AgustinAboutUs1.png'
+import Fran from '../utils/images/FrancoAboutUs1.png'
+import Dani from '../utils/images/DanielAboutUs1.png'
+import Juan from '../utils/images/JuanAboutUs1.png'
 
 function AboutUs() {
   return (
@@ -26,8 +32,8 @@ function AboutUs() {
           <div className="text-center text-gray-500">
             <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-              alt="Bonnie Avatar"
+              src={Fran}
+              alt="Fran Avatar"
             />
             <h3
               style={{ color: "rgb(55, 109, 109)" }}
@@ -81,7 +87,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                  className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
                     style={{ color: "rgb(168, 76, 101)" }}
@@ -96,11 +102,11 @@ function AboutUs() {
               </li>
             </ul>
           </div>
-          <div className="text-center text-gray-500 dark:text-gray-400">
-            <img
+          <div className="text-center text-gray-500">
+          <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
-              alt="Helene Avatar"
+              src={Santi}
+              alt="Santi Avatar"
             />
             <h3
               style={{ color: "rgb(55, 109, 109)" }}
@@ -114,7 +120,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white dark:hover:text-white"
+                  className="text-[#39569c] hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -134,7 +140,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-gray-200 hover:text-white dark:hover:text-white dark:text-gray-300"
+                  className="text-gray-200 hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -153,7 +159,7 @@ function AboutUs() {
               <li>
                 <a
                   href="#"
-                  className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                  className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
                     style={{ color: "rgb(168, 76, 101)" }}
@@ -168,11 +174,11 @@ function AboutUs() {
               </li>
             </ul>
           </div>
-          <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-center text-gray-500">
             <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-              alt="Jese Avatar"
+              src={Lucho}
+              alt="Lucho Avatar"
             />
             <h3
               style={{ color: "rgb(55, 109, 109)" }}
@@ -186,7 +192,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white dark:hover:text-white"
+                  className="text-[#39569c] hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -206,7 +212,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-gray-200 hover:text-white dark:hover:text-white dark:text-gray-300"
+                  className="text-gray-200 hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -225,7 +231,7 @@ function AboutUs() {
               <li>
                 <a
                   href="#"
-                  className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                  className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
                     style={{ color: "rgb(168, 76, 101)" }}
@@ -240,11 +246,11 @@ function AboutUs() {
               </li>
             </ul>
           </div>
-          <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-center text-gray-500">
             <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
-              alt="Joseph Avatar"
+              src={Juan}
+              alt="Juan Avatar"
             />
             <h3
               style={{ color: "rgb(55, 109, 109)" }}
@@ -258,7 +264,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white dark:hover:text-white"
+                  className="text-[#39569c] hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -278,7 +284,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-gray-200 hover:text-white dark:hover:text-white dark:text-gray-300"
+                  className="text-gray-200 hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -297,7 +303,7 @@ function AboutUs() {
               <li>
                 <a
                   href="#"
-                  className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                  className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
                     style={{ color: "rgb(168, 76, 101)" }}
@@ -312,11 +318,11 @@ function AboutUs() {
               </li>
             </ul>
           </div>
-          <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-center text-gray-500">
             <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/sofia-mcguire.png"
-              alt="Sofia Avatar"
+              src={Dani}
+              alt="Dani Avatar"
             />
             <h3
               style={{ color: "rgb(55, 109, 109)" }}
@@ -330,7 +336,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white dark:hover:text-white"
+                  className="text-[#39569c] hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -350,7 +356,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-gray-200 hover:text-white dark:hover:text-white dark:text-gray-300"
+                  className="text-gray-200 hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -369,7 +375,7 @@ function AboutUs() {
               <li>
                 <a
                   href="#"
-                  className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                  className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
                     style={{ color: "rgb(168, 76, 101)" }}
@@ -384,7 +390,7 @@ function AboutUs() {
               </li>
             </ul>
           </div>
-          <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-center text-gray-500">
             <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
               src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
@@ -402,7 +408,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white dark:hover:text-white"
+                  className="text-[#39569c] hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -422,7 +428,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-gray-200 hover:text-white dark:hover:text-white dark:text-gray-300"
+                  className="text-gray-200 hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -441,7 +447,7 @@ function AboutUs() {
               <li>
                 <a
                   href="#"
-                  className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                  className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
                     style={{ color: "rgb(168, 76, 101)" }}
@@ -456,11 +462,11 @@ function AboutUs() {
               </li>
             </ul>
           </div>
-          <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-center text-gray-500 ">
             <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
-              alt="Michael Avatar"
+              src={Agus}
+              alt="Agus Avatar"
             />
             <h3
               style={{ color: "rgb(55, 109, 109)" }}
@@ -474,7 +480,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white dark:hover:text-white"
+                  className="text-[#39569c] hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -494,7 +500,7 @@ function AboutUs() {
                 <a
                   href="#"
                   style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-gray-200 hover:text-white dark:hover:text-white dark:text-gray-300"
+                  className="text-gray-200 hover:text-white"
                 >
                   <svg
                     className="w-5 h-5"
@@ -513,7 +519,7 @@ function AboutUs() {
               <li>
                 <a
                   href="#"
-                  className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                  className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
                     style={{ color: "rgb(168, 76, 101)" }}

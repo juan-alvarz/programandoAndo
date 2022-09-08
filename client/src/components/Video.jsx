@@ -16,6 +16,7 @@ export default function Video() {
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
   }, [idVideo]);
+
   if (!Object.keys(course).length) {
     return <h2>Cargando Video!</h2>;
   } else {
