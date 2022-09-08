@@ -10,7 +10,7 @@ const {
   userLogin,
   googleUserLogin,
   verifyUser,
-  submitChangePass,
+  submitChangePass
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -27,9 +27,9 @@ router.get("/", getAllUsers);
 
 router.get("/:id", validatorGetUsers, getUserById);
 
-router.get("/auth/confirm/:confirmationCode", verifyUser);
+router.get('/auth/confirm/:confirmationCode',verifyUser)
 
-router.get("/auth/confirm/:changePassCode", submitChangePass);
+router.get('/auth/confirm/:changePassCode',submitChangePass)
 
 router.post("/register", validatorCreateUser, createUser);
 
@@ -41,6 +41,7 @@ router.post(
   validatorGoogleLogin,
   googleUserLogin
 );
+
 
 router.put("/:id", validatorGetUsers, updateUser);
 
