@@ -2,66 +2,113 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { lenguages } from "../utils/lenguages";
+import { countries } from "../utils/countries";
+import { useNavigate } from "react-router-dom";
 
-export default function Registration() {
+export default function CreateUser() {
+  const navigate = useNavigate();
   // react-hook-forms
   const {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
     setValue,
   } = useForm({
     defaultValues: {
       name: "",
-      image: "",
-      description: "",
-      videos: [],
+      username: "",
+      email: "",
+      reEmail: "",
+      password: "",
+      rePassword: "",
+      date: "",
+      lenguage: "",
+      country: "",
     },
   });
 
-  // const onSubmit = (data) => {
-  //   const get = getValues();
-  //   console.log(get);
+  // Modificar la vista del inpit password
+  const [pass, setPass] = React.useState("password");
+  const [passTwo, setPassTwo] = React.useState("password");
 
-  //   handleSelect(video);
-  //   console.log(data);
-  //   dispatch(createsCourse(get));
+  function handlePass() {
+    setPass(pass === "password" ? "text" : "password");
+  }
 
-  //   Swal.fire({
-  //     title: "Create Course",
-  //     text: "Course Created Successfully",
-  //     icon: "success",
-  //     confirmButtonText: "Back",
-  //   });
-  // };
+  function handlePassTwo() {
+    setPassTwo(passTwo === "password" ? "text" : "password");
+  }
 
-  // const [video, setVideo] = useState([]);
+  const onSubmit = (data) => {
+    if (data.password !== data.rePassword || data.email !== data.reEmail) {
+      return Swal.fire({
+        title: "Error in Email or Password",
+        text: "Check the password or email input",
+        icon: "error",
+        confirmButtonText: "Back",
+      });
+    } else if (!data.lenguage || !data.country) {
+      return Swal.fire({
+        title: "Error in Lenguage or Country",
+        text: "Check the Lenguage or Country input",
+        icon: "error",
+        confirmButtonText: "Back",
+      });
+      // } else if (
+      //   AllUsers.find(
+      //     (item) =>
+      //       item.username.replace(/\s+/g, "").toLowerCase() ===
+      //       data.username.replace(/\s+/g, "").toLowerCase()
+      //   )
+      // ) {
+      return Swal.fire({
+        title: "repeated user",
+        text: "Check the user exists!!",
+        icon: "error",
+        confirmButtonText: "Back",
+      });
+    } else {
+      console.log(data);
+      return Swal.fire({
+        title: "Create User",
+        text: "Create User Successfully",
+        icon: "success",
+        confirmButtonText: "Back",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      });
+    }
+  };
 
-  // const handleSelect = (value) => {
-  //   const find = video.find((i) => i.value === value.value);
-  //   if (!find) {
-  //     setVideo([...video, value]);
-  //     setValue(
-  //       "videos",
-  //       [...video, value].map((e) => e.value)
-  //     );
-  //     console.log(video);
-  //   }
-  //  console.log(find);
-  // };
+  const [selectedLenguage, setSelectedLenguage] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
 
-  // const optionList = videos?.map((video) => {
-  //   return {
-  //     value: video._id,
-  //     label: video.name,
-  //   };
-  // });
+  function handleSelectLenguage(data) {
+    setSelectedLenguage(data);
+    setValue("lenguage", data.label);
+  }
 
-  // const handleDeleteSelect = (value) => {
-  //   const videoFilter = video.filter((v) => v !== value);
-  //   setVideo(videoFilter);
-  // };
+  function handleSelectCountry(data) {
+    setSelectedCountry(data);
+    setValue("country", data.label);
+  }
+
+  const optionLenguages = lenguages?.map((leng) => {
+    return {
+      value: leng,
+      label: leng,
+    };
+  });
+
+  const optionCountries = countries?.map((contry) => {
+    return {
+      value: contry,
+      label: contry,
+    };
+  });
 
   return (
     <div>
@@ -73,10 +120,10 @@ export default function Registration() {
         </div>
         {/* Form */}
         <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-lg sm:rounded-lg">
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-4">
               <label
-                htmlFor="fullName"
+                htmlFor="name"
                 className="block text-sm font-bold text-black undefined"
               >
                 Full Name
@@ -84,16 +131,30 @@ export default function Registration() {
               <div className="flex flex-col items-start">
                 <input
                   type="text"
-                  name="fullname"
-                  className="px-3 font-light block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  name="name"
+                  className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Full Name"
+                  {...register("name", {
+                    required: true,
+                    pattern: /^[A-Z a-z]+$/i,
+                  })}
                 />
+                {errors.name?.type === "required" && (
+                  <small className="text-red-600 font-bold">
+                    Name is required
+                  </small>
+                )}
+                {errors.name?.type === "pattern" && (
+                  <small className="text-red-600 font-bold">
+                    Input only letters
+                  </small>
+                )}
               </div>
             </div>
 
             <div className="mt-4">
               <label
-                htmlFor="firstName"
+                htmlFor="username"
                 className="block text-sm font-bold text-black undefined"
               >
                 User Name
@@ -101,10 +162,22 @@ export default function Registration() {
               <div className="flex flex-col items-start">
                 <input
                   type="text"
-                  name="firstName"
-                  className="px-3 block w-full mt-1 font-light border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  name="username"
+                  className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="User Name"
+                  {...register("username", {
+                    required: true,
+                    pattern: /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim,
+                  })}
                 />
+                {errors.username?.type === "required" && (
+                  <small className="text-red-600 font-bold">
+                    User is required
+                  </small>
+                )}
+                {errors.username?.type === "pattern" && (
+                  <small className="text-red-600 font-bold">Invalid user</small>
+                )}
               </div>
             </div>
 
@@ -119,9 +192,23 @@ export default function Registration() {
                 <input
                   type="email"
                   name="email"
-                  className="px-3 block w-full mt-1 border-gray-300 font-light rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Email"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^[\w]+@{1}[\w]+\.[a-z]{2,3}$/,
+                  })}
                 />
+                {errors.email?.type === "required" && (
+                  <small className="text-red-600 font-bold">
+                    Email required
+                  </small>
+                )}
+                {errors.email?.type === "pattern" && (
+                  <small className="text-red-600 font-bold">
+                    You must enter your email correctly
+                  </small>
+                )}
               </div>
             </div>
 
@@ -130,15 +217,24 @@ export default function Registration() {
                 htmlFor="reEmail"
                 className="block text-sm font-bold text-black undefined"
               >
-                Re-Email
+                Confirm Email
               </label>
               <div className="flex flex-col items-start">
                 <input
                   type="email"
                   name="reEmail"
-                  className="px-3 block w-full mt-1 font-light border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Re-Email"
+                  {...register("reEmail", {
+                    required: true,
+                    pattern: /^[\w]+@{1}[\w]+\.[a-z]{2,3}$/,
+                  })}
                 />
+                {errors.reEmail?.type === "required" && (
+                  <small className="text-red-600 font-bold">
+                    Confirm email is required
+                  </small>
+                )}
               </div>
             </div>
 
@@ -151,11 +247,37 @@ export default function Registration() {
               </label>
               <div className="flex flex-col items-start">
                 <input
-                  type="password"
+                  type={pass}
                   name="password"
-                  className="px-3 block w-full mt-1 font-light border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Password"
+                  {...register("password", {
+                    required: true,
+                    pattern:
+                      /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g,
+                  })}
                 />
+                <div className="flex justify-end mt-0.5 w-full">
+                  <button
+                    type="button"
+                    className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white  px-0.5 border border-blue-500 hover:border-transparent rounded"
+                    onClick={() => setPass(handlePass)}
+                  >
+                    view
+                  </button>
+                </div>
+
+                {errors.password?.type === "required" && (
+                  <small className="text-red-600 font-bold">
+                    Password is required
+                  </small>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <small className="text-red-600 font-bold">
+                    password 8 to 64 characters with upper and lower case,
+                    numbers and special characters
+                  </small>
+                )}
               </div>
             </div>
 
@@ -168,11 +290,32 @@ export default function Registration() {
               </label>
               <div className="flex flex-col items-start">
                 <input
-                  type="password"
-                  name="password_confirmation"
-                  className="px-3 block w-full mt-1 font-light border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  type={passTwo}
+                  name="rePassword"
+                  className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Re-Password"
+                  {...register("rePassword", { required: true })}
                 />
+                <div className="flex justify-end mt-0.5 w-full">
+                  <button
+                    type="button"
+                    className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white  px-0.5 border border-blue-500 hover:border-transparent rounded"
+                    onClick={() => setPassTwo(handlePassTwo)}
+                  >
+                    view
+                  </button>
+                </div>
+
+                {errors.rePassword?.type === "required" && (
+                  <small className="text-red-600 font-bold">
+                    Confirm password is required
+                  </small>
+                )}
+                {/* {errors.rePassword?.type === "pattern" && (
+                  <small className="text-red-600 font-bold">
+                    Incorrect password
+                  </small>
+                )} */}
               </div>
 
               <div className="mt-4">
@@ -186,38 +329,46 @@ export default function Registration() {
                   <input
                     type="date"
                     name="date"
-                    className="px-3 block w-full mt-1 font-light border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    {...register("date", { required: true })}
                   />
+                  {errors.date?.type === "required" && (
+                    <small className="text-red-600 font-bold">
+                      Date birthday is required
+                    </small>
+                  )}
                 </div>
               </div>
               <div className="mt-4">
                 <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 undefined"
+                  htmlFor="lenguage"
+                  className="block text-sm font-bold text-black undefined"
                 >
-                  Country
+                  Lenguage
                 </label>
-                <div className="flex flex-col items-start">
-                  <input
-                    type="email"
-                    name="email"
-                    className="px-3 block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                  />
-                </div>
+                <Select
+                  name="lenguage"
+                  options={optionLenguages}
+                  placeholder="Lenguage"
+                  value={selectedLenguage}
+                  onChange={handleSelectLenguage}
+                  isSearchable={false}
+                  className="font-light"
+                />
               </div>
               <div className="mt-4">
                 <label
-                  htmlFor="email"
+                  htmlFor="country"
                   className="block text-sm font-bold text-gray-700 undefined"
                 >
                   Country
                 </label>
                 <Select
-                  name="video"
-                  // options={optionList}
-                  placeholder="Countrys"
-                  // value={video}
-                  // onChange={handleSelect}
+                  name="country"
+                  options={optionCountries}
+                  placeholder="Countries"
+                  value={selectedCountry}
+                  onChange={handleSelectCountry}
                   isSearchable={true}
                   className="font-light"
                 />
@@ -228,8 +379,9 @@ export default function Registration() {
             </a>
             <div className="flex items-center mt-4">
               <button
-                className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+                className="w-full px-4 py-2 tracking-wide font-bold text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
                 style={{ backgroundColor: "#113452" }}
+                disabled={Object.entries(errors).length === 0 ? "" : true}
               >
                 Register
               </button>

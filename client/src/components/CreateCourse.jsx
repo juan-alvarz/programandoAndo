@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
@@ -8,6 +9,8 @@ import Swal from "sweetalert2";
 import NavBar from "./NavBar";
 
 export default function CreateCourse() {
+  const navigate = useNavigate();
+
   const { videos, courses } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
 
@@ -47,6 +50,10 @@ export default function CreateCourse() {
       text: "Course Created Successfully",
       icon: "success",
       confirmButtonText: "Back",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
     });
   };
 
@@ -191,7 +198,7 @@ export default function CreateCourse() {
               className="font-light"
             />
 
-            <div className="">
+            <div className="" style={{ overflow: "scroll", height: "80px" }}>
               {video.map((v, index) => (
                 <div key={index} className="">
                   <span
