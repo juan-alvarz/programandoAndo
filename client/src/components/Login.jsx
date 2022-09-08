@@ -171,7 +171,7 @@ export default function Login() {
                 type={verPassword}
                 className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 name="password"
-                placeholder="Password"
+                placeholder="Password 8 min - 64 max"
                 onChange={handleChange}
               />
               <img className="p-3" src={imagenVer} onClick={handleVer}></img>

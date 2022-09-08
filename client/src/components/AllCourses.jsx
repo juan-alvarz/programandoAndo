@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCourses } from "../redux/actions";
+import {favorite} from "../redux/actions"
 import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
@@ -16,10 +17,14 @@ import {
   getCourses3h,
 } from "../redux/actions";
 import imageNotFound from "../utils/images/404person.png";
+import fav from "../utils/images/fav.png"
+import { Favorites } from "./Favorites";
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
+  const {favoritesUser} = useSelector((state) => state.programandoando);
+  console.log(favoritesUser)
 
   // =============== Paginado ==========================
   const [cursoActual, setCursoActual] = useState(1);
@@ -33,7 +38,7 @@ export default function AllCourses() {
     dispatch(getAllCourses());
   }, [dispatch, coursesPowFilter]);
 
-  console.log(courses);
+  
   // //===================================================
   let finallyOneDuration = (time) => {
     let hours = Math.floor(time / 3600);
@@ -125,22 +130,22 @@ export default function AllCourses() {
         }
       };
       let secondsDuration = temporaly.map((e) => toSeconds(e));
-      console.log(secondsDuration);
+      
       let oneDuration = secondsDuration.reduce((sum, a) => sum + a, 0);
-      console.log(oneDuration);
+      
 
       let object = {
         ...course,
         duration: oneDuration,
       };
-      console.log(object.duration);
+      
       return object;
     };
 
-    console.log(durationCourse(courses[0]));
+    
     let coursesPow = courses.map((e) => durationCourse(e));
 
-    console.log(coursesPow);
+    
 
     //=========== lógica del duration ==========
 
@@ -194,6 +199,7 @@ export default function AllCourses() {
     return (
       <div>
         <NavBar />
+        <NavLink to="/favorites">Favorites</NavLink>
 
         <div className="flex flex-col   items-center justify-between  px-5 py-10  lg:flex-row">
           {/* Filtrados */}
@@ -300,6 +306,7 @@ export default function AllCourses() {
                     Read more
                   </button>
                 </NavLink>
+                  <img onClick={(e)=>(dispatch(favorite(course)))} src={fav}></img>
               </div>
             </div>
           ))}

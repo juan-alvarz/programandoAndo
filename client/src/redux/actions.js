@@ -23,6 +23,7 @@ import {
   getCourse5h,
   getCourse3h,
   getSession,
+  favoriteCourse
 } from "./slice";
 
 // ============================ Courses ============================
@@ -81,6 +82,17 @@ export const getCourse = (id) => (dispatch) => {
     .get(`http://localhost:3001/api/courses/${id}`)
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
+};
+export const favorite = (course) => (dispatch) => {
+  dispatch(favoriteCourse(course))
+};
+
+export const updateUser = (payload, id) => async (dispatch) => {
+  const response = await axios.post(
+    `http://localhost:3001/api/users/${id}`,
+    payload
+  );
+  return response;
 };
 
 export const createsCourse = (payload) => async (dispatch) => {

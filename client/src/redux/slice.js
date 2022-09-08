@@ -72,6 +72,10 @@ export const slice = createSlice({
     getCourseById: (state, action) => {
       state.course = action.payload;
     },
+    favoriteCourse:(state,action)=>{
+      state.favoritesUser.push(action.payload)
+    }
+    ,
     createCourse: (state) => {
       return { ...state };
     },
@@ -190,6 +194,7 @@ export const {
   getCourse5h,
   getCourse3h,
   getSession,
+  favoriteCourse
 } = slice.actions;
 
 export default slice.reducer;

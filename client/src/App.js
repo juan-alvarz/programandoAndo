@@ -14,6 +14,7 @@ import AllCourses from "./components/AllCourses";
 import OneCourseDetail from "./components/OneCourseDetail";
 import Login from "./components/Login";
 import CreateUser from "./components/CreateUser";
+import { Favorites } from "./components/Favorites";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/loginUser" element={<Login />} />
           <Route path="/createUser" element={<CreateUser />} />
           <Route path="*" element={<Error404 />} />
+          <Route path="/favorites" element={<Favorites></Favorites>}/>
         </Routes>
       </div>
     </BrowserRouter>
