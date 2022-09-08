@@ -106,7 +106,7 @@ const restoreVideo = async (req, res, next) => {
 const updateVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const {body }= req.body;
+    const body = req.body;
     const data = await Video.updateOne({ _id: id }, body)
     if (!data.modifiedCount) {
       res.status(422);
