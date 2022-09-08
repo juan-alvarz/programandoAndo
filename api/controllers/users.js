@@ -16,7 +16,7 @@ const getAllUsers = async (req, res, next) => {
     const { name } = req.query;
     if (name) {
       const data = await usersModel
-        .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
+        .find({ name: { $regex: "." + name + ".", $options: "<i>" } })
         .populate({
           path: "schools",
           populate: {
@@ -24,8 +24,10 @@ const getAllUsers = async (req, res, next) => {
             populate: { path: "videos" },
           },
         });
-      if (!data.length) {
+      if (!data) {
         handleHtppError(res, "User not found", 404);
+        // res.status(404);
+        // res.json({ message: "User not found" });
       }
       return res.json(data);
     }
@@ -38,7 +40,7 @@ const getAllUsers = async (req, res, next) => {
     });
     return res.json(users);
   } catch (e) {
-    // res.status(e.response.status);
+    res.status(e.response.status);
     return res.json(e.message);
   }
 };
@@ -55,10 +57,12 @@ const getUserById = async (req, res, next) => {
     });
     if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
+      // res.status(404);
+      // return res.send("user doesn't exist");
     }
     return res.json(user);
   } catch (e) {
-    // res.status(e.response.status);
+    res.status(e.response.status);
     return res.json(e.message);
   }
 };
@@ -376,13 +380,3 @@ module.exports = {
   submitChangePass,
   changePasswordRequest,
 };
-
-// Concatenar videos-cursos-escuelas, lógica
-
-// const {schools, ...body} = req.body;
-// if(schools.length) {
-    //   const user = await UserModel.findById(id);
-    //   console.log(user, 'user')
-    //   user.schools = user.schools.concat(schools);
-    //   await user.save()
-    // }

@@ -18,7 +18,7 @@ const router = express.Router();
 //authMiddleware, checkRol(["user", "admin"]),checkRol(["user", "admin"]),
 // VAMOS A GENERAR LA RUTA DE LOS CURSOS -- CRUD EN LA PRIMERA FASE GETALL GETBYID Y CREATE
 
-router.get("/", authMiddleware, getCourses);
+router.get("/", getCourses);
 
 router.get("/:id", validatorGetCourse, getCourseById);
 

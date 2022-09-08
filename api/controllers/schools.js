@@ -3,33 +3,36 @@ const { schoolModel } = require("../models");
 // ============================= GET SCHOOLS DATABASE ========================
 
 const getAllSchool = async (req, res) => {
+  const { name } = req.query;
+  const data = await schoolModel.find({}).populate({
+    path: "courses",
+    populate: {
+      path: "videos",
+    },
+  });
   try {
-    const { name } = req.query;
     if (name) {
-      const nombre = await schoolModel.find({ name: { $regex: '.*' + name + '.*', $options: '<i>' } }).populate({
-        path: "courses",
-        populate: {
-          path: "videos",
-        },
-      });
+      const nombre = await schoolModel
+        .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
+        .populate({
+          path: "courses",
+          populate: {
+            path: "videos",
+          },
+        });
       // const nombre = data.filter(
       //   e => e.name.toLowerCase().includes(name.toLowerCase()))
-      if (!nombre.length) {
-        res.status(404)
-        return res.json({ msg: "School doesnt exist" });
+      console.log(nombre);
+      if (!nombre) {
+        res.send({ msg: "School doesnt exist" });
+      } else {
+        res.send(nombre);
       }
-      return res.json(nombre);
+    } else {
+      res.send(data);
     }
-    const data = await schoolModel.find({}).populate({
-      path: "courses",
-      populate: {
-        path: "videos",
-      },
-    });
-    return res.json(data)
-  }
-  catch (e) {
-    return res.json(e.message);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -54,8 +57,8 @@ const getSchoolId = async (req, res) => {
         res.send(find);
       }
     }
-  } catch (e) {
-    return res.json(e.message);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -82,30 +85,28 @@ const createSchool = async (req, res) => {
 // ===========================UPDATE SCHOOL ====================================
 
 const updateSchool = async (req, res) => {
-  const { id } = req.params
-  const body = req.body
+  const { id } = req.params;
+  const body = req.body;
   try {
-    const actualizado = await schoolModel.updateOne({ _id: id }, body)
+    const actualizado = await schoolModel.updateOne({ _id: id }, body);
     if (!actualizado.modifiedCount) {
-      res.status(422).send('Fail in the query')
+      res.status(422).send("Fail in the query");
     }
-    res.status(201).send('The School was updated')
-  } catch (e) {
-    return res.json(e.message);
+    res.status(201).send("The School was updated");
+  } catch (error) {
+    res.status(404).send({ msg: "The School could not be updated" });
   }
-}
-
+};
 
 // ===========================SOFTDELETE SCHOOL ====================================
 
-
 const softDeleteSchool = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
     const deleted = await schoolModel.delete({ _id: id });
-    res.status(200).send(deleted)
+    res.status(200).send(deleted);
   } catch (error) {
-    res.json(error.message)
+    res.json(error.message);
   }
 };
 

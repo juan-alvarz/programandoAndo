@@ -8,10 +8,6 @@ const getForos = async (req, res) => {
             populate: {
             path: "authorComment",
             select:'name',
-            // path: "answers",
-            // populate: {
-            //     path: "authorComment"
-            // } 
       }
     }).populate({
         path: "comments",
@@ -22,7 +18,7 @@ const getForos = async (req, res) => {
         select:'name',
     },
  }
-}).populate("idVideo")
+})
       res.status(200).json(data);
     } catch (err) {
       console.log(err);
@@ -51,12 +47,14 @@ const getForoById = async (req, res) => {
             select:'name',
         },
      }
-    }).populate("idVideo")
-        if (!notificationId) {
-          res.send({ message: `The foro with the: ${id} does not exist` });
-        } else {
-          res.status(200).send(notificationId);
-        }
+    })
+        // if (!notificationId) {
+        //   res.send({ message: `The foro with the: ${id} does not exist` });
+        // } else {
+        //   res.status(200).send(notificationId);
+        // }
+        console.log(notificationId)
+        res.status(200).send(notificationId);
       }
     } catch (error) {
       handleHttpError(res, "ERROR_GET_FORO");
@@ -75,32 +73,36 @@ const createForo = async (req, res) => {
       res.send({ msg: "The Foro Could not be created" });
     }
   };
-  /* 
-  {
-    "authorComment": "63127d65452e091676932e21",
-    "content": "asdfsafsafasfasdfsa"
-  }
-  */
+  
 const updateForo = async (req, res) => {
     const { id } = req.params;
-    const {commentId, ...body} = req.body;
+    const body = req.body;
     try {
-      const foro = await foroModel.findById(id) 
-      if(commentId) {
-        const data = foro.comments.filter(x => x._id.toString() === commentId)
-        data[0]['answers'] = data[0]['answers'].concat(body);
-        foro.save();
-        return res.status(201).json('answere was update')
+      const actualizado = await foroModel.updateOne({ _id: id }, body).populate(
+        { path: "comments",
+            populate: {
+            path: "authorComment",
+            select:'name',
       }
-      foro.comments = foro.comments.concat(body);
-      foro.save()
-      return res.status(201).send("Foro updated");
-    } catch (error) {
-      res.status(404).json(error.message);
+    }).populate({
+        path: "comments",
+        populate: {
+            path: "answers",
+        populate: {
+        path: "authorComment",
+        select:'name',
+        }
     }
-  };
+});
+if (!actualizado.modifiedCount) {
+  res.status(422).send("Fail in te query");
+} 
+  res.status(200).send("The Foro was updated");
+    } catch (error) {
+      res.status(404).send({ msg: "Foro not updated" });
+    }
+};
   
-
   const softDeleteForo = async (req, res) => {
     const { id } = req.params;
     try {
