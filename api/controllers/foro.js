@@ -54,7 +54,7 @@ const getForoById = async (req, res) => {
         //   res.status(200).send(notificationId);
         // }
         console.log(notificationId)
-        res.status(200).send(notificationId);
+        return res.status(200).send(notificationId);
       }
     } catch (error) {
       handleHttpError(res, "ERROR_GET_FORO");
