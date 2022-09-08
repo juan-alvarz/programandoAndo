@@ -65,12 +65,12 @@ const createNotification = async (req, res) => {
         title,
         description,
       });
-      res.send(creado);
+      return res.json(creado);
     } else {
-      res.send({ msg: "The notification already exist" });
+      return res.send({ msg: "The notification already exist" });
     }
-  } catch (error) {
-    res.send({ msg: "The notification already exist, try with other name" });
+  } catch (e) {
+    return res.json(e.message);
   }
 };
 
