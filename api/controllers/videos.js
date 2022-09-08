@@ -98,7 +98,7 @@ const softDeleteVideo = async (req, res, next) => {
 const restoreVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await Video.restore({ _id: id }).populate('foro');
+    const data = await Video.restore({ _id: id });
     return res.json(data);
   } catch (e) {
     return res.json(e.message);

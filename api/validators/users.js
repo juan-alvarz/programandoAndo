@@ -31,6 +31,18 @@ const validatorCreateUser = [
 const validatorLoginUser = [
   check("email").exists().notEmpty().isEmail(),
   check("password").exists().notEmpty().isLength({ min: 8, max: 16 }),
+
+  (req, res, next) => {
+    return validateResults(req, res, next);
+  },
+];
+
+const validatorGoogleLogin = [
+  check("email").exists().notEmpty().isEmail(),
+
+  (req, res, next) => {
+    return validateResults(req, res, next);
+  },
 ];
 
 const validatorGetUsers = [
@@ -40,4 +52,9 @@ const validatorGetUsers = [
   },
 ];
 
-module.exports = { validatorCreateUser, validatorGetUsers, validatorLoginUser };
+module.exports = {
+  validatorCreateUser,
+  validatorGetUsers,
+  validatorLoginUser,
+  validatorGoogleLogin,
+};

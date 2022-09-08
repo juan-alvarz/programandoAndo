@@ -11,7 +11,7 @@ const NotificationsSchema = new Schema(
     description: {
       type: String,
     },
-    expireAt: { type: Date,  expires: 432000, default: Date.now }
+    expireAt: { type: Date, expires: 432000, default: Date.now },
   },
   {
     timestamps: true,
