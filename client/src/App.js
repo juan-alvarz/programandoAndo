@@ -58,6 +58,7 @@ function App() {
 
           <Route path="*" element={<Error404 />} />
           <Route path="/favorites" element={<Favorites></Favorites>} />
+          <Route path="/confirm/:confirmationCode" element={<Welcome />}/>
         </Routes>
       </div>
     </BrowserRouter>

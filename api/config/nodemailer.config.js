@@ -39,15 +39,14 @@ const sendChangePasswordEmail = (name, email, changePasswordCode) => {
         <p>You have requested a password change for the email ${email},If you have not requested this password change, please contact support </p>
         <a href=http://localhost:3000/changepass/${changePasswordCode}> Click here</a>
         </div>`,
-    })
-    .catch((err) => console.log(err));
-};
+  }).catch(err => console.log(err));
+}
 
-transport
-  .verify()
-  .then(() => {
-    console.log("Ready for send emails");
-  })
-  .catch((e) => console.log(e));
 
-module.exports = { sendConfirmationEmail, sendChangePasswordEmail };
+transport.verify().then(() =>{
+  console.log('Ready for send emails')
+}).catch(e => console.log(e))
+
+
+
+module.exports = {sendConfirmationEmail,sendChangePasswordEmail}

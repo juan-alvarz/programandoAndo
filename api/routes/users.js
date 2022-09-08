@@ -10,7 +10,11 @@ const {
   userLogin,
   googleUserLogin,
   verifyUser,
+<<<<<<< HEAD
   submitChangePass,
+=======
+  submitChangePass
+>>>>>>> ac3cf82 (verified email and change password email)
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -27,9 +31,15 @@ router.get("/", getAllUsers);
 
 router.get("/:id", validatorGetUsers, getUserById);
 
+<<<<<<< HEAD
 router.get("/auth/confirm/:confirmationCode", verifyUser);
 
 router.get("/auth/confirm/:changePassCode", submitChangePass);
+=======
+router.get('/auth/confirm/:confirmationCode',verifyUser)
+
+router.get('/auth/confirm/:changePassCode',submitChangePass)
+>>>>>>> ac3cf82 (verified email and change password email)
 
 router.post("/register", validatorCreateUser, createUser);
 
@@ -41,6 +51,7 @@ router.post(
   validatorGoogleLogin,
   googleUserLogin
 );
+
 
 router.put("/:id", validatorGetUsers, updateUser);
 

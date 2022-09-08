@@ -189,12 +189,10 @@ export const googleUserLogin = (payload) => async (dispatch) => {
   return response;
 };
 
-/*export const login = (payload) => async (dispatch) => {
-  const response = await axios.post("http://localhost:3001/api/user", payload);
-  dispatch(loginUser(response.data))
-
+export const verifyUser = async (code) => {
+  const response = await axios.get(`http://localhost:3001/api/users/ath/confirm/${code}`);
+  return response.data;
 };
-*/
 
 // ============================ Videos ============================
 export const getAllVideos = () => (dispatch) => {
