@@ -1,10 +1,10 @@
 #archivos a ignorar
-node_modules/
+/node_modules/
 
 #variables de entorno
-.env
+/.env
 
 #paquetes instalados
 
 #credentials paypal
-api/config/paypalcredentials.js
+/api/config/paypalcredentials.js
