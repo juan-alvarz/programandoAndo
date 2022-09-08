@@ -1,2 +1,9 @@
 
 api/.env
+
+
+api/package-lock.json
+
+api/config/account_transport.json
+
+api/config/paypalcredentials.js
