@@ -78,31 +78,20 @@ const createForo = async (req, res) => {
 
 const updateForo = async (req, res) => {
   const { id } = req.params;
-  const body = req.body;
+  const {commentId, ...body} = req.body;
   try {
-    const actualizado = await foroModel.updateOne({ _id: id }, body).populate(
-      {
-        path: "comments",
-        populate: {
-          path: "authorComment",
-          select: 'name',
-        }
-      }).populate({
-        path: "comments",
-        populate: {
-          path: "answers",
-          populate: {
-            path: "authorComment",
-            select: 'name',
-          }
-        }
-      });
-    if (!actualizado.modifiedCount) {
-      res.status(422).send("Fail in te query");
+    const foro = await foroModel.findById(id) 
+    if(commentId) {
+      const data = foro.comments.filter(x => x._id.toString() === commentId)
+      data[0]['answers'] = data[0]['answers'].concat(body);
+      foro.save();
+      return res.status(201).json('answere was update')
     }
-    res.status(200).send("The Foro was updated");
+    foro.comments = foro.comments.concat(body);
+    foro.save()
+    return res.status(201).send("Foro updated");
   } catch (error) {
-    res.status(404).send({ msg: "Foro not updated" });
+    res.status(404).json(error.message);
   }
 };
 
