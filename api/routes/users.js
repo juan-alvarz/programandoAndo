@@ -6,9 +6,20 @@ const {
   getUserById,
   updateUser,
   softDeleteUser,
-  restoreUser
+  restoreUser,
+  userLogin,
+  googleUserLogin,
+  verifyUser,
+  submitChangePass,
 } = require("../controllers/users");
-const { validatorCreateUser, validatorGetUsers } = require("../validators/users");
+const {
+  validatorCreateUser,
+  validatorGetUsers,
+  validatorLoginUser,
+  validatorGoogleLogin,
+} = require("../validators/users");
+
+const { googleMiddleware } = require("../middleware/googleSession");
 
 module.exports = router;
 
@@ -16,12 +27,23 @@ router.get("/", getAllUsers);
 
 router.get("/:id", validatorGetUsers, getUserById);
 
-router.post("/", validatorCreateUser, createUser);
+router.get("/auth/confirm/:confirmationCode", verifyUser);
 
-router.put('/:id', validatorGetUsers, updateUser);
+router.get("/auth/confirm/:changePassCode", submitChangePass);
 
-router.patch('/:id', validatorGetUsers, restoreUser);
+router.post("/register", validatorCreateUser, createUser);
 
-router.delete('/:id', validatorGetUsers, softDeleteUser)
+router.post("/login", validatorLoginUser, userLogin);
 
+router.post(
+  "/google_login",
+  googleMiddleware,
+  validatorGoogleLogin,
+  googleUserLogin
+);
 
+router.put("/:id", validatorGetUsers, updateUser);
+
+router.patch("/:id", validatorGetUsers, restoreUser);
+
+router.delete("/:id", validatorGetUsers, softDeleteUser);
