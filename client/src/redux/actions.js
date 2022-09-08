@@ -87,14 +87,6 @@ export const favorite = (course) => (dispatch) => {
   dispatch(favoriteCourse(course));
 };
 
-export const updateUser = (payload, id) => async (dispatch) => {
-  const response = await axios.put(
-    `http://localhost:3001/api/users/${id}`,
-    payload
-  );
-  return response;
-};
-
 export const createsCourse = (payload) => async (dispatch) => {
   const response = await axios.post(
     "http://localhost:3001/api/courses",
@@ -159,6 +151,14 @@ export const getUser = (id) => (dispatch) => {
 export const createsUser = (payload) => async (dispatch) => {
   const response = await axios.post(
     "http://localhost:3001/api/users/register",
+    payload
+  );
+  return response;
+};
+
+export const updateUser = (payload, id) => async (dispatch) => {
+  const response = await axios.post(
+    `http://localhost:3001/api/users/${id}`,
     payload
   );
   return response;
