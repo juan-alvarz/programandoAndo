@@ -72,7 +72,11 @@ export default function Video() {
                 </p>
               </div>
               <p className="flex justify-end">
-                <a href={video.profile} className="text-blue-500">
+                <a
+                  href={video.profile}
+                  target="_blank"
+                  className="text-blue-500"
+                >
                   {video.profile}
                 </a>
               </p>

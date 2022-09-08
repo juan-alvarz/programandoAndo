@@ -25,7 +25,7 @@ function CoursesPA() {
             action=""
           >
             <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
-              Create Courses
+              Create School
             </h2>
             <label className="text-gray-700 font-bold py-2" for="">
               Name
@@ -43,7 +43,7 @@ function CoursesPA() {
               placeholder="Description"
             />
             <label className="text-gray-700 font-bold py-2" for="">
-              Image
+              Image school
             </label>
             <input
               className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
@@ -51,7 +51,7 @@ function CoursesPA() {
               placeholder="Image"
             />
             <label className="text-gray-700 font-bold py-2" for="">
-              Videos
+              courses
             </label>
             <Select
               options={optionList}

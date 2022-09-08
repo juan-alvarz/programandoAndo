@@ -43,7 +43,7 @@ function CoursesPA() {
               placeholder="Description"
             />
             <label className="text-gray-700 font-bold py-2" for="">
-              Image
+              Image course
             </label>
             <input
               className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
