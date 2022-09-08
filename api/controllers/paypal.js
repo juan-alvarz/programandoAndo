@@ -8,7 +8,7 @@ const auth = { user: CLIENT, pass: SECRET };
 const PORT = 3001;
 
 //Crea la orden de compra, se debe hacer un post con un body, EJ: ({"value":"45"})
-const createPayment = (req, res) => {
+const createPayment = async (req, res) => {
   const { value } = req.body;
   const body = {
     intent: "CAPTURE",
@@ -29,7 +29,7 @@ const createPayment = (req, res) => {
       cancel_url: `http://localhost:${PORT}/api/paypal/cancel-payment`,
     },
   };
-  const data = request.post(
+  request.post(
     `${PAYPAL_API}/v2/checkout/orders`,
     {
       auth,
@@ -37,13 +37,10 @@ const createPayment = (req, res) => {
       json: true,
     },
     (err, response) => {
-      //console.log(response.body);
       const link = response.body.links.filter((e) => e.rel === "approve");
       const linkToPay = link[0].href;
       //devuelve el 'href' para que el usuario pague
       console.log(linkToPay);
-      //console.log(linkToPay);
-      //return res.status(200).json({ data: response.body });
       return res.status(200).json({ linkPay: linkToPay });
     }
   );
@@ -63,13 +60,11 @@ const executePayment = (req, res) => {
       if (err) {
         return res.send("something bad happend");
       }
-      //const name = response.body.data.payment_source.name.given_name;
-      //const lastname = response.body.data.payment_source.name.surname;
 
       return res
         .status(200)
         .send(`Thank you so much for contribute with open knowledge!`);
-      //return res.json({ data: response.body.data });
+      return res.json({ data: response.body.data });
     }
   );
 };
