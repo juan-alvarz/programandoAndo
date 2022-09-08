@@ -7,24 +7,20 @@ const ForoSchema = new Schema(
   {
     comments:  [
         {
-            authorComment: [{
+            authorComment: {
               type: Schema.Types.ObjectId,
               ref: 'User',
-            }], 
+            }, 
             content: String,
             answers: [{ 
-              authorComment: [{
+              authorComment: {
                 type: Schema.Types.ObjectId,
                 ref: 'User',
-              }], 
+              }, 
               content: String,
             }]
         }
     ],
-    idVideo: {         
-        type: Schema.Types.ObjectId,
-        ref: 'Video'
-    },
   },
   {
     timestamps: true,

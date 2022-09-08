@@ -8,7 +8,8 @@ const {
     getForos,
 } = require("../controllers/foro");
 const {
-    validatorGetorCreateForo
+    validatorGetorCreateForo,
+    validatorGetForoById
 } = require("../validators/foros");
 
 const router = express.Router();
@@ -17,14 +18,14 @@ const router = express.Router();
 
 router.get("/", getForos);
 
-router.get("/:id", validatorGetorCreateForo,  getForoById);
+router.get("/:id", validatorGetForoById, getForoById);
 
 router.post("/", validatorGetorCreateForo, createForo);
 
 router.put("/:id", updateForo);
 
-router.delete("/:id", validatorGetorCreateForo, softDeleteForo);
+router.delete("/:id", softDeleteForo);
 
-router.patch("/:id", validatorGetorCreateForo, restoreForo);
+router.patch("/:id", restoreForo);
 
 module.exports = router;

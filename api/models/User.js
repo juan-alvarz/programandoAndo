@@ -26,18 +26,59 @@ const UserSchema = new Schema(
         ref: "Foro",
       },
     ],
-    // favorites: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Course",
-    //   },
-    // ],
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
     contributor: {
-      type: Boolean,
-      default: false,
+      type: Number,
+      default: 0,
     },
     banned: { type: Boolean, default: false },
-    isAdmin: { type: Boolean, default: false },
+    role: {
+      type: String,
+      enum: ["owner", "admin", "user"],
+      default: "user",
+    },
+    userName: {
+      type: String,
+      unique: true,
+    },
+    ownPath: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "School",
+      },
+    ],
+    language: {
+      type: String,
+      enum: ["english", "spanish"],
+      default: "english",
+    },
+    country: {
+      type: String,
+    },
+    birthday: {
+      type: Date,
+    },
+    image: {
+      type: String,
+    },
+    scoring: {
+      type: Schema.Types.ObjectId,
+      ref: "Courses",
+    },
+    status: {
+      type: String,
+      enum: ["pending", "active"],
+      default: "pending",
+    },
+    confirmationCode: {
+      type: String,
+      unique: true,
+    },
   },
   {
     timestamps: true,

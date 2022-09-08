@@ -7,7 +7,7 @@ const getVideos = async (req, res) => {
     if (name) {
       const data = await Video.find({
         name: { $regex: ".*" + name + ".*", $options: "<i>" },
-      }).populate('foro');
+      });
       if (!data) {
         res.status(404);
         res.json({ message: "Video not found" });
@@ -25,7 +25,8 @@ const getVideo = async (req, res) => {
   try {
     const { id } = req.params;
     if (id) {
-      const videoId = await Video.findById(id).populate('foro');
+      const videoId = await Video.findById(id)
+      console.log(videoId.foro)
       if (!videoId) {
         return res.status(404).json({ message: "inexistent id" });
       }
@@ -39,7 +40,7 @@ const getVideo = async (req, res) => {
 
 const createVideo = async (req, res) => {
   try {
-    const myforo = await foroModel.create()
+    const myforo = await foroModel.create({comments: []})
     console.log(myforo)
     const {
       name,
@@ -50,6 +51,7 @@ const createVideo = async (req, res) => {
       image,
       duration,
       difficult,
+      foro
     } = req.body;
     const newVideo = new Video({
       name,
@@ -60,7 +62,7 @@ const createVideo = async (req, res) => {
       image,
       duration,
       difficult,
-      myforo: myforo._id
+      foro: myforo._id
     });
     await newVideo.save();
     return res.status(200).json(newVideo);
@@ -72,10 +74,6 @@ const createVideo = async (req, res) => {
 const deleteVideo = async (req, res) => {
   try {
     const { id } = req.params;
-    // const videoToDelete = await Video.findById(id);
-    // if (!videoToDelete) {
-    //   return res.status(404).json({ message: "inexistent id" })
-    // }
     const data = await Video.deleteOne({ _id: id });
     return res.status(200).json({ message: "deleted succesfully" });
   } catch (error) {
@@ -108,14 +106,14 @@ const restoreVideo = async (req, res, next) => {
 const updateVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const body = req.body;
-    const data = await Video.updateOne({ _id: id }, body);
+    const {body }= req.body;
+    const data = await Video.updateOne({ _id: id }, body)
     if (!data.modifiedCount) {
       res.status(422);
       return res.send("Fail in the query");
     }
     res.status(201);
-    return res.send("The user was updated");
+    return res.send("The video was updated");
   } catch (e) {
     return res.json(e.message);
   }

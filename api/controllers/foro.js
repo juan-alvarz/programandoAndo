@@ -8,10 +8,6 @@ const getForos = async (req, res) => {
             populate: {
             path: "authorComment",
             select:'name',
-            // path: "answers",
-            // populate: {
-            //     path: "authorComment"
-            // } 
       }
     }).populate({
         path: "comments",
@@ -22,7 +18,7 @@ const getForos = async (req, res) => {
         select:'name',
     },
  }
-}).populate("idVideo")
+})
       res.status(200).json(data);
     } catch (err) {
       console.log(err);
@@ -51,7 +47,7 @@ const getForoById = async (req, res) => {
             select:'name',
         },
      }
-    }).populate("idVideo")
+    })
         if (!notificationId) {
           res.send({ message: `The foro with the: ${id} does not exist` });
         } else {
@@ -80,17 +76,11 @@ const updateForo = async (req, res) => {
     const { id } = req.params;
     const body = req.body;
     try {
-      const actualizado = await foroModel.updateOne({ _id: id }, body);
-      const foro = await foroModel.findOne({_id: id})
-      foro.populate(
+      const actualizado = await foroModel.updateOne({ _id: id }, body).populate(
         { path: "comments",
             populate: {
             path: "authorComment",
             select:'name',
-            // path: "answers",
-            // populate: {
-            //     path: "authorComment"
-            // } 
       }
     }).populate({
         path: "comments",
@@ -102,13 +92,15 @@ const updateForo = async (req, res) => {
         }
     }
 });
-      res.status(201).send("Foro updated");
+if (!actualizado.modifiedCount) {
+  res.status(422).send("Fail in te query");
+} 
+  res.status(200).send("The Foro was updated");
     } catch (error) {
       res.status(404).send({ msg: "Foro not updated" });
     }
-  };
+};
   
-
   const softDeleteForo = async (req, res) => {
     const { id } = req.params;
     try {
