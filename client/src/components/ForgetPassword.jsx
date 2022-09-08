@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-
 import { useNavigate } from "react-router-dom";
 
 export default function ForgetPassword() {
