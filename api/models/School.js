@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 const mongooseDelete = require("mongoose-delete");
 
 const SchoolSchema = new Schema(
@@ -21,13 +21,14 @@ const SchoolSchema = new Schema(
       type: String,
     },
     isCustom: {
-      type: Boolean
+      type: Boolean,
+      default: false,
     },
     score: {
       type: mongoose.Decimal128,
-      get: v => new mongoose.Types.Decimal128((+v.toString()).toFixed(1)),
-      default: 0
-    }
+      get: (v) => new mongoose.Types.Decimal128((+v.toString()).toFixed(1)),
+      default: 0,
+    },
   },
   {
     timestamps: true,
