@@ -40,8 +40,8 @@ function App() {
           <Route path="/video/:idVideo/:idCourse" element={<Video />} />
           <Route path="/donators" element={<Donators />} />
           {/* Algunas rutas nuevas */}
-          <Route path="/loginUser" element={<Login />} />
-          <Route path="/createUser" element={<CreateUser />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<CreateUser />} />
 
           <Route path="/sidebar" element={<Sidebar />} />
           {/* <Route path="/panelAdmin" element={<PanelAdmin />} /> */}
