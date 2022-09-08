@@ -9,6 +9,8 @@ const {
   restoreUser,
   userLogin,
   googleUserLogin,
+  verifyUser,
+  submitChangePass,
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -24,6 +26,10 @@ module.exports = router;
 router.get("/", getAllUsers);
 
 router.get("/:id", validatorGetUsers, getUserById);
+
+router.get("/auth/confirm/:confirmationCode", verifyUser);
+
+router.get("/auth/confirm/:changePassCode", submitChangePass);
 
 router.post("/register", validatorCreateUser, createUser);
 

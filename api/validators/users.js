@@ -8,12 +8,6 @@ const validatorCreateUser = [
 
   check("password").exists().notEmpty().isLength({ min: 8, max: 16 }),
 
-  check("contributor").exists().notEmpty(),
-
-  check("banned").exists().notEmpty(),
-
-  check("role").exists().notEmpty(),
-
   (req, res, next) => {
     return validateResults(req, res, next);
   },
