@@ -21,8 +21,8 @@ const VideoSchema = new Schema(
     },
     difficult: {
       type: String,
-      enum: ["principiante", "intermedio", "avanzado"],
-      default: "principiante",
+      enum: ["beginner", "intermediate", "advanced"],
+      default: "beginner",
     },
     url: {
       type: String,
