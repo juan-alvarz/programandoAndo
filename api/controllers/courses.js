@@ -1,9 +1,10 @@
 const { courseModel, schoolModel, videoModel } = require("../models");
-const { handleHttpError } = require("../utils/handleError");
-const { durationCourse } = require("../utils/durationSort");
+const { handleHtppError } = require("../utils/handleError");
+const { durationCourse } = require("../utils/durationSort.js");
 // OBTENER LISTA DE CURSOS DE LA BASE DE DATOS
 const getCourses = async (req, res) => {
   const { name } = req.query;
+  const { user } = req; // para saber el user que esta consumiendo esta ruta
 
   const data = await courseModel.find({}).populate("videos");
   try {
@@ -19,9 +20,12 @@ const getCourses = async (req, res) => {
       }
     } else {
       res.status(200).send(data);
+      // res.status(200).send({ data, user }); // Saber que usuario ha entrado a la ruta
     }
-  } catch {
-    console.log(error);
+  } catch (e) {
+    console.log(e.message);
+    // res.status(404).send({ msg: e.message });
+    handleHtppError(res, e.message, 404);
   }
 };
 
@@ -41,7 +45,7 @@ const getCourseById = async (req, res) => {
       }
     }
   } catch (error) {
-    handleHttpError(res, "ERROR_GET_COURSE");
+    handleHtppError(res, "ERROR_GET_COURSE", 404);
   }
 };
 

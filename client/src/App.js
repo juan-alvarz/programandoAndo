@@ -23,6 +23,7 @@ import UsersPA from "./components/panelAdmin/UsersPA";
 import Administrator from "./components/panelAdmin/Administrator";
 import Baneos from "./components/panelAdmin/Baneos";
 import Loader from "./components/Loader";
+import { Favorites } from "./components/Favorites";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/baneos" element={<Baneos />} />
 
           <Route path="*" element={<Error404 />} />
+          <Route path="/favorites" element={<Favorites></Favorites>} />
         </Routes>
       </div>
     </BrowserRouter>
