@@ -76,7 +76,7 @@ let unicos = [...personasMapArr.values()];*/
                 dispatch(favorite(userActualizado.favorites))
                 setTimeout(function () {
                   dispatch(getUser(userActualizado._id))
-                }, 500);
+                },500);
                 
                 
               }}

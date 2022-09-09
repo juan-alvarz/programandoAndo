@@ -396,7 +396,7 @@ export default function AllCourses() {
                       dispatch(updateUser(userNuevo, userNuevo._id))
                   
                     
-                    
+                      setFavoritoAgregado(favoritoAgregado)
                     
 
 
@@ -408,7 +408,7 @@ export default function AllCourses() {
             </div>
           ))}
         </div>
-        <h2 className="text-green-300 bg-white">{favoritoAgregado}</h2>
+        <h2 className="bg-green-300 bg-gray-700">{favoritoAgregado}</h2>
         
 
         <Footer />
