@@ -24,6 +24,7 @@ import UsersPA from "./components/panelAdmin/UsersPA";
 import Administrator from "./components/panelAdmin/Administrator";
 import Baneos from "./components/panelAdmin/Baneos";
 import Loader from "./components/Loader";
+import Welcome from './components/Welcome'
 import { Favorites } from "./components/Favorites";
 
 function App() {
