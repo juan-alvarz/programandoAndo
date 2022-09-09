@@ -1,34 +1,30 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
-import { createsUser,googleUserLogin } from "../redux/actions";
+import { createsUser, googleUserLogin } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function Google() {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
-  const dispatch = useDispatch()
-  
-  const handleCallbackResponse =  async (response) => {
-    const token =response.credential
+  const dispatch = useDispatch();
+
+  const handleCallbackResponse = async (response) => {
+    const token = response.credential;
     // console.log(token)
     // console.log("Encoded JWT ID TOKEN: " + response.credential);
-    let userObject = jwt_decode(response.credential);    
-    
-    dispatch(googleUserLogin({token})).then(r => console.log(r))
-    
+    let userObject = jwt_decode(response.credential);
+
+    dispatch(googleUserLogin({ token })).then((r) => console.log(r));
+
     // console.log(userObject);
     setUser(userObject);
-    
 
     document.getElementById("googleSign").hidden = true;
   };
 
-
   console.log(user);
-
-  
 
   const handleSignOut = (event) => {
     setUser({});
@@ -59,11 +55,9 @@ export default function Google() {
         <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
       )}
       {user && (
-        
         <div>
           <img src={user.picture}></img>
           <h3>{user.name}</h3>
-          
         </div>
       )}
     </div>

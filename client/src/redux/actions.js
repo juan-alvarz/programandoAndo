@@ -87,6 +87,14 @@ export const favorite = (course) => (dispatch) => {
   dispatch(favoriteCourse(course));
 };
 
+export const updateUser = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/users/${id}`,
+    payload
+  );
+  return response;
+};
+
 export const createsCourse = (payload) => async (dispatch) => {
   const response = await axios.post(
     "http://localhost:3001/api/courses",
@@ -156,14 +164,6 @@ export const createsUser = (payload) => async (dispatch) => {
   return response;
 };
 
-export const updateUser = (payload, id) => async (dispatch) => {
-  const response = await axios.post(
-    `http://localhost:3001/api/users/${id}`,
-    payload
-  );
-  return response;
-};
-
 export const userLogin = (payload) => async (dispatch) => {
   const response = await axios
     .post("http://localhost:3001/api/users/login", payload)
@@ -190,7 +190,9 @@ export const googleUserLogin = (payload) => async (dispatch) => {
 };
 
 export const verifyUser = async (code) => {
-  const response = await axios.get(`http://localhost:3001/api/users/ath/confirm/${code}`);
+  const response = await axios.get(
+    `http://localhost:3001/api/users/ath/confirm/${code}`
+  );
   return response.data;
 };
 

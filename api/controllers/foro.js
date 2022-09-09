@@ -10,10 +10,6 @@ const getForos = async (req, res) => {
         populate: {
           path: "authorComment",
           select: "name",
-          // path: "answers",
-          // populate: {
-          //     path: "authorComment"
-          // }
         },
       })
       .populate({
@@ -25,8 +21,8 @@ const getForos = async (req, res) => {
             select: "name",
           },
         },
-      }); // .populate("idVideo")
-    res.status(200).json(data);
+      });
+    return res.status(200).json(data);
   } catch (err) {
     console.log(err);
     res.status(500).json({ success: false, msg: err.message });

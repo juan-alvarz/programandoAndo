@@ -11,6 +11,7 @@ const {
   googleUserLogin,
   verifyUser,
   submitChangePass,
+  successDonation,
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -42,9 +43,10 @@ router.post(
   googleUserLogin
 );
 
-
 router.put("/:id", validatorGetUsers, updateUser);
 
 router.patch("/:id", validatorGetUsers, restoreUser);
 
 router.delete("/:id", validatorGetUsers, softDeleteUser);
+
+router.post("/emailDonationSuccess/", successDonation);

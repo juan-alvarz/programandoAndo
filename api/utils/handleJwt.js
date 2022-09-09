@@ -4,7 +4,7 @@ const JWT_EMAIL_SECRET = process.env.SECRET;
 
 const tokenSign = async (user) => {
   const sign = jwt.sign(
-    {      
+    {
       _id: user._id,
       role: user.role,
     },
@@ -14,18 +14,17 @@ const tokenSign = async (user) => {
     }
   );
   return sign;
-};  
+};
 
 const verifyToken = async (tokenJwt) => {
   try {
     jwt.verify(tokenJwt, JWT_SECRET);
-    console.log("Token is real")
-    return
+    console.log("Token is real");
+    return;
   } catch (error) {
     console.log(error);
   }
 };
-
 
 const verifyEmailToken = async (email) => {
   const sign = jwt.sign(

@@ -1,44 +1,59 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllVideos } from "../redux/actions";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 function Donators() {
-  // const { videos } = useSelector((state) => state.programandoando);
-  // const dispatch = useDispatch();
-  // console.log(videos);
+  const [amount, setAmount] = useState(0); // el monto a donar
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user.user);
 
-  // useEffect(() => {
-  //   dispatch(getAllVideos());
-  // }, [dispatch]);
+  // window.localStorage.removeItem
+  //
+  //actualiza el monto cada que cambia
+  const handleChange = (e) => {
+    setAmount(e.target.value);
+    console.log(amount);
+  };
+
+  //manda lo que se tiene en el input
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const link = await axios
+      .get(`http://localhost:3001/api/paypal/create-payment/${amount}`)
+      .then((r) => r.data);
+    //console.log(link);
+    window.localStorage.setItem("amount", amount);
+    setAmount(0);
+    Swal.fire({
+      title: "Order create",
+      text: "Now you can continue with the payment in PayPal",
+      icon: "success",
+      confirmButtonText: "Pay Now",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = link.linkPay;
+      }
+    });
+  }
 
   return (
     <div>
-      <div className="w-full h-full" style={{ backgroundColor: "#C9C4B8" }}>
-        <div className="h-screen">
-          <form
-            className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
-            action=""
-          >
-            <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
-              Donation
-            </h2>
-            <label className="text-gray-700 font-bold py-2" for=""></label>
-            <input
-              className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
-              type="number"
-              placeholder="Donation $ 0.000"
-            />
-
-            <div className="flex justify-center items-center my-4 mt-10">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 ">
-                <a href="#" target="_blank">
-                  Done
-                </a>
-              </button>
-            </div>
-          </form>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <h2>Donation</h2>
+          <label>Amount: </label>
+          <input
+            type="number"
+            value={amount}
+            onChange={(e) => handleChange(e)}
+            min="0"
+          />
         </div>
-      </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
     </div>
   );
 }
