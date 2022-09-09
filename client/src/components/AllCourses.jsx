@@ -391,6 +391,7 @@ export default function AllCourses() {
                   <img onClick={()=>(
                       
                       userNuevo.favorites.push(course),
+                      
                      dispatch(updateUser(userNuevo,userNuevo._id))
                       
                     
