@@ -71,7 +71,7 @@ export const slice = createSlice({
       state.course = action.payload;
     },
     favoriteCourse: (state, action) => {
-      state.favoritesUser.push(action.payload);
+      state.favoritesUser = action.payload;
     },
     createCourse: (state) => {
       return { ...state };
