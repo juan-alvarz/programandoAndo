@@ -391,7 +391,7 @@ export default function CreateUser() {
             Already have an account?
             <span>
               <span> </span>
-              <a className="text-blue-600 hover:underline" href="#">
+              <a className="text-blue-600 hover:underline" href="/login">
                 Log in
               </a>
             </span>

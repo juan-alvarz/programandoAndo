@@ -43,6 +43,13 @@ const sendChangePasswordEmail = (name, email, changePasswordCode) => {
     .catch((err) => console.log(err));
 };
 
+transport
+  .verify()
+  .then(() => {
+    console.log("Ready for send emails");
+  })
+  .catch((e) => console.log(e));
+
 const sendEmailDonation = (name, email, amount) => {
   console.log("Check");
   transport

@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import data from "../utils/data";
 import Footer from "./Footer";
 import SearchBar from "./SearchBar";
-import { getVideoById, clearFilter } from "../redux/actions";
+import { getVideoById, clearFilter,getAllCourses } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
@@ -17,6 +17,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(getVideoById(idVideo));
+    dispatch(getAllCourses())
   }, [dispatch]);
   return (
     <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>

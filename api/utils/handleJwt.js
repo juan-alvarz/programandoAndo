@@ -15,8 +15,6 @@ const tokenSign = async (user) => {
   );
   return sign;
 };
-const uwuToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE5YWI4MWRkM2JlZDFhYzZhNjA1ZTkiLCJyb2xlIjoidXNlciIsImlhdCI6MTY2MjYyNjg4MCwiZXhwIjoxNjYyNjcwMDgwfQ.fsbWMOetmyBPPDP7dd-YQfKI9BqQtu5Kk1bh9HWBRrY";
 
 const verifyToken = async (tokenJwt) => {
   try {
@@ -27,7 +25,6 @@ const verifyToken = async (tokenJwt) => {
     console.log(error);
   }
 };
-verifyToken(uwuToken);
 
 const verifyEmailToken = async (email) => {
   const sign = jwt.sign(
