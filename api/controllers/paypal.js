@@ -9,7 +9,7 @@ const PORT = 3001;
 
 //Crea la orden de compra, se debe hacer un post con un body, EJ: ({"value":"45"})
 const createPayment = async (req, res) => {
-  const { value } = req.body;
+  const { value } = req.params;
   const body = {
     intent: "CAPTURE",
     purchase_units: [
