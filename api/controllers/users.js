@@ -41,8 +41,7 @@ const getAllUsers = async (req, res, next) => {
     });
     return res.json(users);
   } catch (e) {
-    res.status(e.response.status);
-    return res.json(e.message);
+    return res.send(e.message);
   }
 };
 
@@ -63,8 +62,7 @@ const getUserById = async (req, res, next) => {
     }
     return res.json(user);
   } catch (e) {
-    res.status(e.response.status);
-    return res.json(e.message);
+    return res.send(e.message);
   }
 };
 
