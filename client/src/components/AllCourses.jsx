@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCourses,getUser } from "../redux/actions";
+import { getAllCourses, getUser } from "../redux/actions";
 
 import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
@@ -25,14 +25,14 @@ import { updateUser } from "../redux/actions";
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
-  
-  
+
+
 
   //Usuario registrado
-  let userLocal=window.localStorage.getItem("user")
-  let userObj=JSON.parse(userLocal)
-  
-  
+  let userLocal = window.localStorage.getItem("user")
+  let userObj = JSON.parse(userLocal)
+  const [favoritoAgregado, setFavoritoAgregado] = useState("")
+
 
   // =============== Paginado ==========================
   const [cursoActual, setCursoActual] = useState(1);
@@ -44,21 +44,21 @@ export default function AllCourses() {
 
   useEffect(() => {
     dispatch(getAllCourses());
-    if(userObj){
+    if (userObj) {
 
       dispatch(getUser(userObj.user._id))
     }
   }, [dispatch, coursesPowFilter]);
 
-   
-  let { user} = useSelector(state => state.programandoando)
-  
-  let userNuevo = JSON.parse(JSON.stringify(user?user:null))
 
-  
-  
-  
-  
+  let { user } = useSelector(state => state.programandoando)
+
+  let userNuevo = JSON.parse(JSON.stringify(user ? user : null))
+
+
+
+
+
   // //===================================================
   let finallyOneDuration = (time) => {
     let hours = Math.floor(time / 3600);
@@ -78,7 +78,7 @@ export default function AllCourses() {
   /*==================course not found page========================== */
   if (courses.msg === "error") {
     return (
-      <div style={{backgroundColor: 'rgb(198, 198, 198)'}}>
+      <div style={{ backgroundColor: 'rgb(198, 198, 198)' }}>
         <div>
           <NavBar />
         </div>
@@ -86,7 +86,7 @@ export default function AllCourses() {
           style={{
             display: "flex",
             justifyContent: "center",
-            padding: "10px",  
+            padding: "10px",
           }}
         >
           <SearchBar path={path} setPagina={setCursoActual} />
@@ -150,22 +150,22 @@ export default function AllCourses() {
         }
       };
       let secondsDuration = temporaly.map((e) => toSeconds(e));
-      
+
       let oneDuration = secondsDuration.reduce((sum, a) => sum + a, 0);
-      
+
 
       let object = {
         ...course,
         duration: oneDuration,
       };
-      
+
       return object;
     };
 
-    
+
     let coursesPow = courses.map((e) => durationCourse(e));
-    
-    
+
+
 
     //=========== lógica del duration ==========
 
@@ -217,7 +217,7 @@ export default function AllCourses() {
     };
     // ==============================================
     return (
-      <div style={{backgroundColor: 'rgb(198, 198, 198)'}}>
+      <div style={{ backgroundColor: 'rgb(198, 198, 198)' }}>
         <NavBar />
         <NavLink to="/favorites">Favorites</NavLink>
 
@@ -243,7 +243,7 @@ export default function AllCourses() {
                   className="sr-only peer"
                   onChange={(e) => handleFilterAlph(e)}
                 />
-                <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                <div style={{ backgroundColor: 'rgb(17, 52, 82)' }} className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
               </label>
               <span style={{ paddingRight: "10px", paddingLeft: "10px" }}>
                 Z-A
@@ -254,7 +254,7 @@ export default function AllCourses() {
             <div>
               <select
                 id="countries"
-                style={{width: 130}}
+                style={{ width: 130 }}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% py-1"
                 onChange={(e) => handleFilterDuration(e)}
               >
@@ -287,7 +287,7 @@ export default function AllCourses() {
         {/* Cards */}
         <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-8">
           {cursosActuales.map((course, index) => (
-            
+
             <div
               key={index}
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
@@ -323,7 +323,7 @@ export default function AllCourses() {
 
               <div>
                 <div>
-                  <h5 
+                  <h5
                     style={{
                       fontSize: 20,
                       display: "flex",
@@ -336,9 +336,9 @@ export default function AllCourses() {
                     className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                     {course.name}
                   </h5>
-                  
+
                 </div>
-                <p 
+                <p
                   style={{
                     fontSize: 15,
                     display: "flex",
@@ -353,31 +353,32 @@ export default function AllCourses() {
                   className="mb-3 font-normal text-gray-700">
                   {course.description}
                 </p>
-                <span 
-                    style={{
-                      fontSize: 15,
-                      display: "flex",
-                      color: "rgb(201, 196, 184)",
-                      justifyContent: "center",
-                      paddingTop: 10,
-                      paddingBottom: 20,
-                      paddingLeft: 35,
-                      paddingRight: 35,
-                      textAlign: "center"
-                    }}
-                  >
-                    <strong>Time Inversion: </strong>
-                    {finallyOneDuration(course.duration)}
-                  </span>
+                <span
+                  style={{
+                    fontSize: 15,
+                    display: "flex",
+                    color: "rgb(201, 196, 184)",
+                    justifyContent: "center",
+                    paddingTop: 10,
+                    paddingBottom: 20,
+                    paddingLeft: 35,
+                    paddingRight: 35,
+                    textAlign: "center"
+                  }}
+                >
+                  <strong>Time Inversion: </strong>
+                  {finallyOneDuration(course.duration)}
+                </span>
                 <NavLink
                   to={`/course/${course._id}`}
-                  style={{ 
-                    color: "white", 
+                  style={{
+                    color: "white",
                     display: "flex",
                     justifyContent: "center",
-                    alignContent: "center",}}
+                    alignContent: "center",
+                  }}
                 >
-                  <button 
+                  <button
                     style={{
                       backgroundColor: "rgb(17, 52, 82)",
                       color: "rgb(201, 196, 184)",
@@ -386,21 +387,29 @@ export default function AllCourses() {
                     Read more
                   </button>
                 </NavLink>
-                  <img onClick={()=>(
-                      
-                      userNuevo.favorites.push(course),
-                      
-                     dispatch(updateUser(userNuevo,userNuevo._id))
-                      
+                <img onClick={() => {
+                    
+                    
+
+                      userNuevo.favorites.push(course)
+    
+                      dispatch(updateUser(userNuevo, userNuevo._id))
+                  
                     
                     
                     
-                    
-                    )} src={fav}></img>
+
+
+
+
+                }} src={fav}></img>
+
               </div>
             </div>
           ))}
         </div>
+        <h2 className="text-green-300 bg-white">{favoritoAgregado}</h2>
+        
 
         <Footer />
       </div>

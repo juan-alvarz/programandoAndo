@@ -28,18 +28,32 @@ export const Favorites = () => {
     
   }, [dispatch]);
   const { user } = useSelector(state => state.programandoando)
-  //const {favoritesUser}= useSelector(state => state.programandoando)
+  dispatch(favorite(user.favorites))
+  const {favoritesUser}= useSelector(state => state.programandoando)
   let userActualizado = JSON.parse(JSON.stringify(user?user:null))
-  //console.log(favoritesUser)
+  console.log(favoritesUser)
   
+  let favoritos=userActualizado.favorites.map(cursos =>{
+    return [JSON.stringify(cursos),cursos]
+  })
+ let favoritosMap= new Map(favoritos)
 
+ let favoritosUnicos=[...favoritosMap.values()]
+
+
+  /*let personasMap = personas.map(persona => {
+    return [JSON.stringify(persona), persona]
+});
+let personasMapArr = new Map(personasMap); // Pares de clave y valor
+
+let unicos = [...personasMapArr.values()];*/
 
 
   return(
     <div>
        <NavBar></NavBar>
        {
-         Object.entries(userActualizado).length === 0 ? <span>CARGANDO</span>  :userActualizado.favorites.map(elemento => {
+         Object.entries(userActualizado).length === 0 ? <span>CARGANDO</span>  :favoritosUnicos.map(elemento => {
           
           return (
             <div key={elemento._id} className='grid grid-cols-3 gap-4 content-start'>
@@ -59,10 +73,11 @@ export const Favorites = () => {
                 userActualizado.favorites=filteredfavorites
                 
                 dispatch(updateUser(userActualizado,userActualizado._id))
-                
+                dispatch(favorite(userActualizado.favorites))
                 setTimeout(function () {
                   dispatch(getUser(userActualizado._id))
-                }, 400);
+                }, 500);
+                
                 
               }}
             >X</button>
