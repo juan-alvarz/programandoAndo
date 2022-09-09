@@ -55,9 +55,7 @@ export default function AllCourses() {
   
   let userNuevo = JSON.parse(JSON.stringify(user?user:null))
 
-  console.log(user)
   
-  console.log(userNuevo)
   
   
   
