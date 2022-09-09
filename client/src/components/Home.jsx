@@ -33,7 +33,7 @@ function Home() {
                 class="text-xl sm:text-3xl font-bold leading-tight mb-3 capitalize "
               >
                 {" "}
-                THE ONLY THING YOU NEED TO DO IS TO MAKE THE DECISION TO START
+                THE ONLY THING YOU NEED TO DO IS TO TAKE THE DECISION TO START
                 STUDYING. THE WAY IS GIVEN TO YOU BY US{" "}
               </h1>
               <br />
