@@ -342,6 +342,7 @@ export default function AllCourses() {
                 >
                   {course.description}
                 </p>
+
                 <span
                   style={{
                     fontSize: 15,
@@ -358,25 +359,28 @@ export default function AllCourses() {
                   <strong>Time Inversion: </strong>
                   {finallyOneDuration(course.duration)}
                 </span>
-                <NavLink
-                  to={`/course/${course._id}`}
+                <div
                   style={{
-                    color: "white",
                     display: "flex",
                     justifyContent: "center",
                     alignContent: "center",
+                    marginTop: 15,
                   }}
                 >
-                  <button
-                    style={{
-                      backgroundColor: "rgb(17, 52, 82)",
-                      color: "rgb(201, 196, 184)",
-                    }}
-                    className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
-                  >
-                    Read more
+                  <button>
+                    <NavLink
+                      to={`/course/${course._id}`}
+                      style={{
+                        backgroundColor: "rgb(17, 52, 82)",
+                        color: "rgb(201, 196, 184)",
+                      }}
+                      className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                    >
+                      Read more
+                    </NavLink>
                   </button>
-                </NavLink>
+                </div>
+
                 <img
                   onClick={() => {
                     userNuevo.favorites.push(course);
@@ -391,6 +395,7 @@ export default function AllCourses() {
             </div>
           ))}
         </div>
+
         <h2 className=" bg-gray-700">{favoritoAgregado}</h2>
 
         <Footer />
