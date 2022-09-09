@@ -32,6 +32,7 @@ const getCourses = async (req, res) => {
 
 // OBTENER DETALLE DE UN CURSO DE LA BASE DE DATOS POR MEDIO DEL ID
 const getCourseById = async (req, res) => {
+  const {id} = req.params;
   try {
     if (!id) {
       res.send({ msg: "The ID is necessary" });
@@ -50,6 +51,7 @@ const getCourseById = async (req, res) => {
 
 // CREAR CURSO EN LA BASE DE DATOS
 const createCourse = async (req, res) => {
+  const {id} = req.params;
   const { name, description, image, videos } = req.body;
 
   // const body = req.body;
