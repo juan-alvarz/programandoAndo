@@ -48,7 +48,7 @@ export default function ForgetPassword() {
         confirmButtonText: "Back",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/");
+          navigate("/login");
         }
       });
     }
