@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { lenguages } from "../utils/lenguages";
+import { languages } from "../utils/languages";
 import { countries } from "../utils/countries";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers, getUser, createsUser } from "../redux/actions";
 import NavBar from "./NavBar";
 
 export default function CreateUser() {
+  const { users } = useSelector((state) => state.programandoando);
+
+  console.log(users);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
   const navigate = useNavigate();
   // react-hook-forms
   const {
@@ -15,6 +27,7 @@ export default function CreateUser() {
     handleSubmit,
     formState: { errors },
     setValue,
+    getValues,
   } = useForm({
     defaultValues: {
       name: "",
@@ -24,7 +37,7 @@ export default function CreateUser() {
       password: "",
       rePassword: "",
       date: "",
-      lenguage: "",
+      language: "",
       country: "",
     },
   });
@@ -42,6 +55,8 @@ export default function CreateUser() {
   }
 
   const onSubmit = (data) => {
+    const get = getValues();
+
     if (data.password !== data.rePassword || data.email !== data.reEmail) {
       return Swal.fire({
         title: "Error in Email or Password",
@@ -49,28 +64,43 @@ export default function CreateUser() {
         icon: "error",
         confirmButtonText: "Back",
       });
-    } else if (!data.lenguage || !data.country) {
+    } else if (!data.language || !data.country) {
       return Swal.fire({
-        title: "Error in Lenguage or Country",
-        text: "Check the Lenguage or Country input",
+        title: "Error in Language or Country",
+        text: "Check the Language or Country input",
         icon: "error",
         confirmButtonText: "Back",
       });
       // } else if (
-      //   AllUsers.find(
+      //   users.find(
       //     (item) =>
       //       item.username.replace(/\s+/g, "").toLowerCase() ===
       //       data.username.replace(/\s+/g, "").toLowerCase()
       //   )
       // ) {
-      return Swal.fire({
-        title: "repeated user",
-        text: "Check the user exists!!",
-        icon: "error",
-        confirmButtonText: "Back",
-      });
+      //   return Swal.fire({
+      //     title: "repeated user",
+      //     text: "Check the user exists!!",
+      //     icon: "error",
+      //     confirmButtonText: "Back",
+      //   });
     } else {
-      console.log(data);
+      // console.log(data);
+      const infoUser = [get].map((user) => {
+        return {
+          name: user.name,
+          username: user.username,
+          email: user.email,
+          password: user.password,
+          date: user.date,
+          language: user.language.toLowerCase(),
+          country: user.country,
+        };
+      });
+
+      console.log(infoUser);
+      dispatch(createsUser(infoUser[0]));
+      console.log(infoUser[0]);
       return Swal.fire({
         title: "Create User",
         text: "Create User Successfully",
@@ -84,12 +114,12 @@ export default function CreateUser() {
     }
   };
 
-  const [selectedLenguage, setSelectedLenguage] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
 
-  function handleSelectLenguage(data) {
-    setSelectedLenguage(data);
-    setValue("lenguage", data.label);
+  function handleSelectLanguage(data) {
+    setSelectedLanguage(data);
+    setValue("language", data.label);
   }
 
   function handleSelectCountry(data) {
@@ -97,7 +127,7 @@ export default function CreateUser() {
     setValue("country", data.label);
   }
 
-  const optionLenguages = lenguages?.map((leng) => {
+  const optionLanguages = languages?.map((leng) => {
     return {
       value: leng,
       label: leng,
@@ -113,12 +143,20 @@ export default function CreateUser() {
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-      <NavBar/>
-      <div style={{ backgroundColor: "rgb(198, 198, 198)" }} className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
+      <NavBar />
+      <div
+        style={{ backgroundColor: "rgb(198, 198, 198)" }}
+        className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50"
+      >
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
           <div>
             <a href="/">
-              <h3 style={{ color: "rgb(17, 52, 82)" }} className="text-3xl font-semibold text-center text-black uppercase">Create User</h3>
+              <h3
+                style={{ color: "rgb(17, 52, 82)" }}
+                className="text-3xl font-semibold text-center text-black uppercase"
+              >
+                Create User
+              </h3>
             </a>
           </div>
           {/* Form */}
@@ -179,7 +217,9 @@ export default function CreateUser() {
                     </small>
                   )}
                   {errors.username?.type === "pattern" && (
-                    <small className="text-red-600 font-bold">Invalid user</small>
+                    <small className="text-red-600 font-bold">
+                      Invalid user
+                    </small>
                   )}
                 </div>
               </div>
@@ -344,17 +384,17 @@ export default function CreateUser() {
                 </div>
                 <div className="mt-4">
                   <label
-                    htmlFor="lenguage"
+                    htmlFor="language"
                     className="block text-sm font-bold text-black undefined"
                   >
-                    Lenguage
+                    Language
                   </label>
                   <Select
-                    name="lenguage"
-                    options={optionLenguages}
-                    placeholder="Lenguage"
-                    value={selectedLenguage}
-                    onChange={handleSelectLenguage}
+                    name="language"
+                    options={optionLanguages}
+                    placeholder="Language"
+                    value={selectedLanguage}
+                    onChange={handleSelectLanguage}
                     isSearchable={false}
                     className="font-light"
                   />

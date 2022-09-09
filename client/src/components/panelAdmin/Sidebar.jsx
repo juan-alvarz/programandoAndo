@@ -51,7 +51,7 @@ function Sidebar() {
         </div>
         <ul className="pt-6">
           {menus.map((menu, index) => (
-            <NavLink to={menu.href}>
+            <NavLink to={menu.href} key={index}>
               <li
                 key={index}
                 className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white rounded-md ${
