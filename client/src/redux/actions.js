@@ -84,8 +84,8 @@ export const getCourse = (id) => (dispatch) => {
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
 };
-export const favorite = (course) => (dispatch) => {
-  dispatch(favoriteCourse(course));
+export const favorite = (payload) => (dispatch) => {
+  dispatch(favoriteCourse(payload));
 };
 
 export const updateUser = (payload, id) => async (dispatch) => {

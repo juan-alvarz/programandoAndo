@@ -55,7 +55,7 @@ const getUserById = async (req, res, next) => {
         path: "courses",
         populate: { path: "videos" },
       },
-    });
+    }).populate("favorites")
     if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);

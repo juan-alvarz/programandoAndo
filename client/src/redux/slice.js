@@ -70,6 +70,7 @@ export const slice = createSlice({
     getCourseById: (state, action) => {
       state.course = action.payload;
     },
+
     favoriteCourse: (state, action) => {
       state.favoritesUser = action.payload;
     },
