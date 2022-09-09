@@ -13,7 +13,7 @@ const getNotifications = async (req, res) => {
     if (name) {
       const nombre = await notificationModel
         .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
-      console.log(nombre);
+
       if (!nombre.length) {
         res.send({ msg: "error" });
       } else {
