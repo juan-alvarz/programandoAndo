@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ver from "../utils/images/ver.png";
 import ocultar from "../utils/images/ojo.png";
-import { userLogin } from "../redux/actions";
+import { userLogin,favorite} from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
 
@@ -21,6 +21,7 @@ export default function Login() {
     e.preventDefault();
 
     window.localStorage.removeItem("user");
+    dispatch(favorite([]))
     /*setTimeout(function () {
     
       navigate("/");
