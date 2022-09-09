@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCourses } from "../redux/actions";
-import {favorite} from "../redux/actions"
+import { getAllCourses,getUser } from "../redux/actions";
+
 import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
@@ -18,13 +18,21 @@ import {
 } from "../redux/actions";
 import imageNotFound from "../utils/images/404person.png";
 import fav from "../utils/images/fav.png"
-import { Favorites } from "./Favorites";
+
+import { updateUser } from "../redux/actions";
+
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
-  const {favoritesUser} = useSelector((state) => state.programandoando);
-  console.log(favoritesUser)
+  
+  
+
+  //Usuario registrado
+  let userLocal=window.localStorage.getItem("user")
+  let userObj=JSON.parse(userLocal)
+  
+  
 
   // =============== Paginado ==========================
   const [cursoActual, setCursoActual] = useState(1);
@@ -36,8 +44,22 @@ export default function AllCourses() {
 
   useEffect(() => {
     dispatch(getAllCourses());
+    if(userObj){
+
+      dispatch(getUser(userObj.user._id))
+    }
   }, [dispatch, coursesPowFilter]);
 
+   
+  let { user} = useSelector(state => state.programandoando)
+  
+  let userNuevo = JSON.parse(JSON.stringify(user?user:null))
+
+  console.log(user)
+  
+  console.log(userNuevo)
+  
+  
   
   // //===================================================
   let finallyOneDuration = (time) => {
@@ -144,7 +166,7 @@ export default function AllCourses() {
 
     
     let coursesPow = courses.map((e) => durationCourse(e));
-
+    
     
 
     //=========== lógica del duration ==========
@@ -267,6 +289,7 @@ export default function AllCourses() {
         {/* Cards */}
         <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-8">
           {cursosActuales.map((course, index) => (
+            
             <div
               key={index}
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
@@ -365,7 +388,16 @@ export default function AllCourses() {
                     Read more
                   </button>
                 </NavLink>
-                  <img onClick={(e)=>(dispatch(favorite(course)))} src={fav}></img>
+                  <img onClick={()=>(
+                      
+                      userNuevo.favorites.push(course),
+                     dispatch(updateUser(userNuevo,userNuevo._id))
+                      
+                    
+                    
+                    
+                    
+                    )} src={fav}></img>
               </div>
             </div>
           ))}
