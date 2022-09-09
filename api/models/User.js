@@ -30,12 +30,16 @@ const UserSchema = new Schema(
     },
     language: {
       type: String,
+      enum: ["english", "spanish"],
+      default: "english",
     },
     country: {
       type: String,
+      default: "",
     },
     birthday: {
       type: Date,
+      default: Date.now(),
     },
     ownPath: [
       {
@@ -45,6 +49,7 @@ const UserSchema = new Schema(
     ],
     scoring: {
       type: Schema.Types.ObjectId,
+      ref: "Courses",
     },
     favorites: [
       {
@@ -65,6 +70,9 @@ const UserSchema = new Schema(
     confirmationCode: {
       type: String,
       unique: true,
+    },
+    changePassCode: {
+      type: String,
     },
   },
 

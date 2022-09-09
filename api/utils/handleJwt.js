@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_EMAIL_SECRET = process.env.SECRET;
 
 const tokenSign = async (user) => {
   const sign = jwt.sign(
-    {
+    {      
       _id: user._id,
       role: user.role,
     },
@@ -13,14 +14,40 @@ const tokenSign = async (user) => {
     }
   );
   return sign;
-};
+};  
 
 const verifyToken = async (tokenJwt) => {
   try {
-    return jwt.verify(tokenJwt, JWT_SECRET);
+    jwt.verify(tokenJwt, JWT_SECRET);
+    console.log("Token is real")
+    return
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = { tokenSign, verifyToken };
+
+const verifyEmailToken = async (email) => {
+  const sign = jwt.sign(
+    {
+      email,
+    },
+    JWT_EMAIL_SECRET
+  );
+  return sign;
+};
+
+const verifyChangeToken = async (email) => {
+  const changePassToken = jwt.sign(
+    {
+      email,
+    },
+    JWT_EMAIL_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
+  return changePassToken;
+};
+
+module.exports = { tokenSign, verifyEmailToken, verifyChangeToken };

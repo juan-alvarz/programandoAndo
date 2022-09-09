@@ -23,6 +23,7 @@ import {
   getCourse5h,
   getCourse3h,
   getSession,
+  favoriteCourse,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -81,6 +82,9 @@ export const getCourse = (id) => (dispatch) => {
     .get(`http://localhost:3001/api/courses/${id}`)
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
+};
+export const favorite = (course) => (dispatch) => {
+  dispatch(favoriteCourse(course));
 };
 
 export const createsCourse = (payload) => async (dispatch) => {
@@ -163,7 +167,12 @@ export const updateUser = (payload, id) => async (dispatch) => {
 export const userLogin = (payload) => async (dispatch) => {
   const response = await axios
     .post("http://localhost:3001/api/users/login", payload)
-    .then((res) => dispatch(getSession(res.data)))
+    .then((res) => {
+      window.localStorage.setItem("user", JSON.stringify(res.data));
+
+      dispatch(getSession(res.data));
+    })
+
     .catch((e) => console.log(e));
   return response;
 };
@@ -171,10 +180,18 @@ export const userLogin = (payload) => async (dispatch) => {
 export const googleUserLogin = (payload) => async (dispatch) => {
   const response = await axios
     .post("http://localhost:3001/api/users/google_login", payload)
-    .then((res) => dispatch(getSession(res.data)))
+    .then((res) => {
+      dispatch(getSession(res.data));
+      window.localStorage.setItem("user", JSON.stringify(res.data));
+    })
     .catch((e) => console.log(e));
 
   return response;
+};
+
+export const verifyUser = async (code) => {
+  const response = await axios.get(`http://localhost:3001/api/users/ath/confirm/${code}`);
+  return response.data;
 };
 
 // ============================ Videos ============================
@@ -214,6 +231,7 @@ export function orderByName(payload) {
     payload,
   };
 }
+
 // ============================ Clear ============================
 // export function clearFilter() {
 //   return {

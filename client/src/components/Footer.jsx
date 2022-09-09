@@ -18,7 +18,7 @@ const Footer = () => {
   return (
     <footer
       style={{ backgroundColor: "rgb(17, 52, 82)" }}
-      className="p-4 bg-gray-900 border border-solid border-gray-800 sm:p-6 dark:bg-gray-900"
+      className="p-4 bg-gray-900 border border-solid border-gray-800 sm:p-6"
     >
       <div className="md:flex md:justify-evenly">
         <div className="flex justify-center items-center mb-3">

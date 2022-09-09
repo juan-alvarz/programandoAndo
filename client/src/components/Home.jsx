@@ -3,11 +3,12 @@ import NavBar from "./NavBar";
 import data from "../utils/data";
 import Footer from "./Footer";
 import SearchBar from "./SearchBar";
-import { getVideoById, clearFilter } from "../redux/actions";
+import { getVideoById, clearFilter,getAllCourses } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
+import Google from "./Google";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
@@ -16,13 +17,11 @@ function Home() {
 
   useEffect(() => {
     dispatch(getVideoById(idVideo));
+    dispatch(getAllCourses())
   }, [dispatch]);
   return (
     <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
       <NavBar />
-      <div>
-        <Carousel />
-      </div>
       <div class="py-10">
         <div
           style={{ backgroundColor: "rgb(17, 52, 82)" }}
@@ -51,12 +50,16 @@ function Home() {
                 information to generate a thank you and greater visibility to
                 people who are committed to teach for free.{" "}
               </p>
+              
             </div>
             <div class="lg:w-5/12 order-2">
               <img src={img} alt="" class="rounded" />
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Carousel />
       </div>
       <Footer />
     </div>

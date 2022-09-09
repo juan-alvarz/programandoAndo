@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import { createsUser,googleUserLogin } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Google() {
+  const navigate= useNavigate()
   const [user, setUser] = useState({});
   const dispatch = useDispatch()
   
@@ -57,9 +59,11 @@ export default function Google() {
         <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
       )}
       {user && (
+        
         <div>
           <img src={user.picture}></img>
           <h3>{user.name}</h3>
+          
         </div>
       )}
     </div>
