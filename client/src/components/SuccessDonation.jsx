@@ -9,17 +9,26 @@ import logo from "../utils/images/LOGOPA.png";
 
 export default function SuccessDonation() {
   const dispatch = useDispatch();
+
   const userToUpdate = useSelector((state) => state.programandoando.user);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userUpdateId = user.user._id;
+  console.log(userUpdateId);
+
+  console.log(userUpdateId);
   useEffect(() => {
     dispatch(getUser(userUpdateId));
   }, [dispatch]);
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  const userUpdateId = user.user._id;
   const currentAmount = userToUpdate.contributor;
+  if (currentAmount) {
+    console.log(currentAmount);
+  }
+  console.log(userToUpdate);
 
   var amount = JSON.parse(localStorage.getItem("amount"));
-
+  console.log(amount);
   if (Object.keys(userToUpdate).length === 0) {
     return <Loader />;
   } else {
