@@ -70,8 +70,9 @@ const getUserById = async (req, res, next) => {
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;
-    const find = usersModel.findById(body._id);
-    // console.log(find)
+    console.log(body);
+    const find = await usersModel.findOne({ email: body.email });
+    console.log(find);
 
     if (find) {
       return handleHtppError(res, "User already exist", 401);

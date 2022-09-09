@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import {
   getCourses,
   getCourseById,
@@ -231,6 +232,82 @@ export function orderByName(payload) {
   return {
     type: "ORDER_BY_NAME",
     payload,
+  };
+}
+
+// =========================== Delete ===========================
+export function deleteSchoolById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/schools/${id}`)
+      .then(() => {
+        alert("Se elimino");
+        return dispatch({
+          type: "DELETE_SCHOOL",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function deleteCourseById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/courses/${id}`)
+      .then(() => {
+        Swal.fire({
+          title: "Course Delete",
+          text: "Course Deleted Successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        return dispatch({
+          type: "DELETE_COURSE",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function deleteVideoById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/videos/${id}`)
+      .then(() => {
+        alert("Se elimino");
+        return dispatch({
+          type: "DELETE_VIDEO",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function deleteUserById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/users/${id}`)
+      .then(() => {
+        alert("Se elimino");
+        return dispatch({
+          type: "DELETE_USER",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function deleteNotificationById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/notifications/${id}`)
+      .then(() => {
+        alert("Se elimino");
+        return dispatch({
+          type: "DELETE_NOTIFICATION",
+        });
+      })
+      .catch((error) => console.log(error));
   };
 }
 
