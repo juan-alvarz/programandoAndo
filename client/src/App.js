@@ -25,6 +25,8 @@ import Administrator from "./components/panelAdmin/Administrator";
 import Baneos from "./components/panelAdmin/Baneos";
 import Loader from "./components/Loader";
 import { Favorites } from "./components/Favorites";
+import CancelDonation from "./components/CancelDonation";
+import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 
 function App() {
@@ -56,9 +58,11 @@ function App() {
           <Route path="/userspa" element={<UsersPA />} />
           <Route path="/administrator" element={<Administrator />} />
           <Route path="/baneos" element={<Baneos />} />
+          <Route path="/execute-payment" element={<SuccessDonation />} />
+          <Route path="/cancel-payment" element={<CancelDonation />} />
 
           <Route path="*" element={<Error404 />} />
-          <Route path="/favorites" element={<Favorites></Favorites>} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
         </Routes>
       </div>

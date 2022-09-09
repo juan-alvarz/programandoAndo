@@ -50,4 +50,32 @@ transport
   })
   .catch((e) => console.log(e));
 
-module.exports = { sendConfirmationEmail, sendChangePasswordEmail };
+const sendEmailDonation = (name, email, amount) => {
+  console.log("Check");
+  transport
+    .sendMail({
+      from: accountTransport.auth.user,
+      to: email,
+      subject: "Thanks for you donation",
+      html: `<h1>You are collab with programandoando.com</h1>
+        <h2>Hello ${name}</h2>
+        <p>Thank you for donate to our platform.
+          You collab with ${amount} USD
+        </p>
+        </div>`,
+    })
+    .catch((err) => console.log(err));
+};
+
+transport
+  .verify()
+  .then(() => {
+    console.log("Ready for send emails");
+  })
+  .catch((e) => console.log(e));
+
+module.exports = {
+  sendConfirmationEmail,
+  sendChangePasswordEmail,
+  sendEmailDonation,
+};

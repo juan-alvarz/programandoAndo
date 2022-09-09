@@ -9,6 +9,7 @@ const { handleHtppError } = require("../utils/handleError");
 const {
   sendConfirmationEmail,
   sendChangePasswordEmail,
+  sendEmailDonation,
 } = require("../config/nodemailer.config");
 
 const getAllUsers = async (req, res, next) => {
@@ -70,7 +71,6 @@ const getUserById = async (req, res, next) => {
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;
-    console.log(body);
     const find = await usersModel.findOne({ email: body.email });
     console.log(find);
 
@@ -313,13 +313,13 @@ const updateUser = async (req, res, next) => {
           schools: body.schools ? body.schools : user.schools,
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
+          contributor: body.contributor ? body.contributor : user.contributor,
         }
       );
       if (!data.modifiedCount) {
         handleHtppError(res, "Fail in the query", 422);
       }
-      res.status(201);
-      return res.send(data);
+      return res.status(201).send(data);
     }
     if (user.role === "admin") {
       const newBody = { ...body, password };
@@ -368,6 +368,17 @@ const restoreUser = async (req, res, next) => {
   }
 };
 
+const successDonation = (req, res) => {
+  try {
+    const { name, email, amount } = req.body;
+    console.log(`este es params` + req.body);
+    sendEmailDonation(name, email, amount);
+    return res.status(200).json({ message: "success" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -380,4 +391,5 @@ module.exports = {
   verifyUser,
   submitChangePass,
   changePasswordRequest,
+  successDonation,
 };

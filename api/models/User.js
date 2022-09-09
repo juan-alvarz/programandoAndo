@@ -35,9 +35,11 @@ const UserSchema = new Schema(
     },
     country: {
       type: String,
+      default: "",
     },
     birthday: {
       type: Date,
+      default: Date.now(),
     },
     ownPath: [
       {
@@ -73,6 +75,7 @@ const UserSchema = new Schema(
       type: String,
     },
   },
+
   {
     timestamps: true,
     versionKey: false,
