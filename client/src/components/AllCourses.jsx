@@ -17,22 +17,18 @@ import {
   getCourses3h,
 } from "../redux/actions";
 import imageNotFound from "../utils/images/404person.png";
-import fav from "../utils/images/fav.png"
+import fav from "../utils/images/fav.png";
 
 import { updateUser } from "../redux/actions";
-
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
 
-
-
   //Usuario registrado
-  let userLocal = window.localStorage.getItem("user")
-  let userObj = JSON.parse(userLocal)
-  const [favoritoAgregado, setFavoritoAgregado] = useState("")
-
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  const [favoritoAgregado, setFavoritoAgregado] = useState("");
 
   // =============== Paginado ==========================
   const [cursoActual, setCursoActual] = useState(1);
@@ -45,19 +41,13 @@ export default function AllCourses() {
   useEffect(() => {
     dispatch(getAllCourses());
     if (userObj) {
-
-      dispatch(getUser(userObj.user._id))
+      dispatch(getUser(userObj.user._id));
     }
   }, [dispatch, coursesPowFilter]);
 
+  let { user } = useSelector((state) => state.programandoando);
 
-  let { user } = useSelector(state => state.programandoando)
-
-  let userNuevo = JSON.parse(JSON.stringify(user ? user : null))
-
-
-
-
+  let userNuevo = JSON.parse(JSON.stringify(user ? user : null));
 
   // //===================================================
   let finallyOneDuration = (time) => {
@@ -78,7 +68,7 @@ export default function AllCourses() {
   /*==================course not found page========================== */
   if (courses.msg === "error") {
     return (
-      <div style={{ backgroundColor: 'rgb(198, 198, 198)' }}>
+      <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
         <div>
           <NavBar />
         </div>
@@ -153,7 +143,6 @@ export default function AllCourses() {
 
       let oneDuration = secondsDuration.reduce((sum, a) => sum + a, 0);
 
-
       let object = {
         ...course,
         duration: oneDuration,
@@ -162,10 +151,7 @@ export default function AllCourses() {
       return object;
     };
 
-
     let coursesPow = courses.map((e) => durationCourse(e));
-
-
 
     //=========== lógica del duration ==========
 
@@ -217,7 +203,7 @@ export default function AllCourses() {
     };
     // ==============================================
     return (
-      <div style={{ backgroundColor: 'rgb(198, 198, 198)' }}>
+      <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
         <NavBar />
         <NavLink to="/favorites">Favorites</NavLink>
 
@@ -243,7 +229,10 @@ export default function AllCourses() {
                   className="sr-only peer"
                   onChange={(e) => handleFilterAlph(e)}
                 />
-                <div style={{ backgroundColor: 'rgb(17, 52, 82)' }} className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                <div
+                  style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                  className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
+                ></div>
               </label>
               <span style={{ paddingRight: "10px", paddingLeft: "10px" }}>
                 Z-A
@@ -287,7 +276,6 @@ export default function AllCourses() {
         {/* Cards */}
         <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-8">
           {cursosActuales.map((course, index) => (
-
             <div
               key={index}
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
@@ -329,14 +317,14 @@ export default function AllCourses() {
                       display: "flex",
                       color: "rgb(201, 196, 184)",
                       justifyContent: "center",
-                      backgroundColor: 'rgb(55, 109, 109)',
+                      backgroundColor: "rgb(55, 109, 109)",
                       paddingTop: 10,
-                      paddingBottom: 10
+                      paddingBottom: 10,
                     }}
-                    className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                    className="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                  >
                     {course.name}
                   </h5>
-
                 </div>
                 <p
                   style={{
@@ -348,9 +336,10 @@ export default function AllCourses() {
                     paddingLeft: 35,
                     paddingRight: 35,
                     paddingTop: 20,
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
-                  className="mb-3 font-normal text-gray-700">
+                  className="mb-3 font-normal text-gray-700"
+                >
                   {course.description}
                 </p>
                 <span
@@ -363,7 +352,7 @@ export default function AllCourses() {
                     paddingBottom: 20,
                     paddingLeft: 35,
                     paddingRight: 35,
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   <strong>Time Inversion: </strong>
@@ -383,33 +372,26 @@ export default function AllCourses() {
                       backgroundColor: "rgb(17, 52, 82)",
                       color: "rgb(201, 196, 184)",
                     }}
-                    className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
+                    className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                  >
                     Read more
                   </button>
                 </NavLink>
-                <img onClick={() => {
-                    
-                    
+                <img
+                  onClick={() => {
+                    userNuevo.favorites.push(course);
 
-                      userNuevo.favorites.push(course)
-    
-                      dispatch(updateUser(userNuevo, userNuevo._id))
-                  
-                    
-                      setFavoritoAgregado(favoritoAgregado)
-                    
+                    dispatch(updateUser(userNuevo, userNuevo._id));
 
-
-
-
-                }} src={fav}></img>
-
+                    setFavoritoAgregado(favoritoAgregado);
+                  }}
+                  src={fav}
+                ></img>
               </div>
             </div>
           ))}
         </div>
-        <h2 className="bg-green-300 bg-gray-700">{favoritoAgregado}</h2>
-        
+        <h2 className=" bg-gray-700">{favoritoAgregado}</h2>
 
         <Footer />
       </div>
