@@ -21,10 +21,6 @@ const ForoSchema = new Schema(
             }]
         }
     ],
-    idVideo: {         
-        type: Schema.Types.ObjectId,
-        ref: 'Video'
-    },
   },
   {
     timestamps: true,
