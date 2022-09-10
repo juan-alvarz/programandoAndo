@@ -16,7 +16,6 @@ export default function SuccessDonation() {
   const userUpdateId = user.user._id;
   console.log(userUpdateId);
 
-  console.log(userUpdateId);
   useEffect(() => {
     dispatch(getUser(userUpdateId));
   }, [dispatch]);
