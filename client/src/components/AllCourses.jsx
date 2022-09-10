@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCourses, getUser } from "../redux/actions";
 
+import HearthFav from "./HearthFav";
 import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
@@ -17,26 +18,22 @@ import {
   getCourses3h,
 } from "../redux/actions";
 import imageNotFound from "../utils/images/404person.png";
-import fav from "../utils/images/fav.png"
+import fav from "../utils/images/fav.png";
 
 import { updateUser } from "../redux/actions";
 
-
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
-  const {favoritesUser}= useSelector(state => state.programandoando)
+  const { favoritesUser } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
 
-
-
   //Usuario registrado
-  let userLocal = window.localStorage.getItem("user")
-  let userObj = JSON.parse(userLocal)
-  const [favoritoAgregado, setFavoritoAgregado] = useState("")
-
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  const [favoritoAgregado, setFavoritoAgregado] = useState("");
 
   // =============== Paginado ==========================
-  const [cursoActual, setCursoActual] = useState(1);
+  const [cursoActual, setCursoActual] = useState(1);  
   const [cursosPagina] = useState(6);
   const ultimoCurso = cursoActual * cursosPagina;
   const primerCurso = ultimoCurso - cursosPagina;
@@ -46,20 +43,16 @@ export default function AllCourses() {
   useEffect(() => {
     dispatch(getAllCourses());
     if (userObj) {
-
-      dispatch(getUser(userObj.user._id))
+      dispatch(getUser(userObj.user._id));
     }
   }, [dispatch, coursesPowFilter]);
 
+  let { user } = useSelector((state) => state.programandoando);
 
-  let { user } = useSelector(state => state.programandoando)
+  let userNuevo = JSON.parse(JSON.stringify(user ? user : null));
 
-  let userNuevo = JSON.parse(JSON.stringify(user ? user : null))
-
-
-  console.log(favoritesUser)
-  console.log(courses)
-
+  // console.log(favoritesUser);
+  // console.log(courses);
 
   // //===================================================
   let finallyOneDuration = (time) => {
@@ -80,7 +73,7 @@ export default function AllCourses() {
   /*==================course not found page========================== */
   if (courses.msg === "error") {
     return (
-      <div style={{ backgroundColor: 'rgb(198, 198, 198)' }}>
+      <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
         <div>
           <NavBar />
         </div>
@@ -155,7 +148,6 @@ export default function AllCourses() {
 
       let oneDuration = secondsDuration.reduce((sum, a) => sum + a, 0);
 
-
       let object = {
         ...course,
         duration: oneDuration,
@@ -164,10 +156,7 @@ export default function AllCourses() {
       return object;
     };
 
-
     let coursesPow = courses.map((e) => durationCourse(e));
-
-
 
     //=========== lógica del duration ==========
 
@@ -219,7 +208,7 @@ export default function AllCourses() {
     };
     // ==============================================
     return (
-      <div style={{ backgroundColor: 'rgb(198, 198, 198)' }}>
+      <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
         <NavBar />
         <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
           {/* Filtrados */}
@@ -243,7 +232,10 @@ export default function AllCourses() {
                   className="sr-only peer"
                   onChange={(e) => handleFilterAlph(e)}
                 />
-                <div style={{ backgroundColor: 'rgb(17, 52, 82)' }} className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                <div
+                  style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                  className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
+                ></div>
               </label>
               <span style={{ paddingRight: "10px", paddingLeft: "10px" }}>
                 Z-A
@@ -287,7 +279,6 @@ export default function AllCourses() {
         {/* Cards */}
         <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-8">
           {cursosActuales.map((course, index) => (
-
             <div
               key={index}
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
@@ -329,14 +320,14 @@ export default function AllCourses() {
                       display: "flex",
                       color: "rgb(201, 196, 184)",
                       justifyContent: "center",
-                      backgroundColor: 'rgb(55, 109, 109)',
+                      backgroundColor: "rgb(55, 109, 109)",
                       paddingTop: 10,
-                      paddingBottom: 10
+                      paddingBottom: 10,
                     }}
-                    className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                    className="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                  >
                     {course.name}
                   </h5>
-
                 </div>
                 <p
                   style={{
@@ -348,9 +339,10 @@ export default function AllCourses() {
                     paddingLeft: 35,
                     paddingRight: 35,
                     paddingTop: 20,
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
-                  className="mb-3 font-normal text-gray-700">
+                  className="mb-3 font-normal text-gray-700"
+                >
                   {course.description}
                 </p>
                 <span
@@ -363,80 +355,42 @@ export default function AllCourses() {
                     paddingBottom: 20,
                     paddingLeft: 35,
                     paddingRight: 35,
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   <strong>Time Inversion: </strong>
                   {finallyOneDuration(course.duration)}
                 </span>
-                <div style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignContent: "center",
-                          marginTop: 15
-                        }}>
-                      <button 
-                        >
-                        <NavLink
-                          to={`/course/${course._id}`}
-                          style={{
-                            backgroundColor: "rgb(17, 52, 82)",
-                            color: "rgb(201, 196, 184)",
-                          }}
-                            className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
-                        >
-                              Read more
-                        </NavLink>
-                      </button>
-                    </div>
-                    <div style={{
-                          display: "flex",
-                          justifyContent: "end",
-                          alignContent: "center",
-                          maxWidth: 350,
-                          marginTop: 10,
-                          cursor: "pointer"
-                        }}>
-                          {favoritesUser.find(e => e._id === course._id) ? 
-                          <svg
-                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                          </svg>
-                          :
-                          <svg 
-                          onClick={() => {
-                            userNuevo.favorites.push(course)
-                            dispatch(updateUser(userNuevo, userNuevo._id))
-                            setFavoritoAgregado(favoritoAgregado)
-                          }}
-                          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                          </svg>
-                          }
-                  </div>
-                {/* <img onClick={() => {
-                    
-                    
-
-                      userNuevo.favorites.push(course)
-    
-                      dispatch(updateUser(userNuevo, userNuevo._id))
-                  
-                    
-                      setFavoritoAgregado(favoritoAgregado)
-                    
-
-
-
-
-                }} src={fav}></img> */}
-
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    marginTop: 15,
+                  }}
+                >
+                  <button>
+                    <NavLink
+                      to={`/course/${course._id}`}
+                      style={{
+                        backgroundColor: "rgb(17, 52, 82)",
+                        color: "rgb(201, 196, 184)",
+                      }}
+                      className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                    >
+                      Read more
+                    </NavLink>
+                  </button>
+                </div>
+                {userLocal && 
+                    <HearthFav course={course} userObj={userObj} />
+                    }
+             
               </div>
             </div>
           ))}
         </div>
         <h2 className="bg-green-300 bg-gray-700">{favoritoAgregado}</h2>
-        
 
         <Footer />
       </div>

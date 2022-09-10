@@ -24,8 +24,8 @@ import {
   getCourse5h,
   getCourse3h,
   getSession,
-  favoriteCourse,
-  getNotifications
+  getFavoriteCourse,
+  getNotifications,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -85,8 +85,8 @@ export const getCourse = (id) => (dispatch) => {
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
 };
-export const favorite = (payload) => (dispatch) => {
-  dispatch(favoriteCourse(payload));
+export const getFavorites = (payload) => (dispatch) => {
+  dispatch(getFavoriteCourse(payload));
 };
 
 export const updateUser = (payload, id) => async (dispatch) => {

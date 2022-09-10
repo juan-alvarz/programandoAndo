@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import NavBar from './NavBar'
-import { favorite, getUser, updateUser } from '../redux/actions'
+import { getFavorites, getUser, updateUser } from '../redux/actions'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -29,7 +29,7 @@ export const Favorites = () => {
     
   }, [dispatch]);
   const { user } = useSelector(state => state.programandoando)
-  dispatch(favorite(user.favorites))
+  dispatch(getFavorites(user.favorites))
   const {favoritesUser}= useSelector(state => state.programandoando)
   let userActualizado = JSON.parse(JSON.stringify(user?user:null))
   console.log(favoritesUser)
@@ -82,7 +82,7 @@ let unicos = [...personasMapArr.values()];*/
                 userActualizado.favorites=filteredfavorites
                 
                 dispatch(updateUser(userActualizado,userActualizado._id))
-                dispatch(favorite(userActualizado.favorites))
+                dispatch(getFavorites(userActualizado.favorites))
                 setTimeout(function () {
                   dispatch(getUser(userActualizado._id))
                 },500);

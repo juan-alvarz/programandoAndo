@@ -12,6 +12,8 @@ const {
   verifyUser,
   submitChangePass,
   successDonation,
+  updateFavorites,
+  deleteFavorites,
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -44,6 +46,10 @@ router.post(
 );
 
 router.put("/:id", validatorGetUsers, updateUser);
+
+router.put("/addFavorites/:id", updateFavorites);
+
+router.put("/deleteFavorites/:id", deleteFavorites);
 
 router.patch("/:id", validatorGetUsers, restoreUser);
 
