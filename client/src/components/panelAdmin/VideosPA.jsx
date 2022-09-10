@@ -12,10 +12,10 @@ import {
 
 // import NavbarPA from "./NavbarPA";
 
-function CoursesPA() {
+function VideosPA() {
   const dispatch = useDispatch();
 
-  const { videos, courses } = useSelector((state) => state.programandoando);
+  const { videos } = useSelector((state) => state.programandoando);
 
   useEffect(() => {
     dispatch(getAllVideos());
@@ -30,8 +30,8 @@ function CoursesPA() {
   } = useForm({
     defaultValues: {
       name: "",
-      image: "",
-      URL: "",
+      profile: "",
+      url: "",
       description: "",
     },
   });
@@ -51,33 +51,8 @@ function CoursesPA() {
     });
   };
 
-  // function handleSelectPrueba(value) {
-  //   const find = course.find((i) => i.value === value.value);
-  //   if (!find) {
-  //     setCourse(value);
-  //  setValue(
-  //    "videos",
-  //    [...video, value].map((e) => e.value)
-  //  );
-  //     console.log(course);
-  //   }
-  // }
-
-  // const optionListCourses = courses?.map((course) => {
-  //   return {
-  //     value: course._id,
-  //     label: course.name,
-  //   };
-  // });
-
-  // const [course, setCourse] = useState([]);
   const [videoDelete, setVideoDelete] = useState();
   function handleSelectDelete(data) {
-    // const find = course.find((i) => i.value === data.value);
-    // if (!find) {
-    //   setCourse(data);
-    //   console.log(course);
-    // }
     setVideoDelete(data);
   }
 
@@ -86,31 +61,12 @@ function CoursesPA() {
     setEditCourse(data);
   }
 
-  // Create Course
-  // const [video, setVideo] = useState([]);
-  // function handleSelect(value) {
-  //   const find = video.find((i) => i.value === value.value);
-  //   if (!find) {
-  //     setVideo([...video, value]);
-  // setValue(
-  //   "videos",
-  //   [...video, value].map((e) => e.value)
-  // );
-  //     console.log(video);
-  //   }
-  // }
-
   const optionListVideos = videos?.map((video) => {
     return {
       value: video._id,
       label: video.name,
     };
   });
-
-  // const handleDeleteSelect = (value) => {
-  //   const videoFilter = video.filter((v) => v !== value);
-  //   setVideo(videoFilter);
-  // };
 
   // ============ Delete =================
   const handleDeleteCourse = (id) => {
@@ -134,7 +90,7 @@ function CoursesPA() {
               method="POST"
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
-                Create School
+                Create Video
               </h2>
 
               <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -147,16 +103,17 @@ function CoursesPA() {
                 placeholder="Name"
                 {...register("name", {
                   required: true,
-                  validate: {
-                    repeat: (v) =>
-                      !courses.includes(
-                        courses.find(
-                          (c) =>
-                            c.name.replace(/\s+/g, "").toLowerCase() ===
-                            v.replace(/\s+/g, "").toLowerCase()
-                        )
-                      ),
-                  },
+                  //   validate: {
+                  //     repeat: (v) =>
+                  //       !videos.includes(
+                  //         videos.find(
+                  //           (c) =>
+                  //             c.name.replace(/\s+/g, "").toLowerCase() ===
+                  //             v.replace(/\s+/g, "").toLowerCase()
+                  //         )
+                  //       ),
+                  //   },
+                  // })}
                 })}
               />
               {errors.name?.type === "required" && (
@@ -164,24 +121,23 @@ function CoursesPA() {
               )}
 
               <label className="text-gray-700 font-bold py-2" htmlFor="">
-                Image Video
+                Profile Video
               </label>
               <input
-                name="image"
+                name="profile"
                 type="text"
                 className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
-                {...register("image", {
+                {...register("profile", {
                   required: true,
                   pattern:
                     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
-                  pattern: /.*(png|jpg|jpeg|gif)$/,
                 })}
               />
-              {errors.image?.type === "required" && (
+              {errors.profile?.type === "required" && (
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
-              {errors.image?.type === "pattern" && (
+              {errors.profile?.type === "pattern" && (
                 <small className="text-red-600 font-bold">
                   URL Not Valid or Format not Valid
                 </small>
@@ -191,21 +147,20 @@ function CoursesPA() {
                 URL Video
               </label>
               <input
-                name="URL"
+                name="url"
                 type="text"
                 className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
-                {...register("URL", {
+                {...register("url", {
                   required: true,
                   pattern:
                     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
-                  pattern: /.*(png|jpg|jpeg|gif)$/,
                 })}
               />
-              {errors.URL?.type === "required" && (
+              {errors.url?.type === "required" && (
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
-              {errors.URL?.type === "pattern" && (
+              {errors.url?.type === "pattern" && (
                 <small className="text-red-600 font-bold">
                   URL Not Valid or Format not Valid
                 </small>
@@ -245,10 +200,10 @@ function CoursesPA() {
               action=""
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
-                Edit School
+                Edit Video
               </h2>
               <label className="text-gray-700 font-bold py-2" htmlFor="">
-                Select Schools
+                Select Videos
               </label>
               <Select
                 options={optionListVideos}
@@ -274,10 +229,10 @@ function CoursesPA() {
               action=""
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
-                Delete Schools
+                Delete Video
               </h2>
               <label className="text-gray-700 font-bold py-2" htmlFor="">
-                Select school
+                Select Videos
               </label>
               <Select
                 options={optionListVideos}
@@ -317,4 +272,4 @@ function CoursesPA() {
   );
 }
 
-export default CoursesPA;
+export default VideosPA;

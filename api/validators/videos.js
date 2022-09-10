@@ -6,13 +6,13 @@ const validatorCreateVideo = [
 
   check("description").exists().notEmpty(),
 
-  check("author").exists().notEmpty(),
+  // check("author").exists().notEmpty(),
 
   check("profile").exists().notEmpty(),
 
-  check("duration").exists().notEmpty(),
+  // check("duration").exists().notEmpty(),
 
-  check("difficult").exists().notEmpty(),
+  // check("difficult").exists().notEmpty(),
 
   check("url").exists().notEmpty().isURL(),
 

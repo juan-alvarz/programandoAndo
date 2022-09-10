@@ -71,19 +71,19 @@ export default function CreateUser() {
         icon: "error",
         confirmButtonText: "Back",
       });
-      // } else if (
-      //   users.find(
-      //     (item) =>
-      //       item.username.replace(/\s+/g, "").toLowerCase() ===
-      //       data.username.replace(/\s+/g, "").toLowerCase()
-      //   )
-      // ) {
-      //   return Swal.fire({
-      //     title: "repeated user",
-      //     text: "Check the user exists!!",
-      //     icon: "error",
-      //     confirmButtonText: "Back",
-      //   });
+    } else if (
+      users.find(
+        (item) =>
+          item.username.replace(/\s+/g, "").toLowerCase() ===
+          data.username.replace(/\s+/g, "").toLowerCase()
+      )
+    ) {
+      return Swal.fire({
+        title: "repeated user",
+        text: "Check the user exists!!",
+        icon: "error",
+        confirmButtonText: "Back",
+      });
     } else {
       // console.log(data);
       const infoUser = [get].map((user) => {
@@ -127,10 +127,11 @@ export default function CreateUser() {
     setValue("country", data.label);
   }
 
+  const uppInitial = (str) => str[0].toUpperCase() + str.slice(1);
   const optionLanguages = languages?.map((leng) => {
     return {
       value: leng,
-      label: leng,
+      label: uppInitial(leng),
     };
   });
 

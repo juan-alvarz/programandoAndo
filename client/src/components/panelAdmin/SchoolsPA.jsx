@@ -7,8 +7,8 @@ import { useForm } from "react-hook-form";
 import {
   getAllSchools,
   getAllCourses,
-  deleteCourseById,
-  createsCourse,
+  deleteSchoolById,
+  createsSchool,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
@@ -44,7 +44,7 @@ function CoursesPA() {
 
     handleSelect(course);
     console.log(data);
-    dispatch(createsCourse(get));
+    dispatch(createsSchool(get));
 
     Swal.fire({
       title: "Create Course",
@@ -117,7 +117,7 @@ function CoursesPA() {
 
   // ============ Delete =================
   const handleDeleteCourse = (id) => {
-    dispatch(deleteCourseById(id));
+    dispatch(deleteSchoolById(id));
   };
   return (
     <div className="text-2x1 font-semibold flex h-screen">

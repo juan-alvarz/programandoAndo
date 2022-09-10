@@ -41,8 +41,7 @@ const getAllUsers = async (req, res, next) => {
     });
     return res.json(users);
   } catch (e) {
-    res.status(e.response.status);
-    return res.json(e.message);
+    return res.send(e.message);
   }
 };
 
@@ -55,7 +54,7 @@ const getUserById = async (req, res, next) => {
         path: "courses",
         populate: { path: "videos" },
       },
-    }).populate("favorites")
+    });
     if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);
@@ -63,8 +62,7 @@ const getUserById = async (req, res, next) => {
     }
     return res.json(user);
   } catch (e) {
-    res.status(e.response.status);
-    return res.json(e.message);
+    return res.send(e.message);
   }
 };
 

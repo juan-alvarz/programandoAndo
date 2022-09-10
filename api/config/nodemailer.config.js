@@ -67,13 +67,6 @@ const sendEmailDonation = (name, email, amount) => {
     .catch((err) => console.log(err));
 };
 
-transport
-  .verify()
-  .then(() => {
-    console.log("Ready for send emails");
-  })
-  .catch((e) => console.log(e));
-
 module.exports = {
   sendConfirmationEmail,
   sendChangePasswordEmail,
