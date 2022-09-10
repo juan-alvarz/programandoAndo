@@ -25,6 +25,7 @@ import {
   getCourse3h,
   getSession,
   favoriteCourse,
+  getNotifications
 } from "./slice";
 
 // ============================ Courses ============================
@@ -297,6 +298,8 @@ export function deleteUserById(id) {
   };
 }
 
+// =========================== Notification ===========================
+
 export function deleteNotificationById(id) {
   return async function (dispatch) {
     await axios
@@ -310,6 +313,13 @@ export function deleteNotificationById(id) {
       .catch((error) => console.log(error));
   };
 }
+
+export const getAllNotifications = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/notifications")
+    .then((res) => dispatch(getNotifications(res.data)))
+    .catch((e) => console.log(e));
+};
 
 // ============================ Clear ============================
 // export function clearFilter() {

@@ -5,6 +5,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink, useNavigate } from "react-router-dom";
 import { DetailSchool } from "./DetailSchool";
 import img from "../utils/images/LOGOCOMPLETOPA.png";
+import { useSelector } from 'react-redux'
+import Notifications from './Notifications'
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -27,6 +29,7 @@ export default function NavBar() {
   const usuario = window.localStorage.getItem('user')
 
   const navigate = useNavigate()
+  const { notifications } = useSelector((state) => state.programandoando);
 
   const handlelogout = (e) => {
     e.preventDefault();
@@ -172,7 +175,7 @@ export default function NavBar() {
                         className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />                              
                       </button>
 
                       {/* Profile dropdown */}
@@ -209,12 +212,12 @@ export default function NavBar() {
                             </Menu.Item>
                             <Menu.Item>
                               {({ active }) => (
-                                <a
-                                  href="#"
+                                <NavLink
+                                  to="/favorites"
                                   className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                 >
-                                  Settings
-                                </a>
+                                  Favorites
+                                </NavLink>
                               )}
                             </Menu.Item>
                             <Menu.Item>
@@ -283,11 +286,11 @@ export default function NavBar() {
               </div>
               <div className="space-y-1 px-2 pt-1 pb-3">
                 {navigation.map((item) => (
-                  <Disclosure.Button
+                  <NavLink
                     style={{ color: "rgb(201, 196, 184)" }}
                     key={item.name}
                     as="a"
-                    href={item.href}
+                    to={item.href}
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
@@ -297,8 +300,8 @@ export default function NavBar() {
                     aria-current={item.current ? "page" : undefined}
                   >
                     {item.name}
-                  </Disclosure.Button>
-                ))}
+                  </NavLink>
+                ))}                 
               </div>
             </Disclosure.Panel>
           </>
@@ -501,11 +504,11 @@ export default function NavBar() {
               </div>
               <div className="space-y-1 px-2 pt-1 pb-3">
                 {navigation.map((item) => (
-                  <Disclosure.Button
+                  <NavLink
                     style={{ color: "rgb(201, 196, 184)" }}
                     key={item.name}
                     as="a"
-                    href={item.href}
+                    to={item.href}
                     className={classNames(
                       item.current
                         ? "bg-gray-900 text-white"
@@ -515,7 +518,26 @@ export default function NavBar() {
                     aria-current={item.current ? "page" : undefined}
                   >
                     {item.name}
-                  </Disclosure.Button>
+                  </NavLink>
+                ))}
+                {navigation2.map((item) => (
+                  <NavLink                  
+                    style={{
+                      color: "rgb(201, 196, 184)",
+                    }}
+                    key={item.name}
+                    as="a"
+                    to={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-sky-700 hover:text-white",
+                        "block px-3 py-2 rounded-md text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
+                    </NavLink>                  
                 ))}
               </div>
             </Disclosure.Panel>

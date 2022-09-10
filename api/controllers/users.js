@@ -62,7 +62,7 @@ const getUserById = async (req, res, next) => {
     }
     return res.json(user);
   } catch (e) {
-    res.status(e.response.status);
+    res.status(404);
     return res.json(e.message);
   }
 };

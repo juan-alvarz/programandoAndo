@@ -7,6 +7,7 @@ import Agus from '../utils/images/AgustinAboutUs1.png'
 import Fran from '../utils/images/FrancoAboutUs1.png'
 import Dani from '../utils/images/DanielAboutUs1.png'
 import Juan from '../utils/images/JuanAboutUs1.png'
+import Roge from '../utils/images/RogelioAboutUs1.png'
 
 function AboutUs() {
   return (
@@ -293,8 +294,8 @@ function AboutUs() {
           <div className="text-center text-gray-500">
             <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
-              alt="Leslie Avatar"
+              src={Roge}
+              alt="Roge Avatar"
             />
             <h3
               style={{ color: "rgb(55, 109, 109)" }}

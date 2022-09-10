@@ -24,6 +24,7 @@ import { updateUser } from "../redux/actions";
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
+  const {favoritesUser}= useSelector(state => state.programandoando)
   const dispatch = useDispatch();
 
 
@@ -56,7 +57,8 @@ export default function AllCourses() {
   let userNuevo = JSON.parse(JSON.stringify(user ? user : null))
 
 
-
+  console.log(favoritesUser)
+  console.log(courses)
 
 
   // //===================================================
@@ -219,8 +221,6 @@ export default function AllCourses() {
     return (
       <div style={{ backgroundColor: 'rgb(198, 198, 198)' }}>
         <NavBar />
-        <NavLink to="/favorites">Favorites</NavLink>
-
         <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
           {/* Filtrados */}
           <div
@@ -353,24 +353,23 @@ export default function AllCourses() {
                   className="mb-3 font-normal text-gray-700">
                   {course.description}
                 </p>
-<<<<<<< HEAD
-                <span 
-                    style={{
-                      fontSize: 15,
-                      display: "flex",
-                      color: "rgb(201, 196, 184)",
-                      justifyContent: "center",
-                      paddingTop: 10,
-                      paddingBottom: 20,
-                      paddingLeft: 35,
-                      paddingRight: 35,
-                      textAlign: "center"
-                    }}
-                  >
-                    <strong>Time Inversion: </strong>
-                    {finallyOneDuration(course.duration)}
-                  </span>
-                    <div style={{
+                <span
+                  style={{
+                    fontSize: 15,
+                    display: "flex",
+                    color: "rgb(201, 196, 184)",
+                    justifyContent: "center",
+                    paddingTop: 10,
+                    paddingBottom: 20,
+                    paddingLeft: 35,
+                    paddingRight: 35,
+                    textAlign: "center"
+                  }}
+                >
+                  <strong>Time Inversion: </strong>
+                  {finallyOneDuration(course.duration)}
+                </span>
+                <div style={{
                           display: "flex",
                           justifyContent: "center",
                           alignContent: "center",
@@ -390,42 +389,32 @@ export default function AllCourses() {
                         </NavLink>
                       </button>
                     </div>
-=======
-                <span
-                  style={{
-                    fontSize: 15,
-                    display: "flex",
-                    color: "rgb(201, 196, 184)",
-                    justifyContent: "center",
-                    paddingTop: 10,
-                    paddingBottom: 20,
-                    paddingLeft: 35,
-                    paddingRight: 35,
-                    textAlign: "center"
-                  }}
-                >
-                  <strong>Time Inversion: </strong>
-                  {finallyOneDuration(course.duration)}
-                </span>
-                <NavLink
-                  to={`/course/${course._id}`}
-                  style={{
-                    color: "white",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignContent: "center",
-                  }}
-                >
-                  <button
-                    style={{
-                      backgroundColor: "rgb(17, 52, 82)",
-                      color: "rgb(201, 196, 184)",
-                    }}
-                    className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200">
-                    Read more
-                  </button>
-                </NavLink>
-                <img onClick={() => {
+                    <div style={{
+                          display: "flex",
+                          justifyContent: "end",
+                          alignContent: "center",
+                          maxWidth: 350,
+                          marginTop: 10,
+                          cursor: "pointer"
+                        }}>
+                          {favoritesUser.find(e => e._id === course._id) ? 
+                          <svg
+                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                          </svg>
+                          :
+                          <svg 
+                          onClick={() => {
+                            userNuevo.favorites.push(course)
+                            dispatch(updateUser(userNuevo, userNuevo._id))
+                            setFavoritoAgregado(favoritoAgregado)
+                          }}
+                          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                          </svg>
+                          }
+                  </div>
+                {/* <img onClick={() => {
                     
                     
 
@@ -440,19 +429,15 @@ export default function AllCourses() {
 
 
 
-                }} src={fav}></img>
->>>>>>> agustin
+                }} src={fav}></img> */}
 
               </div>
             </div>
           ))}
         </div>
-<<<<<<< HEAD
-=======
         <h2 className="bg-green-300 bg-gray-700">{favoritoAgregado}</h2>
         
 
->>>>>>> agustin
         <Footer />
       </div>
     );

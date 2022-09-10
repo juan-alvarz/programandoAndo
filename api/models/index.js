@@ -3,6 +3,7 @@ const models = {
   schoolModel: require("./School"),
   courseModel: require("./Course"),
   videoModel: require("./Video"),
+  notificationModel: require('./Notifications'),
 };
 
 module.exports = models;
