@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import {
   getCourses,
   getCourseById,
@@ -24,6 +25,7 @@ import {
   getCourse3h,
   getSession,
   favoriteCourse,
+  getNotifications
 } from "./slice";
 
 // ============================ Courses ============================
@@ -83,8 +85,8 @@ export const getCourse = (id) => (dispatch) => {
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
 };
-export const favorite = (course) => (dispatch) => {
-  dispatch(favoriteCourse(course));
+export const favorite = (payload) => (dispatch) => {
+  dispatch(favoriteCourse(payload));
 };
 
 export const updateUser = (payload, id) => async (dispatch) => {
@@ -233,6 +235,91 @@ export function orderByName(payload) {
     payload,
   };
 }
+
+// =========================== Delete ===========================
+export function deleteSchoolById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/schools/${id}`)
+      .then(() => {
+        alert("Se elimino");
+        return dispatch({
+          type: "DELETE_SCHOOL",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function deleteCourseById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/courses/${id}`)
+      .then(() => {
+        Swal.fire({
+          title: "Course Delete",
+          text: "Course Deleted Successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        return dispatch({
+          type: "DELETE_COURSE",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function deleteVideoById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/videos/${id}`)
+      .then(() => {
+        alert("Se elimino");
+        return dispatch({
+          type: "DELETE_VIDEO",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function deleteUserById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/users/${id}`)
+      .then(() => {
+        alert("Se elimino");
+        return dispatch({
+          type: "DELETE_USER",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+// =========================== Notification ===========================
+
+export function deleteNotificationById(id) {
+  return async function (dispatch) {
+    await axios
+      .delete(`http://localhost:3001/api/notifications/${id}`)
+      .then(() => {
+        alert("Se elimino");
+        return dispatch({
+          type: "DELETE_NOTIFICATION",
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export const getAllNotifications = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/notifications")
+    .then((res) => dispatch(getNotifications(res.data)))
+    .catch((e) => console.log(e));
+};
 
 // ============================ Clear ============================
 // export function clearFilter() {

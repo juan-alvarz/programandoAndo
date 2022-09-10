@@ -7,6 +7,7 @@ import Agus from '../utils/images/AgustinAboutUs1.png'
 import Fran from '../utils/images/FrancoAboutUs1.png'
 import Dani from '../utils/images/DanielAboutUs1.png'
 import Juan from '../utils/images/JuanAboutUs1.png'
+import Roge from '../utils/images/RogelioAboutUs1.png'
 
 function AboutUs() {
   return (
@@ -45,27 +46,7 @@ function AboutUs() {
             <ul className="flex justify-center mt-4 space-x-4">
               <li>
                 <a
-                  href="#"
-                  style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white"
-                >
-                  <svg
-                    className="w- h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="https://github.com/frangiuliano"
                   style={{ color: "rgb(168, 76, 101)" }}
                   className="text-gray-200 hover:text-white"
                 >
@@ -85,7 +66,7 @@ function AboutUs() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/francosebastiangiuliano/"
                   style={{ color: "rgb(168, 76, 101)" }}
                   className="text-[#ea4c89] hover:text-gray-900"
                 >
@@ -118,27 +99,7 @@ function AboutUs() {
             <ul className="flex justify-center mt-4 space-x-4">
               <li>
                 <a
-                  href="#"
-                  style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="https://github.com/Santy1707"
                   style={{ color: "rgb(168, 76, 101)" }}
                   className="text-gray-200 hover:text-white"
                 >
@@ -158,7 +119,7 @@ function AboutUs() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/santiago-vega-53970b217/"
                   className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
@@ -190,27 +151,7 @@ function AboutUs() {
             <ul className="flex justify-center mt-4 space-x-4">
               <li>
                 <a
-                  href="#"
-                  style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="https://github.com/Luchobd"
                   style={{ color: "rgb(168, 76, 101)" }}
                   className="text-gray-200 hover:text-white"
                 >
@@ -230,7 +171,7 @@ function AboutUs() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/luis-wuilfredo-blanco-delgado-b47619207/"
                   className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
@@ -262,27 +203,7 @@ function AboutUs() {
             <ul className="flex justify-center mt-4 space-x-4">
               <li>
                 <a
-                  href="#"
-                  style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="https://github.com/juan-alvarz"
                   style={{ color: "rgb(168, 76, 101)" }}
                   className="text-gray-200 hover:text-white"
                 >
@@ -302,7 +223,7 @@ function AboutUs() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/juan-alvarez-8857aa18b/"
                   className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
@@ -334,27 +255,7 @@ function AboutUs() {
             <ul className="flex justify-center mt-4 space-x-4">
               <li>
                 <a
-                  href="#"
-                  style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="https://github.com/DanielFMartinezC"
                   style={{ color: "rgb(168, 76, 101)" }}
                   className="text-gray-200 hover:text-white"
                 >
@@ -374,7 +275,7 @@ function AboutUs() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/daniel-felipe-mart%C3%ADnez-cubillos-904551241/"
                   className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
@@ -393,8 +294,8 @@ function AboutUs() {
           <div className="text-center text-gray-500">
             <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
-              alt="Leslie Avatar"
+              src={Roge}
+              alt="Roge Avatar"
             />
             <h3
               style={{ color: "rgb(55, 109, 109)" }}
@@ -406,27 +307,7 @@ function AboutUs() {
             <ul className="flex justify-center mt-4 space-x-4">
               <li>
                 <a
-                  href="#"
-                  style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="https://github.com/Danzsv"
                   style={{ color: "rgb(168, 76, 101)" }}
                   className="text-gray-200 hover:text-white"
                 >
@@ -446,7 +327,7 @@ function AboutUs() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/rogelio-sandoval/"
                   className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
@@ -478,27 +359,7 @@ function AboutUs() {
             <ul className="flex justify-center mt-4 space-x-4">
               <li>
                 <a
-                  href="#"
-                  style={{ color: "rgb(168, 76, 101)" }}
-                  className="text-[#39569c] hover:text-white"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
+                  href="https://github.com/agu6692"
                   style={{ color: "rgb(168, 76, 101)" }}
                   className="text-gray-200 hover:text-white"
                 >
@@ -518,7 +379,7 @@ function AboutUs() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/juan-agust%C3%ADn-figueredo-56a416194/"
                   className="text-[#ea4c89] hover:text-gray-900"
                 >
                   <svg
