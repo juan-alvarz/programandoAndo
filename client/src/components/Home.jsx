@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import data from "../utils/data";
 import Footer from "./Footer";
 import SearchBar from "./SearchBar";
-import { getVideoById, clearFilter,getAllCourses } from "../redux/actions";
+import { getVideoById, clearFilter, getAllNotifications } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
@@ -16,8 +16,8 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getVideoById(idVideo));
-    dispatch(getAllCourses())
+    dispatch(getVideoById(idVideo))
+    dispatch(getAllNotifications());
   }, [dispatch]);
   return (
     <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
@@ -34,7 +34,7 @@ function Home() {
                 class="text-xl sm:text-3xl font-bold leading-tight mb-3 capitalize "
               >
                 {" "}
-                THE ONLY THING YOU NEED TO DO IS TO MAKE THE DECISION TO START
+                THE ONLY THING YOU NEED TO DO IS TO TAKE THE DECISION TO START
                 STUDYING. THE WAY IS GIVEN TO YOU BY US{" "}
               </h1>
               <br />

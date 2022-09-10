@@ -73,37 +73,7 @@ function Courses() {
     return object;
   };
 
-
   //-----------------------------------------------
-
-  
-
-    
-
-    
-
-    
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
   return (
     <div style={{backgroundColor: 'rgb(198, 198, 198)'}}>
