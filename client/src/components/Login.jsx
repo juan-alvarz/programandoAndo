@@ -8,6 +8,8 @@ import { userLogin } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
 import NavBar from "./NavBar";
+import Swal from "sweetalert2";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -68,11 +70,25 @@ export default function Login() {
           setTimeout(function () {
             navigate("/");
           }, 2000);
+          Swal.fire({
+            title: "Successful login",
+            text: "You are being redirected to the home",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          })
         } else {
           setError("login incorrecto");
           setTimeout(function () {
             setError("");
           }, 2000);
+          Swal.fire({
+            title: "Unsuccessful login",
+            text: "You must log in with an existing account",
+            icon: "error",
+            timer: 2000,
+            showConfirmButton: false,
+          })
         }
       }, 500);
     }
@@ -163,7 +179,7 @@ export default function Login() {
           Don't have an account?
           <a
             href="/register"
-            className="font-medium text-blue-600 hover:underline"
+            className="font-medium text-blue-600 hover:underline ml-2"
           >
             Sign up
           </a>

@@ -57,9 +57,9 @@ function App() {
           <Route path="/administrator" element={<Administrator />} />
           <Route path="/baneos" element={<Baneos />} />
 
-          <Route path="*" element={<Error404 />} />
           <Route path="/favorites" element={<Favorites/>} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
     </BrowserRouter>

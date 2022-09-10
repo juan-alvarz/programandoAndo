@@ -38,7 +38,7 @@ export default function NavBar() {
     setTimeout(function () {
     
         navigate("/");
-    }, 2000
+    }, 1000
     )
   }
 
