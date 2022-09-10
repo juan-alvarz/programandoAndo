@@ -48,13 +48,16 @@ const getAllUsers = async (req, res, next) => {
 const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await usersModel.findById(id).populate({
-      path: "schools",
-      populate: {
-        path: "courses",
-        populate: { path: "videos" },
-      },
-    }).populate("favorites")
+    const user = await usersModel
+      .findById(id)
+      .populate({
+        path: "schools",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      })
+      .populate("favorites");
     if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);
@@ -62,11 +65,7 @@ const getUserById = async (req, res, next) => {
     }
     return res.json(user);
   } catch (e) {
-<<<<<<< HEAD
-    res.status(400).json(e.message);
-=======
     return res.send(e.message);
->>>>>>> Roge
   }
 };
 
