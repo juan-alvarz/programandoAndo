@@ -54,18 +54,6 @@ function CoursesPA() {
     });
   };
 
-  // function handleSelectPrueba(value) {
-  //   const find = course.find((i) => i.value === value.value);
-  //   if (!find) {
-  //     setCourse(value);
-  //     //  setValue(
-  //     //    "videos",
-  //     //    [...video, value].map((e) => e.value)
-  //     //  );
-  //     console.log(course);
-  //   }
-  // }
-
   const optionListCourses = courses?.map((course) => {
     return {
       value: course._id,
@@ -73,20 +61,40 @@ function CoursesPA() {
     };
   });
 
-  // const [course, setCourse] = useState([]);
   const [courseDelete, setCourseDelete] = useState();
   function handleSelectDelete(data) {
-    // const find = course.find((i) => i.value === data.value);
-    // if (!find) {
-    //   setCourse(data);
-    //   console.log(course);
-    // }
     setCourseDelete(data);
   }
 
   const [courseEdit, setEditCourse] = useState();
+  const [render, setRender] = useState({
+    name: "",
+    description: "",
+    image: "",
+    videos: [],
+  });
   function handleSelectEdit(data) {
+    const find = courses.find((course) => course._id === data.value);
+    console.log(find);
     setEditCourse(data);
+
+    if (find) {
+      setRender({
+        name: find.name,
+        description: find.description,
+        image: find.image,
+        videos: find.videos,
+      });
+    }
+  }
+  console.log(courseEdit);
+  console.log(render);
+
+  function handleChange(e) {
+    setRender({
+      ...render,
+      [e.target.name]: e.target.value,
+    });
   }
 
   // Create Course
@@ -114,6 +122,8 @@ function CoursesPA() {
     const videoFilter = video.filter((v) => v !== value);
     setVideo(videoFilter);
   };
+
+  // ============ HendleEdit =================
 
   // ============ Delete =================
   const handleDeleteCourse = (id) => {
@@ -270,12 +280,26 @@ function CoursesPA() {
                 onChange={handleSelectEdit}
                 isSearchable={true}
               />
+
               <div className="flex justify-end items-center my-4 mt-10">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 ">
                   Edit
                 </button>
               </div>
             </form>
+            <div>
+              {render &&
+                [render].map((r) => (
+                  <form action="">
+                    <input
+                      type="text"
+                      name="name"
+                      value={render.name}
+                      onChange={() => handleChange()}
+                    />
+                  </form>
+                ))}
+            </div>
           </div>
         </div>
 

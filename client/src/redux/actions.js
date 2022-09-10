@@ -24,8 +24,8 @@ import {
   getCourse5h,
   getCourse3h,
   getSession,
-  favoriteCourse,
-  getNotifications
+  getFavoriteCourse,
+  getNotifications,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -85,8 +85,8 @@ export const getCourse = (id) => (dispatch) => {
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
 };
-export const favorite = (payload) => (dispatch) => {
-  dispatch(favoriteCourse(payload));
+export const getFavorites = (payload) => (dispatch) => {
+  dispatch(getFavoriteCourse(payload));
 };
 
 export const updateUser = (payload, id) => async (dispatch) => {
@@ -191,12 +191,12 @@ export const googleUserLogin = (payload) => async (dispatch) => {
   return response;
 };
 
-/*export const login = (payload) => async (dispatch) => {
-  const response = await axios.post("http://localhost:3001/api/user", payload);
-  dispatch(loginUser(response.data))
-
+export const verifyUser = async (code) => {
+  const response = await axios.get(
+    `http://localhost:3001/api/users/ath/confirm/${code}`
+  );
+  return response.data;
 };
-*/
 
 // ============================ Videos ============================
 export const getAllVideos = () => (dispatch) => {

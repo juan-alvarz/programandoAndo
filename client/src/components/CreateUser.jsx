@@ -127,10 +127,11 @@ export default function CreateUser() {
     setValue("country", data.label);
   }
 
+  const uppInitial = (str) => str[0].toUpperCase() + str.slice(1);
   const optionLanguages = languages?.map((leng) => {
     return {
       value: leng,
-      label: leng,
+      label: uppInitial(leng),
     };
   });
 
