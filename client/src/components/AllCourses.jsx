@@ -24,7 +24,7 @@ export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const dispatch = useDispatch();
   const {favoritesUser} = useSelector((state) => state.programandoando);
-  console.log(favoritesUser)
+  // console.log(favoritesUser)
 
   // =============== Paginado ==========================
   const [cursoActual, setCursoActual] = useState(1);

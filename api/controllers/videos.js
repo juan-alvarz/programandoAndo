@@ -26,7 +26,7 @@ const getVideo = async (req, res) => {
     const { id } = req.params;
     if (id) {
       const videoId = await Video.findById(id); //.populate('foro')
-      console.log(videoId.foro);
+      // console.log(videoId.foro);
       if (!videoId) {
         return res.status(404).json({ message: "inexistent id" });
       }
