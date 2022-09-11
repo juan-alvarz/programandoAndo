@@ -39,17 +39,23 @@ function SuccessDonation() {
       return (
         <div>
           <NavBar />
-          <div style={{ display: "flex" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <div>
               <h1>Success Donation!</h1>
             </div>
             <div>
-              {/* <span>
+              <span>
                 thanks for contributing to the page, remember that all the
-                content is totally free, the donation helps to keep the page on
-                the air and now you enter the list of people who have helped
-                keep it going
-              </span> */}
+                content is totally free, the donation helps to keep the page and
+                now you enter the list of people who have helped keep it going,
+                here you are a special gift for you, keep it learning!
+              </span>
               <div>
                 <a
                   href="#"
@@ -62,6 +68,7 @@ function SuccessDonation() {
                     class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
                     src={logo}
                     alt="not found"
+                    style={{ padding: "5px" }}
                   />
                   <div class="flex flex-col justify-between p-4 leading-normal">
                     <h5
@@ -71,10 +78,11 @@ function SuccessDonation() {
                       {userToUpdate.username} is a new contributor!
                     </h5>
                     <p class="mb-3 font-normal" style={{ color: "#113452" }}>
-                      we want to thank <strong>{userToUpdate.username}</strong>
+                      we want to thank <strong>{userToUpdate.username}</strong>{" "}
                       for contributing to <strong>programandoando</strong> and
-                      help support it, voluntarily contributing {amount} and has
-                      collaborated with {amount + currentAmount} in total.
+                      help support it, voluntarily contributing {amount} USD and
+                      has collaborated with {amount + currentAmount} USD in
+                      total.
                       <br />
                       Thanks you so much {userToUpdate.username}
                     </p>
