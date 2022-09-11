@@ -65,7 +65,7 @@ const createVideo = async (req, res) => {
       foro: myforo._id
     });
     await newVideo.save();
-    return res.status(200).json(newVideo);
+    return res.status(200).json({video: newVideo, foro: myforo});
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

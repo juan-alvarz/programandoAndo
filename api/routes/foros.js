@@ -18,7 +18,7 @@ const router = express.Router();
 
 router.get("/", getForos);
 
-router.get("/:id", validatorGetForoById, getForoById);
+router.get("/:id", getForoById);
 
 router.post("/", validatorGetorCreateForo, createForo);
 
