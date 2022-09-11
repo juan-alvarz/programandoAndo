@@ -236,13 +236,51 @@ export function orderByName(payload) {
   };
 }
 
+// =========================== Uppdate ===========================
+export const uppdateVideo = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/videos/${id}`,
+    payload
+  );
+  return response;
+};
+
+export const uppdateCourse = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/courses/${id}`,
+    payload
+  );
+  return response;
+};
+
+export const uppdateSchool = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/schools/${id}`,
+    payload
+  );
+  return response;
+};
+
+export const uppdateUser = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/users/${id}`,
+    payload
+  );
+  return response;
+};
+
 // =========================== Delete ===========================
 export function deleteSchoolById(id) {
   return async function (dispatch) {
     await axios
       .delete(`http://localhost:3001/api/schools/${id}`)
       .then(() => {
-        alert("Se elimino");
+        Swal.fire({
+          title: "Delete School",
+          text: "Delete School Successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
         return dispatch({
           type: "DELETE_SCHOOL",
         });
@@ -273,9 +311,15 @@ export function deleteCourseById(id) {
 export function deleteVideoById(id) {
   return async function (dispatch) {
     await axios
-      .delete(`http://localhost:3001/api/videos/${id}`)
+      .delete(`http://localhost:3001/api/videos/softDelete/${id}`)
       .then(() => {
-        alert("Se elimino");
+        Swal.fire({
+          title: "Delete Video",
+          text: "Delete Video Successfully",
+          icon: "success",
+          confirmButtonText: "Back",
+        });
+
         return dispatch({
           type: "DELETE_VIDEO",
         });

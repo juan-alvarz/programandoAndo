@@ -28,6 +28,7 @@ import { Favorites } from "./components/Favorites";
 import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
+import Settings from "./components/panelAdmin/Settings";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
           <Route path="/userspa" element={<UsersPA />} />
           <Route path="/administrator" element={<Administrator />} />
           <Route path="/baneos" element={<Baneos />} />
+          <Route path="/setting" element={<Settings />} />
           <Route path="/execute-payment" element={<SuccessDonation />} />
           <Route path="/cancel-payment" element={<CancelDonation />} />
 
