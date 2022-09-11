@@ -7,6 +7,7 @@ import axios from "axios";
 export default function HearthFav({ course,userObj }) {
   const { user } = useSelector((state) => state.programandoando);
   const { favoritesUser } = useSelector((state) => state.programandoando);
+  console.log(favoritesUser)
   // console.log(favoritesUser)
   // const dispatch = useDispatch();
   
