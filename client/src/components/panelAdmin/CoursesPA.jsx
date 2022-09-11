@@ -9,6 +9,7 @@ import {
   getAllVideos,
   deleteCourseById,
   createsCourse,
+  uppdateCourse,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
@@ -17,6 +18,8 @@ function CoursesPA() {
   const dispatch = useDispatch();
 
   const { videos, courses } = useSelector((state) => state.programandoando);
+  // const courseSlice = useSelector((state) => state.programandoando.course);
+  // console.log(courseSlice);
 
   useEffect(() => {
     dispatch(getAllCourses());
@@ -92,16 +95,39 @@ function CoursesPA() {
   }
 
   const [videoEdit, setVideoEdit] = useState([]);
-  function handleSelecVideos(value) {
+
+  async function handleSelectVideos(value) {
     const find = video.find((i) => i.value === value.value);
     if (!find) {
       setVideoEdit([...videoEdit, value]);
+
+      const idVideosEdit = videoEdit.map((e) => {
+        return { _id: e.value };
+      });
+      const idVideosRender = render.videos.map((e) => {
+        return { _id: e._id };
+      });
+
+      const videos = [...idVideosRender, ...idVideosEdit];
+      // setRender([...render, videos]);
+
+      () => {
+        setRender({
+          ...render,
+          ["video"]: videos,
+        });
+      };
+
+      // setRender([...render, :])
       // setVideoEdit(
       //   "videos",
       //   [...videoEdit, value].map((e) => e.value)
       // );
     }
   }
+  console.log(videos);
+  console.log(render);
+  console.log(videoEdit);
 
   function handleChange(e) {
     console.log(render);
@@ -143,13 +169,16 @@ function CoursesPA() {
   };
 
   const handleSubmitEdit = (e) => {
+    const get = getValues();
     e.preventDefault();
-    // dispatch(createsCourse(inputs));
     console.log(render);
+    dispatch(uppdateCourse(render));
   };
-  // ============ HendleEdit =================
 
-  // ============ Delete =================
+  useEffect(() => {
+    console.log(render);
+  }, [render]);
+
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
   };
@@ -354,7 +383,7 @@ function CoursesPA() {
                   <div key={index} className="text-center">
                     <span
                       className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                      onClick={() => handleDeleteEdit(v)}
+                      // onClick={() => handleDeleteEdit(v)}
                     >
                       {v.name}
                     </span>
@@ -367,7 +396,7 @@ function CoursesPA() {
                 options={optionListVideos}
                 placeholder="All Videos"
                 value={videoEdit} //pendiente
-                onChange={handleSelecVideos}
+                onChange={handleSelectVideos}
                 isSearchable={true}
               />
               <div

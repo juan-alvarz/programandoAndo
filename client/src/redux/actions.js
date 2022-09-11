@@ -235,6 +235,39 @@ export function orderByName(payload) {
   };
 }
 
+// =========================== Uppdate ===========================
+export const uppdateVideo = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/videos/${id}`,
+    payload
+  );
+  return response;
+};
+
+export const uppdateCourse = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/courses/${id}`,
+    payload
+  );
+  return response;
+};
+
+export const uppdateSchool = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/schools/${id}`,
+    payload
+  );
+  return response;
+};
+
+export const uppdateUser = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/users/${id}`,
+    payload
+  );
+  return response;
+};
+
 // =========================== Delete ===========================
 export function deleteSchoolById(id) {
   return async function (dispatch) {

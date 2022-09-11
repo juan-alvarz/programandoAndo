@@ -4,6 +4,7 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { difficult } from "../../utils/difficult";
 import {
   getAllVideos,
   deleteVideoById,
@@ -14,7 +15,6 @@ import {
 
 function VideosPA() {
   const dispatch = useDispatch();
-
   const { videos } = useSelector((state) => state.programandoando);
 
   useEffect(() => {
@@ -37,6 +37,13 @@ function VideosPA() {
       duration: "",
       difficult: "",
     },
+  });
+
+  const optionDifficult = difficult?.map((dif) => {
+    return {
+      value: dif,
+      label: dif,
+    };
   });
 
   const onSubmit = (data) => {
@@ -75,6 +82,12 @@ function VideosPA() {
   const handleDeleteCourse = (id) => {
     dispatch(deleteVideoById(id));
   };
+
+  const [selectedDifficult, setSelectedDifficult] = useState("");
+  function handleSelectDifficult(data) {
+    setSelectedDifficult(data);
+    setValue("difficult", data.label);
+  }
   return (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
@@ -155,21 +168,23 @@ function VideosPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
-                Difficult
-              </label>
-              <input
-                name="difficult"
-                type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
-                placeholder="Difficult"
-                {...register("difficult", {
-                  required: true,
-                })}
-              />
-              {errors.name?.type === "required" && (
-                <small className="text-red-600 font-bold">Input empty</small>
-              )}
+              <div className="mt-4">
+                <label
+                  htmlFor="Difficult"
+                  className="block text-sm font-bold text-black undefined"
+                >
+                  Language
+                </label>
+                <Select
+                  name="difficult"
+                  options={optionDifficult}
+                  placeholder="Difficult"
+                  value={selectedDifficult}
+                  onChange={handleSelectDifficult}
+                  isSearchable={false}
+                  className="font-semibold"
+                />
+              </div>
 
               <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Profile Video

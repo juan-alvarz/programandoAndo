@@ -157,6 +157,20 @@ export const slice = createSlice({
 
       state.stateFilter = sortedAlf;
     },
+    // ============== Edit =====================
+    uppdateSchool: (state) => {
+      return { ...state };
+    },
+    uppdateCourse: (state) => {
+      return { ...state };
+    },
+    uppdateVideo: (state) => {
+      return { ...state };
+    },
+    uppdateUser: (state) => {
+      return { ...state };
+    },
+
     // ============== Delete ====================
     deleteSchool: (state) => {
       return { ...state };
@@ -207,6 +221,10 @@ export const {
   deleteVideo,
   deleteUser,
   deleteNotifications,
+  uppdateSchool,
+  uppdateCourse,
+  uppdateVideo,
+  uppdateUser,
 } = slice.actions;
 
 export default slice.reducer;
