@@ -1,49 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getVideoById, clearVideo, getCourse, getForoById , updateForo} from "../redux/actions";
+import {
+  getVideoById,
+  clearVideo,
+  getCourse,
+  getForoById,
+  updateForo,
+} from "../redux/actions";
 import NavBar from "./NavBar";
 import { Videos } from "./Videos";
+import Loader from "./Loader";
 
 export default function Video() {
-  const { video, course, foro } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const { idCourse } = useParams();
   const { idUser } = useParams();
+  const { video, course, foro } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
 
-
-const [comment, setComment] = useState({
+  const [comment, setComment] = useState({
     content: "",
     authorComment: idUser,
-    commentId: ""
-})
+    commentId: "",
+  });
 
-  function handleChange (e) {
+  function handleChange(e) {
     setComment({
       ...comment,
-      [e.target.value]: e.target.value
-    }) 
+      [e.target.value]: e.target.value,
+    });
   }
 
-  function handleSubmit (e) {
+  function handleSubmit(e) {
     e.preventDefault();
     console.log(comment);
-    dispatch(updateForo( video.foro, comment))
+    dispatch(updateForo(video.foro, comment));
   }
 
-useEffect(() => {
+  useEffect(() => {
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
-    dispatch(getForoById(video.foro))
-}, [idVideo]);
+    //dispatch(getForoById(video.foro));
+  }, [idVideo]);
 
+  useEffect(() => {
+    dispatch(getForoById(video.foro));
+  });
 
   if (!Object.keys(course).length) {
-    return <h2>Cargando Video!</h2>;
+    return <Loader />;
   } else {
-    console.log(video.foro)
-    console.log(foro)
+    console.log(video.foro);
+    console.log(foro);
     return (
       <div style={{ width: "100%" }}>
         <NavBar />
@@ -113,17 +122,20 @@ useEffect(() => {
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
         <div>
-    
-    
-    <input
-      type = 'text'
-      value = {comment.content}
-      placeholder="Comment...)"
-      onChange={(e)=> handleChange(e)}
-    />
+          <input
+            type="text"
+            value={comment.content}
+            placeholder="Comment...)"
+            onChange={(e) => handleChange(e)}
+          />
 
-    {/* 
-    <h1>{foro.comments[2].content}</h1>
+          {Object.keys(foro).length ? (
+            foro.comments.map((comment) => <h2>{comment.content}</h2>)
+          ) : (
+            <h2>No se cumplió master</h2>
+          )}
+          {/* 
+          <h1>{foro.comments[2].content}</h1>
 
     <h1>{foro.comments[2].content}</h1>
 
@@ -137,19 +149,28 @@ useEffect(() => {
         <h1>{foro.comments[2].answers[0].content}</h1>
 
         */}
-        <input
-      type = 'text'
-      value = {comment.content}
-      placeholder="Comment...)"
-      onChange={(e)=> handleChange(e)}
-    />
-     <button className="button" type='submit'
-        onClick={(e)=> handleSubmit(e)}>Send</button>
-
+          <input
+            type="text"
+            value={comment.content}
+            placeholder="Comment...)"
+            onChange={(e) => handleChange(e)}
+          />
+          <button
+            className="button"
+            type="submit"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Send
+          </button>
         </div>
+        {/* <div>
+        <h1>
+          {foro.comments.map((comment) => (
+            <h1>{comment.content}</h1>
+          ))}
+        </h1>
+        </div> */}
       </div>
     );
   }
 }
-
-{/* foro.comment */}
