@@ -106,8 +106,21 @@ const restoreVideo = async (req, res, next) => {
 const updateVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { body } = req.body;
-    const data = await Video.updateOne({ _id: id }, body);
+    const { name, author, duration, difficult, profile, url, description } =
+      req.body;
+    console.log(req.body);
+    const data = await Video.updateOne(
+      { _id: id },
+      {
+        name,
+        author,
+        duration,
+        difficult,
+        profile,
+        url,
+        description,
+      }
+    );
     if (!data.modifiedCount) {
       res.status(422);
       return res.send("Fail in the query");
