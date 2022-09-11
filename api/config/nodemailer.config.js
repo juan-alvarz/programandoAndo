@@ -57,10 +57,13 @@ const sendEmailDonation = (name, email, amount) => {
       from: accountTransport.auth.user,
       to: email,
       subject: "Thanks for you donation",
-      html: `<h1>You are collab with programandoando.com</h1>
-        <h2>Hello ${name}</h2>
-        <p>Thank you for donate to our platform.
-          You collab with ${amount} USD
+      html: `<h1>You have collaborated with <strong>programandoando</strong></h1>
+        <h2>Hello ${name}!</h2>
+        <p>
+        Thanks for your donation, it is a very valuable contribution to the support
+        of the page and the maintenance of the same.
+        </br>
+        You contributed with ${amount} USD
         </p>
         </div>`,
     })

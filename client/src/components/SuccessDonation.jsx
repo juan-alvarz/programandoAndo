@@ -7,27 +7,26 @@ import Loader from "./Loader";
 import { NavLink } from "react-router-dom";
 import logo from "../utils/images/LOGOPA.png";
 
-export default function SuccessDonation() {
+//version alternativa
+function SuccessDonation() {
   const dispatch = useDispatch();
-  const userToUpdate = useSelector((state) => state.programandoando.user);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  const idUpdate = currentUser.user._id;
   useEffect(() => {
-    dispatch(getUser(userUpdateId));
+    dispatch(getUser(idUpdate));
   }, [dispatch]);
-
-  const user = JSON.parse(localStorage.getItem("user"));
-  const userUpdateId = user.user._id;
-  const currentAmount = userToUpdate.contributor;
-
-  var amount = JSON.parse(localStorage.getItem("amount"));
-
+  const userToUpdate = useSelector((state) => state.programandoando.user);
   if (Object.keys(userToUpdate).length === 0) {
     return <Loader />;
   } else {
-    if (currentAmount && amount !== 0 && amount !== null) {
+    const currentAmount = userToUpdate.contributor;
+    const amount = JSON.parse(localStorage.getItem("amount"));
+    //si hay amount, se dispacha lo siguiente
+    if (amount) {
       console.log("el amount existe y no es nulo");
       const payload = { contributor: amount + currentAmount };
       console.log(payload);
-      dispatch(updateUser(payload, userUpdateId))
+      dispatch(updateUser(payload, idUpdate))
         .then(console.log("actualizado con exito"))
         .then(
           axios.post(`http://localhost:3001/api/users/emailDonationSuccess/`, {
@@ -37,8 +36,6 @@ export default function SuccessDonation() {
           })
         )
         .then(localStorage.removeItem("amount"));
-
-      /* Renderizado */
       return (
         <div>
           <NavBar />
@@ -47,16 +44,19 @@ export default function SuccessDonation() {
               <h1>Success Donation!</h1>
             </div>
             <div>
-              <span>
+              {/* <span>
                 thanks for contributing to the page, remember that all the
                 content is totally free, the donation helps to keep the page on
                 the air and now you enter the list of people who have helped
                 keep it going
-              </span>
+              </span> */}
               <div>
                 <a
                   href="#"
-                  class="flex flex-col items-center rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700"
+                  className="flex flex-col items-center rounded-lg border shadow-md md:flex-row md:max-w-xl bg-gradient-to-r from-sky-200 to-red-200"
+                  style={{
+                    border: "1px solid #113452",
+                  }}
                 >
                   <img
                     class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
@@ -64,14 +64,19 @@ export default function SuccessDonation() {
                     alt="not found"
                   />
                   <div class="flex flex-col justify-between p-4 leading-normal">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5
+                      class="mb-2 text-2xl font-bold tracking-tight"
+                      style={{ color: "#113452" }}
+                    >
                       {userToUpdate.username} is a new contributor!
                     </h5>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                      we want to thank {userToUpdate.username} for contributing
-                      to <strong>programandoando</strong> and help support it,
-                      voluntarily contributing {amount} USD at this time and has
-                      collaborated {userToUpdate.contributor} USD in total
+                    <p class="mb-3 font-normal" style={{ color: "#113452" }}>
+                      we want to thank <strong>{userToUpdate.username}</strong>
+                      for contributing to <strong>programandoando</strong> and
+                      help support it, voluntarily contributing {amount} and has
+                      collaborated with {amount + currentAmount} in total.
+                      <br />
+                      Thanks you so much {userToUpdate.username}
                     </p>
                   </div>
                 </a>
@@ -81,9 +86,8 @@ export default function SuccessDonation() {
         </div>
       );
     } else {
-      console.log("no hay nada para actualizar pilluelo");
+      console.log("nada para donar");
       return (
-        /* renderizado */
         <div>
           <div>
             <NavBar />
@@ -127,3 +131,5 @@ export default function SuccessDonation() {
     }
   }
 }
+
+export default SuccessDonation;
