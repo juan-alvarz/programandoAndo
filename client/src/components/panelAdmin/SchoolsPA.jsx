@@ -7,16 +7,19 @@ import { useForm } from "react-hook-form";
 import {
   getAllSchools,
   getAllCourses,
-  deleteCourseById,
-  createsCourse,
+  deleteSchoolById,
+  createsSchool,
+  updateSchool
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
 
-function CoursesPA() {
+function SchoolsPA() {
   const dispatch = useDispatch();
 
   const { schools, courses } = useSelector((state) => state.programandoando);
+
+  // console.log(schools);
 
   useEffect(() => {
     dispatch(getAllSchools());
@@ -44,7 +47,7 @@ function CoursesPA() {
 
     handleSelect(course);
     console.log(data);
-    dispatch(createsCourse(get));
+    dispatch(createsSchool(get));
 
     Swal.fire({
       title: "Create Course",
@@ -54,42 +57,129 @@ function CoursesPA() {
     });
   };
 
-  // function handleSelectPrueba(value) {
-  //   const find = course.find((i) => i.value === value.value);
-  //   if (!find) {
-  //     setCourse(value);
-  //     //  setValue(
-  //     //    "videos",
-  //     //    [...video, value].map((e) => e.value)
-  //     //  );
-  //     console.log(course);
-  //   }
-  // }
-
-  const optionListSchools = schools?.map((course) => {
+  const optionListSchools = schools?.map((school) => {
     return {
-      value: course._id,
-      label: course.name,
+      value: school._id,
+      label: school.name,
     };
   });
 
-  // const [course, setCourse] = useState([]);
+  // ============ Edit School ============
+  const [schoolSelectValue, setSchoolSelectValue] = useState();
+  const [render, setRender] = useState({
+    name: "",
+    description: "",
+    image: "",
+    courses: [],
+  });
+
+  function handleSelectEdit(value) {
+    const findSelect = schools.find((school) => school._id === value.value);
+    
+    setSchoolSelectValue(value);
+    
+
+    if (findSelect) {
+      setRender({
+        name: findSelect.name,
+        description: findSelect.description,
+        image: findSelect.image,
+        courses: findSelect.courses,
+      });
+    }
+    // console.log(findSelect.courses);
+  }
+  console.log(schoolSelectValue)
+  const [courseEdit, setCourseEdit] = useState([]);
+  function handleSelectCourses(value) {
+    console.log(value)
+    const find = course.find((i) => i.value === value.value);
+    if (!find) {
+      setCourseEdit([...courseEdit, value]);
+      //  setVideoEdit(
+      //    "videos",
+      //    [...videoEdit, value].map((e) => e.value)
+      //  );
+    }
+  }
+  function handleSelectCourses(value) {
+    const find = courses.find((i) => i.value === value.value);
+    if (!find) {
+      setCourseEdit([...courseEdit, value]);
+    }
+  }
+  // console.log(courseEdit)
+  
+  const handleDeleteEditSchoold = (value) => {
+    console.log(value)
+    // console.log(render.courses)
+    // console.log(courseEdit)
+    const courseFilter = courseEdit.filter((v) => v.value !== value.value);
+    
+    setCourseEdit(courseFilter)
+    // setCourseEdit(courseFilter); // este borra todo.
+  };
+// console.log(courseEdit)
+let [contador,setContador] = useState(0)
+const handleDeleteRenderVideo = (e) => {
+  console.log(render.courses)
+  console.log(e)
+  const courseFilter = render.courses.filter((v) => v._id !== e._id);
+  console.log(courseFilter)
+  const uwu = render
+  uwu.courses = courseFilter    
+  setRender(uwu);
+  setContador(contador +1)
+  console.log(render)
+};
+
+const renderuwu = render
+const handleSubmitEdit = (e) => {
+  
+  e.preventDefault();
+     const idCoursesEdit = courseEdit.map((e) => {
+      return { _id: e.value };
+    });
+    const idCoursesRender = render.courses.map((e) => {
+      return { _id: e._id };
+    }); 
+
+    const newCourses = [...idCoursesRender, ...idCoursesEdit];
+    const coursesAdd = newCourses.map(e => e._id)
+    const uwu2 = {...renderuwu,addCourses: coursesAdd}
+  // setRender({
+  //   ...render,
+  //   ["addVideos"]: uwu2
+  // });
+  console.log(uwu2);
+  // console.log(schoolSelectValue)
+  dispatch(updateSchool(uwu2,schoolSelectValue.value));
+}; 
+
+  function handleChange(e) {
+    console.log(render);
+    setRender({
+      ...render,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  // const [courseEdit, setEditCourse] = useState();
+  // function handleSelectEdit(data) {
+  //   setEditCourse(data);
+  // }
+
+  // ========== Delete School ===========
   const [schoolDelete, setSchoolDelete] = useState();
   function handleSelectDelete(data) {
-    // const find = course.find((i) => i.value === data.value);
-    // if (!find) {
-    //   setCourse(data);
-    //   console.log(course);
-    // }
     setSchoolDelete(data);
   }
 
-  const [courseEdit, setEditCourse] = useState();
-  function handleSelectEdit(data) {
-    setEditCourse(data);
-  }
+  const handleDeleteCourse = (id) => {
+    dispatch(deleteSchoolById(id));
+  };
 
-  // Create Course
+  // ============ Create School =================
   const [course, setCourse] = useState([]);
   function handleSelect(value) {
     const find = course.find((i) => i.value === value.value);
@@ -103,22 +193,24 @@ function CoursesPA() {
     }
   }
 
-  const optionListCourses = courses?.map((video) => {
+  const optionListCourses = courses?.map((course) => {
     return {
-      value: video._id,
-      label: video.name,
+      value: course._id,
+      label: course.name,
     };
   });
 
   const handleDeleteSelect = (value) => {
+    
     const courseFilter = course.filter((v) => v !== value);
     setCourse(courseFilter);
+    // setCourseEdit(courseFilter); // este borra todo.
   };
-
-  // ============ Delete =================
-  const handleDeleteCourse = (id) => {
-    dispatch(deleteCourseById(id));
-  };
+  // const handleDeleteSelect = (value) => {
+  //   const videoFilter = video.filter((v) => v !== value);
+  //   setVideo(videoFilter);
+  // };
+ 
   return (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
@@ -256,6 +348,7 @@ function CoursesPA() {
             <form
               className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               action=""
+              onSubmit={(e) => handleSubmitEdit(e)}
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
                 Edit School
@@ -264,15 +357,105 @@ function CoursesPA() {
                 Select Schools
               </label>
               <Select
-                options={optionListCourses}
+                options={optionListSchools}
                 placeholder="Select school"
-                value={courseEdit}
+                value={schoolSelectValue}
                 onChange={handleSelectEdit}
                 isSearchable={true}
               />
+
+              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+                Form to Edit
+              </h2>
+              <input
+                name="name"
+                type="text"
+                value={render.name}
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="Name"
+                onChange={(e) => handleChange(e)}
+              />
+
+              <input
+                name="image"
+                type="text"
+                value={render.image}
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="http://..."
+                onChange={(e) => handleChange(e)}
+              />
+
+              <textarea
+                style={{ resize: "none" }}
+                name="description"
+                value={render.description}
+                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                placeholder="Description"
+                onChange={(e) => handleChange(e)}
+              />
+              <div
+                style={{
+                  overflow: "scroll",
+                  height: "160px",
+                  backgroundColor: "rgb(198, 198, 198)",
+                  borderRadius: 5,
+                  borderWidth: 2,
+                  borderColor: "white",
+                }}
+                className=""
+                // onChange={(e) => handleChange(e)}
+              >
+                {render.courses.map((v, index) => (
+                  <div key={index} className="text-center">
+                    <span
+                      className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
+                      onClick={() => handleDeleteRenderVideo(v)}
+                    >
+                      {v.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <Select
+                name="course"
+                options={optionListCourses}
+                placeholder="All Courses"
+                value={courseEdit}
+                onChange={handleSelectCourses}
+                isSearchable={true}
+              />
+              <div
+                style={{
+                  overflow: "scroll",
+                  height: "160px",
+                  backgroundColor: "rgb(198, 198, 198)",
+                  borderRadius: 5,
+                  borderWidth: 2,
+                  borderColor: "white",
+                }}
+                className=""
+                // onChange={(e) => handleChange(e)}
+              >
+                {/* {courseEdit.map((e) => e)} */}
+                {courseEdit.map((v, index) => (
+                  <div key={index} className="text-center">
+                    <span
+                      className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
+                      onClick={() => handleDeleteEditSchoold(v)}
+                    >
+                      {v.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
               <div className="flex justify-end items-center my-4 mt-10">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 ">
-                  Edit
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
+                  disabled={Object.entries(errors).length === 0 ? "" : true}
+                >
+                  Edit Course
                 </button>
               </div>
             </form>
@@ -330,4 +513,4 @@ function CoursesPA() {
   );
 }
 
-export default CoursesPA;
+export default SchoolsPA;

@@ -266,7 +266,42 @@ const verifyUser = async (req, res, next) => {
     }
   });
 };
+const updateFavorites = async (req, res) => {
+  const { id } = req.params;
 
+  const favorites = req.body;
+
+  const user = await usersModel.findById(id);
+  const data = await usersModel.updateOne(
+    { _id: id },
+    {
+      favorites: [...user.favorites, favorites[0]],
+    }
+  );
+  console.log(user.favorites);
+  res.status(201).send({ msg: "Added course favorite" });
+};
+
+const deleteFavorites = async (req, res) => {
+  const { id } = req.params;
+
+  const favorites = req.body;
+  // console.log(favorites);
+
+  const user = await usersModel.findById(id);
+  const userFavorites = user.favorites.map((e) => e.toString());
+
+  const newFavorites = userFavorites.filter((e) => e !== favorites[0]);
+  console.log(newFavorites);
+  const data = await usersModel.updateOne(
+    { _id: id },
+    {
+      favorites: newFavorites,
+    }
+  );
+  console.log(user);
+  res.status(201).send({ msg: "Course favorite deleted" });
+};
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -393,4 +428,6 @@ module.exports = {
   submitChangePass,
   changePasswordRequest,
   successDonation,
+  updateFavorites,
+  deleteFavorites,
 };
