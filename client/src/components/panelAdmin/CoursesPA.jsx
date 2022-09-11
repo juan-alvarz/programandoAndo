@@ -9,7 +9,7 @@ import {
   getAllVideos,
   deleteCourseById,
   createsCourse,
-  uppdateCourse,
+  updateCourse,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
@@ -70,7 +70,7 @@ function CoursesPA() {
   }
 
   // Edit Courses
-  const [course, setCourse] = useState([]);
+  const [update, setUpdate] = useState([]);
   const [courseEdit, setEditCourse] = useState();
   const [render, setRender] = useState({
     name: "",
@@ -111,13 +111,13 @@ function CoursesPA() {
       const videos = [...idVideosRender, ...idVideosEdit];
       // setRender([...render, videos]);
 
-      () => {
-        setRender({
-          ...render,
-          ["video"]: videos,
-        });
-      };
+      setRender({
+        ...render,
+        ["video"]: videos,
+      });
 
+      setUpdate({ ...render, ...update, ["video"]: videos });
+      console.log(update);
       // setRender([...render, :])
       // setVideoEdit(
       //   "videos",
@@ -125,9 +125,10 @@ function CoursesPA() {
       // );
     }
   }
-  console.log(videos);
-  console.log(render);
-  console.log(videoEdit);
+  console.log(update);
+  // console.log(videos);
+  // console.log(render);
+  // console.log(videoEdit);
 
   function handleChange(e) {
     console.log(render);
@@ -171,13 +172,13 @@ function CoursesPA() {
   const handleSubmitEdit = (e) => {
     const get = getValues();
     e.preventDefault();
-    console.log(render);
-    dispatch(uppdateCourse(render));
+    console.log(update);
+    dispatch(updateCourse(update));
   };
 
   useEffect(() => {
-    console.log(render);
-  }, [render]);
+    console.log(update);
+  }, [update]);
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));

@@ -48,13 +48,16 @@ const getAllUsers = async (req, res, next) => {
 const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await usersModel.findById(id).populate({
-      path: "schools",
-      populate: {
-        path: "courses",
-        populate: { path: "videos" },
-      },
-    });
+    const user = await usersModel
+      .findById(id)
+      .populate({
+        path: "schools",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      })
+      .populate("favorites");
     if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);
@@ -268,9 +271,11 @@ const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
+    console.log(body);
     const user = await usersModel.findById(id);
     const passwordUser = await usersModel.findById(id).select("password");
-    // console.log(passwordUser.password)
+    console.log(passwordUser.password);
+    console.log(body.password);
     console.log(user.role);
 
     if (body.password) {
