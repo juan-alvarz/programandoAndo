@@ -33,6 +33,9 @@ function VideosPA() {
       profile: "",
       url: "",
       description: "",
+      author: "",
+      duration: "",
+      difficult: "",
     },
   });
 
@@ -114,6 +117,54 @@ function VideosPA() {
                   //       ),
                   //   },
                   // })}
+                })}
+              />
+              {errors.name?.type === "required" && (
+                <small className="text-red-600 font-bold">Input empty</small>
+              )}
+
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                Author
+              </label>
+              <input
+                name="author"
+                type="text"
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="Author"
+                {...register("author", {
+                  required: true,
+                })}
+              />
+              {errors.name?.type === "required" && (
+                <small className="text-red-600 font-bold">Input empty</small>
+              )}
+
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                Duration
+              </label>
+              <input
+                name="duration"
+                type="text"
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="Duration"
+                {...register("duration", {
+                  required: true,
+                })}
+              />
+              {errors.name?.type === "required" && (
+                <small className="text-red-600 font-bold">Input empty</small>
+              )}
+
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                Difficult
+              </label>
+              <input
+                name="difficult"
+                type="text"
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="Difficult"
+                {...register("difficult", {
+                  required: true,
                 })}
               />
               {errors.name?.type === "required" && (
