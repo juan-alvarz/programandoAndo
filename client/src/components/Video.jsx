@@ -51,8 +51,6 @@ export default function Video() {
   if (!Object.keys(course).length) {
     return <Loader />;
   } else {
-    console.log(video.foro);
-    console.log(foro);
     return (
       <div style={{ width: "100%" }}>
         <NavBar />
@@ -128,7 +126,7 @@ export default function Video() {
             placeholder="Comment...)"
             onChange={(e) => handleChange(e)}
           />
-
+          {/* FORO FUNCIONAL */}
           {Object.keys(foro).length ? (
             foro.comments.map((comment) => <h2>{comment.content}</h2>)
           ) : (
@@ -163,13 +161,6 @@ export default function Video() {
             Send
           </button>
         </div>
-        {/* <div>
-        <h1>
-          {foro.comments.map((comment) => (
-            <h1>{comment.content}</h1>
-          ))}
-        </h1>
-        </div> */}
       </div>
     );
   }
