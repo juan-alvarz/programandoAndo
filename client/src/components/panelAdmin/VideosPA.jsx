@@ -9,6 +9,7 @@ import {
   getAllVideos,
   deleteVideoById,
   createsVideo,
+  updateVideo,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
@@ -66,10 +67,7 @@ function VideosPA() {
     setVideoDelete(data);
   }
 
-  const [courseEdit, setEditCourse] = useState();
-  function handleSelectEdit(data) {
-    setEditCourse(data);
-  }
+  
 
   const optionListVideos = videos?.map((video) => {
     return {
@@ -77,6 +75,54 @@ function VideosPA() {
       label: video.name,
     };
   });
+  // ============ Edit Videos ============
+  const [videosSelectValue, setVideosSelectValue] = useState();
+  const [render, setRender] = useState({
+    name: "",
+    author: "",
+    duration: "",
+    difficult: "",
+    profile: "",
+    url: "",
+    description: "",
+  });
+
+  function handleSelectEdit(value) {
+    const findSelect = videos.find((school) => school._id === value.value);
+
+    setVideosSelectValue(value);
+
+    if (findSelect) {
+      setRender({
+        name: findSelect.name,
+        author: findSelect.author,
+        duration: findSelect.duration,
+        difficult: findSelect.difficult,
+        profile: findSelect.profile,
+        url: findSelect.url,
+        description: findSelect.description,
+      });
+    }
+    // console.log(findSelect.courses);
+  }
+  console.log(videosSelectValue);
+  function handleChange(e) {
+    console.log(render);
+    setRender({
+      ...render,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const renderuwu = render;
+  
+  const handleSubmitEdit = (e) => {
+    e.preventDefault();
+    
+    console.log(renderuwu);
+    dispatch(updateVideo(renderuwu, videosSelectValue.value));
+  };
+  console.log(renderuwu.difficult)
 
   // ============ Delete =================
   const handleDeleteCourse = (id) => {
@@ -88,6 +134,18 @@ function VideosPA() {
     setSelectedDifficult(data);
     setValue("difficult", data.label);
   }
+  const [contador,setContador] = useState(0)
+  const [selectedDifficultEdit, setSelectedDifficultEdit] = useState("");
+  function handleSelectDifficultEdit(data) {
+    setSelectedDifficultEdit(data);
+    setRender({
+      ...render,
+      difficult : data.value
+    })    
+    setContador(contador+1)
+    // setValue("difficult", data.label);
+  }
+  // console.log(selectedDifficultEdit)
   return (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
@@ -173,7 +231,7 @@ function VideosPA() {
                   htmlFor="Difficult"
                   className="block text-sm font-bold text-black undefined"
                 >
-                  Language
+                  Difficult
                 </label>
                 <Select
                   name="difficult"
@@ -258,35 +316,126 @@ function VideosPA() {
           </div>
         </div>
 
-        {/* Edit School */}
+        {/* Edit Video */}
         <div>
           <div className="h-screen">
             <form
               className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               action=""
+              onSubmit={(e) => handleSubmitEdit(e)}
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
                 Edit Video
               </h2>
               <label className="text-gray-700 font-bold py-2" htmlFor="">
-                Select Videos
+                Select Video
               </label>
               <Select
                 options={optionListVideos}
-                placeholder="Select school"
-                value={courseEdit}
+                placeholder="Select Video"
+                value={videosSelectValue}
                 onChange={handleSelectEdit}
                 isSearchable={true}
               />
+
+              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+                Form to Edit
+              </h2>
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                Name
+              </label>
+              <input
+                name="name"
+                type="text"
+                value={render.name}
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="Name"
+                onChange={(e) => handleChange(e)}
+              />
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                Author
+              </label>
+              <input
+                name="author"
+                type="text"
+                value={render.author}
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="Author"
+                onChange={(e) => handleChange(e)}
+              />
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                Duration
+              </label>
+              <input
+                name="duration"
+                type="text"
+                value={render.duration}
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="Duration"
+                onChange={(e) => handleChange(e)}
+              />
+              <label
+                htmlFor="Difficult"
+                className="block text-sm font-bold text-black undefined"
+              >
+                Difficult
+              </label>
+              <Select
+                name="difficult"
+                options={optionDifficult}
+                placeholder="Difficult"
+                value={selectedDifficultEdit}
+                onChange={handleSelectDifficultEdit}
+                isSearchable={false}
+                className="font-semibold"
+              />
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                Profile Video
+              </label>
+              <input
+                name="profile"
+                type="text"
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="http://..."
+                value={render.profile}
+                onChange={(e) => handleChange(e)}
+              />
+
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                URL Video
+              </label>
+              <input
+                name="url"
+                type="text"
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="http://..."
+                value={render.url}
+                onChange={(e) => handleChange(e)}
+              />
+
+              <label className="text-gray-700 font-bold py-2" htmlFor="">
+                Description
+              </label>
+
+              <textarea
+                style={{ resize: "none" }}
+                name="description"
+                value={render.description}
+                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                placeholder="Description"
+                onChange={(e) => handleChange(e)}
+              />
               <div className="flex justify-end items-center my-4 mt-10">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 ">
-                  Edit
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
+                  disabled={Object.entries(errors).length === 0 ? "" : true}
+                >
+                  Edit Video
                 </button>
               </div>
             </form>
           </div>
         </div>
-
         {/* Delete School */}
         <div>
           <div className="h-screen">

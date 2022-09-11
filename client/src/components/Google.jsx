@@ -22,6 +22,7 @@ export default function Google() {
     setUser(userObject);
 
     document.getElementById("googleSign").hidden = true;
+    navigate('/')
   };
 
   console.log(user);

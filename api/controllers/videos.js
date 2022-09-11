@@ -26,7 +26,7 @@ const getVideo = async (req, res) => {
     const { id } = req.params;
     if (id) {
       const videoId = await Video.findById(id); //.populate('foro')
-      console.log(videoId.foro);
+      // console.log(videoId.foro);
       if (!videoId) {
         return res.status(404).json({ message: "inexistent id" });
       }
@@ -106,8 +106,21 @@ const restoreVideo = async (req, res, next) => {
 const updateVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { body } = req.body;
-    const data = await Video.updateOne({ _id: id }, body);
+    const { name, author, duration, difficult, profile, url, description } =
+      req.body;
+    console.log(req.body);
+    const data = await Video.updateOne(
+      { _id: id },
+      {
+        name,
+        author,
+        duration,
+        difficult,
+        profile,
+        url,
+        description,
+      }
+    );
     if (!data.modifiedCount) {
       res.status(422);
       return res.send("Fail in the query");

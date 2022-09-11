@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import NavBar from './NavBar'
-import { favorite, getUser, updateUser } from '../redux/actions'
+import { getFavorites, getUser, updateUser } from '../redux/actions'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 export const Favorites = () => {
@@ -28,7 +29,7 @@ export const Favorites = () => {
     
   }, [dispatch]);
   const { user } = useSelector(state => state.programandoando)
-  dispatch(favorite(user.favorites))
+  dispatch(getFavorites(user.favorites))
   const {favoritesUser}= useSelector(state => state.programandoando)
   let userActualizado = JSON.parse(JSON.stringify(user?user:null))
   console.log(favoritesUser)
@@ -45,13 +46,12 @@ export const Favorites = () => {
     return [JSON.stringify(persona), persona]
 });
 let personasMapArr = new Map(personasMap); // Pares de clave y valor
-
 let unicos = [...personasMapArr.values()];*/
 
 
   return(
     <div>
-       <NavBar></NavBar>
+       <NavBar/>
        {
          Object.entries(userActualizado).length === 0 ? <span>CARGANDO</span>  :favoritosUnicos.map(elemento => {
           
@@ -62,10 +62,19 @@ let unicos = [...personasMapArr.values()];*/
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{elemento.name}</h5>
             </a>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{elemento.description}</p>
-            <a href="#" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Read more
-                <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            </a>
+            <button 
+                        >
+                        <NavLink
+                          to={`/course/${elemento._id}`}
+                          style={{
+                            backgroundColor: "rgb(17, 52, 82)",
+                            color: "rgb(201, 196, 184)",
+                          }}
+                            className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                        >
+                              Read more
+                        </NavLink>
+                      </button>
             <button
               onClick={()=>{
                 const filteredfavorites = userActualizado.favorites.filter((item) => item._id !== elemento._id)
@@ -73,7 +82,7 @@ let unicos = [...personasMapArr.values()];*/
                 userActualizado.favorites=filteredfavorites
                 
                 dispatch(updateUser(userActualizado,userActualizado._id))
-                dispatch(favorite(userActualizado.favorites))
+                dispatch(getFavorites(userActualizado.favorites))
                 setTimeout(function () {
                   dispatch(getUser(userActualizado._id))
                 },500);

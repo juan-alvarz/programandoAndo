@@ -9,16 +9,17 @@ import {
   getAllCourses,
   deleteSchoolById,
   createsSchool,
+  updateSchool
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
 
-function CoursesPA() {
+function SchoolsPA() {
   const dispatch = useDispatch();
 
   const { schools, courses } = useSelector((state) => state.programandoando);
 
-  console.log(schools);
+  // console.log(schools);
 
   useEffect(() => {
     dispatch(getAllSchools());
@@ -74,8 +75,9 @@ function CoursesPA() {
 
   function handleSelectEdit(value) {
     const findSelect = schools.find((school) => school._id === value.value);
-    console.log(findSelect);
+    
     setSchoolSelectValue(value);
+    
 
     if (findSelect) {
       setRender({
@@ -87,9 +89,10 @@ function CoursesPA() {
     }
     // console.log(findSelect.courses);
   }
-
+  console.log(schoolSelectValue)
   const [courseEdit, setCourseEdit] = useState([]);
   function handleSelectCourses(value) {
+    console.log(value)
     const find = course.find((i) => i.value === value.value);
     if (!find) {
       setCourseEdit([...courseEdit, value]);
@@ -99,6 +102,59 @@ function CoursesPA() {
       //  );
     }
   }
+  function handleSelectCourses(value) {
+    const find = courses.find((i) => i.value === value.value);
+    if (!find) {
+      setCourseEdit([...courseEdit, value]);
+    }
+  }
+  // console.log(courseEdit)
+  
+  const handleDeleteEditSchoold = (value) => {
+    console.log(value)
+    // console.log(render.courses)
+    // console.log(courseEdit)
+    const courseFilter = courseEdit.filter((v) => v.value !== value.value);
+    
+    setCourseEdit(courseFilter)
+    // setCourseEdit(courseFilter); // este borra todo.
+  };
+// console.log(courseEdit)
+let [contador,setContador] = useState(0)
+const handleDeleteRenderVideo = (e) => {
+  console.log(render.courses)
+  console.log(e)
+  const courseFilter = render.courses.filter((v) => v._id !== e._id);
+  console.log(courseFilter)
+  const uwu = render
+  uwu.courses = courseFilter    
+  setRender(uwu);
+  setContador(contador +1)
+  console.log(render)
+};
+
+const renderuwu = render
+const handleSubmitEdit = (e) => {
+  
+  e.preventDefault();
+     const idCoursesEdit = courseEdit.map((e) => {
+      return { _id: e.value };
+    });
+    const idCoursesRender = render.courses.map((e) => {
+      return { _id: e._id };
+    }); 
+
+    const newCourses = [...idCoursesRender, ...idCoursesEdit];
+    const coursesAdd = newCourses.map(e => e._id)
+    const uwu2 = {...renderuwu,addCourses: coursesAdd}
+  // setRender({
+  //   ...render,
+  //   ["addVideos"]: uwu2
+  // });
+  console.log(uwu2);
+  // console.log(schoolSelectValue)
+  dispatch(updateSchool(uwu2,schoolSelectValue.value));
+}; 
 
   function handleChange(e) {
     console.log(render);
@@ -145,11 +201,16 @@ function CoursesPA() {
   });
 
   const handleDeleteSelect = (value) => {
+    
     const courseFilter = course.filter((v) => v !== value);
     setCourse(courseFilter);
-    setCourseEdit(courseFilter); // este borra todo.
+    // setCourseEdit(courseFilter); // este borra todo.
   };
-
+  // const handleDeleteSelect = (value) => {
+  //   const videoFilter = video.filter((v) => v !== value);
+  //   setVideo(videoFilter);
+  // };
+ 
   return (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
@@ -287,6 +348,7 @@ function CoursesPA() {
             <form
               className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               action=""
+              onSubmit={(e) => handleSubmitEdit(e)}
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
                 Edit School
@@ -347,7 +409,7 @@ function CoursesPA() {
                   <div key={index} className="text-center">
                     <span
                       className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                      onClick={() => handleDeleteSelect(v)}
+                      onClick={() => handleDeleteRenderVideo(v)}
                     >
                       {v.name}
                     </span>
@@ -380,7 +442,7 @@ function CoursesPA() {
                   <div key={index} className="text-center">
                     <span
                       className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                      onClick={() => handleDeleteSelect(v)}
+                      onClick={() => handleDeleteEditSchoold(v)}
                     >
                       {v.label}
                     </span>
@@ -451,4 +513,4 @@ function CoursesPA() {
   );
 }
 
-export default CoursesPA;
+export default SchoolsPA;

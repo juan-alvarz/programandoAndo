@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getVideoById, clearVideo, getCourse } from "../redux/actions";
 import NavBar from "./NavBar";
 import { Videos } from "./Videos";
+import Swal from "sweetalert2";
+
 
 export default function Video() {
   const { video, course } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const { idCourse } = useParams();
+  const navigate = useNavigate();
+
+  
+  const usuario = window.localStorage.getItem('user')
+
 
   const dispatch = useDispatch();
 
@@ -21,6 +28,7 @@ export default function Video() {
     return <h2>Cargando Video!</h2>;
   } else {
     return (
+      usuario ?
       <div style={{ width: "100%" }}>
         <NavBar />
         <div>
@@ -89,6 +97,17 @@ export default function Video() {
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
       </div>
-    );
+      : 
+      Swal.fire({
+        title: "Access to videos denied",
+        text: "You cannot login if you are not logged in. Please log in",
+        icon: "warning",
+        confirmButtonText: "Log in",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      })
+    )
   }
 }

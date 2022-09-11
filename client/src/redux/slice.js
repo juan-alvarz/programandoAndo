@@ -14,6 +14,7 @@ export const slice = createSlice({
     video: {},
     filters: [],
     favoritesUser: [],
+    notifications: [],
   },
   reducers: {
     // ========= Courses ===========
@@ -71,7 +72,7 @@ export const slice = createSlice({
       state.course = action.payload;
     },
 
-    favoriteCourse: (state, action) => {
+    getFavoriteCourse: (state, action) => {
       state.favoritesUser = action.payload;
     },
     createCourse: (state) => {
@@ -187,6 +188,10 @@ export const slice = createSlice({
     deleteNotifications: (state) => {
       return { ...state };
     },
+    // ============== Notification ====================
+    getNotifications: (state, action) => {
+      state.notifications = action.payload;
+    },
   },
 });
 
@@ -215,16 +220,17 @@ export const {
   getCourse5h,
   getCourse3h,
   getSession,
-  favoriteCourse,
+  getFavoriteCourse,
   deleteSchool,
   deleteCourse,
   deleteVideo,
   deleteUser,
   deleteNotifications,
-  updateSchool,
-  updateCourse,
-  updateVideo,
-  updateUser,
+  getNotifications,
+  uppdateSchool,
+  uppdateCourse,
+  uppdateVideo,
+  uppdateUser,
 } = slice.actions;
 
 export default slice.reducer;

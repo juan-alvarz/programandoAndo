@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCourses, getUser } from "../redux/actions";
 
+import HearthFav from "./HearthFav";
 import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
@@ -23,6 +24,7 @@ import { updateUser } from "../redux/actions";
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
+  const { favoritesUser } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
 
   //Usuario registrado
@@ -31,7 +33,7 @@ export default function AllCourses() {
   const [favoritoAgregado, setFavoritoAgregado] = useState("");
 
   // =============== Paginado ==========================
-  const [cursoActual, setCursoActual] = useState(1);
+  const [cursoActual, setCursoActual] = useState(1);  
   const [cursosPagina] = useState(6);
   const ultimoCurso = cursoActual * cursosPagina;
   const primerCurso = ultimoCurso - cursosPagina;
@@ -48,6 +50,9 @@ export default function AllCourses() {
   let { user } = useSelector((state) => state.programandoando);
 
   let userNuevo = JSON.parse(JSON.stringify(user ? user : null));
+
+  // console.log(favoritesUser);
+  // console.log(courses);
 
   // //===================================================
   let finallyOneDuration = (time) => {
@@ -205,8 +210,6 @@ export default function AllCourses() {
     return (
       <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
         <NavBar />
-        <NavLink to="/favorites">Favorites</NavLink>
-
         <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
           {/* Filtrados */}
           <div
@@ -342,7 +345,6 @@ export default function AllCourses() {
                 >
                   {course.description}
                 </p>
-
                 <span
                   style={{
                     fontSize: 15,
@@ -380,23 +382,15 @@ export default function AllCourses() {
                     </NavLink>
                   </button>
                 </div>
-
-                <img
-                  onClick={() => {
-                    userNuevo.favorites.push(course);
-
-                    dispatch(updateUser(userNuevo, userNuevo._id));
-
-                    setFavoritoAgregado(favoritoAgregado);
-                  }}
-                  src={fav}
-                ></img>
+                {userLocal && 
+                    <HearthFav course={course} userObj={userObj} />
+                    }
+             
               </div>
             </div>
           ))}
         </div>
-
-        <h2 className=" bg-gray-700">{favoritoAgregado}</h2>
+        <h2 className="bg-green-300 bg-gray-700">{favoritoAgregado}</h2>
 
         <Footer />
       </div>
