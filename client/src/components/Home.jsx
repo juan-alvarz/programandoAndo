@@ -24,15 +24,19 @@ function Home() {
   
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
-  console.log(userObj.user.favorites);
+  // console.log(userObj.user.favorites);
+  // console.log(userLocal)
+  // console.log(userObj)
   
   const incomingFavorites = user.favorites
   console.log(incomingFavorites)
   
   useEffect(() => {
-    dispatch(getVideoById(idVideo));
+    // dispatch(getVideoById(idVideo));
     dispatch(getAllNotifications());
-    console.log(dispatch(getUser(userObj.user._id)));    
+    if(userObj){
+      (dispatch(getUser(userObj.user._id)))
+    } 
    
     }, [dispatch]);
     
