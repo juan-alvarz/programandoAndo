@@ -204,7 +204,7 @@ const handleSubmitEdit = (e) => {
     
     const courseFilter = course.filter((v) => v !== value);
     setCourse(courseFilter);
-    setCourseEdit(courseFilter); // este borra todo.
+    // setCourseEdit(courseFilter); // este borra todo.
   };
   // const handleDeleteSelect = (value) => {
   //   const videoFilter = video.filter((v) => v !== value);
