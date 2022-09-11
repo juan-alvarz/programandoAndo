@@ -111,12 +111,12 @@ function CoursesPA() {
       const videos = [...idVideosRender, ...idVideosEdit];
       // setRender([...render, videos]);
 
-      () => {
-        setRender({
+      
+    setRender({
           ...render,
           ["video"]: videos,
         });
-      };
+    
 
       // setRender([...render, :])
       // setVideoEdit(
