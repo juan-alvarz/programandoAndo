@@ -100,39 +100,14 @@ function CoursesPA() {
   const [videoEdit, setVideoEdit] = useState([]);
  
 
-  async function handleSelectVideos(value) {
+  function handleSelectVideos(value) {
     const find = videos.find((i) => i.value === value.value);
     if (!find) {
       setVideoEdit([...videoEdit, value]);
-
-    //   const idVideosEdit = videoEdit.map((e) => {
-    //     return { _id: e.value };
-    //   });
-    //   const idVideosRender = render.videos.map((e) => {
-    //     return { _id: e._id };
-    //   }); 
-
-    //   const newVideos = [...idVideosRender, ...idVideosEdit];
-    //   // setRender([...render, videos]);
-      
-    // setRender({
-    //       ...render,
-    //       ["video"]: newVideos,
-    //     });
-   
-
-      // setRender([...render, :])
-      // setVideoEdit(
-      //   "videos",
-      //   [...videoEdit, value].map((e) => e.value)
-      // );
     }
   }
-  // console.log(videos);
-  // console.log(render);
-  // console.log(videoEdit);
-  // console.log(newVideos)
-  // console.log(array)
+
+//=======================================================
 
   function handleChange(e) {
     console.log(render);
