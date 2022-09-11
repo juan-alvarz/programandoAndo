@@ -9,7 +9,7 @@ import {
   getAllVideos,
   deleteCourseById,
   createsCourse,
-  uppdateCourse,
+  updateCourse,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
@@ -25,7 +25,8 @@ function CoursesPA() {
     dispatch(getAllCourses());
     dispatch(getAllVideos());
   }, [dispatch]);
-
+  
+ 
   const {
     register,
     handleSubmit,
@@ -78,6 +79,8 @@ function CoursesPA() {
     image: "",
     videos: [],
   });
+  console.log(courseEdit)
+
 
   function handleSelectEdit(value) {
     const findSelect = courses.find((course) => course._id === value.value);
@@ -95,28 +98,28 @@ function CoursesPA() {
   }
 
   const [videoEdit, setVideoEdit] = useState([]);
+ 
 
   async function handleSelectVideos(value) {
-    const find = video.find((i) => i.value === value.value);
+    const find = videos.find((i) => i.value === value.value);
     if (!find) {
       setVideoEdit([...videoEdit, value]);
 
-      const idVideosEdit = videoEdit.map((e) => {
-        return { _id: e.value };
-      });
-      const idVideosRender = render.videos.map((e) => {
-        return { _id: e._id };
-      });
+    //   const idVideosEdit = videoEdit.map((e) => {
+    //     return { _id: e.value };
+    //   });
+    //   const idVideosRender = render.videos.map((e) => {
+    //     return { _id: e._id };
+    //   }); 
 
-      const videos = [...idVideosRender, ...idVideosEdit];
-      // setRender([...render, videos]);
-
+    //   const newVideos = [...idVideosRender, ...idVideosEdit];
+    //   // setRender([...render, videos]);
       
-    setRender({
-          ...render,
-          ["video"]: videos,
-        });
-    
+    // setRender({
+    //       ...render,
+    //       ["video"]: newVideos,
+    //     });
+   
 
       // setRender([...render, :])
       // setVideoEdit(
@@ -125,9 +128,11 @@ function CoursesPA() {
       // );
     }
   }
-  console.log(videos);
-  console.log(render);
-  console.log(videoEdit);
+  // console.log(videos);
+  // console.log(render);
+  // console.log(videoEdit);
+  // console.log(newVideos)
+  // console.log(array)
 
   function handleChange(e) {
     console.log(render);
@@ -164,20 +169,49 @@ function CoursesPA() {
   };
 
   const handleDeleteEdit = (e) => {
-    const videoFilter = video.filter((v) => v !== e);
+    // console.log(videoEdit)
+    // console.log(e)
+    const videoFilter = videoEdit.filter((v) => v.value !== e.value);
+    // console.log(videoFilter)
     setVideoEdit(videoFilter);
   };
-
-  const handleSubmitEdit = (e) => {
-    const get = getValues();
-    e.preventDefault();
-    console.log(render);
-    dispatch(uppdateCourse(render));
+  let [contador,setContador] = useState(0)
+ 
+  const handleDeleteRenderVideo = (e) => {
+    // console.log(render.videos)
+    // console.log(e)
+    const videoFilter = render.videos.filter((v) => v._id !== e._id);
+    // console.log(videoFilter)
+    const uwu = render
+    uwu.videos = videoFilter    
+    setRender(uwu);
+    setContador(contador +1)
+    console.log(render)
   };
-
   useEffect(() => {
     console.log(render);
   }, [render]);
+  const renderuwu = render
+  const handleSubmitEdit = (e) => {
+    const get = getValues();
+    e.preventDefault();
+       const idVideosEdit = videoEdit.map((e) => {
+        return { _id: e.value };
+      });
+      const idVideosRender = render.videos.map((e) => {
+        return { _id: e._id };
+      }); 
+
+      const newVideos = [...idVideosRender, ...idVideosEdit];
+      const videosAdd = newVideos.map(e => e._id)
+      const uwu2 = {...renderuwu,addVideos: videosAdd}
+    // setRender({
+    //   ...render,
+    //   ["addVideos"]: uwu2
+    // });
+    console.log(uwu2);
+    dispatch(updateCourse(uwu2,courseEdit.value));
+  }; 
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
@@ -383,7 +417,7 @@ function CoursesPA() {
                   <div key={index} className="text-center">
                     <span
                       className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                      // onClick={() => handleDeleteEdit(v)}
+                      onClick={() => handleDeleteRenderVideo(v)}
                     >
                       {v.name}
                     </span>
@@ -413,6 +447,7 @@ function CoursesPA() {
               >
                 {/* {render.videos.map((e) => e)} */}
                 {videoEdit.map((v, index) => (
+                  
                   <div key={index} className="text-center">
                     <span
                       className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"

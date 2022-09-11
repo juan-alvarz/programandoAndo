@@ -237,7 +237,7 @@ export function orderByName(payload) {
 }
 
 // =========================== Uppdate ===========================
-export const uppdateVideo = (payload, id) => async (dispatch) => {
+export const updateVideo = (payload, id) => async (dispatch) => {
   const response = await axios.put(
     `http://localhost:3001/api/videos/${id}`,
     payload
@@ -245,7 +245,7 @@ export const uppdateVideo = (payload, id) => async (dispatch) => {
   return response;
 };
 
-export const uppdateCourse = (payload, id) => async (dispatch) => {
+export const updateCourse = (payload, id) => async (dispatch) => {
   const response = await axios.put(
     `http://localhost:3001/api/courses/${id}`,
     payload
@@ -253,7 +253,7 @@ export const uppdateCourse = (payload, id) => async (dispatch) => {
   return response;
 };
 
-export const uppdateSchool = (payload, id) => async (dispatch) => {
+export const updateSchool = (payload, id) => async (dispatch) => {
   const response = await axios.put(
     `http://localhost:3001/api/schools/${id}`,
     payload
