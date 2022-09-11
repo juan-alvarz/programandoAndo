@@ -9,10 +9,15 @@ export const slice = createSlice({
     schools: [],
     school: {},
     users: [],
-    user: {},
+    user: {
+          
+         },
     videos: [],
     video: {},
+    foro: {},
+    foros: [],
     filters: [],
+    favoritesUser:[]
   },
   reducers: {
     // ========= Courses ===========
@@ -69,6 +74,10 @@ export const slice = createSlice({
     getCourseById: (state, action) => {
       state.course = action.payload;
     },
+    favoriteCourse:(state,action)=>{
+      state.favoritesUser.push(action.payload)
+    }
+    ,
     createCourse: (state) => {
       return { ...state };
     },
@@ -97,6 +106,18 @@ export const slice = createSlice({
     getUserById: (state, action) => {
       state.user = action.payload;
     },
+
+    loginUser: (state, action) => {
+      state.user = action.payload;
+    },
+
+
+
+
+
+
+
+
     createUser: (state) => {
       return { ...state };
     },
@@ -118,6 +139,17 @@ export const slice = createSlice({
     getVideosByName: (state, action) => {
       state.courses = action.payload;
     },
+
+    //======== foros ==============
+    getForos: (state, action) => {
+      state.foros = action.payload;
+    },
+    getForo: (state, action) => {
+      state.foro = action.payload;
+    },
+    
+  
+
     // getSchoolsByName: (state, action) => {
     //   state.courses = action.payload;
     // },
@@ -125,6 +157,12 @@ export const slice = createSlice({
     // filterByName: (state, action) => {
     //   state.stateFilter = action.payload;
     // },
+
+    // ============SESSION=====================
+    getSession: (state, action) => {
+      state.user = action.payload;
+    },
+
     orderFilter: (state, action) => {
       const sortedAlf =
         action.payload === "value"
@@ -156,6 +194,8 @@ export const {
   createUser,
   getVideos,
   getVideo,
+  getForo,
+  getForos,
   createVideo,
   clearVideo,
   orderFilter,
@@ -164,11 +204,12 @@ export const {
   getVideosByName,
   getCoursesByAZ,
   getCoursesByZA,
-
   getCourse10more,
   getCourse10h,
   getCourse5h,
   getCourse3h,
+  getSession,
+  favoriteCourse
 } = slice.actions;
 
 export default slice.reducer;

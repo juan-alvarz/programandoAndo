@@ -7,10 +7,12 @@ import { DetailSchool } from "./DetailSchool";
 import img from "../utils/images/LOGOCOMPLETOPA.png";
 
 const navigation = [
+  {name: "Home", href: "/", current: false },
   { name: "Courses", href: "/allCourses", current: false },
-  { name: "Home", href: "/", current: false },
-  // { name: "About us", href: "/aboutUs", current: false },
+  { name: "About us", href: "/aboutUs", current: false },
   { name: "Create course", href: "/createCourse", current: false },
+  { name: "Register", href: "/register", current: false },
+  { name: "Login", href: "/login", current: false },
 ];
 
 function classNames(...classes) {
@@ -21,15 +23,15 @@ export default function NavBar() {
   return (
     <Disclosure
       as="nav"
-      style={{ backgroundColor: "rgb(17, 52, 82)" }}
+      style={{ backgroundColor: "rgb(17, 52, 82)"}}
       className="bg-gray-800"
     >
       {({ open }) => {
         return (
           <>
-            <div className="max-w-7xl px-2 sm:px-6">
-              <div className="relative flex h-20 items-center justify-between">
-                <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-center">
+            <div className="max-w-full px-2 sm:px-6">
+              <div className="relative flex h-20 items-center justify-center lg:justify-around">
+                <div className="flex items-center w-96 justify-center lg:items-stretch lg:justify-center">
                   <NavLink to="/">
                     <img
                       className="block h-12 w-auto lg:hidden"
@@ -44,8 +46,8 @@ export default function NavBar() {
                   </NavLink>
                 </div>
                 <div>
-                  <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-center">
-                    <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
+                  <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-center">
+                    <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                       {/* Mobile menu button*/}
                       <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                         <span className="sr-only">Open main menu</span>
@@ -62,7 +64,7 @@ export default function NavBar() {
                         )}
                       </Disclosure.Button>
                     </div>
-                    <div className="hidden md:ml-5 md:block">
+                    <div className="hidden lg:ml-5 lg:block">
                       <Menu as="div" className="relative">
                         <div>
                           <Menu.Button className="text-grey-300 hover:bg-grey-700 hover:text-white">
@@ -121,7 +123,7 @@ export default function NavBar() {
                         </Transition>
                       </Menu>
                     </div>
-                    <div className="hidden md:ml-5 md:block">
+                    <div className="hidden lg:ml-5 lg:block">
                       <div className="flex space-x-4">
                         {navigation.map((item) => (
                           <NavLink
@@ -146,10 +148,10 @@ export default function NavBar() {
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
-            </div>
 
-            <Disclosure.Panel className="md:hidden">
+            <Disclosure.Panel className="lg:hidden">
               <div className="space-y-1 px-2 pt-2">
                 <Menu
                   as="div"
@@ -182,6 +184,7 @@ export default function NavBar() {
                         backgroundColor: "rgb(17, 52, 82)",
                         borderColor: "rgb(198, 198, 198)",
                         borderWidth: "1px",
+                        zIndex: 50,
                       }}
                       className="absolute text-gray-700 left-4 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     >

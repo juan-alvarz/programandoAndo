@@ -27,7 +27,7 @@ router.patch("/:id", validatorGetVideo, restoreVideo);
 
 router.put("/:id", updateVideo);
 
-router.post("/", createVideo);
+router.post("/", validatorCreateVideo, createVideo);
 
 module.exports = router;
 //ruta videos

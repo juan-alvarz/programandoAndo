@@ -6,6 +6,9 @@ const UserSchema = new Schema(
     name: {
       type: String,
     },
+    username: {
+      type: String,
+    },
     email: {
       type: String,
       unique: true,
@@ -20,38 +23,11 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-    foros: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Foro",
-      },
-    ],
-    favorites: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Course",
-      },
-    ],
-    contributor: {
-      type: Number,
-      default: 0,
-    },
-    banned: { type: Boolean, default: false },
     role: {
       type: String,
-      enum: ["owner", "admin", "user"],
+      enum: ["user", "admin", "owner"],
       default: "user",
     },
-    userName: {
-      type: String,
-      unique: true,
-    },
-    ownPath: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "School",
-      },
-    ],
     language: {
       type: String,
       enum: ["english", "spanish"],
@@ -63,13 +39,27 @@ const UserSchema = new Schema(
     birthday: {
       type: Date,
     },
-    image: {
-      type: String,
-    },
+    ownPath: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "School",
+      },
+    ],
     scoring: {
       type: Schema.Types.ObjectId,
       ref: "Courses",
     },
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
+    contributor: {
+      type: Number,
+      default: 0,
+    },
+    banned: { type: Boolean, default: false },
     status: {
       type: String,
       enum: ["pending", "active"],
@@ -78,6 +68,9 @@ const UserSchema = new Schema(
     confirmationCode: {
       type: String,
       unique: true,
+    },
+    changePassCode: {
+      type: String,
     },
   },
   {

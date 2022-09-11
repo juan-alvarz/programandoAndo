@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllVideos, createsCourse, getAllCourses } from "../redux/actions";
 import Swal from "sweetalert2";
+
 import NavBar from "./NavBar";
+import Google from "./Google";
 
 export default function CreateCourse() {
+  const navigate = useNavigate();
+
   const { videos, courses } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
 
@@ -47,6 +52,10 @@ export default function CreateCourse() {
       text: "Course Created Successfully",
       icon: "success",
       confirmButtonText: "Back",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
     });
   };
 
@@ -84,12 +93,9 @@ export default function CreateCourse() {
     /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
   let reg_exImg = /.*(png|jpg|jpeg|gif)$/;
   return (
-    <div style={{ height: "90vh" }}>
+    <div style={{ backgroundColor: "rgb(198, 198, 198)", height: "100vh" }}>
       <NavBar />
-      <div
-        className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: "rgb(198, 198, 198)" }}
-      >
+      <div className="flex items-center justify-center pt-24 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8 font">
           <div
             className="flex flex-col items-center"
@@ -191,11 +197,21 @@ export default function CreateCourse() {
               className="font-light"
             />
 
-            <div className="">
+            <div
+              style={{
+                overflow: "scroll",
+                height: "160px",
+                backgroundColor: "rgb(198, 198, 198)",
+                borderRadius: 5,
+                borderWidth: 2,
+                borderColor: "white",
+              }}
+              className=""
+            >
               {video.map((v, index) => (
-                <div key={index} className="">
+                <div key={index} className="text-center">
                   <span
-                    className="cursor-pointer bg-red-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-200 dark:text-gray-900 hover:bg-red-500"
+                    className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
                     onClick={() => handleDeleteSelect(v)}
                   >
                     {v.label}
@@ -220,14 +236,12 @@ export default function CreateCourse() {
                 </span>
                 Create Course
               </button>
+
+              <Google />
             </div>
           </form>
         </div>
       </div>
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Roge

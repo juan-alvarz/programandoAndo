@@ -14,7 +14,7 @@ const getVideos = async (req, res) => {
       }
       return res.json(data);
     }
-    const data = await Video.find({});
+    const data = await Video.find({})
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -25,8 +25,8 @@ const getVideo = async (req, res) => {
   try {
     const { id } = req.params;
     if (id) {
-      const videoId = await Video.findById(id)
-      console.log(videoId.foro)
+      const videoId = await Video.findById(id)//.populate('foro')
+      console.log(videoId)
       if (!videoId) {
         return res.status(404).json({ message: "inexistent id" });
       }
@@ -106,7 +106,7 @@ const restoreVideo = async (req, res, next) => {
 const updateVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const {body }= req.body;
+    const body = req.body;
     const data = await Video.updateOne({ _id: id }, body)
     if (!data.modifiedCount) {
       res.status(422);

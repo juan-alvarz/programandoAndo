@@ -11,6 +11,8 @@ import {
   createUser,
   getVideos,
   getVideo,
+  getForo,
+  getForos,
   createVideo,
   clearVideo,
   getCourseByName,
@@ -22,6 +24,8 @@ import {
   getCourse10h,
   getCourse5h,
   getCourse3h,
+  getSession,
+  favoriteCourse
 } from "./slice";
 
 // ============================ Courses ============================
@@ -80,6 +84,17 @@ export const getCourse = (id) => (dispatch) => {
     .get(`http://localhost:3001/api/courses/${id}`)
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
+};
+export const favorite = (course) => (dispatch) => {
+  dispatch(favoriteCourse(course))
+};
+
+export const updateUser = (payload, id) => async (dispatch) => {
+  const response = await axios.post(
+    `http://localhost:3001/api/users/${id}`,
+    payload
+  );
+  return response;
 };
 
 export const createsCourse = (payload) => async (dispatch) => {
@@ -144,9 +159,59 @@ export const getUser = (id) => (dispatch) => {
 };
 
 export const createsUser = (payload) => async (dispatch) => {
-  const response = await axios.post("http://localhost:3001/api/users", payload);
+  const response = await axios.post(
+    "http://localhost:3001/api/users/register",
+    payload
+  );
   return response;
 };
+
+export const userLogin = (payload) => async (dispatch) => {
+  
+  const response = await axios
+    .post("http://localhost:3001/api/users/login", payload)
+    .then((res) =>{
+      window.localStorage.setItem(
+        "user", JSON.stringify(res.data));
+       
+        dispatch(getSession(res.data))
+
+
+    } 
+      
+      
+      )
+      
+    .catch((e) => console.log(e));
+  return response;
+};
+
+export const googleUserLogin = (payload) => async (dispatch) => {
+  const response = await axios
+    .post("http://localhost:3001/api/users/google_login", payload)
+    .then((res) => {dispatch(getSession(res.data))
+      window.localStorage.setItem(
+        "user", JSON.stringify(res.data));     
+    })
+    .catch((e) => console.log(e));
+
+  return response;
+};
+
+/*export const login = (payload) => async (dispatch) => {
+  const response = await axios.post("http://localhost:3001/api/user", payload);
+  dispatch(loginUser(response.data))
+
+};
+*/
+
+
+
+
+
+
+
+
 
 // ============================ Videos ============================
 export const getAllVideos = () => (dispatch) => {
@@ -178,6 +243,30 @@ export const getVideoByName = (name) => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
+// =========================== Foro del video, utiliza el id de foro que trae el video ===================
+
+export const getForoById = (id) => (dispatch) => {
+  axios 
+    .get(`http://localhost:3001/api/foros/${id}`)
+    .then((res) => dispatch(getForo(res.data)))
+    .catch((e) => console.log(e));
+}
+
+export const getAllForos = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/foros")
+    .then((res) => dispatch(getForos(res.data)))
+    .catch((e) => console.log(e));
+}
+
+export const updateForo = (idForo ,payload)  => (dispatch) => {
+  axios
+  .put(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
+
+
 // ============================ Order ============================
 export function orderByName(payload) {
   return {
@@ -185,6 +274,8 @@ export function orderByName(payload) {
     payload,
   };
 }
+
+
 // ============================ Clear ============================
 // export function clearFilter() {
 //   return {

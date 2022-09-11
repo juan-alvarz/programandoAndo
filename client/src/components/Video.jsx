@@ -1,24 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getVideoById, clearVideo, getCourse } from "../redux/actions";
+import { getVideoById, clearVideo, getCourse, getForoById , updateForo} from "../redux/actions";
 import NavBar from "./NavBar";
 import { Videos } from "./Videos";
 
 export default function Video() {
-  const { video, course } = useSelector((state) => state.programandoando);
+  const { video, course, foro } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const { idCourse } = useParams();
-
+  const { idUser } = useParams();
   const dispatch = useDispatch();
 
-  useEffect(() => {
+
+const [comment, setComment] = useState({
+    content: "",
+    authorComment: idUser,
+    commentId: ""
+})
+
+  function handleChange (e) {
+    setComment({
+      ...comment,
+      [e.target.value]: e.target.value
+    }) 
+  }
+
+  function handleSubmit (e) {
+    e.preventDefault();
+    console.log(comment);
+    dispatch(updateForo( video.foro, comment))
+  }
+
+useEffect(() => {
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
-  }, [idVideo]);
+    dispatch(getForoById(video.foro))
+}, [idVideo]);
+
+
   if (!Object.keys(course).length) {
     return <h2>Cargando Video!</h2>;
   } else {
+    console.log(video.foro)
+    console.log(foro)
     return (
       <div style={{ width: "100%" }}>
         <NavBar />
@@ -47,7 +72,10 @@ export default function Video() {
                   className="pb-5 text-lg font-semibold"
                   style={{ fontSize: "15px", color: "rgb(17, 52, 82)" }}
                 >
-                  Autor: <a href={video.profile}>{video.author}</a>
+                  Autor:{" "}
+                  <a href={video.profile} target="_blank">
+                    {video.author}
+                  </a>
                 </h3>
               </div>
               <p
@@ -71,7 +99,11 @@ export default function Video() {
                 </p>
               </div>
               <p className="flex justify-end">
-                <a href={video.profile} className="text-blue-500">
+                <a
+                  href={video.profile}
+                  target="_blank"
+                  className="text-blue-500"
+                >
                   {video.profile}
                 </a>
               </p>
@@ -80,7 +112,44 @@ export default function Video() {
           {/* Courses */}
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
+        <div>
+    
+    
+    <input
+      type = 'text'
+      value = {comment.content}
+      placeholder="Comment...)"
+      onChange={(e)=> handleChange(e)}
+    />
+
+    {/* 
+    <h1>{foro.comments[2].content}</h1>
+
+    <h1>{foro.comments[2].content}</h1>
+
+        <button className="button" type='submit'
+        onClick={(e)=> handleSubmit(e)}>Send</button>
+{foro.map( (comment) => {
+  return{
+    comment: comment[2].answers
+  }
+})}      
+        <h1>{foro.comments[2].answers[0].content}</h1>
+
+        */}
+        <input
+      type = 'text'
+      value = {comment.content}
+      placeholder="Comment...)"
+      onChange={(e)=> handleChange(e)}
+    />
+     <button className="button" type='submit'
+        onClick={(e)=> handleSubmit(e)}>Send</button>
+
+        </div>
       </div>
     );
   }
 }
+
+{/* foro.comment */}
