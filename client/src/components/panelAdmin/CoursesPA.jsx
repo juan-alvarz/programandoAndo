@@ -46,7 +46,7 @@ function CoursesPA() {
     const get = getValues();
     console.log(get);
 
-    handleSelect(video);
+    handleSelect(video)
     console.log(data);
     dispatch(createsCourse(get)); 
     setVideo([])
@@ -198,6 +198,7 @@ function CoursesPA() {
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
+    setCourseDelete("Selec Course")
   };
   return (
     <div className="text-2x1 font-semibold flex h-screen">

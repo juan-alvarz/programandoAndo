@@ -124,6 +124,11 @@ export const createsCourse = (payload) => async (dispatch) => {
         text: "Create Video Successfully",
         icon: "success",
         confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload();
+        }
       });
     })
     .catch((error) =>
@@ -255,6 +260,11 @@ export const createsVideo = (payload) => async (dispatch) => {
         text: "Create Video Successfully",
         icon: "success",
         confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload();
+        }
       });
       return dispatch({
         type: "DELETE_SCHOOL",
@@ -297,6 +307,11 @@ export const updateVideo = (payload, id) => async (dispatch) => {
         text: "Update Video Successfully",
         icon: "success",
         confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload();
+        }
       });
     })
     .catch((error) =>
@@ -320,6 +335,11 @@ export const updateCourse = (payload, id) => async (dispatch) => {
         text: "Update Course Successfully",
         icon: "success",
         confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload();
+        }
       });
     })
     .catch((error) =>
@@ -361,6 +381,11 @@ export function deleteSchoolById(id) {
           text: "Delete School Successfully",
           icon: "success",
           confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // navigate("/userspa");
+            window.location.reload();
+          }
         });
         return dispatch({
           type: "DELETE_SCHOOL",
@@ -380,6 +405,11 @@ export function deleteCourseById(id) {
           text: "Course Deleted Successfully",
           icon: "success",
           confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // navigate("/userspa");
+            window.location.reload();
+          }
         });
         return dispatch({
           type: "DELETE_COURSE",
@@ -399,6 +429,11 @@ export function deleteVideoById(id) {
           text: "Delete Video Successfully",
           icon: "success",
           confirmButtonText: "Back",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // navigate("/userspa");
+            window.location.reload();
+          }
         });
 
         return dispatch({
@@ -414,7 +449,7 @@ export function deleteUserById(id) {
     await axios
       .delete(`http://localhost:3001/api/users/${id}`)
       .then(() => {
-        alert("Se elimino");
+        // alert("Se elimino");
         return dispatch({
           type: "DELETE_USER",
         });

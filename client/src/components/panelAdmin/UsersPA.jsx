@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Select from "react-select";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
@@ -20,7 +21,7 @@ import {
 
 function CoursesPA() {
   const dispatch = useDispatch();
-
+  const navigate= useNavigate();
   const { users } = useSelector((state) => state.programandoando);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ function CoursesPA() {
     formState: { errors },
     getValues,
     setValue,
+    reset,
   } = useForm({
     defaultValues: {
       name: "",
@@ -54,6 +56,11 @@ function CoursesPA() {
       text: "Course Created Successfully",
       icon: "success",
       confirmButtonText: "Back",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // navigate("/userspa");
+        window.location.reload()
+      }
     });
   };
 
@@ -110,12 +117,22 @@ function CoursesPA() {
       const notification = {title: name, description}
       // console.log(notification)
       dispatch(createNotification(notification))
-
+      reset({        
+          name: "",
+          image: "",
+          URL: "",
+          description: "",
+        })
       Swal.fire({
         title: "Create Notification",
         text: "Notification Created Successfully",
         icon: "success",
         confirmButtonText: "Back",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload()
+        }
       });
   }
   const optionListUsers = users?.map((user) => {
@@ -131,8 +148,20 @@ function CoursesPA() {
   // };
 
   // ============ Delete =================
-  const handleDeleteCourse = (id) => {
+  const handleDeleteUser = (id) => {
     dispatch(deleteUserById(id));
+    Swal.fire({
+      title: "Delete User",
+      text: "User Deleted Successfully",
+      icon: "success",
+      confirmButtonText: "Back",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // navigate("/userspa");
+        window.location.reload()
+      }
+    });
+    setVideoDelete("Select User")
   };
   return (
     <div className="text-2x1 font-semibold flex h-screen">
@@ -262,7 +291,7 @@ function CoursesPA() {
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   type="button"
-                  onClick={() => handleDeleteCourse(videoDelete["value"])}
+                  onClick={() => handleDeleteUser(videoDelete["value"])}
                 >
                   Delete
                 </button>

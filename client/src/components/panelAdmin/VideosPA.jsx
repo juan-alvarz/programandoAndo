@@ -69,7 +69,7 @@ function VideosPA() {
       duration: "",
       difficult: "",
     })
-    window.location.href = window.location.href
+    // window.location.href = window.location.href
 
     // dispatch(getAllVideos());
     
@@ -152,8 +152,8 @@ function VideosPA() {
   // ============ Delete =================
   const handleDeleteVideo = (id) => {
     dispatch(deleteVideoById(id));    
-    window.location.href = window.location.href
-  
+    setVideoDelete("Select Course")
+    // window.location.href = window.location.href  
   };
 
   const [selectedDifficult, setSelectedDifficult] = useState("");
