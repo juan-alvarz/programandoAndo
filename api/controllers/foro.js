@@ -59,7 +59,8 @@ const getForoById = async (req, res) => {
         }
       }
     } catch (error) {
-      handleHttpError(res, "ERROR_GET_FORO");
+      console.log(error)
+    //  handleHttpError(res, "ERROR_GET_FORO");
     }
 };
   
@@ -89,11 +90,11 @@ const updateForo = async (req, res) => {
         const data = foro.comments.filter(x => x._id.toString() === commentId)
         data[0]['answers'] = data[0]['answers'].concat(body);
         foro.save();
-        return res.status(201).json('answere was update')
+        return res.status(201).json(foro)
       }
       foro.comments = foro.comments.concat(body);
       foro.save()
-      return res.status(201).send("Foro updated");
+      return res.status(201).send(foro);
     } catch (error) {
       res.status(404).json(error.message);
     }
