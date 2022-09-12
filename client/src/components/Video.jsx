@@ -19,34 +19,66 @@ export default function Video() {
   const { video, course, foro } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
 
-  const [comment, setComment] = useState({
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+
+  // COMENTARIO
+
+  const [valueComment, setvalueComment] = useState("");
+
+  const [commentario, setCommentario] = useState({
     content: "",
-    authorComment: idUser,
-    commentId: "",
+    authorComment: userObj.user._id,
+    commentId: "", // este siempre sale vakcio che
   });
 
   function handleChange(e) {
-    setComment({
-      ...comment,
-      [e.target.value]: e.target.value,
+    setCommentario({
+      ...commentario,
+      [e.target.name]: e.target.value,
     });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(comment);
-    dispatch(updateForo(video.foro, comment));
+    console.log(commentario);
+    dispatch(updateForo(video.foro, commentario));
+    setvalueComment("");
+  }
+
+  // RESPUESTA
+  const [respuesta, setRespuesta] = useState({
+    content: "",
+    authorComment: userObj.user._id,
+    commentId: "",
+  });
+
+  function handleChangeRespuesta(e) {
+    setRespuesta({
+      ...respuesta,
+      commentId: e.target.dataset.commentid,
+      [e.target.name]: e.target.value,
+    });
+    setvalueComment(e.target.value);
+  }
+
+  function handleSubmitRespuesta(e) {
+    e.preventDefault();
+    console.log(respuesta);
+    dispatch(updateForo(video.foro, respuesta));
+    setvalueComment("");
   }
 
   useEffect(() => {
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
-    //dispatch(getForoById(video.foro));
   }, [idVideo]);
 
   useEffect(() => {
     dispatch(getForoById(video.foro));
-  });
+  }, [video.foro]);
+
+  console.log(foro);
 
   if (!Object.keys(course).length) {
     return <Loader />;
@@ -120,47 +152,59 @@ export default function Video() {
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
         <div>
-          <input
-            type="text"
-            value={comment.content}
-            placeholder="Comment...)"
-            onChange={(e) => handleChange(e)}
-          />
           {/* FORO FUNCIONAL */}
-          {Object.keys(foro).length ? (
-            foro.comments.map((comment) => <h2>{comment.content}</h2>)
+          {Object.keys(foro).length > 0 ? (
+            foro.comments.map((comment) => (
+              <ol>
+                <h2>{comment.content}</h2>
+                <h3>
+                  {comment.answers?.map((answer) => (
+                    <ol>
+                      <h2>{answer.content}</h2>
+                    </ol>
+                  ))}
+                </h3>
+                <button>Comentar</button>
+                <br />
+                <br />
+                <hr />
+                <br />
+                <input
+                  type="text"
+                  placeholder="Comment...)"
+                  value={valueComment}
+                  data-commentid={comment._id}
+                  name="content"
+                  onChange={(e) => handleChangeRespuesta(e)}
+                />
+                <button
+                  className="button"
+                  type="submit"
+                  onClick={(e) => handleSubmitRespuesta(e)}
+                >
+                  Send
+                </button>
+              </ol>
+            ))
           ) : (
             <h2>No se cumplió master</h2>
           )}
-          {/* 
-          <h1>{foro.comments[2].content}</h1>
-
-    <h1>{foro.comments[2].content}</h1>
-
-        <button className="button" type='submit'
-        onClick={(e)=> handleSubmit(e)}>Send</button>
-{foro.map( (comment) => {
-  return{
-    comment: comment[2].answers
-  }
-})}      
-        <h1>{foro.comments[2].answers[0].content}</h1>
-
-        */}
-          <input
-            type="text"
-            value={comment.content}
-            placeholder="Comment...)"
-            onChange={(e) => handleChange(e)}
-          />
-          <button
-            className="button"
-            type="submit"
-            onClick={(e) => handleSubmit(e)}
-          >
-            Send
-          </button>
         </div>
+        <input
+          type="text"
+          value={valueComment}
+          name="content"
+          placeholder="Comment...)"
+          onChange={(e) => handleChange(e)}
+        />
+        <button
+          className="button"
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+        >
+          Send
+        </button>
+        <h1>EL DE ARRIBA ES UN INPUT PARA UN COMENTARIO, NO UNA RESPUESTA</h1>
       </div>
     );
   }
