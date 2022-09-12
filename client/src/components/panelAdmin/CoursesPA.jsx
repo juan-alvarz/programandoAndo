@@ -429,6 +429,7 @@ function CoursesPA() {
                 className=""
                 // onChange={(e) => handleChange(e)}
               >
+
                 {/* {render.videos.map((e) => e)} */}
                 {videoEdit.map((v, index) => (
                   <div key={index} className="text-center">
@@ -436,7 +437,7 @@ function CoursesPA() {
                       className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
                       onClick={() => handleDeleteEdit(v)}
                     >
-                      {v.label}
+                      {v.label} 
                     </span>
                   </div>
                 ))}
@@ -451,19 +452,7 @@ function CoursesPA() {
                 </button>
               </div>
             </form>
-            <div>
-              {render &&
-                [render].map((r) => (
-                  <form action="">
-                    <input
-                      type="text"
-                      name="name"
-                      value={render.name}
-                      onChange={() => handleChange()}
-                    />
-                  </form>
-                ))}
-            </div>
+           
           </div>
         </div>
 

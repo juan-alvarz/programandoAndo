@@ -12,7 +12,7 @@ const navigation = [
     { name: "Home", href: "/", current: false },
     { name: "Courses", href: "/allCourses", current: false },
     { name: "About us", href: "/aboutUs", current: false },
-    { name: "Create route", href: "/createCourse", current: false },
+    
 ];
 
 const navigation2 = [

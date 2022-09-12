@@ -487,7 +487,7 @@ function SchoolsPA() {
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
-                  Edit Course
+                  Edit School
                 </button>
               </div>
             </form>
