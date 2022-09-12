@@ -85,8 +85,11 @@ export const getCourse = (id) => (dispatch) => {
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
 };
-export const getFavorites = (payload) => (dispatch) => {
-  dispatch(getFavoriteCourse(payload));
+
+export const getFavorites = (id) => async (dispatch) => {
+  const user = await axios.get(`http://localhost:3001/api/users/${id}`);
+  console.log(user);
+  dispatch(getFavoriteCourse(user.data.favorites));
 };
 
 export const createsCourse = (payload) => async (dispatch) => {
@@ -182,7 +185,6 @@ export const googleUserLogin = (payload) => async (dispatch) => {
 
   return response;
 };
-
 export const verifyUser = async (code) => {
   const response = await axios.get(
     `http://localhost:3001/api/users/ath/confirm/${code}`

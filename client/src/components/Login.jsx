@@ -9,6 +9,8 @@ import { userLogin } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
 import NavBar from "./NavBar";
+import Swal from "sweetalert2";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -43,13 +45,13 @@ export default function Login() {
       /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     e.preventDefault();
     if (!emailRegex.test(email)) {
-      setEmailError("Email invalido");
+      setEmailError("Invalid email");
       setTimeout(function () {
         setEmailError("");
       }, 3000);
     }
     if (password.length > 64 || password.length < 8) {
-      setPassError("El password debe tener entre 8 y 64 caracteres");
+      setPassError("The password must be between 8 and 64 characters");
       setTimeout(function () {
         setPassError("");
       }, 3000);
@@ -69,11 +71,25 @@ export default function Login() {
           setTimeout(function () {
             navigate("/");
           }, 2000);
+          Swal.fire({
+            title: "Successful login",
+            text: "You are being redirected to the home",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          })
         } else {
           setError("login incorrecto");
           setTimeout(function () {
             setError("");
           }, 2000);
+          Swal.fire({
+            title: "Unsuccessful login",
+            text: "You must log in with an existing account",
+            icon: "error",
+            timer: 2000,
+            showConfirmButton: false,
+          })
         }
       }, 500);
     }
@@ -170,7 +186,7 @@ export default function Login() {
           Don't have an account?
           <a
             href="/register"
-            className="font-medium text-blue-600 hover:underline"
+            className="font-medium text-blue-600 hover:underline ml-2"
           >
             Sign up
           </a>

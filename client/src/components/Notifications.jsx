@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NotificationCard from "./NotificationCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllNotifications } from "../redux/actions";
 
-export default function Notifications({ notifications }) {
+
+export default function Notifications() {
     const [displayNotifications, setDisplay] = React.useState(false);
     const handleDisplayNotifications = () => {
         setDisplay(!displayNotifications)
     };
+    const dispatch = useDispatch();
+
+    const { notifications } = useSelector((state) => state.programandoando);
+
+    useEffect(() => {
+        dispatch(getAllNotifications());
+      }, [dispatch]);
+
 
     return (
         <div>

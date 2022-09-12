@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -7,21 +7,22 @@ import { DetailSchool } from "./DetailSchool";
 import img from "../utils/images/LOGOCOMPLETOPA.png";
 import { useSelector } from 'react-redux'
 import Notifications from './Notifications'
-import NavBarLogin from './NavBarLogin'
-import NavBarLogout from './NavBarLogout'
-import NavBarUser from "./NavBarUser";
+import NavBarUser from './NavBarUser'
+import NavBarAdmin from './NavBarAdmin'
 
-export default function NavBar() {
+function NavBarLogin() {
 
   const usuario = window.localStorage.getItem('user')
-
-  const { notifications } = useSelector((state) => state.programandoando);
-  // console.log(usuario.user)
+  let userObj = JSON.parse(usuario);
+  const rolUser = userObj.user.role
+  console.log(userObj.user.role)
 
   return (
-    usuario ? 
-    <NavBarLogin/>
+    rolUser === 'user' ?
+    <NavBarUser/>
     :
-    <NavBarLogout/>
-  );
+    <NavBarAdmin/>
+  )
 }
+
+export default NavBarLogin
