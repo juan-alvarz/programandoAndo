@@ -67,8 +67,6 @@ function VideosPA() {
     setVideoDelete(data);
   }
 
-  
-
   const optionListVideos = videos?.map((video) => {
     return {
       value: video._id,
@@ -115,14 +113,14 @@ function VideosPA() {
   }
 
   const renderuwu = render;
-  
+
   const handleSubmitEdit = (e) => {
     e.preventDefault();
-    
+
     console.log(renderuwu);
     dispatch(updateVideo(renderuwu, videosSelectValue.value));
   };
-  console.log(renderuwu.difficult)
+  console.log(renderuwu.difficult);
 
   // ============ Delete =================
   const handleDeleteCourse = (id) => {
@@ -134,15 +132,15 @@ function VideosPA() {
     setSelectedDifficult(data);
     setValue("difficult", data.label);
   }
-  const [contador,setContador] = useState(0)
+  const [contador, setContador] = useState(0);
   const [selectedDifficultEdit, setSelectedDifficultEdit] = useState("");
   function handleSelectDifficultEdit(data) {
     setSelectedDifficultEdit(data);
     setRender({
       ...render,
-      difficult : data.value
-    })    
-    setContador(contador+1)
+      difficult: data.value,
+    });
+    setContador(contador + 1);
     // setValue("difficult", data.label);
   }
   // console.log(selectedDifficultEdit)
@@ -467,19 +465,6 @@ function VideosPA() {
                 </button>
               </div>
             </form>
-
-            {/* <div>
-              {videos.map((v, index) => (
-                <div key={index} className="w-60 my-10">
-                  <span
-                    className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                    onClick={() => handleDeleteSelect(v)}
-                  >
-                    {v.url}
-                  </span>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>

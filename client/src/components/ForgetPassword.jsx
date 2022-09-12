@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { updateUser } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -122,9 +122,14 @@ export default function ForgetPassword() {
               <div className="mt-4">
                 <label
                   htmlFor="email"
-                  className="block text-xl font-bold text-black undefined"
+                  className=" text-xl font-bold text-black undefined flex justify-between"
                 >
                   {userObj.user.email}
+                  <Link to={"/login"}>
+                    <span className="font-normal text-xs text-purple-600 hover:underline">
+                      To Login
+                    </span>
+                  </Link>
                 </label>
                 {/* <div className="flex flex-col items-start">
                 <input

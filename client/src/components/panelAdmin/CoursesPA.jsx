@@ -25,8 +25,7 @@ function CoursesPA() {
     dispatch(getAllCourses());
     dispatch(getAllVideos());
   }, [dispatch]);
-  
- 
+
   const {
     register,
     handleSubmit,
@@ -79,8 +78,7 @@ function CoursesPA() {
     image: "",
     videos: [],
   });
-  console.log(courseEdit)
-
+  console.log(courseEdit);
 
   function handleSelectEdit(value) {
     const findSelect = courses.find((course) => course._id === value.value);
@@ -98,7 +96,6 @@ function CoursesPA() {
   }
 
   const [videoEdit, setVideoEdit] = useState([]);
- 
 
   function handleSelectVideos(value) {
     const find = videos.find((i) => i.value === value.value);
@@ -107,7 +104,7 @@ function CoursesPA() {
     }
   }
 
-//=======================================================
+  //=======================================================
 
   function handleChange(e) {
     console.log(render);
@@ -150,57 +147,43 @@ function CoursesPA() {
     // console.log(videoFilter)
     setVideoEdit(videoFilter);
   };
-<<<<<<< HEAD
+  let [contador, setContador] = useState(0);
 
-  const handleSubmitEdit = (e) => {
-    const get = getValues();
-    e.preventDefault();
-    console.log(update);
-    dispatch(updateCourse(update));
-=======
-  let [contador,setContador] = useState(0)
- 
   const handleDeleteRenderVideo = (e) => {
     // console.log(render.videos)
     // console.log(e)
     const videoFilter = render.videos.filter((v) => v._id !== e._id);
     // console.log(videoFilter)
-    const uwu = render
-    uwu.videos = videoFilter    
+    const uwu = render;
+    uwu.videos = videoFilter;
     setRender(uwu);
-    setContador(contador +1)
-    console.log(render)
->>>>>>> Roge
+    setContador(contador + 1);
+    console.log(render);
   };
   useEffect(() => {
-<<<<<<< HEAD
-    console.log(update);
-  }, [update]);
-=======
     console.log(render);
   }, [render]);
-  const renderuwu = render
+  const renderuwu = render;
   const handleSubmitEdit = (e) => {
     const get = getValues();
     e.preventDefault();
-       const idVideosEdit = videoEdit.map((e) => {
-        return { _id: e.value };
-      });
-      const idVideosRender = render.videos.map((e) => {
-        return { _id: e._id };
-      }); 
+    const idVideosEdit = videoEdit.map((e) => {
+      return { _id: e.value };
+    });
+    const idVideosRender = render.videos.map((e) => {
+      return { _id: e._id };
+    });
 
-      const newVideos = [...idVideosRender, ...idVideosEdit];
-      const videosAdd = newVideos.map(e => e._id)
-      const uwu2 = {...renderuwu,addVideos: videosAdd}
+    const newVideos = [...idVideosRender, ...idVideosEdit];
+    const videosAdd = newVideos.map((e) => e._id);
+    const uwu2 = { ...renderuwu, addVideos: videosAdd };
     // setRender({
     //   ...render,
     //   ["addVideos"]: uwu2
     // });
     console.log(uwu2);
-    dispatch(updateCourse(uwu2,courseEdit.value));
-  }; 
->>>>>>> Roge
+    dispatch(updateCourse(uwu2, courseEdit.value));
+  };
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
@@ -400,7 +383,6 @@ function CoursesPA() {
                   borderColor: "white",
                 }}
                 className=""
-                // onChange={(e) => handleChange(e)}
               >
                 {render.videos.map((v, index) => (
                   <div key={index} className="text-center">
@@ -432,11 +414,8 @@ function CoursesPA() {
                   borderColor: "white",
                 }}
                 className=""
-                // onChange={(e) => handleChange(e)}
               >
-                {/* {render.videos.map((e) => e)} */}
                 {videoEdit.map((v, index) => (
-                  
                   <div key={index} className="text-center">
                     <span
                       className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
@@ -457,19 +436,6 @@ function CoursesPA() {
                 </button>
               </div>
             </form>
-            <div>
-              {render &&
-                [render].map((r) => (
-                  <form action="">
-                    <input
-                      type="text"
-                      name="name"
-                      value={render.name}
-                      onChange={() => handleChange()}
-                    />
-                  </form>
-                ))}
-            </div>
           </div>
         </div>
 
@@ -504,19 +470,6 @@ function CoursesPA() {
                 </button>
               </div>
             </form>
-
-            {/* <div>
-              {videos.map((v, index) => (
-                <div key={index} className="w-60 my-10">
-                  <span
-                    className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                    onClick={() => handleDeleteSelect(v)}
-                  >
-                    {v.url}
-                  </span>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>

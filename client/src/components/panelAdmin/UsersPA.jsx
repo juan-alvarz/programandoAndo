@@ -254,19 +254,6 @@ function CoursesPA() {
                 </button>
               </div>
             </form>
-
-            {/* <div>
-              {videos.map((v, index) => (
-                <div key={index} className="w-60 my-10">
-                  <span
-                    className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                    onClick={() => handleDeleteSelect(v)}
-                  >
-                    {v.url}
-                  </span>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>
