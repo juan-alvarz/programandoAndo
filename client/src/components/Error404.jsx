@@ -5,7 +5,7 @@ const Error404 = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-gradient-to-r from-sky-900 to-red-400">
       <div
-        style={{ backgroundColor: "rgb(198, 198, 198)" }}
+        style={{ backgroundColor: "rgb(240, 240, 240)" }}
         className="px-40 py-20 bg-white rounded-md shadow-xl"
       >
         <div className="flex flex-col items-center">

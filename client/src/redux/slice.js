@@ -13,6 +13,8 @@ export const slice = createSlice({
     videos: [],
     video: {},
     filters: [],
+    favoritesUser: [],
+    notifications: [],
   },
   reducers: {
     // ========= Courses ===========
@@ -69,6 +71,10 @@ export const slice = createSlice({
     getCourseById: (state, action) => {
       state.course = action.payload;
     },
+
+    getFavoriteCourse: (state, action) => {
+      state.favoritesUser = action.payload;
+    },
     createCourse: (state) => {
       return { ...state };
     },
@@ -97,6 +103,11 @@ export const slice = createSlice({
     getUserById: (state, action) => {
       state.user = action.payload;
     },
+
+    loginUser: (state, action) => {
+      state.user = action.payload;
+    },
+
     createUser: (state) => {
       return { ...state };
     },
@@ -125,6 +136,12 @@ export const slice = createSlice({
     // filterByName: (state, action) => {
     //   state.stateFilter = action.payload;
     // },
+
+    // ============SESSION=====================
+    getSession: (state, action) => {
+      state.user = action.payload;
+    },
+
     orderFilter: (state, action) => {
       const sortedAlf =
         action.payload === "value"
@@ -140,6 +157,40 @@ export const slice = createSlice({
             });
 
       state.stateFilter = sortedAlf;
+    },
+    // ============== Edit =====================
+    updateSchool: (state) => {
+      return { ...state };
+    },
+    updateCourse: (state) => {
+      return { ...state };
+    },
+    updateVideo: (state) => {
+      return { ...state };
+    },
+    updateUser: (state) => {
+      return { ...state };
+    },
+
+    // ============== Delete ====================
+    deleteSchool: (state) => {
+      return { ...state };
+    },
+    deleteCourse: (state) => {
+      return { ...state };
+    },
+    deleteVideo: (state) => {
+      return { ...state };
+    },
+    deleteUser: (state) => {
+      return { ...state };
+    },
+    deleteNotifications: (state) => {
+      return { ...state };
+    },
+    // ============== Notification ====================
+    getNotifications: (state, action) => {
+      state.notifications = action.payload;
     },
   },
 });
@@ -164,11 +215,22 @@ export const {
   getVideosByName,
   getCoursesByAZ,
   getCoursesByZA,
-
   getCourse10more,
   getCourse10h,
   getCourse5h,
   getCourse3h,
+  getSession,
+  getFavoriteCourse,
+  deleteSchool,
+  deleteCourse,
+  deleteVideo,
+  deleteUser,
+  deleteNotifications,
+  getNotifications,
+  uppdateSchool,
+  uppdateCourse,
+  uppdateVideo,
+  uppdateUser,
 } = slice.actions;
 
 export default slice.reducer;

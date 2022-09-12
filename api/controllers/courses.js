@@ -1,15 +1,16 @@
 const { courseModel, schoolModel, videoModel } = require("../models");
-const { handleHttpError } = require("../utils/handleError");
-const { durationCourse } = require("../utils/durationSort");
+const { handleHtppError } = require("../utils/handleError");
+const { durationCourse } = require("../utils/durationSort.js");
 // OBTENER LISTA DE CURSOS DE LA BASE DE DATOS
 const getCourses = async (req, res) => {
   const { name } = req.query;
+  const { user } = req; // para saber el user que esta consumiendo esta ruta
 
   const data = await courseModel.find({}).populate("videos");
   try {
     if (name) {
       const nombre = await courseModel
-        .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
+        .find({ name: { $regex: "." + name + ".", $options: "<i>" } })
         .populate("videos");
       console.log(nombre);
       if (!nombre.length) {
@@ -19,9 +20,12 @@ const getCourses = async (req, res) => {
       }
     } else {
       res.status(200).send(data);
+      // res.status(200).send({ data, user }); // Saber que usuario ha entrado a la ruta
     }
-  } catch {
-    console.log(error);
+  } catch (e) {
+    console.log(e.message);
+    // res.status(404).send({ msg: e.message });
+    handleHtppError(res, e.message, 404);
   }
 };
 
@@ -41,7 +45,7 @@ const getCourseById = async (req, res) => {
       }
     }
   } catch (error) {
-    handleHttpError(res, "ERROR_GET_COURSE");
+    handleHtppError(res, "ERROR_GET_COURSE", 404);
   }
 };
 
@@ -50,7 +54,8 @@ const createCourse = async (req, res) => {
   const { name, description, image, videos } = req.body;
 
   // const body = req.body;
-  const find = await schoolModel.findOne({ name: name });
+  const find = await schoolModel.findWithDeleted({ name });
+  console.log(find);
 
   const videosFind = await Promise.all(
     videos.map(async (video) => {
@@ -60,7 +65,7 @@ const createCourse = async (req, res) => {
   const duration = durationCourse(videosFind);
 
   try {
-    if (!find) {
+    if (find.length === 0) {
       const creado = await courseModel.create({
         name,
         description,
@@ -86,9 +91,21 @@ const createCourse = async (req, res) => {
 
 const updateCourse = async (req, res) => {
   const { id } = req.params;
-  const body = req.body;
+  const { name, description, image, videos, addVideos } = req.body;
+  console.log(req.body);
+  console.log(addVideos);
   try {
-    const actualizado = await courseModel.updateOne({ _id: id }, body);
+    // const actualizado = await courseModel.updateOne({ _id: id }, body);
+    const actualizado = await courseModel.updateOne(
+      { _id: id },
+      {
+        name,
+        description,
+        image,
+        videos: addVideos,
+      }
+    );
+
     if (!actualizado.modifiedCount) {
       res.status(422).send("Fail in the query");
     }

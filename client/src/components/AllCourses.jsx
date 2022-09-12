@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCourses } from "../redux/actions";
+import { getAllCourses, getUser } from "../redux/actions";
+
+import HearthFav from "./HearthFav";
 import { NavLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
@@ -14,15 +16,25 @@ import {
   getCourses10h,
   getCourses5h,
   getCourses3h,
+  getFavorites
 } from "../redux/actions";
 import imageNotFound from "../utils/images/404person.png";
+import fav from "../utils/images/fav.png";
+
+import { updateUser } from "../redux/actions";
 
 export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
+  const { favoritesUser } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
 
+  //Usuario registrado
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  const [favoritoAgregado, setFavoritoAgregado] = useState("");
+
   // =============== Paginado ==========================
-  const [cursoActual, setCursoActual] = useState(1);
+  const [cursoActual, setCursoActual] = useState(1);  
   const [cursosPagina] = useState(6);
   const ultimoCurso = cursoActual * cursosPagina;
   const primerCurso = ultimoCurso - cursosPagina;
@@ -31,9 +43,19 @@ export default function AllCourses() {
 
   useEffect(() => {
     dispatch(getAllCourses());
+    if (userObj) {
+      dispatch(getUser(userObj.user._id));
+      dispatch(getFavorites(userObj.user._id));
+    }
   }, [dispatch, coursesPowFilter]);
 
-  console.log(courses);
+  let { user } = useSelector((state) => state.programandoando);
+
+  let userNuevo = JSON.parse(JSON.stringify(user ? user : null));
+
+  // console.log(favoritesUser);
+  // console.log(courses);
+
   // //===================================================
   let finallyOneDuration = (time) => {
     let hours = Math.floor(time / 3600);
@@ -53,7 +75,7 @@ export default function AllCourses() {
   /*==================course not found page========================== */
   if (courses.msg === "error") {
     return (
-      <div>
+      <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
         <div>
           <NavBar />
         </div>
@@ -125,22 +147,18 @@ export default function AllCourses() {
         }
       };
       let secondsDuration = temporaly.map((e) => toSeconds(e));
-      console.log(secondsDuration);
+
       let oneDuration = secondsDuration.reduce((sum, a) => sum + a, 0);
-      console.log(oneDuration);
 
       let object = {
         ...course,
         duration: oneDuration,
       };
-      console.log(object.duration);
+
       return object;
     };
 
-    console.log(durationCourse(courses[0]));
     let coursesPow = courses.map((e) => durationCourse(e));
-
-    console.log(coursesPow);
 
     //=========== lógica del duration ==========
 
@@ -192,10 +210,9 @@ export default function AllCourses() {
     };
     // ==============================================
     return (
-      <div>
+      <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
         <NavBar />
-
-        <div className="flex flex-col   items-center justify-between  px-5 py-10  lg:flex-row">
+        <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
           {/* Filtrados */}
           <div
             style={{
@@ -207,7 +224,7 @@ export default function AllCourses() {
               <span className="pr-2">A-Z</span>
               <label
                 for="default-toggle"
-                className="inline-flex relative items-center  cursor-pointer"
+                className="inline-flex relative items-center cursor-pointer"
               >
                 <div></div>
                 <input
@@ -217,7 +234,10 @@ export default function AllCourses() {
                   className="sr-only peer"
                   onChange={(e) => handleFilterAlph(e)}
                 />
-                <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <div
+                  style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                  className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
+                ></div>
               </label>
               <span style={{ paddingRight: "10px", paddingLeft: "10px" }}>
                 Z-A
@@ -228,7 +248,8 @@ export default function AllCourses() {
             <div>
               <select
                 id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                style={{ width: 130 }}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% py-1"
                 onChange={(e) => handleFilterDuration(e)}
               >
                 <option value={"allDurations"}>All Durations</option>
@@ -258,52 +279,120 @@ export default function AllCourses() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-3 grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-          {/* className="grid gap-8 lg:gap-16 sm:grid-cols-1 lg:grid-cols-3 justify-items-center" */}
+        <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-8">
           {cursosActuales.map((course, index) => (
             <div
               key={index}
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
-              // className="px-10 flex flex-col justify-between"
+              style={{
+                maxWidth: 400,
+                height: 580,
+                backgroundColor: "rgb(17, 52, 82)",
+                marginTop: 5,
+                marginLeft: 10,
+                marginRight: 10,
+                marginBottom: 30,
+                borderRadius: 10,
+              }}
             >
               <picture>
                 <NavLink to={`/course/${course._id}`}>
                   <img
-                    class="rounded-t-lg object-cover"
+                    className="rounded-t-lg object-cover"
                     src={course.image}
                     alt=""
                     style={{
+                      minHeight: 180,
+                      maxHeight: 180,
+                      width: "100%",
+                      objectFit: "cover",
+                      borderTopLeftRadius: 10,
+                      borderTopRightRadius: 10,
                       width: "500px",
                     }}
                   />
                 </NavLink>
               </picture>
 
-              <div className="p-5 ">
+              <div>
                 <div>
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  <h5
+                    style={{
+                      fontSize: 20,
+                      display: "flex",
+                      color: "rgb(201, 196, 184)",
+                      justifyContent: "center",
+                      backgroundColor: "rgb(55, 109, 109)",
+                      paddingTop: 10,
+                      paddingBottom: 10,
+                    }}
+                    className="mb-2 text-2xl font-bold tracking-tight text-gray-900"
+                  >
                     {course.name}
                   </h5>
-                  <span style={{ fontSize: "1.2rem" }}>
-                    <strong>Time Inversion: </strong>
-                    {finallyOneDuration(course.duration)}
-                  </span>
                 </div>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                <p
+                  style={{
+                    fontSize: 15,
+                    display: "flex",
+                    color: "rgb(201, 196, 184)",
+                    justifyContent: "center",
+                    minHeight: 180,
+                    paddingLeft: 35,
+                    paddingRight: 35,
+                    paddingTop: 20,
+                    textAlign: "center",
+                  }}
+                  className="mb-3 font-normal text-gray-700"
+                >
                   {course.description}
                 </p>
-                <NavLink
-                  to={`/course/${course._id}`}
-                  style={{ color: "white" }}
+                <span
+                  style={{
+                    fontSize: 15,
+                    display: "flex",
+                    color: "rgb(201, 196, 184)",
+                    justifyContent: "center",
+                    paddingTop: 10,
+                    paddingBottom: 20,
+                    paddingLeft: 35,
+                    paddingRight: 35,
+                    textAlign: "center",
+                  }}
                 >
-                  <button className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                    Read more
+                  <strong>Time Inversion: </strong>
+                  {finallyOneDuration(course.duration)}
+                </span>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    marginTop: 15,
+                  }}
+                >
+                  <button>
+                    <NavLink
+                      to={`/course/${course._id}`}
+                      style={{
+                        backgroundColor: "rgb(17, 52, 82)",
+                        color: "rgb(201, 196, 184)",
+                      }}
+                      className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                    >
+                      Read more
+                    </NavLink>
                   </button>
-                </NavLink>
+                </div>
+                {userLocal &&
+                    <HearthFav course={course} userObj={userObj} />                    
+                    }
+             
               </div>
             </div>
           ))}
         </div>
+        <h2 className="bg-green-300 bg-gray-700">{favoritoAgregado}</h2>
 
         <Footer />
       </div>

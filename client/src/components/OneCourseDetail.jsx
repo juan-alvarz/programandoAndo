@@ -23,27 +23,29 @@ export default function OneCourseDetail() {
     <Loader />;
   } else {
     return (
-      <div>
+      <div style={{backgroundColor: 'rgb(240, 240, 240)', height: '100vh'}}>
         <NavBar />
         <div className="justify-center">
-          <div className="grid justify-items-center mt-4  bg-gray-200 pt-5 border-t-4 border-indigo-300">
-            <h2
-              className="text-2xl mb-10"
-              style={{ fontWeight: "600", fontSize: "1.5rem" }}
-            >
-              {course.name}
-            </h2>
-            <span
-              style={{ fontSize: "1.2rem", textAlign: "center", width: "50%" }}
-            >
-              {course.description}
-            </span>
-            <div className="mt-10 ">
+          <div className="grid mt-8 bg-gray-200 justify-items-center lg:justify-items-start lg:mx-32 lg:flex" style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+            <div >
               <img
-                style={{ maxHeight: 150, maxWidth: 300, borderRadius: "5px" }}
-                className="mb-10"
+                style={{maxHeight:100,maxWidth:150}} 
+                className="mb-5"
                 src={course.image}
               ></img>
+            </div>
+            <div className="grid w-96 justify-items-center  lg:justify-items-start lg:w-10/12 lg:ml-10">
+              <h2
+                style={{color: 'rgb(17, 52, 82)'}} 
+                className="text-lg font-bold mb-2 text-gray-700"
+              >
+                {course.name}
+              </h2>
+              <div
+                className="flex mb-5 font-medium text-sm text-center lg:text-start"
+              >
+                {course.description}
+              </div>
             </div>
           </div>
           <Videos videos={window.courseSelect.videos} idCourse={idCourse} />

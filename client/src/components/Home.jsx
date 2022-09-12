@@ -3,7 +3,13 @@ import NavBar from "./NavBar";
 import data from "../utils/data";
 import Footer from "./Footer";
 import SearchBar from "./SearchBar";
-import { getVideoById, clearFilter } from "../redux/actions";
+import {
+  getVideoById,
+  clearFilter,
+  getAllNotifications,
+  getUser,
+  getFavorites, 
+} from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
@@ -13,16 +19,29 @@ function Home() {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.programandoando);
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+
+  const incomingFavorites = user.favorites;
+  console.log(incomingFavorites);
 
   useEffect(() => {
-    dispatch(getVideoById(idVideo));
+    
+    // dispatch(getVideoById(idVideo));
+    dispatch(getAllNotifications());
+    if (userObj) {
+      dispatch(getUser(userObj.user._id));
+      dispatch(getFavorites(userObj.user._id));
+    }
   }, [dispatch]);
+
+  const stat = useSelector((state) => state.programandoando);
+  console.log(stat);
   return (
-    <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
+    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
       <NavBar />
-      <div>
-        <Carousel />
-      </div>
       <div class="py-10">
         <div
           style={{ backgroundColor: "rgb(17, 52, 82)" }}
@@ -35,7 +54,7 @@ function Home() {
                 class="text-xl sm:text-3xl font-bold leading-tight mb-3 capitalize "
               >
                 {" "}
-                THE ONLY THING YOU NEED TO DO IS TO MAKE THE DECISION TO START
+                THE ONLY THING YOU NEED TO DO IS TO TAKE THE DECISION TO START
                 STUDYING. THE WAY IS GIVEN TO YOU BY US{" "}
               </h1>
               <br />
@@ -57,6 +76,9 @@ function Home() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Carousel />
       </div>
       <Footer />
     </div>

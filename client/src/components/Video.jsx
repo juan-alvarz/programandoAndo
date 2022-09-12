@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getVideoById, clearVideo, getCourse } from "../redux/actions";
 import NavBar from "./NavBar";
 import { Videos } from "./Videos";
+import Swal from "sweetalert2";
+
 
 export default function Video() {
   const { video, course } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const { idCourse } = useParams();
+  const navigate = useNavigate();
+
+  
+  const usuario = window.localStorage.getItem('user')
+
 
   const dispatch = useDispatch();
 
@@ -16,11 +23,13 @@ export default function Video() {
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
   }, [idVideo]);
+
   if (!Object.keys(course).length) {
     return <h2>Cargando Video!</h2>;
   } else {
     return (
-      <div style={{ width: "100%" }}>
+      usuario ?
+      <div style={{ width: "100%", backgroundColor: 'rgb(240, 240, 240)', height: '100vh' }}>
         <NavBar />
         <div>
           {/* Video */}
@@ -47,7 +56,10 @@ export default function Video() {
                   className="pb-5 text-lg font-semibold"
                   style={{ fontSize: "15px", color: "rgb(17, 52, 82)" }}
                 >
-                  Autor: <a href={video.profile}>{video.author}</a>
+                  Autor:{" "}
+                  <a href={video.profile} target="_blank">
+                    {video.author}
+                  </a>
                 </h3>
               </div>
               <p
@@ -71,7 +83,11 @@ export default function Video() {
                 </p>
               </div>
               <p className="flex justify-end">
-                <a href={video.profile} className="text-blue-500">
+                <a
+                  href={video.profile}
+                  target="_blank"
+                  className="text-blue-500"
+                >
                   {video.profile}
                 </a>
               </p>
@@ -81,6 +97,17 @@ export default function Video() {
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
       </div>
-    );
+      : 
+      Swal.fire({
+        title: "Access to videos denied",
+        text: "You cannot login if you are not logged in. Please log in",
+        icon: "warning",
+        confirmButtonText: "Log in",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      })
+    )
   }
 }

@@ -28,9 +28,6 @@ const Carousel = () => {
     }
   }
 
-  console.log(courses);
-  console.log(carouselCourses);
-
   return (
     <div className="container mx-auto">
       <div className="flex items-center justify-center w-full h-full py-24 sm:py-8 px-4">
@@ -71,7 +68,6 @@ const Carousel = () => {
               <Slider>
                 <div>
                   {carouselCourses.map((e) => {
-                    console.log(e);
                     return (
                       <Slide key={e._id}>
                         <div
@@ -97,19 +93,16 @@ const Carousel = () => {
                             src={e.image}
                             alt="img not found"
                           />
-                          <div
-                            style={{
-                              marginTop: 20,
-                              marginLeft: 10,
-                              marginRight: 5,
-                            }}
-                          >
+                          <div>
                             <h2
                               style={{
                                 fontSize: 20,
                                 display: "flex",
                                 color: "rgb(201, 196, 184)",
                                 justifyContent: "center",
+                                backgroundColor: 'rgb(55, 109, 109)',
+                                paddingTop: 10,
+                                paddingBottom: 10
                               }}
                             >
                               {e.name}
@@ -121,7 +114,10 @@ const Carousel = () => {
                                   display: "flex",
                                   color: "rgb(201, 196, 184)",
                                   justifyContent: "center",
-                                  minHeight: 250,
+                                  minHeight: 230,
+                                  paddingLeft: 35,
+                                  paddingRight: 35,
+                                  textAlign: "center"
                                 }}
                               >
                                 {e.description}
@@ -137,10 +133,10 @@ const Carousel = () => {
                               >
                                 <button
                                   style={{
-                                    backgroundColor: "rgb(55, 109, 109)",
+                                    backgroundColor: "rgb(17, 52, 82)",
                                     color: "rgb(201, 196, 184)",
                                   }}
-                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 >
                                   Read more
                                 </button>
@@ -152,75 +148,6 @@ const Carousel = () => {
                     );
                   })}
                 </div>
-
-                {/* <div id="slider" className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700">
-                                    <Slide index={0}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/fDngH9G/carosel-1.png" alt="black chair and white table" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 1</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={1}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/DWrGxX6/carosel-2.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={2}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/tCfVky2/carosel-3.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={3}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/rFsGfr5/carosel-4.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={4}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/fDngH9G/carosel-1.png" alt="black chair and white table" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={5}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/DWrGxX6/carosel-2.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                </div> */}
               </Slider>
             </div>
             <ButtonNext
@@ -285,7 +212,6 @@ const Carousel = () => {
               <Slider>
                 <div>
                   {carouselCourses.map((e) => {
-                    console.log(e);
                     return (
                       <Slide key={e._id}>
                         <div
@@ -310,18 +236,16 @@ const Carousel = () => {
                             src={e.image}
                             alt="img not found"
                           />
-                          <div
-                            style={{
-                              marginTop: 20,
-                              marginLeft: 10,
-                              marginRight: 5,
-                            }}
-                          >
+                          <div>
                             <h2
                               style={{
+                                fontSize: 20,
                                 display: "flex",
                                 color: "rgb(201, 196, 184)",
                                 justifyContent: "center",
+                                backgroundColor: 'rgb(55, 109, 109)',
+                                paddingTop: 10,
+                                paddingBottom: 10
                               }}
                             >
                               {e.name}
@@ -329,10 +253,14 @@ const Carousel = () => {
                             <div style={{ marginTop: 40 }}>
                               <h3
                                 style={{
+                                  fontSize: 15,
                                   display: "flex",
                                   color: "rgb(201, 196, 184)",
                                   justifyContent: "center",
-                                  minHeight: 250,
+                                  minHeight: 230,
+                                  paddingLeft: 35,
+                                  paddingRight: 35,
+                                  textAlign: "center"
                                 }}
                               >
                                 {e.description}
@@ -348,10 +276,10 @@ const Carousel = () => {
                               >
                                 <button
                                   style={{
-                                    backgroundColor: "rgb(201, 196, 184)",
-                                    color: "rgb(17, 52, 82)",
+                                    backgroundColor: "rgb(17, 52, 82)",
+                                    color: "rgb(201, 196, 184)",
                                   }}
-                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 >
                                   Read more
                                 </button>
@@ -363,141 +291,6 @@ const Carousel = () => {
                     );
                   })}
                 </div>
-
-                {/* <div id="slider" className="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700">
-                                    <Slide index={0}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/fDngH9G/carosel-1.png" alt="black chair and white table" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 1</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={1}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/DWrGxX6/carosel-2.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={2}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/tCfVky2/carosel-3.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={3}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/rFsGfr5/carosel-4.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={4}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/fDngH9G/carosel-1.png" alt="black chair and white table" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={5}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/DWrGxX6/carosel-2.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={6}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/tCfVky2/carosel-3.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={7}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/rFsGfr5/carosel-4.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={8}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/fDngH9G/carosel-1.png" alt="black chair and white table" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="texlg:t-xl le leading-4 text-basealg:ding-tight text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={9}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/DWrGxX6/carosel-2.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={10}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/tCfVky2/carosel-3.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={11}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/rFsGfr5/carosel-4.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                </div> */}
               </Slider>
             </div>
             <ButtonNext
@@ -562,7 +355,6 @@ const Carousel = () => {
               <Slider>
                 <div>
                   {carouselCourses.map((e) => {
-                    console.log(e);
                     return (
                       <Slide key={e._id}>
                         <div
@@ -586,18 +378,16 @@ const Carousel = () => {
                             src={e.image}
                             alt="img not found"
                           />
-                          <div
-                            style={{
-                              marginTop: 20,
-                              marginLeft: 10,
-                              marginRight: 5,
-                            }}
-                          >
+                          <div>
                             <h2
                               style={{
+                                fontSize: 20,
                                 display: "flex",
                                 color: "rgb(201, 196, 184)",
                                 justifyContent: "center",
+                                backgroundColor: 'rgb(55, 109, 109)',
+                                paddingTop: 10,
+                                paddingBottom: 10,
                               }}
                             >
                               {e.name}
@@ -605,10 +395,14 @@ const Carousel = () => {
                             <div style={{ marginTop: 40 }}>
                               <h3
                                 style={{
+                                  fontSize: 15,
                                   display: "flex",
                                   color: "rgb(201, 196, 184)",
                                   justifyContent: "center",
-                                  minHeight: 250,
+                                  minHeight: 230,
+                                  paddingLeft: 35,
+                                  paddingRight: 35,
+                                  textAlign: "center"
                                 }}
                               >
                                 {e.description}
@@ -624,10 +418,10 @@ const Carousel = () => {
                               >
                                 <button
                                   style={{
-                                    backgroundColor: "rgb(201, 196, 184)",
-                                    color: "rgb(17, 52, 82)",
+                                    backgroundColor: "rgb(17, 52, 82)",
+                                    color: "rgb(201, 196, 184)",
                                   }}
-                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 >
                                   Read more
                                 </button>
@@ -639,141 +433,6 @@ const Carousel = () => {
                     );
                   })}
                 </div>
-
-                {/* <div id="slider" className="h-full w-full flex lg:gap-8 md:gap-6 items-center justify-start transition ease-out duration-700">
-                                    <Slide index={0}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/fDngH9G/carosel-1.png" alt="black chair and white table" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 1</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={1}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/DWrGxX6/carosel-2.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={2}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/tCfVky2/carosel-3.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={3}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/rFsGfr5/carosel-4.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={4}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/fDngH9G/carosel-1.png" alt="black chair and white table" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={5}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/DWrGxX6/carosel-2.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={6}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/tCfVky2/carosel-3.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={7}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/rFsGfr5/carosel-4.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={8}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/fDngH9G/carosel-1.png" alt="black chair and white table" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="texlg:t-xl le leading-4 text-basealg:ding-tight text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={9}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/DWrGxX6/carosel-2.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={10}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/tCfVky2/carosel-3.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                    <Slide index={11}>
-                                        <div className="flex flex-shrink-0 relative w-full sm:w-auto">
-                                            <img src="https://i.ibb.co/rFsGfr5/carosel-4.png" alt="sitting area" className="object-cover object-center w-full" />
-                                            <div className="bg-gray-800 bg-opacity-30 absolute w-full h-full p-6">
-                                                <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">Catalog 2</h2>
-                                                <div className="flex h-full items-end pb-6">
-                                                    <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">Minimal Interior</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Slide>
-                                </div> */}
               </Slider>
             </div>
             <ButtonNext
