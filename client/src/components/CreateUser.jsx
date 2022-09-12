@@ -146,7 +146,7 @@ export default function CreateUser() {
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
       <NavBar />
       <div
-        style={{ backgroundColor: "rgb(198, 198, 198)" }}
+        style={{ backgroundColor: "rgb(240, 240, 240)" }}
         className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50"
       >
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">

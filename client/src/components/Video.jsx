@@ -29,7 +29,7 @@ export default function Video() {
   } else {
     return (
       usuario ?
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", backgroundColor: 'rgb(240, 240, 240)', height: '100vh' }}>
         <NavBar />
         <div>
           {/* Video */}

@@ -6,7 +6,7 @@ export default function CancelDonation() {
   return (
     <div
       style={{
-        background: "rgb(198, 198, 198)",
+        background: "rgb(240, 240, 240)",
         height: "100vh",
       }}
     >

@@ -11,7 +11,7 @@ import Roge from '../utils/images/RogelioAboutUs1.png'
 
 function AboutUs() {
   return (
-    <section style={{ backgroundColor: "rgb(198, 198, 198)" }}>
+    <section style={{backgroundColor: 'rgb(240, 240, 240)'}}>
       <NavBar />
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">

@@ -105,7 +105,7 @@ export default function Login() {
   };
 
   return (
-    <div style={{ backgroundColor: "rgb(198, 198, 198)" }}className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+    <div style={{backgroundColor: 'rgb(240, 240, 240)'}} className="relative flex flex-col justify-center min-h-screen overflow-hidden">
       <NavBar/>
       <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
         <h1 style={{ color: "rgb(17, 52, 82)" }} className="text-3xl font-semibold text-center text-black uppercase">

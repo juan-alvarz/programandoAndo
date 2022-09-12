@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import Error404 from "./Error404";
+import NavBar from "./NavBar";
 
 function Donators() {
   const [amount, setAmount] = useState(0); // el monto a donar
@@ -40,7 +41,8 @@ function Donators() {
     return <Error404 />;
   } else {
     return (
-      <div className="w-full h-full" style={{ backgroundColor: "#C9C4B8" }}>
+      <div className="w-full h-full" style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+        <NavBar/>
         <div className="h-screen">
           <form
             className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"

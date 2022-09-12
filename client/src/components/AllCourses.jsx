@@ -210,7 +210,7 @@ export default function AllCourses() {
     };
     // ==============================================
     return (
-      <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
+      <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
         <NavBar />
         <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
           {/* Filtrados */}
