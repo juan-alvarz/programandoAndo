@@ -1,5 +1,6 @@
-const { foroModel } = require("../models/index.js");
+const { foroModel, videoModel } = require("../models/index.js");
 const Video = require("../models/Video.js");
+const { handleHtppError } = require("../utils/handleError.js");
 //const { videoModel } = require("../models");
 const getVideos = async (req, res) => {
   try {
@@ -41,7 +42,6 @@ const getVideo = async (req, res) => {
 const createVideo = async (req, res) => {
   try {
     const myforo = await foroModel.create({ comments: [] });
-    console.log(myforo);
     const {
       name,
       description,
@@ -53,19 +53,28 @@ const createVideo = async (req, res) => {
       difficult,
       foro,
     } = req.body;
-    const newVideo = new Video({
-      name,
-      description,
-      author,
-      profile,
-      url,
-      image,
-      duration,
-      difficult,
-      foro: myforo._id,
-    });
-    await newVideo.save();
-    return res.status(200).json(newVideo);
+    // console.log(myforo);
+    // const find = await videoModel.findOne({ name });
+    const find = await videoModel.findWithDeleted({ name });
+    console.log(find);
+
+    if (find.length === 0) {
+      const newVideo = new Video({
+        name,
+        description,
+        author,
+        profile,
+        url,
+        image,
+        duration,
+        difficult,
+        foro: myforo._id,
+      });
+      await newVideo.save();
+      return res.status(200).json(newVideo);
+    } else {
+      handleHtppError(res, "Name video already exist please try again", 403);
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

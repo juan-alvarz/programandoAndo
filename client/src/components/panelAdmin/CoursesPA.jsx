@@ -20,11 +20,11 @@ function CoursesPA() {
   const { videos, courses } = useSelector((state) => state.programandoando);
   // const courseSlice = useSelector((state) => state.programandoando.course);
   // console.log(courseSlice);
-
+  const [contador, setContador] = useState(0);
   useEffect(() => {
     dispatch(getAllCourses());
     dispatch(getAllVideos());
-  }, [dispatch]);
+  }, [dispatch,])
 
   const {
     register,
@@ -32,6 +32,7 @@ function CoursesPA() {
     formState: { errors },
     getValues,
     setValue,
+    reset
   } = useForm({
     defaultValues: {
       name: "",
@@ -45,16 +46,17 @@ function CoursesPA() {
     const get = getValues();
     console.log(get);
 
-    handleSelect(video);
+    handleSelect(video)
     console.log(data);
-    dispatch(createsCourse(get));
-
-    Swal.fire({
-      title: "Create Course",
-      text: "Course Created Successfully",
-      icon: "success",
-      confirmButtonText: "Back",
-    });
+    dispatch(createsCourse(get)); 
+    setVideo([])
+    reset({
+      name: "",
+      image: "",
+      description: "",
+      videos: [],
+    })      
+    setContador(contador+1)
   };
 
   const optionListCourses = courses?.map((course) => {
@@ -147,7 +149,7 @@ function CoursesPA() {
     // console.log(videoFilter)
     setVideoEdit(videoFilter);
   };
-  let [contador, setContador] = useState(0);
+  
 
   const handleDeleteRenderVideo = (e) => {
     // console.log(render.videos)
@@ -183,10 +185,20 @@ function CoursesPA() {
     // });
     console.log(uwu2);
     dispatch(updateCourse(uwu2, courseEdit.value));
+    setRender({
+      name: "",
+      description: "",
+      image: "",
+      videos: [],
+    })
+    setEditCourse("Select Course")
+    setVideoEdit([])
+
   };
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
+    setCourseDelete("Selec Course")
   };
   return (
     <div className="text-2x1 font-semibold flex h-screen">

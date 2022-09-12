@@ -9,7 +9,7 @@ import {
   getAllCourses,
   deleteSchoolById,
   createsSchool,
-  updateSchool
+  updateSchool,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
@@ -32,6 +32,7 @@ function SchoolsPA() {
     formState: { errors },
     getValues,
     setValue,
+    reset,
   } = useForm({
     defaultValues: {
       name: "",
@@ -48,12 +49,24 @@ function SchoolsPA() {
     handleSelect(course);
     console.log(data);
     dispatch(createsSchool(get));
+    reset({
+      name: "",
+      image: "",
+      description: "",
+      courses: [],
+    });
+    setCourse([]);
 
     Swal.fire({
-      title: "Create Course",
-      text: "Course Created Successfully",
+      title: "Create School",
+      text: "School Created Successfully",
       icon: "success",
       confirmButtonText: "Back",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // navigate("/userspa");
+        window.location.reload()
+      }
     });
   };
 
@@ -75,9 +88,8 @@ function SchoolsPA() {
 
   function handleSelectEdit(value) {
     const findSelect = schools.find((school) => school._id === value.value);
-    
+
     setSchoolSelectValue(value);
-    
 
     if (findSelect) {
       setRender({
@@ -89,10 +101,10 @@ function SchoolsPA() {
     }
     // console.log(findSelect.courses);
   }
-  console.log(schoolSelectValue)
+  console.log(schoolSelectValue);
   const [courseEdit, setCourseEdit] = useState([]);
   function handleSelectCourses(value) {
-    console.log(value)
+    console.log(value);
     const find = course.find((i) => i.value === value.value);
     if (!find) {
       setCourseEdit([...courseEdit, value]);
@@ -109,52 +121,66 @@ function SchoolsPA() {
     }
   }
   // console.log(courseEdit)
-  
+
   const handleDeleteEditSchoold = (value) => {
-    console.log(value)
+    console.log(value);
     // console.log(render.courses)
     // console.log(courseEdit)
     const courseFilter = courseEdit.filter((v) => v.value !== value.value);
-    
-    setCourseEdit(courseFilter)
+
+    setCourseEdit(courseFilter);
     // setCourseEdit(courseFilter); // este borra todo.
   };
-// console.log(courseEdit)
-let [contador,setContador] = useState(0)
-const handleDeleteRenderVideo = (e) => {
-  console.log(render.courses)
-  console.log(e)
-  const courseFilter = render.courses.filter((v) => v._id !== e._id);
-  console.log(courseFilter)
-  const uwu = render
-  uwu.courses = courseFilter    
-  setRender(uwu);
-  setContador(contador +1)
-  console.log(render)
-};
+  // console.log(courseEdit)
+  let [contador, setContador] = useState(0);
+  const handleDeleteRenderVideo = (e) => {
+    console.log(render.courses);
+    console.log(e);
+    const courseFilter = render.courses.filter((v) => v._id !== e._id);
+    console.log(courseFilter);
+    const uwu = render;
+    uwu.courses = courseFilter;
+    setRender(uwu);
+    setContador(contador + 1);
+    console.log(render);
+  };
 
-const renderuwu = render
-const handleSubmitEdit = (e) => {
-  
-  e.preventDefault();
-     const idCoursesEdit = courseEdit.map((e) => {
+  const renderuwu = render;
+  const handleSubmitEdit = (e) => {
+    e.preventDefault();
+    const idCoursesEdit = courseEdit.map((e) => {
       return { _id: e.value };
     });
     const idCoursesRender = render.courses.map((e) => {
       return { _id: e._id };
-    }); 
+    });
 
     const newCourses = [...idCoursesRender, ...idCoursesEdit];
-    const coursesAdd = newCourses.map(e => e._id)
-    const uwu2 = {...renderuwu,addCourses: coursesAdd}
-  // setRender({
-  //   ...render,
-  //   ["addVideos"]: uwu2
-  // });
-  console.log(uwu2);
-  // console.log(schoolSelectValue)
-  dispatch(updateSchool(uwu2,schoolSelectValue.value));
-}; 
+    const coursesAdd = newCourses.map((e) => e._id);
+    const uwu2 = { ...renderuwu, addCourses: coursesAdd };
+    // setRender({
+    //   ...render,
+    //   ["addVideos"]: uwu2
+    // });
+    console.log(uwu2);
+    // console.log(schoolSelectValue)
+    dispatch(updateSchool(uwu2, schoolSelectValue.value));
+    setRender({ name: "", description: "", image: "", courses: [] });
+    setCourseEdit([])
+    setSchoolSelectValue("Select School")
+    Swal.fire({
+      title: "Edit School",
+      text: "Course Edited Successfully",
+      icon: "success",
+      confirmButtonText: "Back",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // navigate("/userspa");
+        window.location.reload()
+      }
+    });
+
+  };
 
   function handleChange(e) {
     console.log(render);
@@ -177,6 +203,13 @@ const handleSubmitEdit = (e) => {
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteSchoolById(id));
+    // Swal.fire({
+    //   title: "Delete School",
+    //   text: "School Deleted Successfully",
+    //   icon: "success",
+    //   confirmButtonText: "Back",
+    // });
+    setSchoolDelete("Select School")
   };
 
   // ============ Create School =================
@@ -201,7 +234,6 @@ const handleSubmitEdit = (e) => {
   });
 
   const handleDeleteSelect = (value) => {
-    
     const courseFilter = course.filter((v) => v !== value);
     setCourse(courseFilter);
     // setCourseEdit(courseFilter); // este borra todo.
@@ -210,7 +242,7 @@ const handleSubmitEdit = (e) => {
   //   const videoFilter = video.filter((v) => v !== value);
   //   setVideo(videoFilter);
   // };
- 
+
   return (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
@@ -218,7 +250,7 @@ const handleSubmitEdit = (e) => {
         className="w-full h-full flex justify-around"
         style={{ backgroundColor: "#C9C4B8" }}
       >
-        {/* Create School */}
+        {/* 1hool */}
         <div>
           {/* <NavbarPA /> */}
           <div className="h-screen">
@@ -259,7 +291,7 @@ const handleSubmitEdit = (e) => {
               )}
 
               <label className="text-gray-700 font-bold py-2" htmlFor="">
-                Image Course
+                Image School
               </label>
               <input
                 name="image"
@@ -477,7 +509,7 @@ const handleSubmitEdit = (e) => {
               </label>
               <Select
                 options={optionListSchools}
-                placeholder="Select course"
+                placeholder="Select School"
                 value={schoolDelete}
                 onChange={handleSelectDelete}
                 isSearchable={true}

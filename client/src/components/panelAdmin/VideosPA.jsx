@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { difficult } from "../../utils/difficult";
 import {
   getAllVideos,
@@ -18,9 +18,14 @@ function VideosPA() {
   const dispatch = useDispatch();
   const { videos } = useSelector((state) => state.programandoando);
 
+ 
   useEffect(() => {
     dispatch(getAllVideos());
-  }, [dispatch]);
+  }, [dispatch,getAllVideos]);
+
+  useEffect(() => {
+    dispatch(getAllVideos());
+  }, [getAllVideos]);
 
   const {
     register,
@@ -28,6 +33,7 @@ function VideosPA() {
     formState: { errors },
     getValues,
     setValue,
+    reset
   } = useForm({
     defaultValues: {
       name: "",
@@ -52,14 +58,21 @@ function VideosPA() {
     console.log(get);
 
     console.log(data);
-    dispatch(createsVideo(get));
+    dispatch(createsVideo(get));    
+    
+    reset( {
+      name: "",
+      profile: "",
+      url: "",
+      description: "",
+      author: "",
+      duration: "",
+      difficult: "",
+    })
+    // window.location.href = window.location.href
 
-    Swal.fire({
-      title: "Create Course",
-      text: "Course Created Successfully",
-      icon: "success",
-      confirmButtonText: "Back",
-    });
+    // dispatch(getAllVideos());
+    
   };
 
   const [videoDelete, setVideoDelete] = useState();
@@ -119,14 +132,28 @@ function VideosPA() {
   const handleSubmitEdit = (e) => {
     e.preventDefault();
     
-    console.log(renderuwu);
+    // console.log(renderuwu);
     dispatch(updateVideo(renderuwu, videosSelectValue.value));
+    
+    dispatch(getAllVideos())
+    setVideosSelectValue("Choose Video")
+    setRender({
+      name: "",
+      author: "",
+      duration: "",
+      difficult: "",
+      profile: "",
+      url: "",
+      description: "",
+    })
   };
-  console.log(renderuwu.difficult)
+  // console.log(renderuwu.difficult)
 
   // ============ Delete =================
-  const handleDeleteCourse = (id) => {
-    dispatch(deleteVideoById(id));
+  const handleDeleteVideo = (id) => {
+    dispatch(deleteVideoById(id));    
+    setVideoDelete("Select Course")
+    // window.location.href = window.location.href  
   };
 
   const [selectedDifficult, setSelectedDifficult] = useState("");
@@ -436,7 +463,7 @@ function VideosPA() {
             </form>
           </div>
         </div>
-        {/* Delete School */}
+        {/* Delete Video */}
         <div>
           <div className="h-screen">
             <form
@@ -461,7 +488,7 @@ function VideosPA() {
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   type="button"
-                  onClick={() => handleDeleteCourse(videoDelete["value"])}
+                  onClick={() => handleDeleteVideo(videoDelete["value"])}
                 >
                   Delete
                 </button>

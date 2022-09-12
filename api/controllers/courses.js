@@ -54,7 +54,8 @@ const createCourse = async (req, res) => {
   const { name, description, image, videos } = req.body;
 
   // const body = req.body;
-  const find = await schoolModel.findOne({ name: name });
+  const find = await schoolModel.findWithDeleted({ name });
+  console.log(find);
 
   const videosFind = await Promise.all(
     videos.map(async (video) => {
@@ -64,7 +65,7 @@ const createCourse = async (req, res) => {
   const duration = durationCourse(videosFind);
 
   try {
-    if (!find) {
+    if (find.length === 0) {
       const creado = await courseModel.create({
         name,
         description,
