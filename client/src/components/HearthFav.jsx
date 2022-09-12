@@ -1,15 +1,18 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../redux/actions";
+import { updateUser,getFavorites,
+   } from "../redux/actions";
 import axios from "axios";
 
 export default function HearthFav({ course,userObj }) {
   const { user } = useSelector((state) => state.programandoando);
   const { favoritesUser } = useSelector((state) => state.programandoando);
+  const dispatch = useDispatch()
   console.log(favoritesUser)
   // console.log(favoritesUser)
   // const dispatch = useDispatch();
+  const [contador,setContador] = useState(0)
   
   let userID = userObj.user._id
   let courseID = course._id
@@ -17,32 +20,38 @@ export default function HearthFav({ course,userObj }) {
   // console.log(courseID)
 
   const handleAdd = () =>{ 
-    addFavorite(courseID,userID)
-    setStatus("like")          
+    // dispatch(addFavorite(courseID,userID))
+    addFavorite2(courseID,userID)
+    setStatus("like")        
+    dispatch(getFavorites(userID))
+    setContador(contador+1)  
   }
 
   const handleDelete = () =>{ 
-    deleteFavorite(courseID,userID)
-    setStatus("unlike")          
+    // dispatch(deleteFavorite(courseID,userID))
+    deleteFavorite2(courseID,userID)
+    setStatus("unlike")  
+    dispatch(getFavorites(userID))        
+    setContador(contador+1)  
   }
-  const [status,setStatus] = useState("unlike")
+  const [status,setStatus] = useState("")
 
   useEffect (() =>{
-  
-    
-  },[handleAdd,handleDelete])
+    dispatch(getFavorites(userID))
+    console.log(contador)
+  },[dispatch,contador])
 
   // console.log(status)
   // console.log(course);
   // let userNuevo = JSON.parse(JSON.stringify(user ? user : null));
   // const [favoritoAgregado, setFavoritoAgregado] = useState("");
-  const deleteFavorite = async (courseId,userId) => {
+  const deleteFavorite2 = async (courseId,userId) => {
     const response = await axios.put(`http://localhost:3001/api/users/deleteFavorites/${userId}/`,
     [courseId]);
     return response.data;
   };
 
-  const addFavorite = async (courseId,userId) => {
+  const addFavorite2 = async (courseId,userId) => {
     const response = await axios.put(`http://localhost:3001/api/users/addFavorites/${userId}/`,
     [courseId]);
     return response.data;
