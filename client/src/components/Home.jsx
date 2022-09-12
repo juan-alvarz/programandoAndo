@@ -8,44 +8,37 @@ import {
   clearFilter,
   getAllNotifications,
   getUser,
-  getFavorites,
+  getFavorites, 
 } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
-import Google from "./Google";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.programandoando);
-  
+
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
-  // console.log(userObj.user.favorites);
-  // console.log(userLocal)
-  // console.log(userObj)
-  
-  const incomingFavorites = user.favorites
-  console.log(incomingFavorites)
-  
+
+  const incomingFavorites = user.favorites;
+  console.log(incomingFavorites);
+
   useEffect(() => {
     
     // dispatch(getVideoById(idVideo));
     dispatch(getAllNotifications());
-    if(userObj){
-      (dispatch(getUser(userObj.user._id)))
-    } 
-   
-    }, [dispatch]);
-    
-    
-    
-    const stat = useSelector( (state) => state.programandoando)
-    dispatch(getFavorites(incomingFavorites))
-    console.log(stat)
+    if (userObj) {
+      dispatch(getUser(userObj.user._id));
+      dispatch(getFavorites(userObj.user._id));
+    }
+  }, [dispatch]);
+
+  const stat = useSelector((state) => state.programandoando);
+  console.log(stat);
   return (
     <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
       <NavBar />

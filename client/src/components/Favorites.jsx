@@ -8,6 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 export const Favorites = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.programandoando);
+  const { favoritesUser } = useSelector((state) => state.programandoando);
+  let userActualizado = JSON.parse(JSON.stringify(user ? user : null));
+
   //usuario registrado
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
@@ -15,20 +20,16 @@ export const Favorites = () => {
   //////////////////
   const [elminado, setEliminado] = useState();
 
-  const dispatch = useDispatch();
-
+  console.log(favoritesUser);
   useEffect(() => {
     if (userObj) {
       dispatch(getUser(userObj.user._id));
+
+      dispatch(getFavorites(userObj.user._id));
     }
   }, [dispatch]);
-  const { user } = useSelector((state) => state.programandoando);
-  dispatch(getFavorites(user.favorites));
-  const { favoritesUser } = useSelector((state) => state.programandoando);
-  let userActualizado = JSON.parse(JSON.stringify(user ? user : null));
-  console.log(favoritesUser);
 
-  let favoritos = userActualizado.favorites.map((cursos) => {
+  let favoritos = favoritesUser.map((cursos) => {
     return [JSON.stringify(cursos), cursos];
   });
   let favoritosMap = new Map(favoritos);
@@ -83,10 +84,10 @@ let unicos = [...personasMapArr.values()];*/
                     userActualizado.favorites = filteredfavorites;
 
                     dispatch(updateUser(userActualizado, userActualizado._id));
-                    dispatch(getFavorites(userActualizado.favorites));
                     setTimeout(function () {
                       dispatch(getUser(userActualizado._id));
-                    }, 500);
+                      dispatch(getFavorites(userActualizado._id));
+                    }, 300);
                   }}
                 >
                   X
