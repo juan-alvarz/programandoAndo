@@ -166,7 +166,6 @@ export default function Video() {
                 </h3>
                 <button>Comentar</button>
                 <br />
-                <br />
                 <hr />
                 <br />
                 <input
