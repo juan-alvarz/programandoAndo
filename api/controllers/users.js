@@ -68,7 +68,6 @@ const getUserById = async (req, res, next) => {
     return res.send(e.message);
   }
 };
-
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;

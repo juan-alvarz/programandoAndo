@@ -16,6 +16,7 @@ import {
   getCourses10h,
   getCourses5h,
   getCourses3h,
+  getFavorites
 } from "../redux/actions";
 import imageNotFound from "../utils/images/404person.png";
 import fav from "../utils/images/fav.png";
@@ -44,6 +45,7 @@ export default function AllCourses() {
     dispatch(getAllCourses());
     if (userObj) {
       dispatch(getUser(userObj.user._id));
+      dispatch(getFavorites(userObj.user._id));
     }
   }, [dispatch, coursesPowFilter]);
 
@@ -382,8 +384,8 @@ export default function AllCourses() {
                     </NavLink>
                   </button>
                 </div>
-                {userLocal && 
-                    <HearthFav course={course} userObj={userObj} />
+                {userLocal &&
+                    <HearthFav course={course} userObj={userObj} />                    
                     }
              
               </div>
