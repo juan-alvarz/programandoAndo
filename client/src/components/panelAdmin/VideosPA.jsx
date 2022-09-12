@@ -134,12 +134,7 @@ function VideosPA() {
     
     // console.log(renderuwu);
     dispatch(updateVideo(renderuwu, videosSelectValue.value));
-    Swal.fire({
-      title: "Edit Video",
-      text: "Video Edited Successfully",
-      icon: "success",
-      confirmButtonText: "Back",
-    });
+    
     dispatch(getAllVideos())
     setVideosSelectValue("Choose Video")
     setRender({

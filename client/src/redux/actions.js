@@ -92,11 +92,50 @@ export const getFavorites = (id) => async (dispatch) => {
   dispatch(getFavoriteCourse(user.data.favorites));
 };
 
+// export const createsCourse = (payload) => async (dispatch) => {
+//   const response = await axios
+//     .post("http://localhost:3001/api/courses", payload)
+//     .then(() => {
+//       Swal.fire({
+//         title: "Create Course",
+//         text: "Course Created Successfully",
+//         icon: "success",
+//         confirmButtonText: "Back",
+//       });
+//     })
+//     .catch((error) =>
+//       Swal.fire({
+//         title: "Ups Something Happens",
+//         // text: "Can't create video please try again",
+//         text: error.response.data.error,
+//         icon: "error",
+//         confirmButtonText: "OK",
+//       }).then(console.log(error))
+//     );
+//   return response;
+// };
+
 export const createsCourse = (payload) => async (dispatch) => {
-  const response = await axios.post(
-    "http://localhost:3001/api/courses",
-    payload
-  );
+  const response = await axios
+    .post("http://localhost:3001/api/courses", payload)
+    .then(() => {
+      Swal.fire({
+        title: "Create Video",
+        text: "Create Video Successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
+
   return response;
 };
 
@@ -250,18 +289,48 @@ export function orderByName(payload) {
 
 // =========================== Update ===========================
 export const updateVideo = (payload, id) => async (dispatch) => {
-  const response = await axios.put(
-    `http://localhost:3001/api/videos/${id}`,
-    payload
-  );
+  const response = await axios
+    .put(`http://localhost:3001/api/videos/${id}`, payload)
+    .then(() => {
+      Swal.fire({
+        title: "Update Video",
+        text: "Update Video Successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
   return response;
 };
 
 export const updateCourse = (payload, id) => async (dispatch) => {
-  const response = await axios.put(
-    `http://localhost:3001/api/courses/${id}`,
-    payload
-  );
+  const response = await axios
+    .put(`http://localhost:3001/api/courses/${id}`, payload)
+    .then(() => {
+      Swal.fire({
+        title: "Update Course",
+        text: "Update Course Successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
   return response;
 };
 
