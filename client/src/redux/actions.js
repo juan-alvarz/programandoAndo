@@ -208,10 +208,28 @@ export const getVideoById = (id) => (dispatch) => {
 };
 
 export const createsVideo = (payload) => async (dispatch) => {
-  const response = await axios.post(
-    "http://localhost:3001/api/videos",
-    payload
-  );
+  const response = await axios
+    .post("http://localhost:3001/api/videos", payload)
+    .then(() => {
+      Swal.fire({
+        title: "Create Video",
+        text: "Create Video Successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      return dispatch({
+        type: "DELETE_SCHOOL",
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
   return response;
 };
 
@@ -357,6 +375,14 @@ export const getAllNotifications = () => (dispatch) => {
     .get("http://localhost:3001/api/notifications")
     .then((res) => dispatch(getNotifications(res.data)))
     .catch((e) => console.log(e));
+};
+
+export const createNotification = (payload) => async (dispatch) => {
+  const response = await axios.post(
+    "http://localhost:3001/api/notifications",
+    payload
+  );
+  return response;
 };
 
 // ============================ Clear ============================

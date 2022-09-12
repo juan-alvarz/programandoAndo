@@ -13,6 +13,7 @@ import {
   createsUser,
   deleteUserById,
   deleteNotificationById,
+  createNotification,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
@@ -104,7 +105,19 @@ function CoursesPA() {
   //     console.log(video);
   //   }
   // }
+  const handleCreateNotification = () =>{
+      const {name,description} = getValues()
+      const notification = {title: name, description}
+      // console.log(notification)
+      dispatch(createNotification(notification))
 
+      Swal.fire({
+        title: "Create Notification",
+        text: "Notification Created Successfully",
+        icon: "success",
+        confirmButtonText: "Back",
+      });
+  }
   const optionListUsers = users?.map((user) => {
     return {
       value: user._id,
@@ -134,7 +147,7 @@ function CoursesPA() {
           <div className="h-screen">
             <form
               className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit(handleCreateNotification)}
               action="#"
               method="POST"
             >
@@ -186,6 +199,7 @@ function CoursesPA() {
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
+                 
                 >
                   Send
                 </button>
