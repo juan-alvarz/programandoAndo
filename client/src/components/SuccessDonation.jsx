@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Loader";
 import { NavLink } from "react-router-dom";
 import logo from "../utils/images/LOGOPA.png";
+import Footer from "./Footer";
 
 //version alternativa
 function SuccessDonation() {
@@ -37,50 +38,63 @@ function SuccessDonation() {
         )
         .then(localStorage.removeItem("amount"));
       return (
-        <div>
+        <div style={{ background: "#C6C6C6", height: "100vh" }}>
           <NavBar />
-          <div style={{ display: "flex" }}>
-            <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ fontSize: "x-large" }}>
               <h1>Success Donation!</h1>
             </div>
-            <div>
-              {/* <span>
+            <div
+              style={{
+                textAlign: "center",
+                paddingTop: "15px",
+                paddingBottom: "15px",
+              }}
+            >
+              <span>
                 thanks for contributing to the page, remember that all the
-                content is totally free, the donation helps to keep the page on
-                the air and now you enter the list of people who have helped
-                keep it going
-              </span> */}
-              <div>
-                <a
-                  href="#"
-                  className="flex flex-col items-center rounded-lg border shadow-md md:flex-row md:max-w-xl bg-gradient-to-r from-sky-200 to-red-200"
-                  style={{
-                    border: "1px solid #113452",
-                  }}
-                >
-                  <img
-                    class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                    src={logo}
-                    alt="not found"
-                  />
-                  <div class="flex flex-col justify-between p-4 leading-normal">
-                    <h5
-                      class="mb-2 text-2xl font-bold tracking-tight"
-                      style={{ color: "#113452" }}
-                    >
-                      {userToUpdate.username} is a new contributor!
-                    </h5>
-                    <p class="mb-3 font-normal" style={{ color: "#113452" }}>
-                      we want to thank <strong>{userToUpdate.username}</strong>
-                      for contributing to <strong>programandoando</strong> and
-                      help support it, voluntarily contributing {amount} and has
-                      collaborated with {amount + currentAmount} in total.
-                      <br />
-                      Thanks you so much {userToUpdate.username}
-                    </p>
-                  </div>
-                </a>
-              </div>
+                content is totally free, the donation helps to keep the page and
+                now you enter the list of people who have helped keep it going,
+                here you are a special gift for you, keep it learning!
+              </span>
+            </div>
+            <div>
+              <a
+                href="#"
+                className="flex flex-col items-center rounded-lg border shadow-md md:flex-row md:max-w-xl bg-gradient-to-r from-sky-200 to-red-200"
+                style={{
+                  border: "1px solid #113452",
+                }}
+              >
+                <img
+                  class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                  src={logo}
+                  alt="not found"
+                  style={{ padding: "2px" }}
+                />
+                <div class="flex flex-col justify-between p-4 leading-normal">
+                  <h5
+                    class="mb-2 text-2xl font-bold tracking-tight"
+                    style={{ color: "#113452" }}
+                  >
+                    {userToUpdate.username} is a new contributor!
+                  </h5>
+                  <p class="mb-3 font-normal" style={{ color: "#113452" }}>
+                    we want to thank <strong>{userToUpdate.username}</strong>{" "}
+                    for contributing to <strong>programandoando</strong> and
+                    help support it, voluntarily contributing {amount} USD and
+                    has collaborated with {amount + currentAmount} USD in total.
+                    <br />
+                    Thanks you so much {userToUpdate.username}
+                  </p>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -88,7 +102,7 @@ function SuccessDonation() {
     } else {
       console.log("nada para donar");
       return (
-        <div>
+        <div style={{ background: "#C6C6C6", height: "100vh" }}>
           <div>
             <NavBar />
           </div>
@@ -108,12 +122,15 @@ function SuccessDonation() {
               style={{
                 paddin: "35px",
                 marginTop: "20px",
+                textAlign: "justify",
               }}
             >
-              on this page you can get a special and personalized card for
-              yourself when you donate and contribute to the maintenance of the
-              page, at this time you have not donated. if you want contribute,
-              follow this
+              <strong>programandoando</strong> manages to stay with the help of
+              donations, remember that all content is available for free if you
+              do not want to donate on this page you can get a special and
+              personalized card for yourself when you donate and contribute to
+              the maintenance of the page, at this time you have not donated. if
+              you want contribute, follow this
             </span>
             <div>
               <NavLink to="/donators">

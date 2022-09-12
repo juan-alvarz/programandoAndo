@@ -9,6 +9,7 @@ import {
   getAllVideos,
   deleteCourseById,
   createsCourse,
+  updateCourse,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
@@ -17,12 +18,15 @@ function CoursesPA() {
   const dispatch = useDispatch();
 
   const { videos, courses } = useSelector((state) => state.programandoando);
+  // const courseSlice = useSelector((state) => state.programandoando.course);
+  // console.log(courseSlice);
 
   useEffect(() => {
     dispatch(getAllCourses());
     dispatch(getAllVideos());
   }, [dispatch]);
-
+  
+ 
   const {
     register,
     handleSubmit,
@@ -66,6 +70,8 @@ function CoursesPA() {
     setCourseDelete(data);
   }
 
+  // Edit Courses
+  const [course, setCourse] = useState([]);
   const [courseEdit, setEditCourse] = useState();
   const [render, setRender] = useState({
     name: "",
@@ -73,24 +79,38 @@ function CoursesPA() {
     image: "",
     videos: [],
   });
-  function handleSelectEdit(data) {
-    const find = courses.find((course) => course._id === data.value);
-    console.log(find);
-    setEditCourse(data);
+  console.log(courseEdit)
 
-    if (find) {
+
+  function handleSelectEdit(value) {
+    const findSelect = courses.find((course) => course._id === value.value);
+
+    setEditCourse(value);
+
+    if (findSelect) {
       setRender({
-        name: find.name,
-        description: find.description,
-        image: find.image,
-        videos: find.videos,
+        name: findSelect.name,
+        description: findSelect.description,
+        image: findSelect.image,
+        videos: findSelect.videos,
       });
     }
   }
-  console.log(courseEdit);
-  console.log(render);
+
+  const [videoEdit, setVideoEdit] = useState([]);
+ 
+
+  function handleSelectVideos(value) {
+    const find = videos.find((i) => i.value === value.value);
+    if (!find) {
+      setVideoEdit([...videoEdit, value]);
+    }
+  }
+
+//=======================================================
 
   function handleChange(e) {
+    console.log(render);
     setRender({
       ...render,
       [e.target.name]: e.target.value,
@@ -123,9 +143,51 @@ function CoursesPA() {
     setVideo(videoFilter);
   };
 
-  // ============ HendleEdit =================
+  const handleDeleteEdit = (e) => {
+    // console.log(videoEdit)
+    // console.log(e)
+    const videoFilter = videoEdit.filter((v) => v.value !== e.value);
+    // console.log(videoFilter)
+    setVideoEdit(videoFilter);
+  };
+  let [contador,setContador] = useState(0)
+ 
+  const handleDeleteRenderVideo = (e) => {
+    // console.log(render.videos)
+    // console.log(e)
+    const videoFilter = render.videos.filter((v) => v._id !== e._id);
+    // console.log(videoFilter)
+    const uwu = render
+    uwu.videos = videoFilter    
+    setRender(uwu);
+    setContador(contador +1)
+    console.log(render)
+  };
+  useEffect(() => {
+    console.log(render);
+  }, [render]);
+  const renderuwu = render
+  const handleSubmitEdit = (e) => {
+    const get = getValues();
+    e.preventDefault();
+       const idVideosEdit = videoEdit.map((e) => {
+        return { _id: e.value };
+      });
+      const idVideosRender = render.videos.map((e) => {
+        return { _id: e._id };
+      }); 
 
-  // ============ Delete =================
+      const newVideos = [...idVideosRender, ...idVideosEdit];
+      const videosAdd = newVideos.map(e => e._id)
+      const uwu2 = {...renderuwu,addVideos: videosAdd}
+    // setRender({
+    //   ...render,
+    //   ["addVideos"]: uwu2
+    // });
+    console.log(uwu2);
+    dispatch(updateCourse(uwu2,courseEdit.value));
+  }; 
+
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
   };
@@ -260,12 +322,13 @@ function CoursesPA() {
           </div>
         </div>
 
-        {/* Edit School */}
+        {/* Edit courses */}
         <div>
           <div className="h-screen">
             <form
               className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               action=""
+              onSubmit={(e) => handleSubmitEdit(e)}
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
                 Edit Course
@@ -281,9 +344,102 @@ function CoursesPA() {
                 isSearchable={true}
               />
 
+              {/* Edit form */}
+
+              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+                Form to Edit
+              </h2>
+
+              <input
+                name="name"
+                type="text"
+                value={render.name}
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="Name"
+                onChange={(e) => handleChange(e)}
+              />
+
+              <input
+                name="image"
+                type="text"
+                value={render.image}
+                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                placeholder="http://..."
+                onChange={(e) => handleChange(e)}
+              />
+
+              <textarea
+                style={{ resize: "none" }}
+                name="description"
+                value={render.description}
+                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                placeholder="Description"
+                onChange={(e) => handleChange(e)}
+              />
+              <div
+                style={{
+                  overflow: "scroll",
+                  height: "160px",
+                  backgroundColor: "rgb(198, 198, 198)",
+                  borderRadius: 5,
+                  borderWidth: 2,
+                  borderColor: "white",
+                }}
+                className=""
+                // onChange={(e) => handleChange(e)}
+              >
+                {render.videos.map((v, index) => (
+                  <div key={index} className="text-center">
+                    <span
+                      className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
+                      onClick={() => handleDeleteRenderVideo(v)}
+                    >
+                      {v.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <Select
+                name="video"
+                options={optionListVideos}
+                placeholder="All Videos"
+                value={videoEdit} //pendiente
+                onChange={handleSelectVideos}
+                isSearchable={true}
+              />
+              <div
+                style={{
+                  overflow: "scroll",
+                  height: "160px",
+                  backgroundColor: "rgb(198, 198, 198)",
+                  borderRadius: 5,
+                  borderWidth: 2,
+                  borderColor: "white",
+                }}
+                className=""
+                // onChange={(e) => handleChange(e)}
+              >
+                {/* {render.videos.map((e) => e)} */}
+                {videoEdit.map((v, index) => (
+                  
+                  <div key={index} className="text-center">
+                    <span
+                      className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
+                      onClick={() => handleDeleteEdit(v)}
+                    >
+                      {v.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
               <div className="flex justify-end items-center my-4 mt-10">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 ">
-                  Edit
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
+                  disabled={Object.entries(errors).length === 0 ? "" : true}
+                >
+                  Edit Course
                 </button>
               </div>
             </form>
@@ -303,7 +459,7 @@ function CoursesPA() {
           </div>
         </div>
 
-        {/* Delete School */}
+        {/* Delete Course */}
         <div>
           <div className="h-screen">
             <form

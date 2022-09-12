@@ -25,8 +25,11 @@ function Home() {
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
   // console.log(userObj.user.favorites);
+<<<<<<< HEAD
   // console.log(userLocal)
   // console.log(userObj)
+=======
+>>>>>>> Juan
   
   const incomingFavorites = user.favorites
   console.log(incomingFavorites)
@@ -35,15 +38,25 @@ function Home() {
     // dispatch(getVideoById(idVideo));
     dispatch(getAllNotifications());
     if(userObj){
+<<<<<<< HEAD
       (dispatch(getUser(userObj.user._id)))
     } 
    
     }, [dispatch]);
+=======
+      (dispatch(getUser(userObj.user._id))) 
+      setTimeout( () => {
+        dispatch(getFavorites(incomingFavorites))
+
+      },4000 )   
+    }
+>>>>>>> Juan
     
-    
-    
-    const stat = useSelector( (state) => state.programandoando)
-    dispatch(getFavorites(incomingFavorites))
+  }, [dispatch]);
+  
+  
+  
+  const stat = useSelector( (state) => state.programandoando)
     console.log(stat)
   return (
     <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
