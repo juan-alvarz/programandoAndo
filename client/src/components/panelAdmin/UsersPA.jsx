@@ -18,7 +18,7 @@ import {
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
-//uwu
+
 
 function CoursesPA() {
   const dispatch = useDispatch();
