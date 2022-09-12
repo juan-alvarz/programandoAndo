@@ -92,14 +92,6 @@ export const getFavorites = (id) => async (dispatch) => {
   dispatch(getFavoriteCourse(user.data.favorites));
 };
 
-export const updateUser = (payload, id) => async (dispatch) => {
-  const response = await axios.put(
-    `http://localhost:3001/api/users/${id}`,
-    payload
-  );
-  return response;
-};
-
 export const createsCourse = (payload) => async (dispatch) => {
   const response = await axios.post(
     "http://localhost:3001/api/courses",
@@ -238,7 +230,7 @@ export function orderByName(payload) {
   };
 }
 
-// =========================== Uppdate ===========================
+// =========================== Update ===========================
 export const updateVideo = (payload, id) => async (dispatch) => {
   const response = await axios.put(
     `http://localhost:3001/api/videos/${id}`,
@@ -263,7 +255,7 @@ export const updateSchool = (payload, id) => async (dispatch) => {
   return response;
 };
 
-export const uppdateUser = (payload, id) => async (dispatch) => {
+export const updateUser = (payload, id) => async (dispatch) => {
   const response = await axios.put(
     `http://localhost:3001/api/users/${id}`,
     payload

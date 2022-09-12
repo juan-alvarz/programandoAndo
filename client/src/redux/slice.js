@@ -159,16 +159,16 @@ export const slice = createSlice({
       state.stateFilter = sortedAlf;
     },
     // ============== Edit =====================
-    uppdateSchool: (state) => {
+    updateSchool: (state) => {
       return { ...state };
     },
-    uppdateCourse: (state) => {
+    updateCourse: (state) => {
       return { ...state };
     },
-    uppdateVideo: (state) => {
+    updateVideo: (state) => {
       return { ...state };
     },
-    uppdateUser: (state) => {
+    updateUser: (state) => {
       return { ...state };
     },
 

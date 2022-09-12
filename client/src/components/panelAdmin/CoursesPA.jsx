@@ -71,7 +71,7 @@ function CoursesPA() {
   }
 
   // Edit Courses
-  const [course, setCourse] = useState([]);
+  const [update, setUpdate] = useState([]);
   const [courseEdit, setEditCourse] = useState();
   const [render, setRender] = useState({
     name: "",
@@ -150,6 +150,14 @@ function CoursesPA() {
     // console.log(videoFilter)
     setVideoEdit(videoFilter);
   };
+<<<<<<< HEAD
+
+  const handleSubmitEdit = (e) => {
+    const get = getValues();
+    e.preventDefault();
+    console.log(update);
+    dispatch(updateCourse(update));
+=======
   let [contador,setContador] = useState(0)
  
   const handleDeleteRenderVideo = (e) => {
@@ -162,8 +170,13 @@ function CoursesPA() {
     setRender(uwu);
     setContador(contador +1)
     console.log(render)
+>>>>>>> Roge
   };
   useEffect(() => {
+<<<<<<< HEAD
+    console.log(update);
+  }, [update]);
+=======
     console.log(render);
   }, [render]);
   const renderuwu = render
@@ -187,6 +200,7 @@ function CoursesPA() {
     console.log(uwu2);
     dispatch(updateCourse(uwu2,courseEdit.value));
   }; 
+>>>>>>> Roge
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
