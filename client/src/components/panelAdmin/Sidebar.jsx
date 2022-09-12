@@ -4,19 +4,23 @@ import arrowMenu from "../../utils/images/sidebar/control.png";
 import logo from "../../utils/images/sidebar/logo.png";
 
 function Sidebar() {
+  const [click, setClick] = useState(0);
   const [open, setOpen] = useState(true);
+
+  const path = window.location.pathname;
+
   const menus = [
-    { title: "Dashboard", href: "/", src: "Chart_fill" },
-    { title: "Administrator", href: "/administrator", src: "Chat" },
-    { title: "Baneos", href: "/baneos", src: "Folder" },
+    { title: "Dashboard", href: "/", src: "Chart_fill", id: 0 },
+    { title: "Administrator", href: "/administrator", src: "Chat", id: 1 },
+    { title: "Baneos", href: "/baneos", src: "Folder", id: 2 },
 
-    { title: "Videos", href: "/videospa", src: "User", gap: true },
-    { title: "Courses", href: "/coursespa", src: "User" },
-    { title: "Schools", href: "/schoolspa", src: "User" },
-    { title: "Users", href: "/userspa", src: "User" },
+    { title: "Videos", href: "/videospa", src: "User", gap: true, id: 3 },
+    { title: "Courses", href: "/coursespa", src: "User", id: 4 },
+    { title: "Schools", href: "/schoolspa", src: "User", id: 5 },
+    { title: "Users", href: "/userspa", src: "User", id: 6 },
 
-    { title: "Search", href: "", src: "Search", gap: true },
-    { title: "Setting", href: "", src: "Setting" },
+    // { title: "Search", href: "", src: "Search", gap: true, id: 7 },
+    { title: "Setting", href: "/setting", src: "Setting", gap: true, id: 8 },
   ];
   return (
     <div className="flex">
@@ -51,12 +55,15 @@ function Sidebar() {
         </div>
         <ul className="pt-6">
           {menus.map((menu, index) => (
-            <NavLink to={menu.href}>
+            <NavLink to={menu.href} key={index}>
               <li
                 key={index}
                 className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white rounded-md ${
                   menu.gap ? "mt-9" : "mt-2"
-                } ${index === 0 && "bg-white bg-opacity-50"}`}
+                } ${menu.href === path ? "bg-white bg-opacity-50" : ""}`}
+                onClick={() => {
+                  setClick(menu.id);
+                }}
               >
                 <img
                   src={require(`../../utils/images/sidebar/${menu.src}.png`)}

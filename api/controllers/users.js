@@ -9,6 +9,10 @@ const { handleHtppError } = require("../utils/handleError");
 const {
   sendConfirmationEmail,
   sendChangePasswordEmail,
+<<<<<<< HEAD
+=======
+  sendEmailDonation,
+>>>>>>> Fran
 } = require("../config/nodemailer.config");
 
 const getAllUsers = async (req, res, next) => {
@@ -40,21 +44,23 @@ const getAllUsers = async (req, res, next) => {
     });
     return res.json(users);
   } catch (e) {
-    res.status(e.response.status);
-    return res.json(e.message);
+    return res.send(e.message);
   }
 };
 
 const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await usersModel.findById(id).populate({
-      path: "schools",
-      populate: {
-        path: "courses",
-        populate: { path: "videos" },
-      },
-    });
+    const user = await usersModel
+      .findById(id)
+      .populate({
+        path: "schools",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      })
+      .populate("favorites");
     if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);
@@ -62,16 +68,19 @@ const getUserById = async (req, res, next) => {
     }
     return res.json(user);
   } catch (e) {
-    res.status(e.response.status);
-    return res.json(e.message);
+    return res.send(e.message);
   }
 };
-
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;
+<<<<<<< HEAD
     const find = usersModel.findById(body._id);
     // console.log(find)
+=======
+    const find = await usersModel.findOne({ email: body.email });
+    console.log(find);
+>>>>>>> Fran
 
     if (find) {
       return handleHtppError(res, "User already exist", 401);
@@ -264,14 +273,61 @@ const verifyUser = async (req, res, next) => {
     }
   });
 };
+<<<<<<< HEAD
 
+=======
+const updateFavorites = async (req, res) => {
+  const { id } = req.params;
+
+  const favorites = req.body;
+
+  const user = await usersModel.findById(id);
+  const data = await usersModel.updateOne(
+    { _id: id },
+    {
+      favorites: [...user.favorites, favorites[0]],
+    }
+  );
+  console.log(user.favorites);
+  res.status(201).send({ msg: "Added course favorite" });
+};
+
+const deleteFavorites = async (req, res) => {
+  const { id } = req.params;
+
+  const favorites = req.body;
+  // console.log(favorites);
+
+  const user = await usersModel.findById(id);
+  const userFavorites = user.favorites.map((e) => e.toString());
+
+  const newFavorites = userFavorites.filter((e) => e !== favorites[0]);
+  console.log(newFavorites);
+  const data = await usersModel.updateOne(
+    { _id: id },
+    {
+      favorites: newFavorites,
+    }
+  );
+  console.log(user);
+  res.status(201).send({ msg: "Course favorite deleted" });
+};
+>>>>>>> Fran
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
+<<<<<<< HEAD
     const user = await usersModel.findById(id);
     const passwordUser = await usersModel.findById(id).select("password");
     // console.log(passwordUser.password)
+=======
+    console.log(body);
+    const user = await usersModel.findById(id);
+    const passwordUser = await usersModel.findById(id).select("password");
+    console.log(passwordUser.password);
+    console.log(body.password);
+>>>>>>> Fran
     console.log(user.role);
 
     if (body.password) {
@@ -312,13 +368,21 @@ const updateUser = async (req, res, next) => {
           schools: body.schools ? body.schools : user.schools,
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
+<<<<<<< HEAD
+=======
+          contributor: body.contributor ? body.contributor : user.contributor,
+>>>>>>> Fran
         }
       );
       if (!data.modifiedCount) {
         handleHtppError(res, "Fail in the query", 422);
       }
+<<<<<<< HEAD
       res.status(201);
       return res.send(data);
+=======
+      return res.status(201).send(data);
+>>>>>>> Fran
     }
     if (user.role === "admin") {
       const newBody = { ...body, password };
@@ -367,6 +431,17 @@ const restoreUser = async (req, res, next) => {
   }
 };
 
+const successDonation = (req, res) => {
+  try {
+    const { name, email, amount } = req.body;
+    console.log(`este es params` + req.body);
+    sendEmailDonation(name, email, amount);
+    return res.status(200).json({ message: "success" });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -379,4 +454,11 @@ module.exports = {
   verifyUser,
   submitChangePass,
   changePasswordRequest,
+<<<<<<< HEAD
 };
+=======
+  successDonation,
+  updateFavorites,
+  deleteFavorites,
+};
+>>>>>>> Fran

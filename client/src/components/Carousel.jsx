@@ -28,9 +28,6 @@ const Carousel = () => {
     }
   }
 
-  console.log(courses);
-  console.log(carouselCourses);
-
   return (
     <div className="container mx-auto">
       <div className="flex items-center justify-center w-full h-full py-24 sm:py-8 px-4">
@@ -215,7 +212,6 @@ const Carousel = () => {
               <Slider>
                 <div>
                   {carouselCourses.map((e) => {
-                    console.log(e);
                     return (
                       <Slide key={e._id}>
                         <div
@@ -359,7 +355,6 @@ const Carousel = () => {
               <Slider>
                 <div>
                   {carouselCourses.map((e) => {
-                    console.log(e);
                     return (
                       <Slide key={e._id}>
                         <div

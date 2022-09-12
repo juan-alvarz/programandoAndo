@@ -17,7 +17,8 @@ export const slice = createSlice({
     foro: {},
     foros: [],
     filters: [],
-    favoritesUser:[]
+    favoritesUser: [],
+    notifications: [],
   },
   reducers: {
     // ========= Courses ===========
@@ -74,10 +75,10 @@ export const slice = createSlice({
     getCourseById: (state, action) => {
       state.course = action.payload;
     },
-    favoriteCourse:(state,action)=>{
-      state.favoritesUser.push(action.payload)
-    }
-    ,
+
+    getFavoriteCourse: (state, action) => {
+      state.favoritesUser = action.payload;
+    },
     createCourse: (state) => {
       return { ...state };
     },
@@ -110,13 +111,6 @@ export const slice = createSlice({
     loginUser: (state, action) => {
       state.user = action.payload;
     },
-
-
-
-
-
-
-
 
     createUser: (state) => {
       return { ...state };
@@ -179,6 +173,40 @@ export const slice = createSlice({
 
       state.stateFilter = sortedAlf;
     },
+    // ============== Edit =====================
+    updateSchool: (state) => {
+      return { ...state };
+    },
+    updateCourse: (state) => {
+      return { ...state };
+    },
+    updateVideo: (state) => {
+      return { ...state };
+    },
+    updateUser: (state) => {
+      return { ...state };
+    },
+
+    // ============== Delete ====================
+    deleteSchool: (state) => {
+      return { ...state };
+    },
+    deleteCourse: (state) => {
+      return { ...state };
+    },
+    deleteVideo: (state) => {
+      return { ...state };
+    },
+    deleteUser: (state) => {
+      return { ...state };
+    },
+    deleteNotifications: (state) => {
+      return { ...state };
+    },
+    // ============== Notification ====================
+    getNotifications: (state, action) => {
+      state.notifications = action.payload;
+    },
   },
 });
 
@@ -209,7 +237,17 @@ export const {
   getCourse5h,
   getCourse3h,
   getSession,
-  favoriteCourse
+  getFavoriteCourse,
+  deleteSchool,
+  deleteCourse,
+  deleteVideo,
+  deleteUser,
+  deleteNotifications,
+  getNotifications,
+  uppdateSchool,
+  uppdateCourse,
+  uppdateVideo,
+  uppdateUser,
 } = slice.actions;
 
 export default slice.reducer;

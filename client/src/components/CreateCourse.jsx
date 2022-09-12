@@ -93,30 +93,16 @@ export default function CreateCourse() {
     /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
   let reg_exImg = /.*(png|jpg|jpeg|gif)$/;
   return (
-    <div style={{ backgroundColor: "rgb(198, 198, 198)", height: "100vh" }}>
+    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
       <NavBar />
-      <div className="flex items-center justify-center pt-24 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md space-y-8 font">
+      <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+        <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
           <div
             className="flex flex-col items-center"
             style={{ color: "rgb(168,76,101)" }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-8 h-8 mb-2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-              />
-            </svg>
-            <h2 className=" text-center text-3xl font-bold tracking-tight text-gray-900">
-              Create Course
+            <h2 style={{ color: "rgb(17, 52, 82)" }} className="text-3xl font-semibold text-center text-black uppercase">
+              Create route
             </h2>
           </div>
           <form
@@ -126,11 +112,17 @@ export default function CreateCourse() {
             method="POST"
           >
             <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-semibold text-gray-800"
+              >
+                Name
+              </label>
               <input
                 name="name"
                 type="text"
                 autoComplete="off"
-                className="relative block w-full appearance-none rounded-b-md rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm font-light"
+                className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Course Name"
                 {...register("name", {
                   required: true,
@@ -147,16 +139,22 @@ export default function CreateCourse() {
                 })}
               />
               {errors.name?.type === "required" && (
-                <small className="text-red-600 font-bold">Input empty</small>
+                <small className="text-red-600 font-bold">Name empty</small>
               )}
             </div>
 
             <div>
+              <label
+                htmlFor="image"
+                className="block text-sm font-semibold text-gray-800"
+              >
+                Image
+              </label>
               <input
                 name="image"
                 type="text"
                 autoComplete="off"
-                className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm font-light"
+                className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Image or Logo course"
                 {...register("image", {
                   required: true,
@@ -166,7 +164,7 @@ export default function CreateCourse() {
                 })}
               />
               {errors.image?.type === "required" && (
-                <small className="text-red-600 font-bold">Input empty</small>
+                <small className="text-red-600 font-bold">Image empty</small>
               )}
               {errors.image?.type === "pattern" && (
                 <small className="text-red-600 font-bold">URL Not Valid</small>
@@ -174,16 +172,22 @@ export default function CreateCourse() {
             </div>
 
             <div>
+              <label
+                htmlFor="image"
+                className="block text-sm font-semibold text-gray-800"
+              >
+                Description
+              </label>
               <textarea
                 style={{ resize: "none" }}
                 name="description"
                 autoComplete="off"
-                className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm font-light"
+                className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
               {errors.description?.type === "required" && (
-                <small className="text-red-600 font-bold">Input empty</small>
+                <small className="text-red-600 font-bold">Description empty</small>
               )}
             </div>
 

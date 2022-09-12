@@ -7,7 +7,11 @@ const {
 const router = express.Router();
 
 // http://localhost:3001/api/paypal/[ROUTE]
+<<<<<<< HEAD
 router.post("/create-payment", createPayment);
+=======
+router.get("/create-payment/:value", createPayment);
+>>>>>>> Fran
 router.get("/execute-payment", executePayment);
 router.get("/cancel-payment", cancelPayment);
 

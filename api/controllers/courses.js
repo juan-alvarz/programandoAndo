@@ -54,7 +54,8 @@ const createCourse = async (req, res) => {
   const { name, description, image, videos } = req.body;
 
   // const body = req.body;
-  const find = await schoolModel.findOne({ name: name });
+  const find = await schoolModel.findWithDeleted({ name });
+  console.log(find);
 
   const videosFind = await Promise.all(
     videos.map(async (video) => {
@@ -64,7 +65,7 @@ const createCourse = async (req, res) => {
   const duration = durationCourse(videosFind);
 
   try {
-    if (!find) {
+    if (find.length === 0) {
       const creado = await courseModel.create({
         name,
         description,
@@ -90,9 +91,21 @@ const createCourse = async (req, res) => {
 
 const updateCourse = async (req, res) => {
   const { id } = req.params;
-  const body = req.body;
+  const { name, description, image, videos, addVideos } = req.body;
+  console.log(req.body);
+  console.log(addVideos);
   try {
-    const actualizado = await courseModel.updateOne({ _id: id }, body);
+    // const actualizado = await courseModel.updateOne({ _id: id }, body);
+    const actualizado = await courseModel.updateOne(
+      { _id: id },
+      {
+        name,
+        description,
+        image,
+        videos: addVideos,
+      }
+    );
+
     if (!actualizado.modifiedCount) {
       res.status(422).send("Fail in the query");
     }

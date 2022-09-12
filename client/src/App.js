@@ -14,6 +14,7 @@ import AllCourses from "./components/AllCourses";
 import OneCourseDetail from "./components/OneCourseDetail";
 import Login from "./components/Login";
 import CreateUser from "./components/CreateUser";
+import ForgetPassword from "./components/ForgetPassword";
 import Sidebar from "./components/panelAdmin/Sidebar.jsx";
 // Panel Admin
 import VideosPA from "./components/panelAdmin/VideosPA";
@@ -24,6 +25,10 @@ import Administrator from "./components/panelAdmin/Administrator";
 import Baneos from "./components/panelAdmin/Baneos";
 import Loader from "./components/Loader";
 import { Favorites } from "./components/Favorites";
+import CancelDonation from "./components/CancelDonation";
+import SuccessDonation from "./components/SuccessDonation";
+import Welcome from "./components/Welcome";
+import Settings from "./components/panelAdmin/Settings";
 
 function App() {
   return (
@@ -42,6 +47,7 @@ function App() {
           {/* Algunas rutas nuevas */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<CreateUser />} />
+          <Route path="/forgetPassword" element={<ForgetPassword />} />
 
           <Route path="/sidebar" element={<Sidebar />} />
           {/* <Route path="/panelAdmin" element={<PanelAdmin />} /> */}
@@ -53,9 +59,12 @@ function App() {
           <Route path="/userspa" element={<UsersPA />} />
           <Route path="/administrator" element={<Administrator />} />
           <Route path="/baneos" element={<Baneos />} />
-
+          <Route path="/setting" element={<Settings />} />
+          <Route path="/execute-payment" element={<SuccessDonation />} />
+          <Route path="/cancel-payment" element={<CancelDonation />} />
           <Route path="*" element={<Error404 />} />
-          <Route path="/favorites" element={<Favorites></Favorites>} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/confirm/:confirmationCode" element={<Welcome />} />
         </Routes>
       </div>
     </BrowserRouter>

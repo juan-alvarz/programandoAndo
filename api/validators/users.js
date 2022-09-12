@@ -7,7 +7,11 @@ const validatorCreateUser = [
   check("email").exists().notEmpty().isEmail(),
 
   check("password").exists().notEmpty().isLength({ min: 8, max: 16 }),
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> Fran
   (req, res, next) => {
     return validateResults(req, res, next);
   },

@@ -1,89 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import {
-  getVideoById,
-  clearVideo,
-  getCourse,
-  getForoById,
-  updateForo,
-} from "../redux/actions";
+import { useParams, useNavigate } from "react-router-dom";
+import { getVideoById, clearVideo, getCourse } from "../redux/actions";
 import NavBar from "./NavBar";
 import { Videos } from "./Videos";
-import Loader from "./Loader";
+import Swal from "sweetalert2";
+
 
 export default function Video() {
+  const { video, course } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const { idCourse } = useParams();
-  const { idUser } = useParams();
-  const { video, course, foro } = useSelector((state) => state.programandoando);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  let userLocal = window.localStorage.getItem("user");
-  let userObj = JSON.parse(userLocal);
-
-   // COMENTARIO
-
-  const [valueComment, setvalueComment] = useState("")
-
-  const [commentario, setCommentario] = useState({
-    content: "",
-    authorComment: userObj.user._id,
-    commentId: "", // este siempre sale vakcio che 
-  });
-
-  function handleChange(e) {
-    setCommentario({
-      ...commentario,
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(commentario);
-    dispatch(updateForo(video.foro, commentario));
-    setvalueComment("")
-  }
-
-  // RESPUESTA 
-  const [respuesta, setRespuesta] = useState({
-    content: "",
-    authorComment: userObj.user._id,
-    commentId: "",
-  });
-
-  function handleChangeRespuesta(e) {
-    setRespuesta({
-      ...respuesta,
-      commentId: e.target.dataset.commentid,
-      content: e.target.value,
-    });
-    setvalueComment(e.target.value)
-  }
   
-  function handleSubmitRespuesta(e) {
-    e.preventDefault();
-    console.log(respuesta);
-    dispatch(updateForo(video.foro, respuesta))
-  }
+  const usuario = window.localStorage.getItem('user')
+
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
   }, [idVideo]);
 
-  useEffect(() => {
-    dispatch(getForoById(video.foro));
-  }, [video.foro]);
-
-  console.log(foro)
- 
   if (!Object.keys(course).length) {
-    return <Loader />;
+    return <h2>Cargando Video!</h2>;
   } else {
     return (
-      <div style={{ width: "100%" }}>
+      usuario ?
+      <div style={{ width: "100%", backgroundColor: 'rgb(240, 240, 240)', height: '100vh' }}>
         <NavBar />
         <div>
           {/* Video */}
@@ -150,62 +96,18 @@ export default function Video() {
           {/* Courses */}
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
-        </div>
-    );
+      </div>
+      : 
+      Swal.fire({
+        title: "Access to videos denied",
+        text: "You cannot login if you are not logged in. Please log in",
+        icon: "warning",
+        confirmButtonText: "Log in",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      })
+    )
   }
 }
-      {/* <div>
-         FORO FUNCIONAL
-          {Object.keys(foro).length > 0 ? (
-            foro.comments.map(            
-              (comment) => 
-              <ol>
-              <h2>{comment.content}</h2> 
-              <h3>{comment.answers?.map(
-                (answer) => 
-                <ol>
-                <h2>{answer.content}</h2>
-          </ol>
-              )}
-              </h3>
-          <button>Comentar</button>
-          <br/>
-          <br/>
-          <h1> --- </h1>
-          <br/>
-          <input
-            type="text"
-            placeholder="Comment...)"
-            value= {valueComment}
-            data-commentid={comment._id}
-            name={comment._id}
-            onChange={(e) => handleChangeRespuesta(e)}
-            />
-          <button
-            className="button"
-            type="submit"
-            onClick={(e) => handleSubmitRespuesta(e)}
-            >
-            Send
-          </button> 
-              </ol>) 
-          ) : (
-            <h2>No se cumplió master</h2>
-          )}
-        </div>
-           <input
-            type="text"
-            value={valueComment}
-            name= "content"
-            placeholder="Comment...)"
-            onChange={(e) => handleChange(e)}
-          />
-           <button
-            className="button"
-            type="submit"
-            onClick={(e) => handleSubmit(e)}
-            >
-            Send
-          </button>
-          <h1>EL DE ARRIBA ES UN INPUT PARA UN COMENTARIO, NO UNA RESPUESTA</h1>
-        */}

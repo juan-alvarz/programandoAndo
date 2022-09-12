@@ -11,7 +11,11 @@ const NotificationsSchema = new Schema(
     description: {
       type: String,
     },
+<<<<<<< HEAD
     expireAt: { type: Date,  expires: 432000, default: Date.now }
+=======
+    expireAt: { type: Date, expires: 432000, default: Date.now },
+>>>>>>> Fran
   },
   {
     timestamps: true,
@@ -24,4 +28,8 @@ NotificationsSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 const NotificationsModel = model("Notifications", NotificationsSchema);
 
 module.exports = NotificationsModel;
+<<<<<<< HEAD
 //Esquema Notifications
+=======
+//Esquema Notifications
+>>>>>>> Fran

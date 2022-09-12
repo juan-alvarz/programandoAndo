@@ -32,7 +32,7 @@ export const Paginated = ({
                 <li key={numero}>
                   <button
                     style={{backgroundColor: 'rgb(17, 52, 82)'}}
-                    className="pb-1 px-2 text-gray-200 bg-gray-900 border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                    className="pb-1 px-2 text-gray-200 bg-gray-900 border border-gray-300 hover:bg-gray-100 hover:text-gray-400"
                     onClick={() => setPagina(numero)}
                   >
                     {numero}
