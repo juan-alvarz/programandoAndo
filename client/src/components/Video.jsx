@@ -23,18 +23,27 @@ export default function Video() {
   let userObj = JSON.parse(userLocal);
 
   // COMENTARIO
+  useEffect(() => {
+    dispatch(getVideoById(idVideo));
+    dispatch(getCourse(idCourse));
+  }, [idVideo]);
+
+  useEffect(() => {
+    dispatch(getForoById(video.foro));
+  }, [video.foro]);
 
   const [valueComment, setvalueComment] = useState("");
 
   const [commentario, setCommentario] = useState({
     content: "",
     authorComment: userObj.user._id,
-    commentId: "", // este siempre sale vakcio che
+    commentId: "", // este siempre sale vakcio
   });
 
   function handleChange(e) {
+    e.preventDefault();
     setCommentario({
-      ...commentario,
+      ...commentario.content,
       [e.target.name]: e.target.value,
     });
   }
@@ -68,15 +77,6 @@ export default function Video() {
     dispatch(updateForo(video.foro, respuesta));
     setvalueComment("");
   }
-
-  useEffect(() => {
-    dispatch(getVideoById(idVideo));
-    dispatch(getCourse(idCourse));
-  }, [idVideo]);
-
-  useEffect(() => {
-    dispatch(getForoById(video.foro));
-  }, [video.foro]);
 
   console.log(foro);
 
@@ -151,26 +151,35 @@ export default function Video() {
           {/* Courses */}
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
-        <div>
-          {/* FORO FUNCIONAL */}
+        {/* <div>
           {Object.keys(foro).length > 0 ? (
-            foro.comments.map((comment) => (
+            foro.comments.map((comment) => {
               <ol>
                 <h2>{comment.content}</h2>
-                <h3>
+              </ol>;
+            })
+          ) : (
+            <h2>No se logró hacer capo</h2>
+          )}
+        </div> */}
+        <div>
+          {Object.keys(foro).length > 0 ? (
+            foro.comments.map((comment) => (
+              <ol style={{ padding: "5px" }}>
+                <h2>
+                  <strong>{comment.content}</strong>
+                </h2>
+                <h3 style={{ paddingLeft: "25px" }}>
                   {comment.answers?.map((answer) => (
                     <ol>
                       <h2>{answer.content}</h2>
                     </ol>
                   ))}
                 </h3>
-                <button>Comentar</button>
-                <br />
-                <hr />
-                <br />
+
                 <input
                   type="text"
-                  placeholder="Comment...)"
+                  placeholder="Replicate"
                   value={valueComment}
                   data-commentid={comment._id}
                   name="content"
@@ -183,6 +192,9 @@ export default function Video() {
                 >
                   Send
                 </button>
+                <br />
+                <hr />
+                <br />
               </ol>
             ))
           ) : (
@@ -191,9 +203,9 @@ export default function Video() {
         </div>
         <input
           type="text"
-          value={valueComment}
+          value={commentario}
           name="content"
-          placeholder="Comment...)"
+          placeholder="New comment"
           onChange={(e) => handleChange(e)}
         />
         <button
