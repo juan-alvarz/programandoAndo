@@ -57,7 +57,7 @@ export default function Video() {
     setRespuesta({
       ...respuesta,
       commentId: e.target.dataset.commentid,
-      [e.target.name]: e.target.value,
+      content: e.target.value,
     });
     setvalueComment(e.target.value)
   }
@@ -66,7 +66,6 @@ export default function Video() {
     e.preventDefault();
     console.log(respuesta);
     dispatch(updateForo(video.foro, respuesta))
-    setvalueComment("")
   }
 
   useEffect(() => {
@@ -151,8 +150,12 @@ export default function Video() {
           {/* Courses */}
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
-        <div>
-          {/* FORO FUNCIONAL */}
+        </div>
+    );
+  }
+}
+      {/* <div>
+         FORO FUNCIONAL
           {Object.keys(foro).length > 0 ? (
             foro.comments.map(            
               (comment) => 
@@ -175,7 +178,7 @@ export default function Video() {
             placeholder="Comment...)"
             value= {valueComment}
             data-commentid={comment._id}
-            name="content"
+            name={comment._id}
             onChange={(e) => handleChangeRespuesta(e)}
             />
           <button
@@ -189,7 +192,6 @@ export default function Video() {
           ) : (
             <h2>No se cumplió master</h2>
           )}
-          
         </div>
            <input
             type="text"
@@ -206,7 +208,4 @@ export default function Video() {
             Send
           </button>
           <h1>EL DE ARRIBA ES UN INPUT PARA UN COMENTARIO, NO UNA RESPUESTA</h1>
-      </div>
-    );
-  }
-}
+        */}
