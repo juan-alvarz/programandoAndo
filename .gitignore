@@ -1,8 +1,12 @@
-#archivos a ignorar
+#archivos de instalación
 node_modules/
 
 #variables de entorno
 .env
 
-#paquetes instalados
-package-lock.json
+api/package-lock.json
+
+api/config/account_transport.json
+
+#paypal credentials
+api/config/paypalcredentials.js
