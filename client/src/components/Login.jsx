@@ -44,13 +44,13 @@ export default function Login() {
       /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     e.preventDefault();
     if (!emailRegex.test(email)) {
-      setEmailError("Email invalido");
+      setEmailError("Invalid email");
       setTimeout(function () {
         setEmailError("");
       }, 3000);
     }
     if (password.length > 64 || password.length < 8) {
-      setPassError("El password debe tener entre 8 y 64 caracteres");
+      setPassError("The password must be between 8 and 64 characters");
       setTimeout(function () {
         setPassError("");
       }, 3000);
