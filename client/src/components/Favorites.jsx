@@ -53,6 +53,7 @@ let unicos = [...personasMapArr.values()];*/
             <div
               key={elemento._id}
               className="grid grid-cols-3 gap-4 content-start"
+              style={{backgroundColor: 'rgb(240, 240, 240)'}}
             >
               <div class="p-6 m-10 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">

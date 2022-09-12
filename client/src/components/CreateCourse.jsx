@@ -93,7 +93,7 @@ export default function CreateCourse() {
     /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
   let reg_exImg = /.*(png|jpg|jpeg|gif)$/;
   return (
-    <div style={{ backgroundColor: "rgb(198, 198, 198)"}}>
+    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
       <NavBar />
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">

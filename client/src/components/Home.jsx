@@ -40,7 +40,7 @@ function Home() {
   const stat = useSelector((state) => state.programandoando);
   console.log(stat);
   return (
-    <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
+    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
       <NavBar />
       <div class="py-10">
         <div

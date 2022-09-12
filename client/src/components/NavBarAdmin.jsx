@@ -35,7 +35,7 @@ const handlelogout = (e) => {
 }
 
   return (
-    <Disclosure
+    <Disclosure 
       as="nav"
       style={{ backgroundColor: "rgb(17, 52, 82)"}}
       className="bg-gray-800"
