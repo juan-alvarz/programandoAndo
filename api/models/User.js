@@ -47,10 +47,12 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-    scoring: {
-      type: Schema.Types.ObjectId,
-      ref: "Courses",
-    },
+    scoring: [
+      {
+        course: { type: Schema.Types.ObjectId, ref: "Course" },
+        score: Number,
+      },
+    ],
     favorites: [
       {
         type: Schema.Types.ObjectId,

@@ -26,7 +26,8 @@ const CourseSchema = new Schema(
       default: 0,
     },
     score: {
-      type: mongoose.Decimal128,
+      /* type: mongoose.Decimal128, */
+      type: Number,
       default: 0,
     },
   },
