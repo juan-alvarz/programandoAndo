@@ -79,7 +79,7 @@ export default function Login() {
           setError("login exitoso");
           setTimeout(function () {
             navigate("/");
-          }, 2000);
+          }, 1000);
         } else {
           setError("login incorrecto");
           setTimeout(function () {

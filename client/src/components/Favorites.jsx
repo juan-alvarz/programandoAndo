@@ -19,16 +19,16 @@ export const Favorites = () => {
   const[elminado,setEliminado]=useState()
  
   const dispatch = useDispatch()
+  const { user } = useSelector(state => state.programandoando)
   
   useEffect(() => {
+    dispatch(favorite(user.favorites))
     if(userObj){
 
       dispatch(getUser(userObj.user._id))
     }
     
   }, [dispatch]);
-  const { user } = useSelector(state => state.programandoando)
-  dispatch(favorite(user.favorites))
   const {favoritesUser}= useSelector(state => state.programandoando)
   let userActualizado = JSON.parse(JSON.stringify(user?user:null))
   console.log(favoritesUser)
