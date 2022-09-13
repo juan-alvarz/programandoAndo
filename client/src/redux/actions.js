@@ -24,7 +24,8 @@ import {
   getCourse5h,
   getCourse3h,
   getSession,
-  favoriteCourse,
+  getFavoriteCourse,
+  getNotifications,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -84,23 +85,61 @@ export const getCourse = (id) => (dispatch) => {
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
 };
-export const favorite = (payload) => (dispatch) => {
-  dispatch(favoriteCourse(payload));
+
+export const getFavorites = (id) => async (dispatch) => {
+  const user = await axios.get(`http://localhost:3001/api/users/${id}`);
+  console.log(user);
+  dispatch(getFavoriteCourse(user.data.favorites));
 };
 
-export const updateUser = (payload, id) => async (dispatch) => {
-  const response = await axios.put(
-    `http://localhost:3001/api/users/${id}`,
-    payload
-  );
-  return response;
-};
+// export const createsCourse = (payload) => async (dispatch) => {
+//   const response = await axios
+//     .post("http://localhost:3001/api/courses", payload)
+//     .then(() => {
+//       Swal.fire({
+//         title: "Create Course",
+//         text: "Course Created Successfully",
+//         icon: "success",
+//         confirmButtonText: "Back",
+//       });
+//     })
+//     .catch((error) =>
+//       Swal.fire({
+//         title: "Ups Something Happens",
+//         // text: "Can't create video please try again",
+//         text: error.response.data.error,
+//         icon: "error",
+//         confirmButtonText: "OK",
+//       }).then(console.log(error))
+//     );
+//   return response;
+// };
 
 export const createsCourse = (payload) => async (dispatch) => {
-  const response = await axios.post(
-    "http://localhost:3001/api/courses",
-    payload
-  );
+  const response = await axios
+    .post("http://localhost:3001/api/courses", payload)
+    .then(() => {
+      Swal.fire({
+        text: "Route created successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload();
+        }
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
+
   return response;
 };
 
@@ -189,13 +228,12 @@ export const googleUserLogin = (payload) => async (dispatch) => {
 
   return response;
 };
-
-/*export const login = (payload) => async (dispatch) => {
-  const response = await axios.post("http://localhost:3001/api/user", payload);
-  dispatch(loginUser(response.data))
-
+export const verifyUser = async (code) => {
+  const response = await axios.get(
+    `http://localhost:3001/api/users/ath/confirm/${code}`
+  );
+  return response.data;
 };
-*/
 
 // ============================ Videos ============================
 export const getAllVideos = () => (dispatch) => {
@@ -213,10 +251,33 @@ export const getVideoById = (id) => (dispatch) => {
 };
 
 export const createsVideo = (payload) => async (dispatch) => {
-  const response = await axios.post(
-    "http://localhost:3001/api/videos",
-    payload
-  );
+  const response = await axios
+    .post("http://localhost:3001/api/videos", payload)
+    .then(() => {
+      Swal.fire({
+        title: "Create Video",
+        text: "Create Video Successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload();
+        }
+      });
+      return dispatch({
+        type: "DELETE_SCHOOL",
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
   return response;
 };
 
@@ -235,13 +296,96 @@ export function orderByName(payload) {
   };
 }
 
+// =========================== Update ===========================
+export const updateVideo = (payload, id) => async (dispatch) => {
+  const response = await axios
+    .put(`http://localhost:3001/api/videos/${id}`, payload)
+    .then(() => {
+      Swal.fire({
+        title: "Update Video",
+        text: "Update Video Successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload();
+        }
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
+  return response;
+};
+
+export const updateCourse = (payload, id) => async (dispatch) => {
+  const response = await axios
+    .put(`http://localhost:3001/api/courses/${id}`, payload)
+    .then(() => {
+      Swal.fire({
+        title: "Update Course",
+        text: "Update Course Successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          window.location.reload();
+        }
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
+  return response;
+};
+
+export const updateSchool = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/schools/${id}`,
+    payload
+  );
+  return response;
+};
+
+export const updateUser = (payload, id) => async (dispatch) => {
+  const response = await axios.put(
+    `http://localhost:3001/api/users/${id}`,
+    payload
+  );
+  return response;
+};
+
 // =========================== Delete ===========================
 export function deleteSchoolById(id) {
   return async function (dispatch) {
     await axios
       .delete(`http://localhost:3001/api/schools/${id}`)
       .then(() => {
-        alert("Se elimino");
+        Swal.fire({
+          title: "Delete School",
+          text: "Delete School Successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // navigate("/userspa");
+            window.location.reload();
+          }
+        });
         return dispatch({
           type: "DELETE_SCHOOL",
         });
@@ -260,6 +404,11 @@ export function deleteCourseById(id) {
           text: "Course Deleted Successfully",
           icon: "success",
           confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // navigate("/userspa");
+            window.location.reload();
+          }
         });
         return dispatch({
           type: "DELETE_COURSE",
@@ -272,9 +421,20 @@ export function deleteCourseById(id) {
 export function deleteVideoById(id) {
   return async function (dispatch) {
     await axios
-      .delete(`http://localhost:3001/api/videos/${id}`)
+      .delete(`http://localhost:3001/api/videos/softDelete/${id}`)
       .then(() => {
-        alert("Se elimino");
+        Swal.fire({
+          title: "Delete Video",
+          text: "Delete Video Successfully",
+          icon: "success",
+          confirmButtonText: "Back",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // navigate("/userspa");
+            window.location.reload();
+          }
+        });
+
         return dispatch({
           type: "DELETE_VIDEO",
         });
@@ -288,7 +448,7 @@ export function deleteUserById(id) {
     await axios
       .delete(`http://localhost:3001/api/users/${id}`)
       .then(() => {
-        alert("Se elimino");
+        // alert("Se elimino");
         return dispatch({
           type: "DELETE_USER",
         });
@@ -296,6 +456,8 @@ export function deleteUserById(id) {
       .catch((error) => console.log(error));
   };
 }
+
+// =========================== Notification ===========================
 
 export function deleteNotificationById(id) {
   return async function (dispatch) {
@@ -310,6 +472,21 @@ export function deleteNotificationById(id) {
       .catch((error) => console.log(error));
   };
 }
+
+export const getAllNotifications = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/notifications")
+    .then((res) => dispatch(getNotifications(res.data)))
+    .catch((e) => console.log(e));
+};
+
+export const createNotification = (payload) => async (dispatch) => {
+  const response = await axios.post(
+    "http://localhost:3001/api/notifications",
+    payload
+  );
+  return response;
+};
 
 // ============================ Clear ============================
 // export function clearFilter() {

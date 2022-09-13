@@ -9,7 +9,7 @@ const PORT = 3001;
 
 //Crea la orden de compra, se debe hacer un post con un body, EJ: ({"value":"45"})
 const createPayment = async (req, res) => {
-  const { value } = req.body;
+  const { value } = req.params;
   const body = {
     intent: "CAPTURE",
     purchase_units: [
@@ -25,8 +25,8 @@ const createPayment = async (req, res) => {
       brand_name: "programandoando.com",
       landing_page: "LOGIN",
       user_action: "PAY_NOW",
-      return_url: `http://localhost:${PORT}/api/paypal/execute-payment`,
-      cancel_url: `http://localhost:${PORT}/api/paypal/cancel-payment`,
+      return_url: `http://localhost:3000/execute-payment`,
+      cancel_url: `http://localhost:3000/cancel-payment`,
     },
   };
   request.post(

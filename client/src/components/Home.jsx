@@ -3,23 +3,44 @@ import NavBar from "./NavBar";
 import data from "../utils/data";
 import Footer from "./Footer";
 import SearchBar from "./SearchBar";
-import { getVideoById, clearFilter } from "../redux/actions";
+import {
+  getVideoById,
+  clearFilter,
+  getAllNotifications,
+  getUser,
+  getFavorites, 
+} from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
-import Google from "./Google";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.programandoando);
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+
+  const incomingFavorites = user.favorites;
+  console.log(incomingFavorites);
 
   useEffect(() => {
-    dispatch(getVideoById(idVideo));
+    
+    // dispatch(getVideoById(idVideo));
+    dispatch(getAllNotifications());
+    if (userObj) {
+      dispatch(getUser(userObj.user._id));
+      dispatch(getFavorites(userObj.user._id));
+    }
   }, [dispatch]);
+
+  const stat = useSelector((state) => state.programandoando);
+  console.log(stat);
   return (
-    <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
+    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
       <NavBar />
       <div class="py-10">
         <div
@@ -49,7 +70,6 @@ function Home() {
                 information to generate a thank you and greater visibility to
                 people who are committed to teach for free.{" "}
               </p>
-              
             </div>
             <div class="lg:w-5/12 order-2">
               <img src={img} alt="" class="rounded" />

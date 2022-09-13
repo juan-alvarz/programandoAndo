@@ -8,6 +8,8 @@ import { userLogin,favorite} from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
 import NavBar from "./NavBar";
+import Swal from "sweetalert2";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -54,13 +56,13 @@ export default function Login() {
       /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     e.preventDefault();
     if (!emailRegex.test(email)) {
-      setEmailError("Email invalido");
+      setEmailError("Invalid email");
       setTimeout(function () {
         setEmailError("");
       }, 3000);
     }
     if (password.length > 64 || password.length < 8) {
-      setPassError("El password debe tener entre 8 y 64 caracteres");
+      setPassError("The password must be between 8 and 64 characters");
       setTimeout(function () {
         setPassError("");
       }, 3000);
@@ -79,12 +81,26 @@ export default function Login() {
           setError("login exitoso");
           setTimeout(function () {
             navigate("/");
-          }, 1000);
+          }, 2000);
+          Swal.fire({
+            title: "Successful login",
+            text: "You are being redirected to the home",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          })
         } else {
           setError("login incorrecto");
           setTimeout(function () {
             setError("");
           }, 2000);
+          Swal.fire({
+            title: "Unsuccessful login",
+            text: "You must log in with an existing account",
+            icon: "error",
+            timer: 2000,
+            showConfirmButton: false,
+          })
         }
       }, 500);
     }
@@ -101,7 +117,7 @@ export default function Login() {
   };
 
   return (
-    <div style={{ backgroundColor: "rgb(198, 198, 198)" }}className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+    <div style={{backgroundColor: 'rgb(240, 240, 240)'}} className="relative flex flex-col justify-center min-h-screen overflow-hidden">
       <NavBar/>
       <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
         <h1 style={{ color: "rgb(17, 52, 82)" }} className="text-3xl font-semibold text-center text-black uppercase">
@@ -175,7 +191,7 @@ export default function Login() {
           Don't have an account?
           <a
             href="/register"
-            className="font-medium text-blue-600 hover:underline"
+            className="font-medium text-blue-600 hover:underline ml-2"
           >
             Sign up
           </a>

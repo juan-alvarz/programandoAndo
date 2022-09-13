@@ -71,19 +71,19 @@ export default function CreateUser() {
         icon: "error",
         confirmButtonText: "Back",
       });
-      // } else if (
-      //   users.find(
-      //     (item) =>
-      //       item.username.replace(/\s+/g, "").toLowerCase() ===
-      //       data.username.replace(/\s+/g, "").toLowerCase()
-      //   )
-      // ) {
-      //   return Swal.fire({
-      //     title: "repeated user",
-      //     text: "Check the user exists!!",
-      //     icon: "error",
-      //     confirmButtonText: "Back",
-      //   });
+    } else if (
+      users.find(
+        (item) =>
+          item.username.replace(/\s+/g, "").toLowerCase() ===
+          data.username.replace(/\s+/g, "").toLowerCase()
+      )
+    ) {
+      return Swal.fire({
+        title: "repeated user",
+        text: "Check the user exists!!",
+        icon: "error",
+        confirmButtonText: "Back",
+      });
     } else {
       // console.log(data);
       const infoUser = [get].map((user) => {
@@ -127,10 +127,11 @@ export default function CreateUser() {
     setValue("country", data.label);
   }
 
+  const uppInitial = (str) => str[0].toUpperCase() + str.slice(1);
   const optionLanguages = languages?.map((leng) => {
     return {
       value: leng,
-      label: leng,
+      label: uppInitial(leng),
     };
   });
 
@@ -145,7 +146,7 @@ export default function CreateUser() {
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
       <NavBar />
       <div
-        style={{ backgroundColor: "rgb(198, 198, 198)" }}
+        style={{ backgroundColor: "rgb(240, 240, 240)" }}
         className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50"
       >
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">

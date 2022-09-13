@@ -1,5 +1,6 @@
-const { foroModel } = require("../models/index.js");
+const { foroModel, videoModel } = require("../models/index.js");
 const Video = require("../models/Video.js");
+const { handleHtppError } = require("../utils/handleError.js");
 //const { videoModel } = require("../models");
 const getVideos = async (req, res) => {
   try {
@@ -26,7 +27,7 @@ const getVideo = async (req, res) => {
     const { id } = req.params;
     if (id) {
       const videoId = await Video.findById(id); //.populate('foro')
-      console.log(videoId.foro);
+      // console.log(videoId.foro);
       if (!videoId) {
         return res.status(404).json({ message: "inexistent id" });
       }
@@ -41,7 +42,6 @@ const getVideo = async (req, res) => {
 const createVideo = async (req, res) => {
   try {
     const myforo = await foroModel.create({ comments: [] });
-    console.log(myforo);
     const {
       name,
       description,
@@ -53,19 +53,28 @@ const createVideo = async (req, res) => {
       difficult,
       foro,
     } = req.body;
-    const newVideo = new Video({
-      name,
-      description,
-      author,
-      profile,
-      url,
-      image,
-      duration,
-      difficult,
-      foro: myforo._id,
-    });
-    await newVideo.save();
-    return res.status(200).json(newVideo);
+    // console.log(myforo);
+    // const find = await videoModel.findOne({ name });
+    const find = await videoModel.findWithDeleted({ name });
+    console.log(find);
+
+    if (find.length === 0) {
+      const newVideo = new Video({
+        name,
+        description,
+        author,
+        profile,
+        url,
+        image,
+        duration,
+        difficult,
+        foro: myforo._id,
+      });
+      await newVideo.save();
+      return res.status(200).json(newVideo);
+    } else {
+      handleHtppError(res, "Name video already exist please try again", 403);
+    }
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -106,8 +115,21 @@ const restoreVideo = async (req, res, next) => {
 const updateVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { body } = req.body;
-    const data = await Video.updateOne({ _id: id }, body);
+    const { name, author, duration, difficult, profile, url, description } =
+      req.body;
+    console.log(req.body);
+    const data = await Video.updateOne(
+      { _id: id },
+      {
+        name,
+        author,
+        duration,
+        difficult,
+        profile,
+        url,
+        description,
+      }
+    );
     if (!data.modifiedCount) {
       res.status(422);
       return res.send("Fail in the query");

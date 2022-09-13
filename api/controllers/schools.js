@@ -86,9 +86,18 @@ const createSchool = async (req, res) => {
 
 const updateSchool = async (req, res) => {
   const { id } = req.params;
-  const body = req.body;
+  const { name, description, image, courses, addCourses } = req.body;
+  // const body = req.body;
   try {
-    const actualizado = await schoolModel.updateOne({ _id: id }, body);
+    const actualizado = await schoolModel.updateOne(
+      { _id: id },
+      {
+        name,
+        description,
+        image,
+        courses: addCourses,
+      }
+    );
     if (!actualizado.modifiedCount) {
       res.status(422).send("Fail in the query");
     }

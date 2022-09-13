@@ -9,7 +9,7 @@ app.use(express.json()); // esta preparada para recibir info a través de un POS
 app.use(cors());
 //app.use(express.static("storage"));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // TODO lo que haya en api concatenado con la ruta
 

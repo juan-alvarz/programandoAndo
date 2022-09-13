@@ -14,6 +14,7 @@ export const slice = createSlice({
     video: {},
     filters: [],
     favoritesUser: [],
+    notifications: [],
   },
   reducers: {
     // ========= Courses ===========
@@ -71,11 +72,9 @@ export const slice = createSlice({
       state.course = action.payload;
     },
 
-    favoriteCourse:(state,action)=>{
-      state.favoritesUser=action.payload
-    }
-    ,
-
+    getFavoriteCourse: (state, action) => {
+      state.favoritesUser = action.payload;
+    },
     createCourse: (state) => {
       return { ...state };
     },
@@ -159,6 +158,20 @@ export const slice = createSlice({
 
       state.stateFilter = sortedAlf;
     },
+    // ============== Edit =====================
+    updateSchool: (state) => {
+      return { ...state };
+    },
+    updateCourse: (state) => {
+      return { ...state };
+    },
+    updateVideo: (state) => {
+      return { ...state };
+    },
+    updateUser: (state) => {
+      return { ...state };
+    },
+
     // ============== Delete ====================
     deleteSchool: (state) => {
       return { ...state };
@@ -174,6 +187,10 @@ export const slice = createSlice({
     },
     deleteNotifications: (state) => {
       return { ...state };
+    },
+    // ============== Notification ====================
+    getNotifications: (state, action) => {
+      state.notifications = action.payload;
     },
   },
 });
@@ -203,12 +220,17 @@ export const {
   getCourse5h,
   getCourse3h,
   getSession,
-  favoriteCourse,
+  getFavoriteCourse,
   deleteSchool,
   deleteCourse,
   deleteVideo,
   deleteUser,
   deleteNotifications,
+  getNotifications,
+  uppdateSchool,
+  uppdateCourse,
+  uppdateVideo,
+  uppdateUser,
 } = slice.actions;
 
 export default slice.reducer;
