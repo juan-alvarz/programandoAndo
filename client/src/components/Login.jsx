@@ -24,7 +24,7 @@ export default function Login() {
     e.preventDefault();
 
     window.localStorage.removeItem("user");
-    dispatch(favorite([]))
+    
     /*setTimeout(function () {
     
       navigate("/");
