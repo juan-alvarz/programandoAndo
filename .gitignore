@@ -10,3 +10,5 @@ api/config/account_transport.json
 
 #paypal credentials
 api/config/paypalcredentials.js
+
+client\src\utils\gitHubCredentials.js
