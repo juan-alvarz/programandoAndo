@@ -29,7 +29,6 @@ import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
-import Scoring from "./components/Scoring";
 
 function App() {
   return (
@@ -66,7 +65,6 @@ function App() {
           <Route path="*" element={<Error404 />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
-          <Route path="/scoring" element={<Scoring />} />
         </Routes>
       </div>
     </BrowserRouter>
