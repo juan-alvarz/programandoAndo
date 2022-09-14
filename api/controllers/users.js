@@ -338,6 +338,9 @@ const updateUser = async (req, res, next) => {
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
           banned: body.banned ? body.banned : user.banned,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
@@ -382,6 +385,9 @@ const updateUser = async (req, res, next) => {
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
           banned: body.banned ? body.banned : user.banned,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
