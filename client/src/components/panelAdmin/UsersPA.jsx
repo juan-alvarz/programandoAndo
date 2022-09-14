@@ -237,7 +237,7 @@ function CoursesPA() {
           </div>
         </div>
 
-        {/* Edit School
+        {/* Edit School */}
         <div>
           <div className="h-screen">
             <form
@@ -264,7 +264,7 @@ function CoursesPA() {
               </div>
             </form>
           </div>
-        </div>*/}
+        </div>
 
         {/* Delete School */}
         <div>

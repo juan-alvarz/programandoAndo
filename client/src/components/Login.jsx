@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ver from "../utils/images/ver.png";
 import ocultar from "../utils/images/ojo.png";
-import { userLogin,favorite} from "../redux/actions";
+import { userLogin } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
 import NavBar from "./NavBar";
@@ -19,18 +19,6 @@ export default function Login() {
   const [usuario, setUsuario] = useState({});
 
   useEffect(() => {}, []);
-
-  const handlelogout = (e) => {
-    e.preventDefault();
-
-    window.localStorage.removeItem("user");
-    
-    /*setTimeout(function () {
-    
-      navigate("/");
-  }, 2000
-  )*/
-  };
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");

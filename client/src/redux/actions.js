@@ -120,7 +120,8 @@ export const createsCourse = (payload) => async (dispatch) => {
     .post("http://localhost:3001/api/courses", payload)
     .then(() => {
       Swal.fire({
-        text: "Route created successfully",
+        title: "Create Video",
+        text: "Create Video Successfully",
         icon: "success",
         confirmButtonText: "OK",
       }).then((result) => {

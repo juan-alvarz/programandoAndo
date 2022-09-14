@@ -29,7 +29,10 @@ import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
+<<<<<<< HEAD
 import { RankUserDonation } from "./components/RankUserHome";
+=======
+>>>>>>> main
 
 function App() {
   return (

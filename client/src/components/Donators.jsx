@@ -17,7 +17,7 @@ function Donators() {
   //manda lo que se tiene en el input
   async function handleSubmit(e) {
     e.preventDefault();
-
+    console.log("me disparé");
     const link = await axios
       .get(`http://localhost:3001/api/paypal/create-payment/${amount}`)
       .then((r) => r.data);
@@ -41,8 +41,16 @@ function Donators() {
     return <Error404 />;
   } else {
     return (
+<<<<<<< HEAD
       <div className="w-full h-full" style={{backgroundColor: 'rgb(240, 240, 240)'}}>
         <NavBar/>
+=======
+      <div
+        className="w-full h-full"
+        style={{ backgroundColor: "rgb(240, 240, 240)" }}
+      >
+        <NavBar />
+>>>>>>> main
         <div className="h-screen">
           <form
             className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
