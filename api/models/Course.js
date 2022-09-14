@@ -25,6 +25,11 @@ const CourseSchema = new Schema(
       type: Number,
       default: 0,
     },
+    scores: [
+      {
+        type: Number,
+      },
+    ],
     score: {
       /* type: mongoose.Decimal128, */
       type: Number,
@@ -42,3 +47,5 @@ const CourseModel = model("Course", CourseSchema);
 
 module.exports = CourseModel;
 //Esquema Course
+/* scores es la agrupación de todas las votaciones
+score es la puntuación promedio*/

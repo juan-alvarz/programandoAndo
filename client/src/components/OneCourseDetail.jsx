@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getCourse, getUser } from "../redux/actions";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
+import { getCourse, getUser, updateCourse, updateUser } from "../redux/actions";
 import { Videos } from "./Videos";
 import NavBar from "./NavBar";
 import Loader from "./Loader";
+import Swal from "sweetalert2";
 
 export default function OneCourseDetail() {
   const { idCourse } = useParams();
@@ -15,27 +16,79 @@ export default function OneCourseDetail() {
   window.courseSelect = course;
 
   const dispatch = useDispatch();
+  /* PROBLEMAS DE ASCINCRONÍA */
+
   useEffect(() => {
     dispatch(getCourse(idCourse));
     dispatch(getUser(idGet));
   }, [dispatch]);
 
-  const idVotados = user?.scoring.map((scor) => scor.course._id);
+  /* const idVotados =
+    Object.keys(user).length !== 0
+      ? user.hasOwnProperty("scoring")
+        ? (user.scoring?.map((scor) => scor.course._id),
+          console.log("sí la tengo"))
+        : ((user.scoring = []), console.log("F mi pai, no la tenía"))
+      : null; */
 
-  const sameVote = idVotados.find((id) => id === idCourse); //el curso actual y busca si el usuario votó
+  if (Object.keys(user).length !== 0) console.log(user.scoring);
 
-  const votateCourse = user.scoring.filter(
-    (scor) => scor.course._id === sameVote
-  );
+  const idVotados =
+    Object.keys(user).length !== 0
+      ? user.scoring?.map((scor) => scor.course._id)
+      : null;
+
+  if (Object.keys(idVotados).length !== 0) console.log(idVotados);
+
+  const sameVote = idVotados?.find((id) => id === idCourse); //el curso actual y busca si el usuario votó
+
+  const votateCourse =
+    Object.keys(user).length !== 0
+      ? user.scoring.filter((scor) => scor.course._id === sameVote)
+      : null;
 
   if (votateCourse) console.log(votateCourse);
 
-  if (sameVote) console.log(sameVote);
-  console.log(idVotados);
+  // http://localhost:3001/api/users/:ID [PUT]
+  async function handleClickVote(e) {
+    e.preventDefault();
+    const { value: inputValue } = await Swal.fire({
+      title: "Rate this course",
+      text: "You can rate this course in a range of 1 up to 5 starts",
+      input: "range",
+      inputLabel: "Your rate in stars ⭐",
+      inputAttributes: {
+        min: 1,
+        max: 5,
+        step: 1,
+      },
+      showCancelButton: true,
+      confirmButtonText: "RATE",
+      backdrop: "rgba(96, 165, 250, .3)",
+      showLoaderOnConfirm: true,
+      inputValue: 4,
+    });
 
-  let userVote;
+    if (inputValue) {
+      const payloadUser = {
+        scoring: {
+          course: idCourse,
+          score: inputValue,
+        },
+      };
+      const payloadCourse = {
+        scores: Number(inputValue),
+      };
+      console.log(payloadUser);
+      dispatch(updateUser(payloadUser, idGet)).then(console.log("hecho maní"));
+      dispatch(updateCourse(payloadCourse, idCourse)).then(
+        console.log("curso actualizado")
+      );
+    }
+    window.location.reload(true);
+  }
 
-  if (!Object.keys(course).length || !Object.keys(user).length) {
+  if (!Object.keys(course).length) {
     <Loader />;
   } else {
     return (
@@ -121,7 +174,13 @@ export default function OneCourseDetail() {
                       {sameVote ? (
                         <span>{votateCourse[0].score}/5</span>
                       ) : (
-                        <h2>No votado</h2>
+                        <NavLink
+                          to="#"
+                          style={{ color: "#60A5FA" }}
+                          onClick={(e) => handleClickVote(e)}
+                        >
+                          <strong>Rate</strong>
+                        </NavLink>
                       )}
                     </span>
                   </div>

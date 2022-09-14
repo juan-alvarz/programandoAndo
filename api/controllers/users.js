@@ -358,7 +358,9 @@ const updateUser = async (req, res, next) => {
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
-          scoring: body.scoring ? body.scoring : user.scoring,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
