@@ -62,7 +62,8 @@ const UserSchema = new Schema(
       default: 0,
     },
     suscribe: {
-      type: Boolean,      
+      type: Boolean,  
+      default: false,    
     },
     banned: { type: Boolean, default: false },
     status: {
