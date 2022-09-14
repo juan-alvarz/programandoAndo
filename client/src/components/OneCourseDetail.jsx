@@ -9,13 +9,13 @@ import Loader from "./Loader";
 import Swal from "sweetalert2";
 
 export default function OneCourseDetail() {
+  const dispatch = useDispatch();
   const { idCourse } = useParams();
   const { course, user } = useSelector((state) => state.programandoando);
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const idGet = currentUser.user._id;
   window.courseSelect = course;
 
-  const dispatch = useDispatch();
   /* PROBLEMAS DE ASCINCRONÍA */
 
   useEffect(() => {
@@ -31,23 +31,7 @@ export default function OneCourseDetail() {
         : ((user.scoring = []), console.log("F mi pai, no la tenía"))
       : null; */
 
-  if (Object.keys(user).length !== 0) console.log(user.scoring);
-
-  const idVotados =
-    Object.keys(user).length !== 0
-      ? user.scoring?.map((scor) => scor.course._id)
-      : null;
-
-  if (Object.keys(idVotados).length !== 0) console.log(idVotados);
-
-  const sameVote = idVotados?.find((id) => id === idCourse); //el curso actual y busca si el usuario votó
-
-  const votateCourse =
-    Object.keys(user).length !== 0
-      ? user.scoring.filter((scor) => scor.course._id === sameVote)
-      : null;
-
-  if (votateCourse) console.log(votateCourse);
+  //  if (votateCourse) console.log(votateCourse);
 
   // http://localhost:3001/api/users/:ID [PUT]
   async function handleClickVote(e) {
@@ -73,24 +57,43 @@ export default function OneCourseDetail() {
       const payloadUser = {
         scoring: {
           course: idCourse,
-          score: inputValue,
+          score: Number(inputValue),
         },
       };
       const payloadCourse = {
         scores: Number(inputValue),
       };
       console.log(payloadUser);
-      dispatch(updateUser(payloadUser, idGet)).then(console.log("hecho maní"));
-      dispatch(updateCourse(payloadCourse, idCourse)).then(
-        console.log("curso actualizado")
-      );
+      dispatch(updateUser(payloadUser, idGet));
+      dispatch(updateCourse(payloadCourse, idCourse));
     }
-    window.location.reload(true);
+    //window.location.reload(true);
   }
 
-  if (!Object.keys(course).length) {
+  if (!Object.keys(course).length || !Object.keys(user).length) {
     <Loader />;
   } else {
+    if (Object.keys(user).length !== 0) console.log(user);
+
+    /* const idVotados =
+      Object.keys(user).length !== 0
+        ? user.hasOwnProperty("scoring")
+          ? (user.scoring?.map((scor) => scor.course._id),
+            console.log("sí la tengo"))
+          : ((user.scoring = []), console.log("F mi pai, no la tenía"))
+        : null; */
+    const idVotados =
+      Object.keys(user).length !== 0
+        ? user.scoring?.map((scor) => scor.course._id)
+        : null;
+    //curso en el que está parado, busca si ya lo votó o no
+    const sameVote = idVotados?.find((id) => id === idCourse); //el curso actual y busca si el usuario votó
+
+    const votateCourse =
+      Object.keys(user).length !== 0
+        ? user.scoring.filter((scor) => scor.course._id === sameVote)
+        : null;
+    console.log(user);
     return (
       <div style={{ backgroundColor: "rgb(240, 240, 240)", height: "100vh" }}>
         <NavBar />
