@@ -1,13 +1,22 @@
-const { notificationModel } = require("../models");
+const { notificationModel, usersModel } = require("../models");
 const { handleHttpError } = require("../utils/handleError");
 const NotificationsModel = require("../models/Notifications");
+const {sendNotificationEmail} = require('../config/nodemailer.config')
 // OBTENER LISTA DE NOTIFICACIONES DE LA BASE DE DATOS
 
 
 const getNotifications = async (req, res) => {
 
   const { name } = req.query;
- 
+  const allUsers = await usersModel.find({})
+  // console.log(allUsers);
+  const infoUsers = allUsers.map((e) => (
+    {name: e.name,
+     username: e.username,
+     email: e.email
+  }))
+  // console.log(infoUsers);
+
   const data = await notificationModel.find({})
   try {
     if (name) {
@@ -58,16 +67,26 @@ const createNotification = async (req, res) => {
 
   // const body = req.body;
   const find = await notificationModel.findOne({ title: title });
+  const allUsers = await usersModel.find({})
+  // console.log(allUsers);
+  const infoUsers = allUsers.map((e) => (
+    {name: e.name,
+     username: e.username,
+     email: e.email
+  }))
+  // console.log(infoUsers);
+  
 
   try {
     if (!find) {
-      const creado = await notificationModel.create({
+      const notification = await notificationModel.create({
         title,
         description,
-      });
-      res.send(creado);
-    } else {
-      res.send({ msg: "The notification already exist" });
+      });      
+      infoUsers.forEach(e => sendNotificationEmail(e.name,e.username,e.email,notification))
+      res.status(200).send(notification);
+    } else {      
+      res.status(404).send({ msg: "The notification already exist" });
     }
   } catch (error) {
     res.send({ msg: "The notification already exist, try with other name" });

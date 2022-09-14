@@ -64,7 +64,7 @@ const getUserById = async (req, res, next) => {
       // res.status(404);
       // return res.send("user doesn't exist");
     }
-    return res.json(user);
+    return res.send(user);
   } catch (e) {
     return res.send(e.message);
   }
