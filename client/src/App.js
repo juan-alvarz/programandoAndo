@@ -67,7 +67,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
 
-          <Route path="/rankhome" element={<RankUserHome></RankUserHome>} />
+          <Route path="/rankhome" element={<RankUserHome/>} />
         </Routes>
       </div>
     </BrowserRouter>
