@@ -61,7 +61,7 @@ const createNotification = async (req, res) => {
     username: e.username,
     email: e.email,
   }));
-  
+
   try {
     if (!find) {
       const notification = await notificationModel.create({
@@ -73,7 +73,7 @@ const createNotification = async (req, res) => {
       );
       res.status(200).send(notification);
     } else {
-      res.status(404).send({ msg: "The notification already exist" });
+      res.status(403).send({ msg: "The notification already exist" });
     }
   } catch (error) {
     res.send({ msg: "The notification already exist, try with other name" });
