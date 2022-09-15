@@ -18,10 +18,9 @@ function VideosPA() {
   const dispatch = useDispatch();
   const { videos } = useSelector((state) => state.programandoando);
 
- 
   useEffect(() => {
     dispatch(getAllVideos());
-  }, [dispatch,getAllVideos]);
+  }, [dispatch, getAllVideos]);
 
   useEffect(() => {
     dispatch(getAllVideos());
@@ -33,7 +32,7 @@ function VideosPA() {
     formState: { errors },
     getValues,
     setValue,
-    reset
+    reset,
   } = useForm({
     defaultValues: {
       name: "",
@@ -58,9 +57,9 @@ function VideosPA() {
     console.log(get);
 
     console.log(data);
-    dispatch(createsVideo(get));    
-    
-    reset( {
+    dispatch(createsVideo(get));
+
+    reset({
       name: "",
       profile: "",
       url: "",
@@ -68,11 +67,10 @@ function VideosPA() {
       author: "",
       duration: "",
       difficult: "",
-    })
+    });
     // window.location.href = window.location.href
 
     // dispatch(getAllVideos());
-    
   };
 
   const [videoDelete, setVideoDelete] = useState();
@@ -129,17 +127,12 @@ function VideosPA() {
 
   const handleSubmitEdit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
 
-    console.log(renderuwu);
-=======
-    
     // console.log(renderuwu);
->>>>>>> Fran
     dispatch(updateVideo(renderuwu, videosSelectValue.value));
-    
-    dispatch(getAllVideos())
-    setVideosSelectValue("Choose Video")
+
+    dispatch(getAllVideos());
+    setVideosSelectValue("Choose Video");
     setRender({
       name: "",
       author: "",
@@ -148,19 +141,15 @@ function VideosPA() {
       profile: "",
       url: "",
       description: "",
-    })
+    });
   };
-<<<<<<< HEAD
-  console.log(renderuwu.difficult);
-=======
   // console.log(renderuwu.difficult)
->>>>>>> Fran
 
   // ============ Delete =================
   const handleDeleteVideo = (id) => {
-    dispatch(deleteVideoById(id));    
-    setVideoDelete("Select Course")
-    // window.location.href = window.location.href  
+    dispatch(deleteVideoById(id));
+    setVideoDelete("Select Course");
+    // window.location.href = window.location.href
   };
 
   const [selectedDifficult, setSelectedDifficult] = useState("");

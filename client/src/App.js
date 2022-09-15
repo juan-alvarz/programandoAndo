@@ -29,6 +29,9 @@ import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
+// perfil
+import PerfilUser from "./components/PerfilUser";
+import PerfilAdmin from "./components/PerfilUser";
 
 function App() {
   return (
@@ -62,9 +65,13 @@ function App() {
           <Route path="/setting" element={<Settings />} />
           <Route path="/execute-payment" element={<SuccessDonation />} />
           <Route path="/cancel-payment" element={<CancelDonation />} />
-          <Route path="*" element={<Error404 />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
+          <Route path="*" element={<Error404 />} />
+
+          {/* Perfil de usuario */}
+          <Route path="/perfilUser" element={<PerfilUser />} />
+          <Route path="/perfilAdmin" element={<PerfilAdmin />} />
         </Routes>
       </div>
     </BrowserRouter>

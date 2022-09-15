@@ -24,7 +24,7 @@ function CoursesPA() {
   useEffect(() => {
     dispatch(getAllCourses());
     dispatch(getAllVideos());
-  }, [dispatch,])
+  }, [dispatch]);
 
   const {
     register,
@@ -32,7 +32,7 @@ function CoursesPA() {
     formState: { errors },
     getValues,
     setValue,
-    reset
+    reset,
   } = useForm({
     defaultValues: {
       name: "",
@@ -46,17 +46,17 @@ function CoursesPA() {
     const get = getValues();
     console.log(get);
 
-    handleSelect(video)
+    handleSelect(video);
     console.log(data);
-    dispatch(createsCourse(get)); 
-    setVideo([])
+    dispatch(createsCourse(get));
+    setVideo([]);
     reset({
       name: "",
       image: "",
       description: "",
       videos: [],
-    })      
-    setContador(contador+1)
+    });
+    setContador(contador + 1);
   };
 
   const optionListCourses = courses?.map((course) => {
@@ -149,7 +149,6 @@ function CoursesPA() {
     // console.log(videoFilter)
     setVideoEdit(videoFilter);
   };
-  
 
   const handleDeleteRenderVideo = (e) => {
     // console.log(render.videos)
@@ -190,15 +189,14 @@ function CoursesPA() {
       description: "",
       image: "",
       videos: [],
-    })
-    setEditCourse("Select Course")
-    setVideoEdit([])
-
+    });
+    setEditCourse("Select Course");
+    setVideoEdit([]);
   };
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
-    setCourseDelete("Selec Course")
+    setCourseDelete("Selec Course");
   };
   return (
     <div className="text-2x1 font-semibold flex h-screen">

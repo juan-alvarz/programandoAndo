@@ -11,7 +11,6 @@ import Google from "./Google";
 import NavBar from "./NavBar";
 import Swal from "sweetalert2";
 
-
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -77,7 +76,7 @@ export default function Login() {
             icon: "success",
             timer: 2000,
             showConfirmButton: false,
-          })
+          });
         } else {
           setError("login incorrecto");
           setTimeout(function () {
@@ -89,7 +88,7 @@ export default function Login() {
             icon: "error",
             timer: 2000,
             showConfirmButton: false,
-          })
+          });
         }
       }, 500);
     }
@@ -106,16 +105,11 @@ export default function Login() {
   };
 
   return (
-<<<<<<< HEAD
     <div
-      style={{ backgroundColor: "rgb(198, 198, 198)" }}
+      style={{ backgroundColor: "rgb(240, 240, 240)" }}
       className="relative flex flex-col justify-center min-h-screen overflow-hidden"
     >
       <NavBar />
-=======
-    <div style={{backgroundColor: 'rgb(240, 240, 240)'}} className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-      <NavBar/>
->>>>>>> Fran
       <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
         <h1
           style={{ color: "rgb(17, 52, 82)" }}
