@@ -450,20 +450,7 @@ function CoursesPA() {
                   Edit Course
                 </button>
               </div>
-            </form>
-            <div>
-              {render &&
-                [render].map((r) => (
-                  <form action="">
-                    <input
-                      type="text"
-                      name="name"
-                      value={render.name}
-                      onChange={() => handleChange()}
-                    />
-                  </form>
-                ))}
-            </div>
+            </form>          
           </div>
         </div>
 

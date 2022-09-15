@@ -19,6 +19,7 @@ import {
 
 // import NavbarPA from "./NavbarPA";
 
+
 function CoursesPA() {
   const dispatch = useDispatch();
   const navigate= useNavigate();

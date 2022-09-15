@@ -23,8 +23,9 @@ const getAllUsers = async (req, res, next) => {
           populate: {
             path: "courses",
             populate: { path: "videos" },
-          },
-        });
+          },          
+        }).populate({path: "favorites",
+      populate: "courses"});
       if (!data) {
         handleHtppError(res, "User not found", 404);
         // res.status(404);
@@ -63,7 +64,7 @@ const getUserById = async (req, res, next) => {
       // res.status(404);
       // return res.send("user doesn't exist");
     }
-    return res.json(user);
+    return res.send(user);
   } catch (e) {
     return res.send(e.message);
   }
@@ -265,6 +266,7 @@ const verifyUser = async (req, res, next) => {
     }
   });
 };
+
 const updateFavorites = async (req, res) => {
   const { id } = req.params;
 
@@ -335,9 +337,8 @@ const updateUser = async (req, res, next) => {
       );
       if (!data.modifiedCount) {
         handleHtppError(res, "Fail in the query", 422);
-      }
-      res.status(201);
-      return res.send(data);
+      }      
+      return res.status(201).send(data);
     }
     if (user.role === "user") {
       const data = await usersModel.updateOne(
@@ -415,6 +416,7 @@ const successDonation = (req, res) => {
     console.log(error.message);
   }
 };
+
 
 module.exports = {
   getAllUsers,

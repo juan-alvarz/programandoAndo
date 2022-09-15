@@ -7,6 +7,7 @@ import ocultar from "../utils/images/ojo.png";
 import { userLogin } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
+import GitHub from "./GitHub";
 import NavBar from "./NavBar";
 import Swal from "sweetalert2";
 
@@ -174,7 +175,7 @@ export default function Login() {
         <div className="flex mt-4 gap-x-2">
           <Google/>
         </div>
-
+        <GitHub/>
         <p className="mt-8 text-xs font-medium text-center text-black">
           Don't have an account?
           <a
