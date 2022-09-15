@@ -5,6 +5,7 @@ import { getUsers } from "../redux/actions"
 import oro from "../utils/images/oro.png"
 import plata from "../utils/images/plata.png"
 import bronce from "../utils/images/bronce.png"
+import { NavLink } from 'react-router-dom'
 
 
 let usuariosPrueba=[
@@ -51,7 +52,7 @@ let usuariosPrueba=[
       "favorites": [
         
       ],
-      "contributor": 600,
+      "contributor": 340,
       "banned": false,
       "status": "active",
       "confirmationCode": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyYW5jb3NlYmFzdGlhbmdpdWxpYW5vQGdtYWlsLmNvbSIsImlhdCI6MTY2MjY4NTMxMH0.EAT0aT3D-763yp2_rl4MEric41CprU87JhDA06ukHDk",
@@ -292,6 +293,12 @@ const RankUserHome = () => {
                                     <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white" style={{ color: "rgb(201, 196, 184)" }}>
                                     {elemento.contributor}
                                     </div>
+                                    <div>
+                                            
+                                            <NavLink to="/userrank" state={(elemento)}>
+                                                <button style={{ width: "94%" }} type="button" class="m-3 p-3 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 ">More Detail</button>
+                                            </NavLink>
+                                        </div>
                                     
                                 </div>
                                 <div>
@@ -308,7 +315,9 @@ const RankUserHome = () => {
             }) :
                 <span>No hay usuarios</span>}
                 <div className='max-w-md  divide-gray-200'>
+                <NavLink to="/rankusers">
                 <button style={{width:"94%"}}  type="button" class="m-3 p-3 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 ">View More</button>
+                </NavLink>
                 </div>
             </div>
         </div>

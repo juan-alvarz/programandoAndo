@@ -74,7 +74,7 @@ export const Videos = (props) => {
   };
 
   const next = () => {
-    if (paginaActual <= Math.ceil(videos.length / videosPagina)) {
+    if (paginaActual < Math.ceil(videos.length / videosPagina)) {
       setPaginaActual(paginaActual + 1);
     }
   };

@@ -29,7 +29,9 @@ import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
-import { RankUserDonation } from "./components/RankUserHome";
+
+import  RankUserDonation  from "./components/RankUserDonation";
+import { UserRank } from "./components/UserRank";
 
 function App() {
   return (
@@ -68,6 +70,8 @@ function App() {
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
 
           <Route path="/rankhome" element={<RankUserHome/>} />
+          <Route path="/rankusers" element={<RankUserDonation></RankUserDonation>} />
+          <Route path="/userrank" element={<UserRank></UserRank>} />
         </Routes>
       </div>
     </BrowserRouter>
