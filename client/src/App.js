@@ -29,6 +29,8 @@ import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
+import Chat from "./components/Chat";
+import UserCreatedCourse from "./components/UserCreatedCourse";
 
 function App() {
   return (
@@ -65,6 +67,8 @@ function App() {
           <Route path="*" element={<Error404 />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
+          <Route path="/chat" element={<Chat/>} />
+          <Route path="/createdCourse" element={<UserCreatedCourse/>}/>
         </Routes>
       </div>
     </BrowserRouter>

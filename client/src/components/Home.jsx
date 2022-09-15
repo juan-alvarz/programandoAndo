@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 
+
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
