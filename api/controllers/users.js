@@ -23,9 +23,10 @@ const getAllUsers = async (req, res, next) => {
           populate: {
             path: "courses",
             populate: { path: "videos" },
-          },          
-        }).populate({path: "favorites",
-      populate: "courses"});
+          },
+        })
+        .populate("favorites")
+        .populate("ownPath");
       if (!data) {
         handleHtppError(res, "User not found", 404);
         // res.status(404);
@@ -39,7 +40,8 @@ const getAllUsers = async (req, res, next) => {
         path: "courses",
         populate: { path: "videos" },
       },
-    });
+    }).populate("favorites")
+    .populate("ownPath");
     return res.json(users);
   } catch (e) {
     return res.send(e.message);
@@ -337,7 +339,7 @@ const updateUser = async (req, res, next) => {
       );
       if (!data.modifiedCount) {
         handleHtppError(res, "Fail in the query", 422);
-      }      
+      }
       return res.status(201).send(data);
     }
     if (user.role === "user") {
@@ -416,7 +418,6 @@ const successDonation = (req, res) => {
     console.log(error.message);
   }
 };
-
 
 module.exports = {
   getAllUsers,

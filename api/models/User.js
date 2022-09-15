@@ -49,7 +49,7 @@ const UserSchema = new Schema(
     ],
     scoring: {
       type: Schema.Types.ObjectId,
-      ref: "Courses",
+      ref: "Course",
     },
     favorites: [
       {
