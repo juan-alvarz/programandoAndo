@@ -227,7 +227,20 @@ export const googleUserLogin = (payload) => async (dispatch) => {
     .catch((e) => console.log(e));
 
   return response;
+  
 };
+export const gitHubLogin = (payload) => async (dispatch) => {
+  const response = await axios
+    .get("http://localhost:3001/api/auth/github_login")
+    .then((res) => {
+      dispatch(getSession(res.data));
+      window.localStorage.setItem("user", JSON.stringify(res.data));
+    })
+    .catch((e) => console.log(e));
+
+  return response;
+}
+
 export const verifyUser = async (code) => {
   const response = await axios.get(
     `http://localhost:3001/api/users/ath/confirm/${code}`
@@ -488,10 +501,4 @@ export const createNotification = (payload) => async (dispatch) => {
   return response;
 };
 
-// ============================ Clear ============================
-// export function clearFilter() {
-//   return {
-//     type: "CLEAR_FILTER",
-//     payload: { array: [], object: {} },
-//   };
-// }
+

@@ -24,7 +24,7 @@ const {
 
 const { googleMiddleware } = require("../middleware/googleSession");
 
-module.exports = router;
+
 
 router.get("/", getAllUsers);
 
@@ -56,3 +56,6 @@ router.patch("/:id", validatorGetUsers, restoreUser);
 router.delete("/:id", validatorGetUsers, softDeleteUser);
 
 router.post("/emailDonationSuccess/", successDonation);
+
+
+module.exports = router;

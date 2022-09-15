@@ -74,12 +74,10 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-    scoring: [
-      {
-        course: { type: Schema.Types.ObjectId, ref: "Course" },
-        score: Number,
-      },
-    ],
+    scoring: {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+    },
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -89,6 +87,10 @@ const UserSchema = new Schema(
     contributor: {
       type: Number,
       default: 0,
+    },
+    suscribe: {
+      type: Boolean,
+      default: true,
     },
     banned: { type: Boolean, default: false },
     status: {
