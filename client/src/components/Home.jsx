@@ -14,6 +14,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
+import axios from "axios";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
@@ -25,7 +26,8 @@ function Home() {
   let userObj = JSON.parse(userLocal);
 
   const incomingFavorites = user.favorites;
-  console.log(incomingFavorites);
+  console.log(incomingFavorites); 
+
 
   useEffect(() => {
     
@@ -36,6 +38,23 @@ function Home() {
       dispatch(getFavorites(userObj.user._id));
     }
   }, [dispatch]);
+ 
+
+  useEffect(() =>{
+    (async function () {
+      const usr = await axios
+        .get(`http://localhost:3001/api/auth/me`, {
+          withCredentials: true,
+        })
+        .then((res) => res.data);
+        if (usr) {          
+          console.log(usr.decoded._id)
+          dispatch(getUser(usr.decoded._id));
+          dispatch(getFavorites(usr.decoded._id));
+          window.localStorage.setItem("user", JSON.stringify({token: usr.tokenJwt,user}));
+        }
+    })();
+  },[Object.keys(user).length!==0])
 
   const stat = useSelector((state) => state.programandoando);
   console.log(stat);
