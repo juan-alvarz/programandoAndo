@@ -87,7 +87,9 @@ export default function CreateCourse() {
     const coursesFilter = course.filter((v) => v !== value);
     setCourse(coursesFilter);
   };
-
+  function delete_cookie(name) {
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
   // console.log(optionList);
   let pattern =
     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
@@ -96,7 +98,7 @@ export default function CreateCourse() {
   let reg_exImg = /.*(png|jpg|jpeg|gif)$/;
   return (
     <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
-      <NavBar />
+      <NavBar delete_cookie={delete_cookie}/>
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
           <div

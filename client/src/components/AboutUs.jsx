@@ -10,9 +10,12 @@ import Juan from '../utils/images/JuanAboutUs1.png'
 import Roge from '../utils/images/RogelioAboutUs1.png'
 
 function AboutUs() {
+  function delete_cookie(name) {
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
   return (
     <section style={{backgroundColor: 'rgb(240, 240, 240)'}}>
-      <NavBar />
+      <NavBar delete_cookie={delete_cookie}/>
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
           <h2

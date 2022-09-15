@@ -37,7 +37,9 @@ function Courses() {
   console.log(cursosfiltrados)
 
   
-
+  function delete_cookie(name) {
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
   // -------------------------------
   let durationCourse = (course) => {
     let temporaly = course.map((e) => e.duration);
@@ -77,7 +79,7 @@ function Courses() {
 
   return (
     <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
-      <NavBar />
+      <NavBar delete_cookie={delete_cookie}/>
       <div>
         {cursosfiltrados.length > 0 ? (
           <div >

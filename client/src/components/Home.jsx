@@ -15,7 +15,7 @@ import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
 
 
-function Home() {
+function Home () {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const dispatch = useDispatch();
@@ -25,11 +25,18 @@ function Home() {
   let userObj = JSON.parse(userLocal);
 
   const incomingFavorites = user.favorites;
-  // console.log(incomingFavorites);
   
-  let verified =  userObj && userObj.user.status;  
-  console.log(verified)
+  
+  let verified =  userObj && userObj.user.status;   
 
+ console.log(document.cookie);
+
+ function delete_cookie(name) {
+  document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+// delete_cookie("github-jwt") 
+  
   useEffect(() => {
     // dispatch(getVideoById(idVideo));
     dispatch(getAllNotifications());
@@ -47,7 +54,7 @@ function Home() {
         })
         .then((res) => res.data);
       if (usr) {
-        console.log(usr.decoded._id);
+        // console.log(usr.decoded._id);
         dispatch(getUser(usr.decoded._id));
         dispatch(getFavorites(usr.decoded._id));
         window.localStorage.setItem(
@@ -59,11 +66,11 @@ function Home() {
   }, [Object.keys(user).length !== 0]);
 
   const stat = useSelector((state) => state.programandoando);
-  console.log(stat);
+  // console.log(stat);
   return (    
     <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
     
-      <NavBar />
+      <NavBar delete_cookie={delete_cookie} />
       <div class="py-10">
         <div
           style={{ backgroundColor: "rgb(17, 52, 82)" }}

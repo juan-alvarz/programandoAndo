@@ -105,10 +105,7 @@ const gitHubCreate = async (req, res, next) => {
       user: find,
     };
 
-    res.cookie(COOKIE_NAME, dataGithub.token, {
-      httpOnly: true,
-      domain: "localhost",
-    });
+    res.cookie(COOKIE_NAME, dataGithub.token);
 
     // console.log(dataGithub)
     res.redirect("http://localhost:3000/");

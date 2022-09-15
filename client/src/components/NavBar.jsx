@@ -11,7 +11,7 @@ import NavBarLogin from './NavBarLogin'
 import NavBarLogout from './NavBarLogout'
 import NavBarUser from "./NavBarUser";
 
-export default function NavBar() {
+export default function NavBar({delete_cookie}) {
 
   const usuario = window.localStorage.getItem('user')
 
@@ -20,8 +20,8 @@ export default function NavBar() {
 
   return (
     usuario ? 
-    <NavBarLogin/>
+    <NavBarLogin delete_cookie={delete_cookie}/>
     :
-    <NavBarLogout/>
+    <NavBarLogout />
   );
 }
