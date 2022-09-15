@@ -90,7 +90,7 @@ function PerfilUser() {
   const handleChange = (e) => {
     setInputUser({
       ...inputUser,
-      [e.target.name]: type === "checkbox" ? e.target.checkbox : e.target.value,
+      [e.target.name]:   e.target.value,
     });
   };
 
@@ -419,7 +419,7 @@ function PerfilUser() {
                 <label htmlFor="">are you currently working?</label>
                 <input
                   type="checkbox"
-                  checked={authorizeNotifications}
+                  checked={inputUser.authorizeNotifications}
                   name="authorizeNotifications"
                   className="mr-5"
                 />
