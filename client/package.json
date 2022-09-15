@@ -20,7 +20,8 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
-    "styled-components": "^5.3.5",
+    "react-simple-chatbot": "^0.6.1",
+    "styled-components": "^4.0.0",
     "sweetalert2": "^11.4.29",
     "web-vitals": "^2.1.4"
   },

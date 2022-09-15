@@ -120,7 +120,6 @@ export const createsCourse = (payload) => async (dispatch) => {
     .post("http://localhost:3001/api/courses", payload)
     .then(() => {
       Swal.fire({
-        title: "Create Video",
         text: "Create Video Successfully",
         icon: "success",
         confirmButtonText: "OK",
@@ -177,6 +176,14 @@ export const getSchool = (id) => (dispatch) => {
 export const createsSchool = (payload) => async (dispatch) => {
   const response = await axios.post(
     "http://localhost:3001/api/schools",
+    payload
+  );
+  return response;
+};
+
+export const createSchoolUser = (payload, id) => async (dispatch) => {
+  const response = await axios.post(
+    `http://localhost:3001/api/schools/${id}`,
     payload
   );
   return response;
