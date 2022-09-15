@@ -90,7 +90,7 @@ function PerfilUser() {
   const handleChange = (e) => {
     setInputUser({
       ...inputUser,
-      [e.target.name]: e.target.value,
+      [e.target.name]: type === "checkbox" ? e.target.checkbox : e.target.value,
     });
   };
 
@@ -415,17 +415,20 @@ function PerfilUser() {
                 />
               </div>
 
-              <div className="">
-                <div className="flex justify-between">
-                  <label htmlFor="">are you currently working?</label>
-                  <input type="checkbox" checked="checked" className="" />
-                </div>
-                <div className="flex justify-between">
-                  <label htmlFor="">
-                    Do you want to receive email notifications?
-                  </label>
-                  <input type="checkbox" checked="checked" className="" />
-                </div>
+              <div className="flex justify-between">
+                <label htmlFor="">are you currently working?</label>
+                <input
+                  type="checkbox"
+                  checked={authorizeNotifications}
+                  name="authorizeNotifications"
+                  className="mr-5"
+                />
+              </div>
+              <div className="flex justify-around">
+                <label htmlFor="">
+                  Do you want to receive email notifications?
+                </label>
+                <input type="checkbox" checked="checked" className="mr-5" />
               </div>
 
               <button className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
