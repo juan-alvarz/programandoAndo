@@ -1,4 +1,4 @@
-const { schoolModel } = require("../models");
+const { schoolModel, usersModel } = require("../models");
 
 // ============================= GET SCHOOLS DATABASE ========================
 
@@ -82,6 +82,27 @@ const createSchool = async (req, res) => {
   }
 };
 
+const createSchoolUser = async (req, res) => {
+  const { name, description, courses, image } = req.body;
+  const {id} = req.params
+  const findUser = await usersModel.findById( id );
+  const find = await schoolModel.findOne({ name: name });
+  
+  if (!find) {
+    const created = await schoolModel.create({
+      name,
+      description,
+      courses,
+      image,
+      custom: true,
+    });
+    await usersModel.updateOne({_id:id}, { ownPath:[...findUser.ownPath, created._id.toString()]}) 
+    res.status(201).send(created);
+  } else {
+    res.send({ msg: "School already exist" });
+  }
+};
+
 // ===========================UPDATE SCHOOL ====================================
 
 const updateSchool = async (req, res) => {
@@ -138,4 +159,5 @@ module.exports = {
   restoreSchool,
   softDeleteSchool,
   updateSchool,
+  createSchoolUser,
 };

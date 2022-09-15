@@ -182,6 +182,14 @@ export const createsSchool = (payload) => async (dispatch) => {
   return response;
 };
 
+export const createSchoolUser = (payload, id) => async (dispatch) => {
+  const response = await axios.post(
+    `http://localhost:3001/api/schools/${id}`,
+    payload
+  );
+  return response;
+};
+
 // ============================ Users ============================
 export const getUsers = () => (dispatch) => {
   axios

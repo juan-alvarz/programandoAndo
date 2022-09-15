@@ -29,6 +29,8 @@ import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
+import Chat from "./components/Chat";
+import UserCreatedCourse from "./components/UserCreatedCourse";
 
 import  RankUserDonation  from "./components/RankUserDonation";
 import { UserRank } from "./components/UserRank";
@@ -72,6 +74,8 @@ function App() {
           <Route path="/rankhome" element={<RankUserHome/>} />
           <Route path="/rankusers" element={<RankUserDonation></RankUserDonation>} />
           <Route path="/userrank" element={<UserRank></UserRank>} />
+          <Route path="/chat" element={<Chat/>} />
+          <Route path="/createdCourse" element={<UserCreatedCourse/>}/>
         </Routes>
       </div>
     </BrowserRouter>

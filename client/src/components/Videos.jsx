@@ -108,7 +108,7 @@ export const Videos = (props) => {
                 >                
                 <div                 
                   style={elemento._id === idVideo ? { margin: 10, backgroundColor: 'rgb(17, 52, 82)'} : { margin: 10, backgroundColor: 'rgb(55, 109, 109)'}}
-                  className="flex place-content-center rounded-lg w-50 h-40 p-6 transition ease-in-out delay-150 bg-gray-800 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-800 duration-300"
+                  className="flex place-content-center rounded-lg shadow-xl shadow-gray-500 w-50 h-40 p-6 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
                 >
                    
                   <h3 style={{}} className="flex items-center text-center text-md font-medium text-white w-52">

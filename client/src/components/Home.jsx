@@ -14,6 +14,7 @@ import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
 
+
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
