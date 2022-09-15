@@ -16,7 +16,7 @@ import {
   getCourses10h,
   getCourses5h,
   getCourses3h,
-  getFavorites
+  getFavorites,
 } from "../redux/actions";
 import imageNotFound from "../utils/images/404person.png";
 import fav from "../utils/images/fav.png";
@@ -34,7 +34,7 @@ export default function AllCourses() {
   const [favoritoAgregado, setFavoritoAgregado] = useState("");
 
   // =============== Paginado ==========================
-  const [cursoActual, setCursoActual] = useState(1);  
+  const [cursoActual, setCursoActual] = useState(1);
   const [cursosPagina] = useState(6);
   const ultimoCurso = cursoActual * cursosPagina;
   const primerCurso = ultimoCurso - cursosPagina;
@@ -210,7 +210,7 @@ export default function AllCourses() {
     };
     // ==============================================
     return (
-      <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+      <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
         <NavBar />
         <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
           {/* Filtrados */}
@@ -384,10 +384,7 @@ export default function AllCourses() {
                     </NavLink>
                   </button>
                 </div>
-                {userLocal &&
-                    <HearthFav course={course} userObj={userObj} />                    
-                    }
-             
+                {userLocal && <HearthFav course={course} userObj={userObj} />}
               </div>
             </div>
           ))}

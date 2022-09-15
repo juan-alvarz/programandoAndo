@@ -58,7 +58,13 @@ const getUserById = async (req, res, next) => {
           populate: { path: "videos" },
         },
       })
-      .populate("favorites");
+      .populate("favorites")
+      .populate({
+        path: "scoring",
+        populate: {
+          path: "course",
+        },
+      });
     if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);
@@ -333,6 +339,9 @@ const updateUser = async (req, res, next) => {
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
           banned: body.banned ? body.banned : user.banned,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
@@ -352,6 +361,9 @@ const updateUser = async (req, res, next) => {
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
@@ -373,6 +385,9 @@ const updateUser = async (req, res, next) => {
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
           banned: body.banned ? body.banned : user.banned,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
