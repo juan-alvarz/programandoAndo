@@ -20,10 +20,10 @@ const verifyToken = async (tokenJwt) => {
     decoded = jwt.verify(tokenJwt, JWT_SECRET);
     console.log("Token is real"); 
     const localStorage = {tokenJwt,decoded}
-    console.log(localStorage)
+    // console.log(localStorage)
     return(localStorage);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };
 

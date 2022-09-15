@@ -1,19 +1,21 @@
 require("dotenv").config();
 const { handleHtppError } = require("../utils/handleError");
 const jwt_decode = require("jwt-decode");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 const axios = require("axios");
 const querystring = require("node:querystring");
-const {tokenSign,verifyEmailToken,verifyToken }= require('../utils/handleJwt')
-const {usersModel} = require('../models/index')
-const {sendConfirmationEmail} = require("../config/nodemailer.config")
+const {
+  tokenSign,
+  verifyEmailToken,
+  verifyToken,
+} = require("../utils/handleJwt");
+const { usersModel } = require("../models/index");
+const { sendConfirmationEmail } = require("../config/nodemailer.config");
 
 const { GITHUB, GITHUB_SECRET, SECRET } = process.env;
 const COOKIE_NAME = "github-jwt";
 
 const getGitHubUser = async (code) => {
-  
-
   // console.log(GITHUB);
   // console.log(GITHUB_SECRET);
   // console.log(SECRET);
@@ -45,21 +47,20 @@ const getGitHubUser = async (code) => {
     });
 };
 
-const gitHubData = async (req, res,next) => {
-  const {code} = req.query
-  const {path} = req.query
-  console.log(code)
-  console.log(path)
-
+const gitHubData = async (req, res, next) => {
+  const { code } = req.query;
+  const { path } = req.query;
+  console.log(code);
+  console.log(path);
 
   if (!code) {
     handleHtppError(res, "No code!", 404);
   }
   const gitHubUser = await getGitHubUser(code);
-  const token = jwt.sign(gitHubUser, SECRET);  
+  const token = jwt.sign(gitHubUser, SECRET);
 
-  let { login, name,email } = jwt_decode(token);
-  let username = login
+  let { login, name, email } = jwt_decode(token);
+  let username = login;
 
   req.body = { email, name, username };
   // console.log(req.body);
@@ -68,7 +69,7 @@ const gitHubData = async (req, res,next) => {
 };
 
 const gitHubCreate = async (req, res, next) => {
-  const { name, username, email ,path} = req.body;
+  const { name, username, email, path } = req.body;
   // console.log(req.body);
 
   let find = await usersModel.findOne({ email });
@@ -104,35 +105,32 @@ const gitHubCreate = async (req, res, next) => {
       user: find,
     };
 
-    res.cookie(COOKIE_NAME, dataGithub.token ,{
+    res.cookie(COOKIE_NAME, dataGithub.token, {
       httpOnly: true,
       domain: "localhost",
     });
-    
-    // console.log(dataGithub)    
-    res.redirect("http://localhost:3000/")
+
+    // console.log(dataGithub)
+    res.redirect("http://localhost:3000/");
   }
 };
 
 const isLogin = async (req, res) => {
-
-  if(req.headers.cookie){
-    console.log(req.headers.cookie)
-    const cookie = req.headers.cookie.split("github-jwt=")
-    console.log(cookie)
-    const decode = await verifyToken(cookie[1])
-    // console.log(decode)
-    return res.send(decode);
-  }else{
-    res.status(403).send({msg:"Not login yet"})
+  try {
+    if (req.headers.cookie) {
+      // console.log(req.headers.cookie);
+      const cookie = req.headers.cookie.split("; ");
+      const findToken = cookie
+        .find((e) => e.includes("github-jwt"))
+        .split("=")[1];
+      console.log(findToken)
+      const decode = await verifyToken(findToken);
+      // console.log(decode)
+      return res.send(decode);
+    }
+  } catch (error) {
+    res.status(403).send({ msg: "Session expired please login again" });
   }
+};
 
-
-  // console.log(cookie[1])
-  
-  
-  
-}
-
-
-module.exports = { gitHubData ,gitHubCreate,isLogin};
+module.exports = { gitHubData, gitHubCreate, isLogin };
