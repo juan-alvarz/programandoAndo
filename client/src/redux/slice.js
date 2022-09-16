@@ -141,7 +141,6 @@ export const slice = createSlice({
     getForo: (state, action) => {
       state.foro = action.payload;
     },
-    
     // getSchoolsByName: (state, action) => {
     //   state.courses = action.payload;
     // },

@@ -76,14 +76,13 @@ const UserSchema = new Schema(
     },
     pagePuntuation: {
       type: Number,
-      default: 4,
+      default: 0,
     },
     pageOpinion: {
       type: String,
       default: ""
     }
   },
-
   {
     timestamps: true,
     versionKey: false,

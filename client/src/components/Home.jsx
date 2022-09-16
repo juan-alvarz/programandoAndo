@@ -84,7 +84,8 @@ function Home() {
         <Carousel />
       </div>
       <Footer />
-
+     {/* <Puntuation /> */}
+     <Puntuation /> 
     </div>
   );
 }

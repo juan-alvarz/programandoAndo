@@ -56,22 +56,23 @@ export default function Video() {
 
   // DELETE COMENTARIO
 
-  // const [deleteComment, setDeleteComment] = useState({commentId: "632490fcd333c4ccdbc85109", change: "deleteComment" });
+   const [deleteComment, setDeleteComment] = useState({commentId: "", change: "deleteComment" });
 
-  const deleteComment = {commentId: "6323caecf02d1f36aa910967", change: "deleteComment" }
+  //const deleteComment = {commentId: "6323a1c671576a73f18bd911", change: "deleteComment" }
+  
+//   let elimina = deleteComment4()
 
-  // function deleteComment4(e, id){
-  //   e.preventDefault()
-  //   setDeleteComment({
-  //     ...deleteComment,
-  //     commentId: "63248ab727677d2d27d6b771"
-  //   })
-    function handleChangeDelete() {
-      dispatch(updateDeleteCommentorAnswer(video.foro, deleteComment)) //.then(setContador(contador + 1))
-     // setContador(contador+1)
-    }
-  //   handleChangeDelete()
-  // }
+// let elimina2 = handleChangeDelete()
+
+// let eliminar = {...elimina, elimina2}
+
+
+  function deleteComment4(e, id){
+    e.preventDefault()
+    //return deleteComment
+       dispatch(updateDeleteCommentorAnswer(video.foro, {commentId: id, change: "deleteComment"})) //.then(setContador(contador + 1))
+       setContador(contador+1)
+  }
 
 
 
@@ -207,7 +208,7 @@ console.log(foro)
            {comment.authorComment? userObj.user._id === comment.authorComment._id?<button
             className="button"
             type="submit"
-           onClick={(e) => handleChangeDelete(e, comment._id)}
+           onClick={(e) => deleteComment4(e, comment._id)}
             > 
            Delete Comment</button> : "no tiene autor" : "no tiene autor ché"} 
               </ol>) 
