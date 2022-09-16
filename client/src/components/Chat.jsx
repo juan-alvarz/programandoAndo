@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
 import ChatBot from 'react-simple-chatbot';
 import {ThemeProvider} from 'styled-components';
-import styled from 'styled-components'
-import CreateCourse from './CreateCourse';
 import { NavLink } from 'react-router-dom';
-import img from '../utils/images/MessageIcon2.gif'
+import img from '../utils/images/ChatBotIcon2.png'
 
 
 const Chat = () => {
@@ -12,15 +10,16 @@ const Chat = () => {
     const [open, setOpen] = useState(false)
 
     const theme = {
-        background: '#376D6D',
+        background: '#113452',
         fontFamily: 'Helvetica Neue',
-        headerBgColor: '#EF6C00',
-        headerFontColor: '#fff',
+        headerBgColor: '#A84C65',
+        headerFontColor: '#C6C6C6',
         headerFontSize: '15px',
-        botBubbleColor: '#EF6C00',
-        botFontColor: '#fff',
-        userBubbleColor: '#fff',
-        userFontColor: '#4a4a4a',
+        botBubbleColor: '#A84C65',
+        botFontColor: '#C6C6C6',
+        userBubbleColor: '#A84C65',
+        userFontColor: '#C6C6C6',
+        width: 350,
         };
 
     const handleOpen = () => {
@@ -34,12 +33,14 @@ const Chat = () => {
 
   return (
     open === false ? 
-    <button style={{width: 50}} onClick={handleOpen}>
-        <img src={img} alt='chatbot image'/>
-    </button>
+    <div style={{width: 350, height: 570, display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+        <button className='animate-bounce' style={{width: 60, backgroundColor: 'rgb(168, 76, 101)', borderRadius: "34px 8px 34px 34px"}} onClick={handleOpen}>
+            <img style={{padding: 10}} src={img} alt='chatbot image'/>
+        </button>
+    </div>
     :
     <div>
-    <ThemeProvider  theme={theme}>
+    <ThemeProvider theme={theme}>
         <ChatBot
         style={{width: 350}}   
             steps={[
@@ -118,9 +119,11 @@ const Chat = () => {
             ]}
             />
     </ThemeProvider>
-    <button style={{width: 50, display: 'flex', justifyContent: 'flex-end'}} onClick={handleOpen}>
-        <img src={img} alt='chatbot image'/>
-    </button>
+    <div style={{width: 350, display: 'flex', justifyContent: 'flex-end'}}>
+        <button style={{width: 60, backgroundColor: 'rgb(168, 76, 101)', borderRadius: "34px 8px 34px 34px", marginTop: 5}} onClick={handleOpen}>
+            <img style={{padding: 10}} src={img} alt='chatbot image'/>
+        </button>
+    </div>
     </div>
   )
 }

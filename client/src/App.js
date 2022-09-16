@@ -32,6 +32,7 @@ import Settings from "./components/panelAdmin/Settings";
 import InternalChat from "./components/InternalChat";
 import Chat from "./components/Chat";
 import UserCreatedCourse from "./components/UserCreatedCourse";
+import AgeCharts from "./components/AgeCharts";
 
 import RankUserDonation from "./components/RankUserDonation";
 import { UserRank } from "./components/UserRank";
@@ -82,12 +83,14 @@ function App() {
           />
           <Route path="/userrank" element={<UserRank></UserRank>} />
           <Route path="/chat" element={<Chat />} />
-          <Route path="/createdCourse" element={<UserCreatedCourse />} />
           <Route path="*" element={<Error404 />} />
 
           {/* Perfil de usuario */}
           <Route path="/perfilUser" element={<PerfilUser />} />
           <Route path="/perfilAdmin" element={<PerfilAdmin />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/createdCourse" element={<UserCreatedCourse />} />
+          <Route path="/AgeChart" element={<AgeCharts />} />
         </Routes>
       </div>
     </BrowserRouter>

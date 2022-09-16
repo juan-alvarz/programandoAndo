@@ -16,6 +16,7 @@ import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
 import Google from "./Google";
+import Chat from "./Chat";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
@@ -104,6 +105,16 @@ function Home() {
       </div>
       <div>
         <Carousel />
+      </div>
+      <div
+        style={{
+          position: "fixed",
+          right: "20px",
+          bottom: "20px",
+          zIndex: 100,
+        }}
+      >
+        <Chat />
       </div>
       <Footer />
       {/* <Puntuation /> */}
