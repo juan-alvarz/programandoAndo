@@ -41,9 +41,7 @@ export default function AllCourses() {
   //======================================================
   const [coursesPowFilter, setCoursesPowFilter] = useState([]);
 
-  function delete_cookie(name) {
-    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-  }
+  
   useEffect(() => {
     dispatch(getAllCourses());
     if (userObj) {
@@ -80,7 +78,7 @@ export default function AllCourses() {
     return (
       <div style={{ backgroundColor: "rgb(198, 198, 198)" }}>
         <div>
-          <NavBar delete_cookie={delete_cookie} />
+          <NavBar />
         </div>
         <div
           style={{
@@ -214,7 +212,7 @@ export default function AllCourses() {
     // ==============================================
     return (
       <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
-        <NavBar delete_cookie={delete_cookie}/>
+        <NavBar />
         <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
           {/* Filtrados */}
           <div

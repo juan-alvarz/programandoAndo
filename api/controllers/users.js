@@ -391,6 +391,9 @@ const updateUser = async (req, res, next) => {
 const softDeleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const user = await usersModel.updateOne({_id:id},{
+      banned : true
+    })
     const data = await usersModel.delete({ _id: id });
     return res.json(data);
   } catch (e) {

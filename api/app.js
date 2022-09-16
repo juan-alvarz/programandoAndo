@@ -13,7 +13,7 @@ app.use(cors({
   }));
 app.use(fileUpload({
   useTempFiles: true,
-  tempFileDir: '/tmp/'
+  tempFileDir: './uploads'
 }))
 
 const port = process.env.PORT || 3001;

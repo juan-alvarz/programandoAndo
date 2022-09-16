@@ -11,9 +11,12 @@ import NavBarLogin from './NavBarLogin'
 import NavBarLogout from './NavBarLogout'
 import NavBarUser from "./NavBarUser";
 
-export default function NavBar({delete_cookie}) {
+export default function NavBar() {
 
   const usuario = window.localStorage.getItem('user')
+  function delete_cookie(name) {
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  }
 
   const { notifications } = useSelector((state) => state.programandoando);
   // console.log(usuario.user)

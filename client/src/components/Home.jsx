@@ -31,11 +31,10 @@ function Home () {
 
  console.log(document.cookie);
 
- function delete_cookie(name) {
-  document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
+ 
 
-// delete_cookie("github-jwt") 
+// delete_cookie("github-jwt")
+ 
   
   useEffect(() => {
     // dispatch(getVideoById(idVideo));
@@ -70,7 +69,7 @@ function Home () {
   return (    
     <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
     
-      <NavBar delete_cookie={delete_cookie} />
+      <NavBar/>
       <div class="py-10">
         <div
           style={{ backgroundColor: "rgb(17, 52, 82)" }}
