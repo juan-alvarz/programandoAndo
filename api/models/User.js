@@ -33,7 +33,7 @@ const UserSchema = new Schema(
         "data science",
         "MERN route",
         "PERN route",
-        "diseÃ±o UX/UI",
+        "design UX/UI",
       ],
       default: "allSchools",
     },
