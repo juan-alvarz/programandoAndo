@@ -37,8 +37,12 @@ import AgeCharts from "./components/AgeCharts";
 import RankUserDonation from "./components/RankUserDonation";
 import { UserRank } from "./components/UserRank";
 // perfil
-import PerfilUser from "./components/PerfilUser";
-import PerfilAdmin from "./components/PerfilUser";
+import ModifyProfileUser from "./components/ModifyProfileUser";
+import ModifyProfileAdmin from "./components/ModifyProfileAdmin";
+import ProfileAdmin from "./components/ProfileAdmin";
+import ProfilelUser from "./components/ProfilelUser";
+// Cloudinary
+import Cloudinary from "./components/Cloudinary";
 
 function App() {
   return (
@@ -86,11 +90,14 @@ function App() {
           <Route path="*" element={<Error404 />} />
 
           {/* Perfil de usuario */}
-          <Route path="/perfilUser" element={<PerfilUser />} />
-          <Route path="/perfilAdmin" element={<PerfilAdmin />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/createdCourse" element={<UserCreatedCourse />} />
           <Route path="/AgeChart" element={<AgeCharts />} />
+          <Route path="/profileUser" element={<ProfilelUser />} />
+          <Route path="/profileAdmin" element={<ProfileAdmin />} />
+          <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
+          <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
+          <Route path="/cloudinary" element={<Cloudinary />} />
         </Routes>
       </div>
     </BrowserRouter>

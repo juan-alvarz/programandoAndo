@@ -58,7 +58,7 @@ export default function OneCourseDetail() {
     //window.location.reload(true);
   }
 
-  if (!Object.keys(course).length || !Object.keys(user).length) {
+  if (!Object.keys(course).length) {
     <Loader />;
   } else {
     const idVotados =
