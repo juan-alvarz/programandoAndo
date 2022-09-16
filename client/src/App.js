@@ -30,13 +30,14 @@ import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
 import Chat from "./components/Chat";
-import UserCreatedCourse from "./components/UserCreatedCourse";
+import UserScoringCourse from "./components/UserScoringCourse";
 
 import  RankUserDonation  from "./components/RankUserDonation";
 import { UserRank } from "./components/UserRank";
 // perfil
 import PerfilUser from "./components/PerfilUser";
 import PerfilAdmin from "./components/PerfilUser";
+import { FolderUser } from "./components/FolderUser";
 
 function App() {
   return (
@@ -77,7 +78,8 @@ function App() {
           <Route path="/rankusers" element={<RankUserDonation></RankUserDonation>} />
           <Route path="/userrank" element={<UserRank></UserRank>} />
           <Route path="/chat" element={<Chat/>} />
-          <Route path="/createdCourse" element={<UserCreatedCourse/>}/>
+          <Route path="/folderUser" element={<FolderUser></FolderUser>}/>
+          <Route path="/usercreated" element={<UserScoringCourse></UserScoringCourse>}/>
           <Route path="*" element={<Error404 />} />
 
           {/* Perfil de usuario */}

@@ -44,39 +44,33 @@ let unicos = [...personasMapArr.values()];*/
 
   return (
     <div>
-      <NavBar />
+      
+    <div  className="flex flex-row">
       {Object.entries(userActualizado).length === 0 ? (
         <span>CARGANDO</span>
       ) : (
+       
         favoritosUnicos.map((elemento) => {
           return (
             <div
               key={elemento._id}
-              className="grid grid-cols-3 gap-4 content-start"
-              style={{backgroundColor: 'rgb(240, 240, 240)'}}
+              className=""
+              
             >
-              <div class="p-6 m-10 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <a href="#">
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {elemento.name}
-                  </h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                  {elemento.description}
-                </p>
-                <button>
-                  <NavLink
-                    to={`/course/${elemento._id}`}
-                    style={{
-                      backgroundColor: "rgb(17, 52, 82)",
-                      color: "rgb(201, 196, 184)",
-                    }}
-                    className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
-                  >
-                    Read more
-                  </NavLink>
-                </button>
-                <button
+              <div class=""
+                style={{
+                  width: 350,
+                  height: 250,
+                  backgroundColor: "rgb(17, 52, 82)",
+                  marginTop: 5,
+                  marginLeft: 10,
+                  marginRight: 10,
+                  marginBottom: 30,
+                  borderRadius: 10,
+                }}
+              
+              >
+               <button
                   onClick={() => {
                     const filteredfavorites = userActualizado.favorites.filter(
                       (item) => item._id !== elemento._id
@@ -90,14 +84,48 @@ let unicos = [...personasMapArr.values()];*/
                       dispatch(getFavorites(userActualizado._id));
                     }, 300);
                   }}
+                  className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-3 py-1.5 text-center m-3 "
                 >
                   X
                 </button>
+                <a href="#">
+                  <h5 class="rounded-lg p-5 m-5 text-2xl font-bold tracking-tight text-gray-900 "
+                    style={{
+                      fontSize: 20,
+                      display: "flex",
+                      color: "rgb(201, 196, 184)",
+                      justifyContent: "center",
+                      backgroundColor: "rgb(55, 109, 109)",
+                      paddingTop: 10,
+                      paddingBottom: 10,
+                      marginBottom:15,
+                    }}
+                  >
+                    {elemento.name}
+                  </h5>
+                </a>
+               
+                <button>
+                  <NavLink
+                    to={`/course/${elemento._id}`}
+                    style={{
+                      backgroundColor: "rgb(17, 52, 82)",
+                      color: "rgb(201, 196, 184)",
+                    }}
+                    className="m-10 py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                  >
+                    Read more
+                  </NavLink>
+                </button>
+               
               </div>
             </div>
+            
           );
         })
       )}
+    </div>
+
     </div>
   );
 };

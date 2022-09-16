@@ -1,28 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../redux/actions";
+import React from 'react'
 
-
-
-function UserCreatedCourse() {
-
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.programandoando);
-
-  let userLocal = window.localStorage.getItem("user");
-  let userObj = JSON.parse(userLocal);
-
-  useEffect(() => {
-  if (userObj) {
-      dispatch(getUser(userObj.user._id));
-  }
-  }, [dispatch]);
-
-  console.log(user)
-
+export const UserCreatedCourse = () => {
   return (
-      <div>UserCreatedCourse</div>
+    <div>UserCreatedCourse</div>
   )
 }
-
-export default UserCreatedCourse

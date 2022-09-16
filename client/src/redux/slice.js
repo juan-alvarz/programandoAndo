@@ -15,6 +15,7 @@ export const slice = createSlice({
     filters: [],
     favoritesUser: [],
     notifications: [],
+    scoring:[],
   },
   reducers: {
     // ========= Courses ===========
@@ -74,6 +75,9 @@ export const slice = createSlice({
 
     getFavoriteCourse: (state, action) => {
       state.favoritesUser = action.payload;
+    },
+    getScoringCourse: (state, action) => {
+      state.scoring = action.payload;
     },
     createCourse: (state) => {
       return { ...state };
@@ -221,6 +225,7 @@ export const {
   getCourse3h,
   getSession,
   getFavoriteCourse,
+  getScoringCourse,
   deleteSchool,
   deleteCourse,
   deleteVideo,
