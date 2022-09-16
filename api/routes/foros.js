@@ -6,6 +6,7 @@ const {
     softDeleteForo,
     restoreForo,
     getForos,
+    updateDeleteCommentorAnswer
 } = require("../controllers/foro");
 const {
     validatorGetorCreateForo,
@@ -23,6 +24,8 @@ router.get("/:id", validatorGetForoById, getForoById);
 router.post("/", validatorGetorCreateForo, createForo);
 
 router.put("/:id", updateForo);
+
+router.patch("/:id", updateDeleteCommentorAnswer)
 
 router.delete("/:id", softDeleteForo);
 

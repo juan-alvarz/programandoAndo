@@ -34,14 +34,17 @@ const getAllUsers = async (req, res, next) => {
       }
       return res.json(data);
     }
-    const users = await usersModel.find({}).populate({
-      path: "schools",
-      populate: {
-        path: "courses",
-        populate: { path: "videos" },
-      },
-    }).populate("favorites")
-    .populate("ownPath");
+    const users = await usersModel
+      .find({})
+      .populate({
+        path: "schools",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      })
+      .populate("favorites")
+      .populate("ownPath");
     return res.json(users);
   } catch (e) {
     return res.send(e.message);
@@ -60,17 +63,48 @@ const getUserById = async (req, res, next) => {
           populate: { path: "videos" },
         },
       })
-      .populate("favorites");
-    if (!user) {
+      .populate("favorites")
+      .populate({
+        path: "scoring",
+        populate: {
+          path: "course",
+        },
+      })
+      .populate({
+        path: "chats",
+        populate: {
+          path: "transmitter",
+          select: "username",
+        },
+      })
+      .populate({
+        path: "chats",
+        populate: {
+          path: "receiver",
+          select: "username",
+        },
+      })
+      .populate({
+        path: "chats",
+        populate: {
+          path: "content",
+          populate: {
+            path: "author",
+            select: "username",
+          },
+        },
+      });
+    /* if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);
       // return res.send("user doesn't exist");
-    }
-    return res.send(user);
+    } */
+    res.send(user);
   } catch (e) {
     return res.send(e.message);
   }
 };
+
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;
@@ -335,6 +369,9 @@ const updateUser = async (req, res, next) => {
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
           banned: body.banned ? body.banned : user.banned,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
@@ -354,6 +391,9 @@ const updateUser = async (req, res, next) => {
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
@@ -375,6 +415,9 @@ const updateUser = async (req, res, next) => {
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
           banned: body.banned ? body.banned : user.banned,
+          scoring: body.scoring
+            ? [...user.scoring, body.scoring]
+            : user.scoring,
         }
       );
       if (!data.modifiedCount) {
@@ -391,9 +434,12 @@ const updateUser = async (req, res, next) => {
 const softDeleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await usersModel.updateOne({_id:id},{
-      banned : true
-    })
+    const user = await usersModel.updateOne(
+      { _id: id },
+      {
+        banned: true,
+      }
+    );
     const data = await usersModel.delete({ _id: id });
     return res.json(data);
   } catch (e) {

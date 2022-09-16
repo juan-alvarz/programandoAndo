@@ -240,6 +240,8 @@ export default function CreateCourse() {
                 </span>
                 CREATE ROUTE
               </button>
+
+              <Google />
             </div>
           </form>
         </div>

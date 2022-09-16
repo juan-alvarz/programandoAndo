@@ -33,7 +33,7 @@ const UserSchema = new Schema(
         "data science",
         "MERN route",
         "PERN route",
-        "diseÃ±o UX/UI",
+        "design UX/UI",
       ],
       default: "allSchools",
     },
@@ -74,10 +74,12 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-    scoring: [{
-      type: Schema.Types.ObjectId,
-      ref: "Course",
-    }],
+    scoring: [
+      {
+        course: { type: Schema.Types.ObjectId, ref: "Course" },
+        score: Number,
+      },
+    ],
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -87,7 +89,7 @@ const UserSchema = new Schema(
     contributor: {
       type: Number,
       default: 0,
-    },   
+    },
     banned: { type: Boolean, default: false },
     status: {
       type: String,
@@ -101,8 +103,22 @@ const UserSchema = new Schema(
     changePassCode: {
       type: String,
     },
-  },
 
+    chats: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Chat",
+      },
+    ],
+    pagePuntuation: {
+      type: Number,
+      default: 0,
+    },
+    pageOpinion: {
+      type: String,
+      default: "",
+    },
+  },
   {
     timestamps: true,
     versionKey: false,

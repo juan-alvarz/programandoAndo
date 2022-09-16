@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import Puntuation from "./Puntuation";
+import SearchBar from "./SearchBar";
 import {
   getVideoById,
   clearFilter,
@@ -13,9 +15,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
+import Google from "./Google";
+import Chat from "./Chat";
 
-
-function Home () {
+function Home() {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const dispatch = useDispatch();
@@ -25,17 +28,13 @@ function Home () {
   let userObj = JSON.parse(userLocal);
 
   const incomingFavorites = user.favorites;
-  
-  
-  let verified =  userObj && userObj.user.status;   
 
- console.log(document.cookie);
+  let verified = userObj && userObj.user.status;
 
- 
+  console.log(document.cookie);
 
-// delete_cookie("github-jwt")
- 
-  
+  // delete_cookie("github-jwt")
+
   useEffect(() => {
     // dispatch(getVideoById(idVideo));
     dispatch(getAllNotifications());
@@ -46,7 +45,7 @@ function Home () {
   }, [dispatch]);
 
   useEffect(() => {
-    (async function () {
+    (async function() {
       const usr = await axios
         .get(`http://localhost:3001/api/auth/me`, {
           withCredentials: true,
@@ -66,10 +65,9 @@ function Home () {
 
   const stat = useSelector((state) => state.programandoando);
   // console.log(stat);
-  return (    
+  return (
     <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
-    
-      <NavBar/>
+      <NavBar />
       <div class="py-10">
         <div
           style={{ backgroundColor: "rgb(17, 52, 82)" }}
@@ -108,7 +106,19 @@ function Home () {
       <div>
         <Carousel />
       </div>
+      <div
+        style={{
+          position: "fixed",
+          right: "20px",
+          bottom: "20px",
+          zIndex: 100,
+        }}
+      >
+        <Chat />
+      </div>
       <Footer />
+      {/* <Puntuation /> */}
+      <Puntuation />
     </div>
   );
 }
