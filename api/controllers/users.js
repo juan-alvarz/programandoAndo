@@ -394,6 +394,7 @@ const updateUser = async (req, res, next) => {
           scoring: body.scoring
             ? [...user.scoring, body.scoring]
             : user.scoring,
+          image: { url: cloudinary.url, public_id: cloudinary.public_id },
         }
       );
       if (!data.modifiedCount) {
