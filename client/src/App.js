@@ -31,6 +31,7 @@ import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
 import Chat from "./components/Chat";
 import UserCreatedCourse from "./components/UserCreatedCourse";
+import AgeCharts from "./components/AgeCharts";
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
           <Route path="/chat" element={<Chat/>} />
           <Route path="/createdCourse" element={<UserCreatedCourse/>}/>
+          <Route path="/AgeChart" element={<AgeCharts/>}/>
         </Routes>
       </div>
     </BrowserRouter>

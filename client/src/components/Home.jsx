@@ -14,6 +14,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
+import Chat from "./Chat";
 
 
 function Home() {
@@ -80,6 +81,9 @@ function Home() {
       </div>
       <div>
         <Carousel />
+      </div>
+      <div style={{position: 'fixed', right: '20px', bottom: '20px', zIndex: 100}}>
+        <Chat/>
       </div>
       <Footer />
     </div>
