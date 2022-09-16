@@ -29,6 +29,7 @@ import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
+import InternalChat from "./components/InternalChat";
 
 function App() {
   return (
@@ -65,6 +66,7 @@ function App() {
           <Route path="*" element={<Error404 />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
+          <Route path="/internalChat" element={<InternalChat />} />
         </Routes>
       </div>
     </BrowserRouter>

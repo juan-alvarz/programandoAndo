@@ -64,6 +64,30 @@ const getUserById = async (req, res, next) => {
         populate: {
           path: "course",
         },
+      })
+      .populate({
+        path: "chats",
+        populate: {
+          path: "transmitter",
+          select: "username",
+        },
+      })
+      .populate({
+        path: "chats",
+        populate: {
+          path: "receiver",
+          select: "username",
+        },
+      })
+      .populate({
+        path: "chats",
+        populate: {
+          path: "content",
+          populate: {
+            path: "author",
+            select: "username",
+          },
+        },
       });
     if (!user) {
       handleHtppError(res, "user doesn't exist", 404);

@@ -17,6 +17,7 @@ const UserSchema = new Schema(
       type: String,
       select: false,
     },
+
     schools: [
       {
         type: Schema.Types.ObjectId,
@@ -76,6 +77,12 @@ const UserSchema = new Schema(
     changePassCode: {
       type: String,
     },
+    chats: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Chat",
+      },
+    ],
   },
 
   {
