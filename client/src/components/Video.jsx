@@ -31,9 +31,9 @@ export default function Video() {
     dispatch(getForoById(video.foro));
   }, [video.foro, contador]);
 
-  useEffect(() => {
-    dispatch(getForoById(video.foro));
-  }, [video.foro, contador]);
+   useEffect(() => {
+     dispatch(getForoById(video.foro));
+   }, [video.foro, contador]);
 
   // COMENTARIO
   const [commentario, setCommentario] = useState({
@@ -71,6 +71,13 @@ export default function Video() {
     e.preventDefault()
     //return deleteComment
        dispatch(updateDeleteCommentorAnswer(video.foro, {commentId: id, change: "deleteComment"})) //.then(setContador(contador + 1))
+       setContador(contador+1)
+  }
+
+  function deleteAnswer(e, id, idAnswer){
+    e.preventDefault()
+    //return deleteComment
+       dispatch(updateDeleteCommentorAnswer(video.foro, {commentId: id, change: "deleteAnswer", idAnswer: idAnswer})) //.then(setContador(contador + 1))
        setContador(contador+1)
   }
 
@@ -187,6 +194,12 @@ console.log(foro)
                 (answer) => 
                 <ol>
                 <h2> -- ESTA ES UNA ANSWER: {answer.content}</h2>
+                <h1>Author de la respuesta: {answer.authorComment.name? <h1>Hola</h1>: <h1>No sirve</h1> }</h1>
+                {answer.authorComment._id === userObj.user._id? <button
+                 className="button"
+                 type="submit"
+                onClick={(e) => deleteAnswer(e, comment._id, answer._id)}
+                >Eliminar respuesta</button>: ""}
           </ol>
               )}
               </h3>
@@ -210,7 +223,7 @@ console.log(foro)
             type="submit"
            onClick={(e) => deleteComment4(e, comment._id)}
             > 
-           Delete Comment</button> : "no tiene autor" : "no tiene autor ché"} 
+           Delete Comment</button> : "" : ""} 
               </ol>) 
           ) : (
             <h2>No se cumplió master</h2>
