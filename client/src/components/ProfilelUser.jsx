@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUser, getUsers, getUser } from "../redux/actions";
 import Swal from "sweetalert2";
 import ModifyProfileUser from "./ModifyProfileUser";
+import Cloudinary from "./Cloudinary";
 
 function ProfilelUser() {
   let userLocal = window.localStorage.getItem("user");
@@ -25,7 +26,7 @@ function ProfilelUser() {
   useEffect(() => {
     dispatch(getUsers());
 
-    (async function () {
+    (async function() {
       const id = users && users[0]._id;
       if (id) {
         console.log(id);
@@ -50,6 +51,13 @@ function ProfilelUser() {
   const handleRender = () => {
     setRender(render ? false : true);
   };
+
+  const [cloudinary, setCloudinary] = useState({});
+
+  const handleSubmit = () => {
+    dispatch(updateUser(cloudinary, userId));
+  };
+
   return render === false ? (
     <div>
       <div className=" bg-gray-200 flex flex-wrap items-center justify-center">
@@ -65,7 +73,7 @@ function ProfilelUser() {
             <span clspanss="block relative h-32 w-32">
               <img
                 alt="Photo by aldi sigun on Unsplash"
-                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                src={cloudinary.url && cloudinary.url}
                 className="mx-auto object-cover rounded-full h-40 w-40 bg-white p-1"
               />
             </span>
@@ -93,9 +101,16 @@ function ProfilelUser() {
                 >
                   Profile Edit
                 </button>
+                <button
+                  className="rounded-xl border-red-900 border-2"
+                  onClick={() => handleSubmit()}
+                >
+                  Edit
+                </button>
               </div>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-8"></div>
             </div>
+            <Cloudinary setCloudinary={setCloudinary} />
           </div>
         </div>
       </div>

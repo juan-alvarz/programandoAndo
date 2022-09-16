@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function Cloudinary() {
+function Cloudinary({ setCloudinary }) {
   const [image, setImage] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -23,13 +23,15 @@ function Cloudinary() {
     console.log(res);
     setImage(file.secure_url);
     console.log(file.public_id);
-    // console.log(file.secure_url);
+    console.log(file.secure_url);
     setLoading(false);
+    const cloudinary = { public_id: file.public_id, url: file.secure_url };
+    setCloudinary(cloudinary);
   };
 
   return (
     <div className="flex justify-center items-center">
-      <div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 ">
+      {/* <div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 ">
         <a href="#">
           <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Cloudinary
@@ -50,7 +52,8 @@ function Cloudinary() {
           onChange={uploadImage}
         />
         {loading ? <h3>Loading Images...</h3> : <img src={image} width="300" />}
-      </div>
+      </div> */}
+      <input type="file" />
     </div>
   );
 }
