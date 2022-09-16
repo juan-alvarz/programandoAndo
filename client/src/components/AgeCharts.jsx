@@ -11,7 +11,7 @@ function AgeCharts() {
 
     useEffect(() => {
           dispatch(getUsers());
-      }, [dispatch]);
+      }, [dispatch]); 
 
     // console.log(users)
     var birthdaysMillisec = [820497600000, 1104516000000, 1199188800000, 1483207200000, 1988128800000, 2461492800000]
