@@ -4,11 +4,13 @@ import { countries } from "../utils/countries";
 import { levelEducation } from "../utils/levelEducation";
 import { preferences } from "../utils/preferences";
 import photoPerfil from "../utils/images/michi-cool.jpg";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { updateUser, getUsers, getUser } from "../redux/actions";
 import Swal from "sweetalert2";
 
-function PerfilUser() {
+function ModifyProfileUser(prop) {
   let userLocal = window.localStorage.getItem("user");
   let userObj = userLocal && JSON.parse(userLocal);
 
@@ -20,7 +22,7 @@ function PerfilUser() {
 
   useEffect(() => {
     dispatch(getUsers());
-    const id = async () => await users[0]._id;
+    const id = users[0]._id;
     dispatch(getUser(id));
   }, [dispatch, getUsers]);
 
@@ -90,9 +92,20 @@ function PerfilUser() {
   const handleChange = (e) => {
     setInputUser({
       ...inputUser,
-      [e.target.name]:   e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
+
+  const handleChangeCheckbox = (e) => {
+    setInputUser({
+      ...inputUser,
+      [e.target.name]: e.target.value === "false" ? "true" : "false",
+    });
+  };
+
+  // const handleChangeCheckbox = (e) => {
+  //   setInputUser(inputUser.isWorking === "false" ? "true" : "false");
+  // };
 
   // React Select
   const countryList = countries.map((country) => {
@@ -184,6 +197,15 @@ function PerfilUser() {
 
       let payloadDate = { user: userRole, birthday: inputUser.birthday };
       dispatch(updateUser(payloadDate, userId));
+
+      let payloadNotification = {
+        user: userRole,
+        authorizeNotifications: inputUser.authorizeNotifications,
+      };
+      dispatch(updateUser(payloadNotification, userId));
+
+      let payloadWorking = { user: userRole, isWorking: inputUser.isWorking };
+      dispatch(updateUser(payloadWorking, userId));
     }
 
     console.log(inputUser);
@@ -200,6 +222,11 @@ function PerfilUser() {
   function handlePassTwo() {
     setPassTwo(passTwo === "password" ? "text" : "password");
   }
+
+  const handleF5 = () => {
+    window.location.href = window.location.href;
+    return false;
+  };
 
   return (
     <section
@@ -416,22 +443,33 @@ function PerfilUser() {
               </div>
 
               <div className="flex justify-between">
-                <label htmlFor="">are you currently working?</label>
+                <label htmlFor="">Are you currently working?</label>
                 <input
                   type="checkbox"
-                  checked={inputUser.authorizeNotifications}
-                  name="authorizeNotifications"
+                  value={inputUser.isWorking}
+                  name="isWorking"
                   className="mr-5"
+                  onClick={(e) => handleChangeCheckbox(e)}
                 />
               </div>
               <div className="flex justify-around">
                 <label htmlFor="">
                   Do you want to receive email notifications?
                 </label>
-                <input type="checkbox" checked="checked" className="mr-5" />
+                <input
+                  type="checkbox"
+                  value={inputUser.authorizeNotifications}
+                  name="authorizeNotifications"
+                  className="mr-5"
+                  onClick={(e) => handleChangeCheckbox(e)}
+                />
               </div>
 
-              <button className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+              <button
+                className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                // type="button"
+                // onClick={handleF5}
+              >
                 <span>Save</span>
               </button>
             </form>
@@ -442,4 +480,4 @@ function PerfilUser() {
   );
 }
 
-export default PerfilUser;
+export default ModifyProfileUser;
