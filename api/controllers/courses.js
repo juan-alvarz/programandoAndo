@@ -1,6 +1,7 @@
 const { courseModel, schoolModel, videoModel } = require("../models");
 const { handleHtppError } = require("../utils/handleError");
 const { durationCourse } = require("../utils/durationSort.js");
+const { average } = require("../utils/averageScores.js");
 // OBTENER LISTA DE CURSOS DE LA BASE DE DATOS
 const getCourses = async (req, res) => {
   const { name } = req.query;
@@ -51,38 +52,35 @@ const getCourseById = async (req, res) => {
 
 // CREAR CURSO EN LA BASE DE DATOS
 const createCourse = async (req, res) => {
-  const {id} = req.params;
   const { name, description, image, videos } = req.body;
-
+  const body = req.body;
   // const body = req.body;
-  const find = await schoolModel.findOne({ name: name });
+  const find = await schoolModel.findWithDeleted({ name });
 
   const videosFind = await Promise.all(
     videos.map(async (video) => {
       return await videoModel.findById(video);
     })
   );
+  const score = body.scores ? average(body.scores) : 0;
   const duration = durationCourse(videosFind);
-
   try {
-    const videosFind = await Promise.all(
-      videos.map(async (video) => {
-        return await videoModel.findById(video);
-      })
-    );
-    const duration = durationCourse(videosFind);
-
-    const { name, description, image, videos } = req.body
+    if (find.length === 0) {
       const creado = await courseModel.create({
         name,
         description,
         image,
         videos,
         duration,
+        scores: body.scores,
+        score,
       });
-      return res.json(creado);
+      res.send(creado);
+    } else {
+      res.send({ msg: "The course already exist" });
+    }
   } catch (error) {
-    return res.json({ message: error });
+    res.send({ msg: "The course already exist, try with other name" });
   }
 };
 
@@ -95,9 +93,26 @@ const createCourse = async (req, res) => {
 
 const updateCourse = async (req, res) => {
   const { id } = req.params;
+  const { name, description, image, videos, addVideos } = req.body;
   const body = req.body;
+  const course = await courseModel.findById(id);
+  console.log(req.body);
+  console.log(addVideos);
   try {
-    const actualizado = await courseModel.updateOne({ _id: id }, body);
+    // const actualizado = await courseModel.updateOne({ _id: id }, body);
+    //const scores = await courseModel.findById(id).select("scores");
+    const actualizado = await courseModel.updateOne(
+      { _id: id },
+      {
+        name: name ? name : course.name,
+        description: description ? description : course.description,
+        image: image ? image : course.image,
+        videos: addVideos ? addVideos : course.videos,
+        scores: body.scores ? [...course.scores, body.scores] : course.scores,
+        score: average([...course.scores, body.scores]),
+      }
+    );
+
     if (!actualizado.modifiedCount) {
       res.status(422).send("Fail in the query");
     }
@@ -135,3 +150,4 @@ module.exports = {
   softDeleteCourse,
   restoreCourse,
 };
+

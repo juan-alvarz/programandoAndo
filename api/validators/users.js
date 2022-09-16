@@ -7,22 +7,6 @@ const validatorCreateUser = [
   check("email").exists().notEmpty().isEmail(),
 
   check("password").exists().notEmpty().isLength({ min: 8, max: 16 }),
-
-  check("contributor").exists().notEmpty(),
-
-  check("banned").exists().notEmpty(),
-
-  check("role").exists().notEmpty(),
-  
-  check('userName').exists().notEmpty(),
-
-  check('ownPath').exists().notEmpty(),
-  
-  check('language').exists().notEmpty(),
-  
-  check('country').exists().notEmpty(),
-
-  check('birthday').exists().notEmpty(),
   (req, res, next) => {
     return validateResults(req, res, next);
   },

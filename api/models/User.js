@@ -13,9 +13,36 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
     },
+    authorizeNotifications: {
+      type: Boolean,
+    },
     password: {
       type: String,
       select: false,
+    },
+    biography: {
+      type: String,
+    },
+    preferences: {
+      type: String,
+      enum: [
+        "front-end",
+        "back-end",
+        "databases",
+        "allSchools",
+        "data science",
+        "MERN route",
+        "PERN route",
+        "design UX/UI",
+      ],
+      default: "allSchools",
+    },
+    isWorking: {
+      type: Boolean,
+      default: false,
+    },
+    studyStatus: {
+      type: String,
     },
     schools: [
       {
@@ -35,9 +62,11 @@ const UserSchema = new Schema(
     },
     country: {
       type: String,
+      default: "",
     },
     birthday: {
       type: Date,
+      default: Date.now(),
     },
     ownPath: [
       {
@@ -45,9 +74,19 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-    scoring: {
-      type: Schema.Types.ObjectId,
-      ref: "Courses",
+    scoring: [
+      {
+        course: { type: Schema.Types.ObjectId, ref: "Course" },
+        score: Number,
+      },
+    ],
+    image: {
+      url: {
+        type: String,
+      },
+      public_id: {
+        type: String,
+      },
     },
     favorites: [
       {
@@ -71,6 +110,21 @@ const UserSchema = new Schema(
     },
     changePassCode: {
       type: String,
+    },
+
+    chats: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Chat",
+      },
+    ],
+    pagePuntuation: {
+      type: Number,
+      default: 0,
+    },
+    pageOpinion: {
+      type: String,
+      default: "",
     },
   },
   {

@@ -3,7 +3,7 @@ const validateResults = require("../utils/handleValidator");
 
 
 const validatorGetorCreateForo = [
-  check("idVideo").exists().notEmpty().isMongoId(),
+  check("comments").exists().notEmpty(),
   (req, res, next) => {
     return validateResults(req, res, next);
   },
