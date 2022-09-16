@@ -103,6 +103,7 @@ const UserSchema = new Schema(
     changePassCode: {
       type: String,
     },
+
     chats: [
       {
         type: Schema.Types.ObjectId,
