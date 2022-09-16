@@ -19,6 +19,10 @@ const SchoolSchema = new Schema(
     image: {
       type: String,
     },
+    custom: {
+      type: Boolean,
+      default: false,
+    }
   },
   {
     timestamps: true,

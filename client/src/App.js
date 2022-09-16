@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AboutUs from "./components/AboutUs";
 import Home from "./components/Home";
 import LandingPage from "./components/LandingPage";
-import NavBar from "./components/NavBar";
+import RankUserHome from "./components/RankUserHome";
 import Courses from "./components/Courses";
 import CreateCourse from "./components/CreateCourse";
 import Error404 from "./components/Error404";
@@ -30,6 +30,14 @@ import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
 import InternalChat from "./components/InternalChat";
+import Chat from "./components/Chat";
+import UserCreatedCourse from "./components/UserCreatedCourse";
+
+import RankUserDonation from "./components/RankUserDonation";
+import { UserRank } from "./components/UserRank";
+// perfil
+import PerfilUser from "./components/PerfilUser";
+import PerfilAdmin from "./components/PerfilUser";
 
 function App() {
   return (
@@ -63,10 +71,23 @@ function App() {
           <Route path="/setting" element={<Settings />} />
           <Route path="/execute-payment" element={<SuccessDonation />} />
           <Route path="/cancel-payment" element={<CancelDonation />} />
-          <Route path="*" element={<Error404 />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
           <Route path="/internalChat" element={<InternalChat />} />
+
+          <Route path="/rankhome" element={<RankUserHome />} />
+          <Route
+            path="/rankusers"
+            element={<RankUserDonation></RankUserDonation>}
+          />
+          <Route path="/userrank" element={<UserRank></UserRank>} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/createdCourse" element={<UserCreatedCourse />} />
+          <Route path="*" element={<Error404 />} />
+
+          {/* Perfil de usuario */}
+          <Route path="/perfilUser" element={<PerfilUser />} />
+          <Route path="/perfilAdmin" element={<PerfilAdmin />} />
         </Routes>
       </div>
     </BrowserRouter>

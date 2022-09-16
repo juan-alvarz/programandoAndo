@@ -4,7 +4,7 @@ import Select from "react-select";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllVideos, createsCourse, getAllCourses } from "../redux/actions";
+import { getAllVideos, getAllCourses, createSchoolUser } from "../redux/actions";
 import Swal from "sweetalert2";
 
 import NavBar from "./NavBar";
@@ -15,6 +15,8 @@ export default function CreateCourse() {
 
   const { videos, courses } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
 
   console.log(courses);
 
@@ -35,7 +37,7 @@ export default function CreateCourse() {
       name: "",
       image: "",
       description: "",
-      videos: [],
+      courses: [],
     },
   });
 
@@ -43,9 +45,9 @@ export default function CreateCourse() {
     const get = getValues();
     console.log(get);
 
-    handleSelect(video);
+    handleSelect(course);
     console.log(data);
-    dispatch(createsCourse(get));
+    dispatch(createSchoolUser(get, userObj.user._id));
 
     Swal.fire({
       title: "Create Course",
@@ -59,33 +61,32 @@ export default function CreateCourse() {
     });
   };
 
-  const [video, setVideo] = useState([]);
+  const [course, setCourse] = useState([]);
 
   const handleSelect = (value) => {
-    const find = video.find((i) => i.value === value.value);
+    const find = course.find((i) => i.value === value.value);
     if (!find) {
-      setVideo([...video, value]);
+      setCourse([...course, value]);
       setValue(
-        "videos",
-        [...video, value].map((e) => e.value)
+        "courses",
+        [...course, value].map((e) => e.value)
       );
-      console.log(video);
+      console.log(course);
     }
     // console.log(find);
   };
 
-  const optionList = videos?.map((video) => {
+  const optionList = courses?.map((courses) => {
     return {
-      value: video._id,
-      label: video.name,
+      value: courses._id,
+      label: courses.name,
     };
   });
 
   const handleDeleteSelect = (value) => {
-    const videoFilter = video.filter((v) => v !== value);
-    setVideo(videoFilter);
-  };
-
+    const coursesFilter = course.filter((v) => v !== value);
+    setCourse(coursesFilter);
+  }; 
   // console.log(optionList);
   let pattern =
     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
@@ -192,10 +193,10 @@ export default function CreateCourse() {
             </div>
 
             <Select
-              name="video"
+              name="course"
               options={optionList}
-              placeholder="All Videos"
-              value={video}
+              placeholder="All Courses"
+              value={course}
               onChange={handleSelect}
               isSearchable={true}
               className="font-light"
@@ -203,7 +204,6 @@ export default function CreateCourse() {
 
             <div
               style={{
-                overflow: "scroll",
                 height: "160px",
                 backgroundColor: "rgb(198, 198, 198)",
                 borderRadius: 5,
@@ -212,13 +212,13 @@ export default function CreateCourse() {
               }}
               className=""
             >
-              {video.map((v, index) => (
+              {course.map((c, index) => (
                 <div key={index} className="text-center">
                   <span
                     className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                    onClick={() => handleDeleteSelect(v)}
+                    onClick={() => handleDeleteSelect(c)}
                   >
-                    {v.label}
+                    {c.label}
                   </span>
                 </div>
               ))}
@@ -238,7 +238,7 @@ export default function CreateCourse() {
                     style={{ color: "rgb(201, 196, 184)" }}
                   />
                 </span>
-                Create Course
+                CREATE ROUTE
               </button>
             </div>
           </form>

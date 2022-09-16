@@ -65,7 +65,7 @@ function SchoolsPA() {
     }).then((result) => {
       if (result.isConfirmed) {
         // navigate("/userspa");
-        window.location.reload()
+        window.location.reload();
       }
     });
   };
@@ -166,8 +166,8 @@ function SchoolsPA() {
     // console.log(schoolSelectValue)
     dispatch(updateSchool(uwu2, schoolSelectValue.value));
     setRender({ name: "", description: "", image: "", courses: [] });
-    setCourseEdit([])
-    setSchoolSelectValue("Select School")
+    setCourseEdit([]);
+    setSchoolSelectValue("Select School");
     Swal.fire({
       title: "Edit School",
       text: "Course Edited Successfully",
@@ -176,10 +176,9 @@ function SchoolsPA() {
     }).then((result) => {
       if (result.isConfirmed) {
         // navigate("/userspa");
-        window.location.reload()
+        window.location.reload();
       }
     });
-
   };
 
   function handleChange(e) {
@@ -209,7 +208,7 @@ function SchoolsPA() {
     //   icon: "success",
     //   confirmButtonText: "Back",
     // });
-    setSchoolDelete("Select School")
+    setSchoolDelete("Select School");
   };
 
   // ============ Create School =================

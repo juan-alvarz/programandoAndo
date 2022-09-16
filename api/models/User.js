@@ -13,11 +13,37 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
     },
+    authorizeNotifications: {
+      type: Boolean,
+    },
     password: {
       type: String,
       select: false,
     },
-
+    biography: {
+      type: String,
+    },
+    preferences: {
+      type: String,
+      enum: [
+        "front-end",
+        "back-end",
+        "databases",
+        "allSchools",
+        "data science",
+        "MERN route",
+        "PERN route",
+        "diseÃ±o UX/UI",
+      ],
+      default: "allSchools",
+    },
+    isWorking: {
+      type: Boolean,
+      default: false,
+    },
+    studyStatus: {
+      type: String,
+    },
     schools: [
       {
         type: Schema.Types.ObjectId,

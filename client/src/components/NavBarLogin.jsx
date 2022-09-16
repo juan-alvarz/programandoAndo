@@ -10,7 +10,7 @@ import Notifications from './Notifications'
 import NavBarUser from './NavBarUser'
 import NavBarAdmin from './NavBarAdmin'
 
-function NavBarLogin() {
+function NavBarLogin({delete_cookie}) {
 
   const usuario = window.localStorage.getItem('user')
   let userObj = JSON.parse(usuario);
@@ -19,9 +19,9 @@ function NavBarLogin() {
 
   return (
     rolUser === 'user' ?
-    <NavBarUser/>
+    <NavBarUser delete_cookie={delete_cookie}/>
     :
-    <NavBarAdmin/>
+    <NavBarAdmin delete_cookie={delete_cookie}/>
   )
 }
 

@@ -1,18 +1,17 @@
-const { notificationModel } = require("../models");
+const { notificationModel, usersModel } = require("../models");
 const { handleHttpError } = require("../utils/handleError");
 const NotificationsModel = require("../models/Notifications");
+const { sendNotificationEmail } = require("../config/nodemailer.config");
 // OBTENER LISTA DE NOTIFICACIONES DE LA BASE DE DATOS
 
-
 const getNotifications = async (req, res) => {
-
   const { name } = req.query;
- 
-  const data = await notificationModel.find({})
+  const data = await notificationModel.find({});
   try {
     if (name) {
-      const nombre = await notificationModel
-        .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
+      const nombre = await notificationModel.find({
+        name: { $regex: ".*" + name + ".*", $options: "<i>" },
+      });
       console.log(nombre);
       if (!nombre.length) {
         res.send({ msg: "error" });
@@ -28,8 +27,6 @@ const getNotifications = async (req, res) => {
   }
 };
 
-
-
 // OBTENER DETALLE DE UN CURSO DE LA BASE DE DATOS POR MEDIO DEL ID
 const getNotificationById = async (req, res) => {
   const { id } = req.params;
@@ -38,9 +35,11 @@ const getNotificationById = async (req, res) => {
     if (!id) {
       res.send({ msg: "The ID is necessary" });
     } else {
-      const notificationId = await NotificationsModel.findById(id)
+      const notificationId = await NotificationsModel.findById(id);
       if (!notificationId) {
-        res.send({ message: `The notification with the: ${id} does not exist` });
+        res.send({
+          message: `The notification with the: ${id} does not exist`,
+        });
       } else {
         res.status(200).send(notificationId);
       }
@@ -50,24 +49,31 @@ const getNotificationById = async (req, res) => {
   }
 };
 
-
-
 // CREAR CURSO EN LA BASE DE DATOS
 const createNotification = async (req, res) => {
   const { title, description } = req.body;
 
-  // const body = req.body;
   const find = await notificationModel.findOne({ title: title });
+  const allUsers = await usersModel.find({suscribe:true});
+
+  const infoUsers = allUsers.map((e) => ({
+    name: e.name,
+    username: e.username,
+    email: e.email,
+  }));
 
   try {
     if (!find) {
-      const creado = await notificationModel.create({
+      const notification = await notificationModel.create({
         title,
         description,
       });
-      res.send(creado);
+      infoUsers.forEach((e) =>
+        sendNotificationEmail(e.name, e.username, e.email, notification)
+      );
+      res.status(200).send(notification);
     } else {
-      res.send({ msg: "The notification already exist" });
+      res.status(403).send({ msg: "The notification already exist" });
     }
   } catch (error) {
     res.send({ msg: "The notification already exist, try with other name" });
@@ -104,7 +110,6 @@ const softDeleteNotification = async (req, res) => {
     res.json(error.message);
   }
 };
-
 
 // RESTAURAR!! --> VIA PATCH!!
 const restoreNotification = async (req, res) => {

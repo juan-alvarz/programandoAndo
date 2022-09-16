@@ -24,8 +24,9 @@ const getAllUsers = async (req, res, next) => {
             path: "courses",
             populate: { path: "videos" },
           },
-        });
-
+        })
+        .populate("favorites")
+        .populate("ownPath");
       if (!data) {
         handleHtppError(res, "User not found", 404);
         // res.status(404);
@@ -33,13 +34,17 @@ const getAllUsers = async (req, res, next) => {
       }
       return res.json(data);
     }
-    const users = await usersModel.find({}).populate({
-      path: "schools",
-      populate: {
-        path: "courses",
-        populate: { path: "videos" },
-      },
-    });
+    const users = await usersModel
+      .find({})
+      .populate({
+        path: "schools",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      })
+      .populate("favorites")
+      .populate("ownPath");
     return res.json(users);
   } catch (e) {
     return res.send(e.message);
@@ -94,11 +99,12 @@ const getUserById = async (req, res, next) => {
       // res.status(404);
       // return res.send("user doesn't exist");
     }
-    return res.json(user);
+    return res.send(user);
   } catch (e) {
     return res.send(e.message);
   }
 };
+
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;
@@ -296,6 +302,7 @@ const verifyUser = async (req, res, next) => {
     }
   });
 };
+
 const updateFavorites = async (req, res) => {
   const { id } = req.params;
 
@@ -370,8 +377,7 @@ const updateUser = async (req, res, next) => {
       if (!data.modifiedCount) {
         handleHtppError(res, "Fail in the query", 422);
       }
-      res.status(201);
-      return res.send(data);
+      return res.status(201).send(data);
     }
     if (user.role === "user") {
       const data = await usersModel.updateOne(
@@ -428,6 +434,12 @@ const updateUser = async (req, res, next) => {
 const softDeleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const user = await usersModel.updateOne(
+      { _id: id },
+      {
+        banned: true,
+      }
+    );
     const data = await usersModel.delete({ _id: id });
     return res.json(data);
   } catch (e) {

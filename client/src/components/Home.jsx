@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import NavBar from "./NavBar";
-import data from "../utils/data";
 import Footer from "./Footer";
-import SearchBar from "./SearchBar";
 import {
   getVideoById,
   clearFilter,
   getAllNotifications,
   getUser,
-  getFavorites, 
+  getFavorites,
 } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
+import axios from "axios";
 
-function Home() {
+
+function Home () {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const dispatch = useDispatch();
@@ -25,10 +25,18 @@ function Home() {
   let userObj = JSON.parse(userLocal);
 
   const incomingFavorites = user.favorites;
-  console.log(incomingFavorites);
+  
+  
+  let verified =  userObj && userObj.user.status;   
 
+ console.log(document.cookie);
+
+ 
+
+// delete_cookie("github-jwt")
+ 
+  
   useEffect(() => {
-    
     // dispatch(getVideoById(idVideo));
     dispatch(getAllNotifications());
     if (userObj) {
@@ -37,11 +45,31 @@ function Home() {
     }
   }, [dispatch]);
 
+  useEffect(() => {
+    (async function () {
+      const usr = await axios
+        .get(`http://localhost:3001/api/auth/me`, {
+          withCredentials: true,
+        })
+        .then((res) => res.data);
+      if (usr) {
+        // console.log(usr.decoded._id);
+        dispatch(getUser(usr.decoded._id));
+        dispatch(getFavorites(usr.decoded._id));
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify({ token: usr.tokenJwt, user })
+        );
+      }
+    })();
+  }, [Object.keys(user).length !== 0]);
+
   const stat = useSelector((state) => state.programandoando);
-  console.log(stat);
-  return (
-    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
-      <NavBar />
+  // console.log(stat);
+  return (    
+    <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
+    
+      <NavBar/>
       <div class="py-10">
         <div
           style={{ backgroundColor: "rgb(17, 52, 82)" }}
