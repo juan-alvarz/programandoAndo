@@ -109,8 +109,15 @@ const UserSchema = new Schema(
         ref: "Chat",
       },
     ],
+    pagePuntuation: {
+      type: Number,
+      default: 0,
+    },
+    pageOpinion: {
+      type: String,
+      default: "",
+    },
   },
-
   {
     timestamps: true,
     versionKey: false,

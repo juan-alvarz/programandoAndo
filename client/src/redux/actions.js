@@ -4,6 +4,7 @@ import {
   getCourses,
   getCourseById,
   createCourse,
+  favoriteCourse,
   getAllSchool,
   getSchoolId,
   createSchool,
@@ -12,6 +13,8 @@ import {
   createUser,
   getVideos,
   getVideo,
+  getForo,
+  getForos,
   createVideo,
   clearVideo,
   getCourseByName,
@@ -85,6 +88,10 @@ export const getCourse = (id) => (dispatch) => {
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
 };
+export const favorite = (course) => (dispatch) => {
+  dispatch(favoriteCourse(course))
+};
+
 
 export const getFavorites = (id) => async (dispatch) => {
   const user = await axios.get(`http://localhost:3001/api/users/${id}`);
@@ -308,6 +315,36 @@ export const getVideoByName = (name) => (dispatch) => {
     .then((res) => dispatch(getVideosByName(res.data)))
     .catch((e) => console.log(e));
 };
+
+// =========================== Foro del video, utiliza el id de foro que trae el video ===================
+
+export const getForoById = (id) => (dispatch) => {
+  axios 
+    .get(`http://localhost:3001/api/foros/${id}`)
+    .then((res) => dispatch(getForo(res.data)))
+    .catch((e) => console.log(e));
+}
+
+export const getAllForos = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/foros")
+    .then((res) => dispatch(getForos(res.data)))
+    .catch((e) => console.log(e));
+}
+
+export const updateForo = (idForo ,payload) => (dispatch) => {
+ axios
+  .put(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
+
+export const updateDeleteCommentorAnswer = (idForo, payload) => (dispatch) => {
+  axios
+  .patch(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
 
 // ============================ Order ============================
 export function orderByName(payload) {
