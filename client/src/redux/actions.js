@@ -28,6 +28,7 @@ import {
   getCourse3h,
   getSession,
   getFavoriteCourse,
+  getScoringCourse,
   getNotifications,
 } from "./slice";
 
@@ -97,6 +98,13 @@ export const getFavorites = (id) => async (dispatch) => {
   const user = await axios.get(`http://localhost:3001/api/users/${id}`);
   console.log(user);
   dispatch(getFavoriteCourse(user.data.favorites));
+};
+
+export const getScoring = (id) => async (dispatch) => {
+  const user = await axios.get(`http://localhost:3001/api/users/${id}`);
+  console.log("hola")
+  console.log(user.data.scoring)
+  dispatch(getScoringCourse(user.data.scoring));
 };
 
 // export const createsCourse = (payload) => async (dispatch) => {

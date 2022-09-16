@@ -33,6 +33,7 @@ import InternalChat from "./components/InternalChat";
 import Chat from "./components/Chat";
 import UserCreatedCourse from "./components/UserCreatedCourse";
 import AgeCharts from "./components/AgeCharts";
+import UserScoringCourse from "./components/UserScoringCourse";
 
 import RankUserDonation from "./components/RankUserDonation";
 import { UserRank } from "./components/UserRank";
@@ -43,6 +44,7 @@ import ProfileAdmin from "./components/ProfileAdmin";
 import ProfilelUser from "./components/ProfilelUser";
 // Cloudinary
 import Cloudinary from "./components/Cloudinary";
+import { FolderUser } from "./components/FolderUser";
 
 function App() {
   return (
@@ -86,7 +88,11 @@ function App() {
             element={<RankUserDonation></RankUserDonation>}
           />
           <Route path="/userrank" element={<UserRank></UserRank>} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/folderUser" element={<FolderUser></FolderUser>} />
+          <Route
+            path="/usercreated"
+            element={<UserScoringCourse></UserScoringCourse>}
+          />
           <Route path="*" element={<Error404 />} />
 
           {/* Perfil de usuario */}

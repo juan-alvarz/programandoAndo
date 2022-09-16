@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../redux/actions";
 
 function UserCreatedCourse() {
-
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.programandoando);
 
@@ -11,16 +10,14 @@ function UserCreatedCourse() {
   let userObj = JSON.parse(userLocal);
 
   useEffect(() => {
-  if (userObj) {
+    if (userObj) {
       dispatch(getUser(userObj.user._id));
-  }
+    }
   }, [dispatch]);
 
-  console.log(user)
+  console.log(user);
 
-  return (
-      <div>UserCreatedCourse</div>
-  )
+  return <div>UserCreatedCourse</div>;
 }
 
-export default UserCreatedCourse
+export default UserCreatedCourse;

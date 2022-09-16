@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { NavLink, useParams ,useNavigate} from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { Paginated } from "./Paginated";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 
 import Footer from "./Footer";
 import Swal from "sweetalert2";
@@ -12,9 +11,9 @@ import Swal from "sweetalert2";
 export const Videos = (props) => {
   const { course } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
-  const {idVideo} = useParams()
-  const usuario = window.localStorage.getItem('user')
-  const navigate = useNavigate()
+  const { idVideo } = useParams();
+  const usuario = window.localStorage.getItem("user");
+  const navigate = useNavigate();
 
   let name = props.name;
   useEffect(() => {
@@ -46,14 +45,14 @@ export const Videos = (props) => {
   //     setPaginaActual(paginaActual);
   //   }
   // };
-  const handleClick = () =>{   
-    if(!usuario){
+  const handleClick = () => {
+    if (!usuario) {
       Swal.fire({
-        icon: 'warning',
-        title: 'Access to videos denied...',
-        text: 'You cannot login if you are not logged in. Please log in',
+        icon: "warning",
+        title: "Access to videos denied...",
+        text: "You cannot login if you are not logged in. Please log in",
         // footer: '<a href="">Why do I have this issue?</a>'
-      })
+      });
       // Swal.fire({
       //   title: "Access to videos denied",
       //   text: "You cannot login if you are not logged in. Please log in",
@@ -65,8 +64,7 @@ export const Videos = (props) => {
       //   }
       // })
     }
-  }
-
+  };
 
   const prev = () => {
     if (paginaActual > 1) {
@@ -75,7 +73,7 @@ export const Videos = (props) => {
   };
 
   const next = () => {
-    if (paginaActual < Math.ceil(videos.length / videosPagina)) {
+    if (paginaActual <= Math.ceil(videos.length / videosPagina)) {
       setPaginaActual(paginaActual + 1);
     }
   };
@@ -96,29 +94,33 @@ export const Videos = (props) => {
           next={next}
         ></Paginated>
       </div>
-      <div className="grid gap-8 lg:gap-8 mx-5 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:mx-28 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-stretch ">     
-        {videosActuales.map((elemento, index) => {          
-          console.log(elemento)
+      <div className="grid gap-8 lg:gap-8 mx-5 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:mx-28 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-stretch ">
+        {videosActuales.map((elemento, index) => {
+          console.log(elemento);
           return (
             <div key={index}>
-              <NavLink               
-                to={usuario? `/video/${elemento._id}/${idCourse}` : `/login`}
-                state={(videos = videosActuales)} 
-                onClick= { handleClick}
-                  
-                >                
-                <div                 
-                  style={elemento._id === idVideo ? { margin: 10, backgroundColor: 'rgb(17, 52, 82)'} : { margin: 10, backgroundColor: 'rgb(55, 109, 109)'}}
+              <NavLink
+                to={usuario ? `/video/${elemento._id}/${idCourse}` : `/login`}
+                state={(videos = videosActuales)}
+                onClick={handleClick}
+              >
+                <div
+                  style={
+                    elemento._id === idVideo
+                      ? { margin: 10, backgroundColor: "rgb(17, 52, 82)" }
+                      : { margin: 10, backgroundColor: "rgb(55, 109, 109)" }
+                  }
                   className="flex place-content-center rounded-lg shadow-xl shadow-gray-500 w-50 h-40 p-6 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
                 >
-                   
-                  <h3 style={{}} className="flex items-center text-center text-md font-medium text-white w-52">
+                  <h3
+                    style={{}}
+                    className="flex items-center text-center text-md font-medium text-white w-52"
+                  >
                     {elemento.name}
                   </h3>
                   {/* <button >Login </button> */}
                 </div>
               </NavLink>
-              
             </div>
           );
         })}
