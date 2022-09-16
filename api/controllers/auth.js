@@ -70,7 +70,7 @@ const gitHubData = async (req, res, next) => {
 
 const gitHubCreate = async (req, res, next) => {
   const { name, username, email, path } = req.body;
-  // console.log(req.body);
+  console.log(req.body);
 
   let find = await usersModel.findOne({ email });
   // console.log(find);
