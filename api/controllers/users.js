@@ -9,10 +9,7 @@ const { handleHtppError } = require("../utils/handleError");
 const {
   sendConfirmationEmail,
   sendChangePasswordEmail,
-<<<<<<< HEAD
-=======
   sendEmailDonation,
->>>>>>> Fran
 } = require("../config/nodemailer.config");
 
 const getAllUsers = async (req, res, next) => {
@@ -74,13 +71,8 @@ const getUserById = async (req, res, next) => {
 const createUser = async (req, res, next) => {
   try {
     const body = req.body;
-<<<<<<< HEAD
-    const find = usersModel.findById(body._id);
-    // console.log(find)
-=======
     const find = await usersModel.findOne({ email: body.email });
     console.log(find);
->>>>>>> Fran
 
     if (find) {
       return handleHtppError(res, "User already exist", 401);
@@ -273,9 +265,6 @@ const verifyUser = async (req, res, next) => {
     }
   });
 };
-<<<<<<< HEAD
-
-=======
 const updateFavorites = async (req, res) => {
   const { id } = req.params;
 
@@ -312,22 +301,15 @@ const deleteFavorites = async (req, res) => {
   console.log(user);
   res.status(201).send({ msg: "Course favorite deleted" });
 };
->>>>>>> Fran
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const body = req.body;
-<<<<<<< HEAD
-    const user = await usersModel.findById(id);
-    const passwordUser = await usersModel.findById(id).select("password");
-    // console.log(passwordUser.password)
-=======
     console.log(body);
     const user = await usersModel.findById(id);
     const passwordUser = await usersModel.findById(id).select("password");
     console.log(passwordUser.password);
     console.log(body.password);
->>>>>>> Fran
     console.log(user.role);
 
     if (body.password) {
@@ -368,21 +350,13 @@ const updateUser = async (req, res, next) => {
           schools: body.schools ? body.schools : user.schools,
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
-<<<<<<< HEAD
-=======
           contributor: body.contributor ? body.contributor : user.contributor,
->>>>>>> Fran
         }
       );
       if (!data.modifiedCount) {
         handleHtppError(res, "Fail in the query", 422);
       }
-<<<<<<< HEAD
-      res.status(201);
-      return res.send(data);
-=======
       return res.status(201).send(data);
->>>>>>> Fran
     }
     if (user.role === "admin") {
       const newBody = { ...body, password };
@@ -454,11 +428,7 @@ module.exports = {
   verifyUser,
   submitChangePass,
   changePasswordRequest,
-<<<<<<< HEAD
-};
-=======
   successDonation,
   updateFavorites,
   deleteFavorites,
 };
->>>>>>> Fran

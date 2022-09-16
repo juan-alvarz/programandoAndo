@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import data from "../utils/data";
 import Footer from "./Footer";
+import Puntuation from "./Puntuation"
 import SearchBar from "./SearchBar";
 import {
   getVideoById,
@@ -83,6 +84,7 @@ function Home() {
         <Carousel />
       </div>
       <Footer />
+
     </div>
   );
 }

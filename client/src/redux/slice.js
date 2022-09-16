@@ -142,8 +142,6 @@ export const slice = createSlice({
       state.foro = action.payload;
     },
     
-  
-
     // getSchoolsByName: (state, action) => {
     //   state.courses = action.payload;
     // },
@@ -248,6 +246,7 @@ export const {
   uppdateCourse,
   uppdateVideo,
   uppdateUser,
+  favoriteCourse
 } = slice.actions;
 
 export default slice.reducer;

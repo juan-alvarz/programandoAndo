@@ -20,13 +20,8 @@ const uwuToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE5YWI4MWRkM
 const verifyToken = async (tokenJwt) => {
   try {
     jwt.verify(tokenJwt, JWT_SECRET);
-<<<<<<< HEAD
-    console.log("Token is real")
-    return
-=======
     console.log("Token is real");
     return;
->>>>>>> Fran
   } catch (error) {
     console.log(error);
   }

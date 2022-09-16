@@ -4,6 +4,7 @@ import {
   getCourses,
   getCourseById,
   createCourse,
+  favoriteCourse,
   getAllSchool,
   getSchoolId,
   createSchool,
@@ -311,13 +312,19 @@ export const getAllForos = () => (dispatch) => {
     .catch((e) => console.log(e));
 }
 
-export const updateForo = (idForo ,payload)  => (dispatch) => {
-  axios
+export const updateForo = (idForo ,payload) => (dispatch) => {
+ axios
   .put(`http://localhost:3001/api/foros/${idForo}`, payload)
   .then((res) => dispatch(getForo(res.data)))
   .catch((e) => console.log(e));
 }
 
+export const updateDeleteCommentorAnswer = (idForo, payload) => (dispatch) => {
+  axios
+  .patch(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
 
 // ============================ Order ============================
 export function orderByName(payload) {

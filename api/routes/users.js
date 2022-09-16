@@ -10,14 +10,10 @@ const {
   userLogin,
   googleUserLogin,
   verifyUser,
-<<<<<<< HEAD
-  submitChangePass
-=======
   submitChangePass,
   successDonation,
   updateFavorites,
   deleteFavorites,
->>>>>>> Fran
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -34,15 +30,9 @@ router.get("/", getAllUsers);
 
 router.get("/:id", validatorGetUsers, getUserById);
 
-<<<<<<< HEAD
-router.get('/auth/confirm/:confirmationCode',verifyUser)
-
-router.get('/auth/confirm/:changePassCode',submitChangePass)
-=======
 router.get("/auth/confirm/:confirmationCode", verifyUser);
 
 router.get("/auth/confirm/:changePassCode", submitChangePass);
->>>>>>> Fran
 
 router.post("/register", validatorCreateUser, createUser);
 
@@ -55,10 +45,6 @@ router.post(
   googleUserLogin
 );
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Fran
 router.put("/:id", validatorGetUsers, updateUser);
 
 router.put("/addFavorites/:id", updateFavorites);
