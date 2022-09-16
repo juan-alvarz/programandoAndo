@@ -41,6 +41,7 @@ export default function AllCourses() {
   //======================================================
   const [coursesPowFilter, setCoursesPowFilter] = useState([]);
 
+  
   useEffect(() => {
     dispatch(getAllCourses());
     if (userObj) {

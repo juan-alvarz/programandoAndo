@@ -86,8 +86,7 @@ export default function CreateCourse() {
   const handleDeleteSelect = (value) => {
     const coursesFilter = course.filter((v) => v !== value);
     setCourse(coursesFilter);
-  };
-
+  }; 
   // console.log(optionList);
   let pattern =
     /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
