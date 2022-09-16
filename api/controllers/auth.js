@@ -91,9 +91,9 @@ const gitHubCreate = async (req, res, next) => {
       user,
     };
     sendConfirmationEmail(user.username, user.email, user.confirmationCode);
-    res.send(data);
+    res.redirect('http://localhost:3000')    
   } else {
-    if (find.status != "active") {
+    if (find.status !== "active") {
       return handleHtppError(
         res,
         "Pending Account. Please Verify Your Email!",
@@ -108,7 +108,7 @@ const gitHubCreate = async (req, res, next) => {
     res.cookie(COOKIE_NAME, dataGithub.token);
 
     // console.log(dataGithub)
-    res.redirect("http://localhost:3000/");
+    res.redirect('http://localhost:3000');
   }
 };
 
