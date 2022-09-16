@@ -73,40 +73,10 @@ function Courses() {
     return object;
   };
 
-
   //-----------------------------------------------
 
-  
-
-    
-
-    
-
-    
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
   return (
-    <div style={{backgroundColor: 'rgb(198, 198, 198)'}}>
+    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
       <NavBar />
       <div>
         {cursosfiltrados.length > 0 ? (
@@ -128,7 +98,7 @@ function Courses() {
                 <div>
                   {elemento.courses.map((el, index) => {
                     return (
-                      <div key={index}>
+                      <div key={index} className='lg:mx-32 lg:border-t-2 lg:py-5 lg:my-5'>
                         <CourseDetail element={el}></CourseDetail>
                         <div>
                           <Videos

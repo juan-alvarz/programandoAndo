@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import {
-  getVideoById,
-  clearVideo,
-  getCourse,
-  getForoById,
-  updateForo,
-} from "../redux/actions";
+import { useParams, useNavigate } from "react-router-dom";
+import { getVideoById, clearVideo, getCourse, getForoById, updateForo, updateDeleteCommentorAnswer } from "../redux/actions";
 import NavBar from "./NavBar";
 import { Videos } from "./Videos";
-import Loader from "./Loader";
+import Swal from "sweetalert2";
+import { useForm } from 'react-hook-form'
 
 export default function Video() {
+  const { video, course, foro } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const { idCourse } = useParams();
-  const { idUser } = useParams();
-  const { video, course, foro } = useSelector((state) => state.programandoando);
+  const navigate = useNavigate();
+  const {register, formState: {errors}, handleSubmit} = useForm();
+
+  const usuario = window.localStorage.getItem('user')
+  let userObj = JSON.parse(usuario);
+
+  const [contador, setContador] = useState(1)
+  const [state, setState] = useState({ input1: "", input2: "" })
+
   const dispatch = useDispatch();
 
-  let userLocal = window.localStorage.getItem("user");
-  let userObj = JSON.parse(userLocal);
+  useEffect(() => {
+    dispatch(getVideoById(idVideo));
+    dispatch(getCourse(idCourse));
+  }, [idVideo]);
 
+<<<<<<< HEAD
   // COMENTARIO
   useEffect(() => {
     dispatch(getVideoById(idVideo));
@@ -33,10 +39,21 @@ export default function Video() {
   }, [video.foro]);
 
   const [valueComment, setvalueComment] = useState("");
+=======
+  useEffect(() => {
+    dispatch(getForoById(video.foro));
+  }, [video.foro, contador]);
 
+   useEffect(() => {
+     dispatch(getForoById(video.foro));
+   }, [video.foro, contador]);
+>>>>>>> 980efbe3d3249f61272c28da2caff43a1a199988
+
+  // COMENTARIO
   const [commentario, setCommentario] = useState({
     content: "",
     authorComment: userObj.user._id,
+<<<<<<< HEAD
     commentId: "", // este siempre sale vakcio
   });
 
@@ -46,23 +63,69 @@ export default function Video() {
       ...commentario.content,
       [e.target.name]: e.target.value,
     });
+=======
+    commentId: "", // este siempre sale vacio che 
+  });
+
+  function handleChange(e) {
+    setCommentario({...commentario, content: e.target.value,});
+    setState({...state, [e.target.name]: e.target.value,})
+>>>>>>> 980efbe3d3249f61272c28da2caff43a1a199988
   }
 
-  function handleSubmit(e) {
+  function handleSubmitComment(e) {
     e.preventDefault();
-    console.log(commentario);
     dispatch(updateForo(video.foro, commentario));
+<<<<<<< HEAD
     setvalueComment("");
   }
 
   // RESPUESTA
+=======
+    setState({input2: ""})
+    setContador(contador+1)
+  }
+
+  // DELETE COMENTARIO
+
+   const [deleteComment, setDeleteComment] = useState({commentId: "", change: "deleteComment" });
+
+  //const deleteComment = {commentId: "6323a1c671576a73f18bd911", change: "deleteComment" }
+  
+//   let elimina = deleteComment4()
+
+// let elimina2 = handleChangeDelete()
+
+// let eliminar = {...elimina, elimina2}
+
+
+  function deleteComment4(e, id){
+    e.preventDefault()
+    //return deleteComment
+       dispatch(updateDeleteCommentorAnswer(video.foro, {commentId: id, change: "deleteComment"})) //.then(setContador(contador + 1))
+       setContador(contador+1)
+  }
+
+  function deleteAnswer(e, id, idAnswer){
+    e.preventDefault()
+    //return deleteComment
+       dispatch(updateDeleteCommentorAnswer(video.foro, {commentId: id, change: "deleteAnswer", idAnswer: idAnswer})) //.then(setContador(contador + 1))
+       setContador(contador+1)
+  }
+
+
+
+  // RESPUESTA 
+>>>>>>> 980efbe3d3249f61272c28da2caff43a1a199988
   const [respuesta, setRespuesta] = useState({
     content: "",
     authorComment: userObj.user._id,
     commentId: "",
+    change: "respuesta"
   });
 
   function handleChangeRespuesta(e) {
+<<<<<<< HEAD
     setRespuesta({
       ...respuesta,
       commentId: e.target.dataset.commentid,
@@ -79,12 +142,28 @@ export default function Video() {
   }
 
   console.log(foro);
+=======
+    setRespuesta({...respuesta, commentId: e.target.dataset.commentid,  content: e.target.value, });
+    setState({ ...state, input1: e.target.value})
+  }
+  
+  function handleSubmitRespuesta(data, e) {
+    e.target.reset()
+    e.preventDefault();
+    dispatch(updateForo(video.foro, respuesta)) 
+     setState({ input1: ""})
+     setContador(contador + 1)
+  }
+
+console.log(foro)
+>>>>>>> 980efbe3d3249f61272c28da2caff43a1a199988
 
   if (!Object.keys(course).length) {
-    return <Loader />;
+    return <h2>Cargando Video!</h2>;
   } else {
     return (
-      <div style={{ width: "100%" }}>
+      usuario ?
+      <div style={{ width: "100%", backgroundColor: 'rgb(240, 240, 240)', height: '100vh' }}>
         <NavBar />
         <div>
           {/* Video */}
@@ -151,10 +230,17 @@ export default function Video() {
           {/* Courses */}
           <Videos videos={course.videos} idCourse={idCourse} />
         </div>
+<<<<<<< HEAD
         {/* <div>
+=======
+        FORO FUNCIONAL
+        <div>
+          <form onSubmit={handleSubmit(handleSubmitRespuesta)}> 
+>>>>>>> 980efbe3d3249f61272c28da2caff43a1a199988
           {Object.keys(foro).length > 0 ? (
             foro.comments.map((comment) => {
               <ol>
+<<<<<<< HEAD
                 <h2>{comment.content}</h2>
               </ol>;
             })
@@ -216,7 +302,83 @@ export default function Video() {
           Send
         </button>
         <h1>EL DE ARRIBA ES UN INPUT PARA UN COMENTARIO, NO UNA RESPUESTA</h1>
+=======
+                <br></br>
+                <h1>abajo un nuevo comentario</h1>
+              <h2>ESTE ES EL COMENTARIO: -- {comment.content}</h2> 
+              <h2>Autor  --- {comment.authorComment? comment.authorComment.name: "no se encuenta master"}</h2>
+              <br></br>
+              <h3>{comment.answers?.map(
+                (answer) => 
+                <ol>
+                <h2> -- ESTA ES UNA ANSWER: {answer.content}</h2>
+                <h1>Author de la respuesta: {answer.authorComment.name? <h1>Hola</h1>: <h1>No sirve</h1> }</h1>
+                {answer.authorComment._id === userObj.user._id? <button
+                 className="button"
+                 type="submit"
+                onClick={(e) => deleteAnswer(e, comment._id, answer._id)}
+                >Eliminar respuesta</button>: ""}
+          </ol>
+              )}
+              </h3>
+              <br></br>
+          <h3>Comentar</h3>    <input
+            type="text"
+            placeholder="Comment..."
+            data-commentid={comment._id}
+            name="hola"
+            onChange={(e) => handleChangeRespuesta(e)}
+            />
+          <button
+            className="button"
+            type="submit"
+           onClick={(e) => handleSubmitRespuesta(e)}
+         disabled={state.input1? "": true}
+            > 
+           Send Comment</button>  
+           {comment.authorComment? userObj.user._id === comment.authorComment._id?<button
+            className="button"
+            type="submit"
+           onClick={(e) => deleteComment4(e, comment._id)}
+            > 
+           Delete Comment</button> : "" : ""} 
+              </ol>) 
+          ) : (
+            <h2>No se cumplió master</h2>
+          )}
+          </form>
+          </div>
+        <br></br>
+        <br></br>
+       <h2>INPUT PARA ENVIAR UN COMENTARIO</h2> <input
+            type="text"
+            placeholder="Comment..."
+            value= {state.input2}
+            name= "input2"
+            onChange={(e) => handleChange(e)}
+          />
+           <button
+            className="button"
+            type="submit"
+            onClick={(e) => handleSubmitComment(e)}
+            disabled={state.input2? "": true}
+            >
+            Send Comment
+          </button>
+          <h1>EL DE ARRIBA ES UN INPUT PARA UN COMENTARIO, NO UNA RESPUESTA</h1>
+>>>>>>> 980efbe3d3249f61272c28da2caff43a1a199988
       </div>
-    );
+      : 
+      Swal.fire({
+        title: "Access to videos denied",
+        text: "You cannot login if you are not logged in. Please log in",
+        icon: "warning",
+        confirmButtonText: "Log in",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      })
+    )
   }
 }

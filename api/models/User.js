@@ -35,9 +35,11 @@ const UserSchema = new Schema(
     },
     country: {
       type: String,
+      default: "",
     },
     birthday: {
       type: Date,
+      default: Date.now(),
     },
     ownPath: [
       {
@@ -72,6 +74,14 @@ const UserSchema = new Schema(
     changePassCode: {
       type: String,
     },
+    pagePuntuation: {
+      type: Number,
+      default: 0,
+    },
+    pageOpinion: {
+      type: String,
+      default: ""
+    }
   },
   {
     timestamps: true,

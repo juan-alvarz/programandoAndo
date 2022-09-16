@@ -5,21 +5,23 @@ const mongooseDelete = require("mongoose-delete");
 
 const ForoSchema = new Schema(
   {
-    comments:  [
-        {
+    comments: [
+      {
+        authorComment: {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+        content: String,
+        answers: [
+          {
             authorComment: {
               type: Schema.Types.ObjectId,
-              ref: 'User',
-            }, 
+              ref: "User",
+            },
             content: String,
-            answers: [{ 
-              authorComment: {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-              }, 
-              content: String,
-            }]
-        }
+          },
+        ],
+      },
     ],
   },
   {
@@ -33,4 +35,3 @@ const ForoModel = model("Foro", ForoSchema);
 
 module.exports = ForoModel;
 //Esquema Foro
-

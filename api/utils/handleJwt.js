@@ -20,8 +20,8 @@ const uwuToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzE5YWI4MWRkM
 const verifyToken = async (tokenJwt) => {
   try {
     jwt.verify(tokenJwt, JWT_SECRET);
-    console.log("Token is real")
-    return
+    console.log("Token is real");
+    return;
   } catch (error) {
     console.log(error);
   }
@@ -31,9 +31,9 @@ verifyToken(uwuToken)
 const verifyEmailToken = async (email) => {
   const sign = jwt.sign(
     {
-      email,      
+      email,
     },
-    JWT_EMAIL_SECRET,   
+    JWT_EMAIL_SECRET
   );
   return sign;
 };
@@ -43,13 +43,12 @@ const verifyChangeToken = async (email) => {
     {
       email,
     },
-    JWT_EMAIL_SECRET, 
+    JWT_EMAIL_SECRET,
     {
-      expiresIn: "1h"
+      expiresIn: "1h",
     }
-  )
-  return changePassToken
-}
+  );
+  return changePassToken;
+};
 
-
-module.exports = { tokenSign,verifyEmailToken, verifyChangeToken };
+module.exports = { tokenSign, verifyEmailToken, verifyChangeToken };
