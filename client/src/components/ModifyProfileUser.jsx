@@ -4,11 +4,13 @@ import { countries } from "../utils/countries";
 import { levelEducation } from "../utils/levelEducation";
 import { preferences } from "../utils/preferences";
 import photoPerfil from "../utils/images/michi-cool.jpg";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { updateUser, getUsers, getUser } from "../redux/actions";
 import Swal from "sweetalert2";
 
-function PerfilUser() {
+function ModifyProfileUser(prop) {
   let userLocal = window.localStorage.getItem("user");
   let userObj = userLocal && JSON.parse(userLocal);
 
@@ -20,7 +22,7 @@ function PerfilUser() {
 
   useEffect(() => {
     dispatch(getUsers());
-    const id = async () => await users[0]._id;
+    const id = users[0]._id;
     dispatch(getUser(id));
   }, [dispatch, getUsers]);
 
@@ -220,6 +222,11 @@ function PerfilUser() {
   function handlePassTwo() {
     setPassTwo(passTwo === "password" ? "text" : "password");
   }
+
+  const handleF5 = () => {
+    window.location.href = window.location.href;
+    return false;
+  };
 
   return (
     <section
@@ -458,7 +465,11 @@ function PerfilUser() {
                 />
               </div>
 
-              <button className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+              <button
+                className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                // type="button"
+                // onClick={handleF5}
+              >
                 <span>Save</span>
               </button>
             </form>
@@ -469,4 +480,4 @@ function PerfilUser() {
   );
 }
 
-export default PerfilUser;
+export default ModifyProfileUser;

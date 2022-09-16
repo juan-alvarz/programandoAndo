@@ -30,8 +30,12 @@ import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
 // perfil
-import PerfilUser from "./components/PerfilUser";
-import PerfilAdmin from "./components/PerfilUser";
+import ModifyProfileUser from "./components/ModifyProfileUser";
+import ModifyProfileAdmin from "./components/ModifyProfileAdmin";
+import ProfileAdmin from "./components/ProfileAdmin";
+import ProfilelUser from "./components/ProfilelUser";
+// Cloudinary
+import Cloudinary from "./components/Cloudinary";
 
 function App() {
   return (
@@ -70,8 +74,11 @@ function App() {
           <Route path="*" element={<Error404 />} />
 
           {/* Perfil de usuario */}
-          <Route path="/perfilUser" element={<PerfilUser />} />
-          <Route path="/perfilAdmin" element={<PerfilAdmin />} />
+          <Route path="/profileUser" element={<ProfilelUser />} />
+          <Route path="/profileAdmin" element={<ProfileAdmin />} />
+          <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
+          <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
+          <Route path="/cloudinary" element={<Cloudinary />} />
         </Routes>
       </div>
     </BrowserRouter>
