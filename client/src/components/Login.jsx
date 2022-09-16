@@ -4,12 +4,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ver from "../utils/images/ver.png";
 import ocultar from "../utils/images/ojo.png";
+import { Link } from "react-router-dom";
 import { userLogin } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 import Google from "./Google";
+import GitHub from "./GitHub";
 import NavBar from "./NavBar";
 import Swal from "sweetalert2";
-
 
 export default function Login() {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ export default function Login() {
             icon: "success",
             timer: 2000,
             showConfirmButton: false,
-          })
+          });
         } else {
           setError("login incorrecto");
           setTimeout(function () {
@@ -88,7 +89,7 @@ export default function Login() {
             icon: "error",
             timer: 2000,
             showConfirmButton: false,
-          })
+          });
         }
       }, 500);
     }
@@ -105,10 +106,16 @@ export default function Login() {
   };
 
   return (
-    <div style={{backgroundColor: 'rgb(240, 240, 240)'}} className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-      <NavBar/>
+    <div
+      style={{ backgroundColor: "rgb(240, 240, 240)" }}
+      className="relative flex flex-col justify-center min-h-screen overflow-hidden"
+    >
+      <NavBar />
       <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
-        <h1 style={{ color: "rgb(17, 52, 82)" }} className="text-3xl font-semibold text-center text-black uppercase">
+        <h1
+          style={{ color: "rgb(17, 52, 82)" }}
+          className="text-3xl font-semibold text-center text-black uppercase"
+        >
           Sign in
         </h1>
         <form className="mt-6">
@@ -149,13 +156,13 @@ export default function Login() {
               <small className="text-red-600 font-bold">{passError}</small>
             </div>
           </div>
-          <a
-            href="#"
+          <Link
+            to="/forgetPassword"
             className="text-xs text-purple-600 hover:underline"
             style={{ color: "#A84C65" }}
           >
             Forget Password?
-          </a>
+          </Link>
           <div className="mt-6">
             <button
               className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
@@ -172,9 +179,9 @@ export default function Login() {
           <div className="absolute px-5 bg-white font-bold">Or</div>
         </div>
         <div className="flex mt-4 gap-x-2">
-          <Google/>
+          <Google />
         </div>
-
+        <GitHub/>
         <p className="mt-8 text-xs font-medium text-center text-black">
           Don't have an account?
           <a

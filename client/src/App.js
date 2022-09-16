@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AboutUs from "./components/AboutUs";
 import Home from "./components/Home";
 import LandingPage from "./components/LandingPage";
-import NavBar from "./components/NavBar";
+import RankUserHome from "./components/RankUserHome";
 import Courses from "./components/Courses";
 import CreateCourse from "./components/CreateCourse";
 import Error404 from "./components/Error404";
@@ -29,6 +29,22 @@ import CancelDonation from "./components/CancelDonation";
 import SuccessDonation from "./components/SuccessDonation";
 import Welcome from "./components/Welcome";
 import Settings from "./components/panelAdmin/Settings";
+import InternalChat from "./components/InternalChat";
+import Chat from "./components/Chat";
+import UserCreatedCourse from "./components/UserCreatedCourse";
+import AgeCharts from "./components/AgeCharts";
+import UserScoringCourse from "./components/UserScoringCourse";
+
+import RankUserDonation from "./components/RankUserDonation";
+import { UserRank } from "./components/UserRank";
+// perfil
+import ModifyProfileUser from "./components/ModifyProfileUser";
+import ModifyProfileAdmin from "./components/ModifyProfileAdmin";
+import ProfileAdmin from "./components/ProfileAdmin";
+import ProfilelUser from "./components/ProfilelUser";
+// Cloudinary
+import Cloudinary from "./components/Cloudinary";
+import { FolderUser } from "./components/FolderUser";
 
 function App() {
   return (
@@ -62,9 +78,32 @@ function App() {
           <Route path="/setting" element={<Settings />} />
           <Route path="/execute-payment" element={<SuccessDonation />} />
           <Route path="/cancel-payment" element={<CancelDonation />} />
-          <Route path="*" element={<Error404 />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/confirm/:confirmationCode" element={<Welcome />} />
+          <Route path="/internalChat" element={<InternalChat />} />
+
+          <Route path="/rankhome" element={<RankUserHome />} />
+          <Route
+            path="/rankusers"
+            element={<RankUserDonation></RankUserDonation>}
+          />
+          <Route path="/userrank" element={<UserRank></UserRank>} />
+          <Route path="/folderUser" element={<FolderUser></FolderUser>} />
+          <Route
+            path="/usercreated"
+            element={<UserScoringCourse></UserScoringCourse>}
+          />
+          <Route path="*" element={<Error404 />} />
+
+          {/* Perfil de usuario */}
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/createdCourse" element={<UserCreatedCourse />} />
+          <Route path="/AgeChart" element={<AgeCharts />} />
+          <Route path="/profileUser" element={<ProfilelUser />} />
+          <Route path="/profileAdmin" element={<ProfileAdmin />} />
+          <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
+          <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
+          <Route path="/cloudinary" element={<Cloudinary />} />
         </Routes>
       </div>
     </BrowserRouter>

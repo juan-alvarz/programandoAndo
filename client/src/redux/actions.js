@@ -4,6 +4,7 @@ import {
   getCourses,
   getCourseById,
   createCourse,
+  favoriteCourse,
   getAllSchool,
   getSchoolId,
   createSchool,
@@ -12,6 +13,8 @@ import {
   createUser,
   getVideos,
   getVideo,
+  getForo,
+  getForos,
   createVideo,
   clearVideo,
   getCourseByName,
@@ -25,6 +28,7 @@ import {
   getCourse3h,
   getSession,
   getFavoriteCourse,
+  getScoringCourse,
   getNotifications,
 } from "./slice";
 
@@ -85,11 +89,22 @@ export const getCourse = (id) => (dispatch) => {
     .then((res) => dispatch(getCourseById(res.data)))
     .catch((e) => console.log(e));
 };
+export const favorite = (course) => (dispatch) => {
+  dispatch(favoriteCourse(course))
+};
+
 
 export const getFavorites = (id) => async (dispatch) => {
   const user = await axios.get(`http://localhost:3001/api/users/${id}`);
   console.log(user);
   dispatch(getFavoriteCourse(user.data.favorites));
+};
+
+export const getScoring = (id) => async (dispatch) => {
+  const user = await axios.get(`http://localhost:3001/api/users/${id}`);
+  console.log("hola")
+  console.log(user.data.scoring)
+  dispatch(getScoringCourse(user.data.scoring));
 };
 
 // export const createsCourse = (payload) => async (dispatch) => {
@@ -120,7 +135,6 @@ export const createsCourse = (payload) => async (dispatch) => {
     .post("http://localhost:3001/api/courses", payload)
     .then(() => {
       Swal.fire({
-        title: "Create Video",
         text: "Create Video Successfully",
         icon: "success",
         confirmButtonText: "OK",
@@ -182,6 +196,14 @@ export const createsSchool = (payload) => async (dispatch) => {
   return response;
 };
 
+export const createSchoolUser = (payload, id) => async (dispatch) => {
+  const response = await axios.post(
+    `http://localhost:3001/api/schools/${id}`,
+    payload
+  );
+  return response;
+};
+
 // ============================ Users ============================
 export const getUsers = () => (dispatch) => {
   axios
@@ -228,7 +250,20 @@ export const googleUserLogin = (payload) => async (dispatch) => {
     .catch((e) => console.log(e));
 
   return response;
+  
 };
+export const gitHubLogin = (payload) => async (dispatch) => {
+  const response = await axios
+    .get("http://localhost:3001/api/auth/github_login")
+    .then((res) => {
+      dispatch(getSession(res.data));
+      window.localStorage.setItem("user", JSON.stringify(res.data));
+    })
+    .catch((e) => console.log(e));
+
+  return response;
+}
+
 export const verifyUser = async (code) => {
   const response = await axios.get(
     `http://localhost:3001/api/users/ath/confirm/${code}`
@@ -288,6 +323,36 @@ export const getVideoByName = (name) => (dispatch) => {
     .then((res) => dispatch(getVideosByName(res.data)))
     .catch((e) => console.log(e));
 };
+
+// =========================== Foro del video, utiliza el id de foro que trae el video ===================
+
+export const getForoById = (id) => (dispatch) => {
+  axios 
+    .get(`http://localhost:3001/api/foros/${id}`)
+    .then((res) => dispatch(getForo(res.data)))
+    .catch((e) => console.log(e));
+}
+
+export const getAllForos = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/foros")
+    .then((res) => dispatch(getForos(res.data)))
+    .catch((e) => console.log(e));
+}
+
+export const updateForo = (idForo ,payload) => (dispatch) => {
+ axios
+  .put(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
+
+export const updateDeleteCommentorAnswer = (idForo, payload) => (dispatch) => {
+  axios
+  .patch(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
 
 // ============================ Order ============================
 export function orderByName(payload) {
@@ -489,10 +554,4 @@ export const createNotification = (payload) => async (dispatch) => {
   return response;
 };
 
-// ============================ Clear ============================
-// export function clearFilter() {
-//   return {
-//     type: "CLEAR_FILTER",
-//     payload: { array: [], object: {} },
-//   };
-// }
+

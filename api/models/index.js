@@ -5,6 +5,7 @@ const models = {
   videoModel: require("./Video"),
   notificationModel: require("./Notifications"),
   foroModel: require("./Foro"),
+  chatModel: require("./Chat.js"),
 };
 
 module.exports = models;

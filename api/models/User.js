@@ -13,9 +13,36 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
     },
+    authorizeNotifications: {
+      type: Boolean,
+    },
     password: {
       type: String,
       select: false,
+    },
+    biography: {
+      type: String,
+    },
+    preferences: {
+      type: String,
+      enum: [
+        "front-end",
+        "back-end",
+        "databases",
+        "allSchools",
+        "data science",
+        "MERN route",
+        "PERN route",
+        "design UX/UI",
+      ],
+      default: "allSchools",
+    },
+    isWorking: {
+      type: Boolean,
+      default: false,
+    },
+    studyStatus: {
+      type: String,
     },
     schools: [
       {
@@ -76,8 +103,21 @@ const UserSchema = new Schema(
     changePassCode: {
       type: String,
     },
+    chats: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Chat",
+      },
+    ],
+    pagePuntuation: {
+      type: Number,
+      default: 0,
+    },
+    pageOpinion: {
+      type: String,
+      default: "",
+    },
   },
-
   {
     timestamps: true,
     versionKey: false,

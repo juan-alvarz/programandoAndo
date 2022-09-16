@@ -14,12 +14,12 @@ export const Paginated = ({
   }
   // console.log(numeroPaginas);
   return (
-    <div >
+    <div>
       <nav>
         <ul className="flex">
           <li>
             <button
-              style={{width: 70}}
+              style={{ width: 70 }}
               className="py-1 px-2 ml-0 text-sm text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
               onClick={prev}
             >
@@ -31,7 +31,7 @@ export const Paginated = ({
               return (
                 <li key={numero}>
                   <button
-                    style={{backgroundColor: 'rgb(17, 52, 82)'}}
+                    style={{ backgroundColor: "rgb(17, 52, 82)" }}
                     className="pb-1 px-2 text-gray-200 bg-gray-900 border border-gray-300 hover:bg-gray-100 hover:text-gray-400"
                     onClick={() => setPagina(numero)}
                   >
@@ -55,7 +55,7 @@ export const Paginated = ({
           {numeroPaginas.length < 2 ? (
             <li>
               <button
-                style={{width: 70}}
+                style={{ width: 70 }}
                 className="py-1 px-2 text-sm text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                 onClick={next}
                 disabled="false"
@@ -66,7 +66,7 @@ export const Paginated = ({
           ) : (
             <li>
               <button
-                style={{width: 70}}
+                style={{ width: 70 }}
                 className="py-1 px-2 text-sm text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                 onClick={next}
               >
