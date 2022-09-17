@@ -93,7 +93,8 @@ const getUserById = async (req, res, next) => {
             select: "username",
           },
         },
-      });
+      })
+      .populate("ownPath");
     /* if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);
@@ -280,7 +281,7 @@ const submitChangePass = async (req, res, next) => {
     handleHtppError(res, "Fail in the query", 422);
   }
   res.status(200).send("Password changed succesfully");
-  return res.send(data);
+  // return res.send(data);
 };
 
 const verifyUser = async (req, res, next) => {
@@ -372,6 +373,7 @@ const updateUser = async (req, res, next) => {
           scoring: body.scoring
             ? [...user.scoring, body.scoring]
             : user.scoring,
+          image: {url: body.url,public_id: body.public_id}
         }
       );
       if (!data.modifiedCount) {

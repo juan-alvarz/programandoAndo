@@ -14,6 +14,7 @@ const {
   successDonation,
   updateFavorites,
   deleteFavorites,
+  changePasswordRequest
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -32,9 +33,11 @@ router.get("/:id", validatorGetUsers, getUserById);
 
 router.get("/auth/confirm/:confirmationCode", verifyUser);
 
-router.get("/auth/confirm/:changePassCode", submitChangePass);
+router.post("/auth/confirm/:changePassCode", submitChangePass);
 
 router.post("/register", validatorCreateUser, createUser);
+
+router.post("/forget_password",changePasswordRequest)
 
 router.post("/login", validatorLoginUser, userLogin);
 
