@@ -32,7 +32,6 @@ import Settings from "./components/panelAdmin/Settings";
 import InternalChat from "./components/InternalChat";
 import Chat from "./components/Chat";
 import UserCreatedCourse from "./components/UserCreatedCourse";
-import AgeCharts from "./components/AgeCharts";
 import UserScoringCourse from "./components/UserScoringCourse";
 
 import RankUserDonation from "./components/RankUserDonation";
@@ -45,7 +44,12 @@ import ProfilelUser from "./components/ProfilelUser";
 // Cloudinary
 import Cloudinary from "./components/Cloudinary";
 import { FolderUser } from "./components/FolderUser";
+<<<<<<< HEAD
 import SubmitPassword from "./components/SubmitPassword";
+=======
+import AgeCharts from "./components/panelAdmin/AgeCharts";
+import CountryCharts from "./components/panelAdmin/CountryCharts";
+>>>>>>> Fran
 
 function App() {
   return (
@@ -99,7 +103,8 @@ function App() {
           {/* Perfil de usuario */}
           <Route path="/chat" element={<Chat />} />
           <Route path="/createdCourse" element={<UserCreatedCourse />} />
-          <Route path="/AgeChart" element={<AgeCharts />} />
+          <Route path="/ageChart" element={<AgeCharts/>}/>
+          <Route path="/countryChart" element={<CountryCharts/>}/>
           <Route path="/profileUser" element={<ProfilelUser />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
           <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />

@@ -121,7 +121,7 @@ function CoursesPA() {
       <Sidebar />
       <div
         className="w-full h-full flex justify-around"
-        style={{ backgroundColor: "#C9C4B8" }}
+        style={{ backgroundColor: "rgb(240, 240, 240)" }}
       >
         {/* Create School */}
         <div>

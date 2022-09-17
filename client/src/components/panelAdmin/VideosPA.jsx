@@ -174,14 +174,14 @@ function VideosPA() {
       <Sidebar />
       <div
         className="w-full h-full flex justify-around"
-        style={{ backgroundColor: "#C9C4B8" }}
+        style={{ backgroundColor: "rgb(240, 240, 240)" }}
       >
         {/* Create School */}
         <div>
           {/* <NavbarPA /> */}
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               onSubmit={handleSubmit(onSubmit)}
               action="#"
               method="POST"
@@ -196,7 +196,7 @@ function VideosPA() {
               <input
                 name="name"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Name"
                 {...register("name", {
                   required: true,
@@ -223,7 +223,7 @@ function VideosPA() {
               <input
                 name="author"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Author"
                 {...register("author", {
                   required: true,
@@ -239,7 +239,7 @@ function VideosPA() {
               <input
                 name="duration"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Duration"
                 {...register("duration", {
                   required: true,
@@ -263,7 +263,7 @@ function VideosPA() {
                   value={selectedDifficult}
                   onChange={handleSelectDifficult}
                   isSearchable={false}
-                  className="font-semibold"
+                  className="font-light"
                 />
               </div>
 
@@ -273,7 +273,7 @@ function VideosPA() {
               <input
                 name="profile"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
                 {...register("profile", {
                   required: true,
@@ -296,7 +296,7 @@ function VideosPA() {
               <input
                 name="url"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
                 {...register("url", {
                   required: true,
@@ -319,7 +319,7 @@ function VideosPA() {
               <textarea
                 // style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -343,7 +343,7 @@ function VideosPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
@@ -359,9 +359,10 @@ function VideosPA() {
                 value={videosSelectValue}
                 onChange={handleSelectEdit}
                 isSearchable={true}
+                className="font-light"
               />
 
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 className="text-gray-700 font-bold pt-5 text-center text-xl">
                 Form to Edit
               </h2>
               <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -371,7 +372,7 @@ function VideosPA() {
                 name="name"
                 type="text"
                 value={render.name}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Name"
                 onChange={(e) => handleChange(e)}
               />
@@ -382,7 +383,7 @@ function VideosPA() {
                 name="author"
                 type="text"
                 value={render.author}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Author"
                 onChange={(e) => handleChange(e)}
               />
@@ -393,7 +394,7 @@ function VideosPA() {
                 name="duration"
                 type="text"
                 value={render.duration}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Duration"
                 onChange={(e) => handleChange(e)}
               />
@@ -410,7 +411,7 @@ function VideosPA() {
                 value={selectedDifficultEdit}
                 onChange={handleSelectDifficultEdit}
                 isSearchable={false}
-                className="font-semibold"
+                className="font-light"
               />
               <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Profile Video
@@ -418,7 +419,7 @@ function VideosPA() {
               <input
                 name="profile"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
                 value={render.profile}
                 onChange={(e) => handleChange(e)}
@@ -430,7 +431,7 @@ function VideosPA() {
               <input
                 name="url"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
                 value={render.url}
                 onChange={(e) => handleChange(e)}
@@ -444,7 +445,7 @@ function VideosPA() {
                 style={{ resize: "none" }}
                 name="description"
                 value={render.description}
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 onChange={(e) => handleChange(e)}
               />
@@ -463,7 +464,7 @@ function VideosPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               action=""
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
@@ -478,6 +479,7 @@ function VideosPA() {
                 value={videoDelete}
                 onChange={handleSelectDelete}
                 isSearchable={true}
+                className="font-light"
               />
 
               <div className="flex justify-end items-center my-4 mt-10">
