@@ -126,6 +126,14 @@ const UserSchema = new Schema(
       type: String,
       default: "",
     },
+    image: {
+      url: {
+        type: String
+      },
+      public_id: {
+        type: String
+      }
+    }
   },
   {
     timestamps: true,

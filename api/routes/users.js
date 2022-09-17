@@ -38,6 +38,8 @@ router.post("/auth/modify/:changePassCode", submitChangePass);
 
 router.post("/register", validatorCreateUser, createUser);
 
+router.post("/forget_password",changePasswordRequest)
+
 router.post("/login", validatorLoginUser, userLogin);
 
 router.post(
