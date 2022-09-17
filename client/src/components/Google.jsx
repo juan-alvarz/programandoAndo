@@ -4,6 +4,8 @@ import jwt_decode from "jwt-decode";
 import { createsUser, googleUserLogin } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 export default function Google() {
   const navigate = useNavigate();
@@ -22,7 +24,16 @@ export default function Google() {
     setUser(userObject);
 
     document.getElementById("googleSign").hidden = true;
-    navigate('/')
+    Swal.fire({
+      title: "Successful login",
+      text: "You are being redirected to the home",
+      icon: "success",
+      timer: 2000,
+      showConfirmButton: false,
+    })
+    setTimeout(function () {
+      navigate("/");
+    }, 2000);
   };
 
   console.log(user);

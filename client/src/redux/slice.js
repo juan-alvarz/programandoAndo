@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const slice = createSlice({
   name: "programandoando",
   initialState: {
+    userBanned: [],
     stateFilter: [],
     courses: [],
     course: {},
@@ -12,9 +13,12 @@ export const slice = createSlice({
     user: {},
     videos: [],
     video: {},
+    foro: {},
+    foros: [],
     filters: [],
     favoritesUser: [],
     notifications: [],
+    scoring: [],
   },
   reducers: {
     // ========= Courses ===========
@@ -45,7 +49,7 @@ export const slice = createSlice({
     },
     //
     getCoursesByAZ: (state, action) => {
-      state.filters = action.payload.sort(function (a, b) {
+      state.filters = action.payload.sort(function(a, b) {
         if (a.name.toUpperCase() > b.name.toUpperCase()) {
           return 1;
         }
@@ -57,7 +61,7 @@ export const slice = createSlice({
       state.courses = action.payload;
     },
     getCoursesByZA: (state, action) => {
-      state.filters = action.payload.sort(function (a, b) {
+      state.filters = action.payload.sort(function(a, b) {
         if (a.name.toUpperCase() > b.name.toUpperCase()) {
           return -1;
         }
@@ -74,6 +78,9 @@ export const slice = createSlice({
 
     getFavoriteCourse: (state, action) => {
       state.favoritesUser = action.payload;
+    },
+    getScoringCourse: (state, action) => {
+      state.scoring = action.payload;
     },
     createCourse: (state) => {
       return { ...state };
@@ -128,6 +135,14 @@ export const slice = createSlice({
     },
     getVideosByName: (state, action) => {
       state.courses = action.payload;
+    },
+
+    //======== foros ==============
+    getForos: (state, action) => {
+      state.foros = action.payload;
+    },
+    getForo: (state, action) => {
+      state.foro = action.payload;
     },
     // getSchoolsByName: (state, action) => {
     //   state.courses = action.payload;
@@ -192,6 +207,10 @@ export const slice = createSlice({
     getNotifications: (state, action) => {
       state.notifications = action.payload;
     },
+    // ============== Banned ==========================
+    getAllUsersBanned: (state, action) => {
+      state.userBanned = action.payload;
+    },
   },
 });
 
@@ -207,6 +226,8 @@ export const {
   createUser,
   getVideos,
   getVideo,
+  getForo,
+  getForos,
   createVideo,
   clearVideo,
   orderFilter,
@@ -221,6 +242,7 @@ export const {
   getCourse3h,
   getSession,
   getFavoriteCourse,
+  getScoringCourse,
   deleteSchool,
   deleteCourse,
   deleteVideo,
@@ -231,6 +253,8 @@ export const {
   uppdateCourse,
   uppdateVideo,
   uppdateUser,
+  favoriteCourse,
+  getAllUsersBanned,
 } = slice.actions;
 
 export default slice.reducer;

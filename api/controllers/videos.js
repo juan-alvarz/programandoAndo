@@ -15,7 +15,7 @@ const getVideos = async (req, res) => {
       }
       return res.json(data);
     }
-    const data = await Video.find({});
+    const data = await Video.find({})
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });

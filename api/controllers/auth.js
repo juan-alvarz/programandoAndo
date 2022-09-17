@@ -70,7 +70,7 @@ const gitHubData = async (req, res, next) => {
 
 const gitHubCreate = async (req, res, next) => {
   const { name, username, email, path } = req.body;
-  // console.log(req.body);
+  console.log(req.body);
 
   let find = await usersModel.findOne({ email });
   // console.log(find);
@@ -91,9 +91,9 @@ const gitHubCreate = async (req, res, next) => {
       user,
     };
     sendConfirmationEmail(user.username, user.email, user.confirmationCode);
-    res.send(data);
+    res.redirect('http://localhost:3000')    
   } else {
-    if (find.status != "active") {
+    if (find.status !== "active") {
       return handleHtppError(
         res,
         "Pending Account. Please Verify Your Email!",
@@ -105,13 +105,10 @@ const gitHubCreate = async (req, res, next) => {
       user: find,
     };
 
-    res.cookie(COOKIE_NAME, dataGithub.token, {
-      httpOnly: true,
-      domain: "localhost",
-    });
+    res.cookie(COOKIE_NAME, dataGithub.token);
 
     // console.log(dataGithub)
-    res.redirect("http://localhost:3000/");
+    res.redirect('http://localhost:3000');
   }
 };
 

@@ -36,8 +36,7 @@ function Courses() {
   }
   console.log(cursosfiltrados)
 
-  
-
+    
   // -------------------------------
   let durationCourse = (course) => {
     let temporaly = course.map((e) => e.duration);
@@ -77,7 +76,7 @@ function Courses() {
 
   return (
     <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
-      <NavBar />
+      <NavBar/>
       <div>
         {cursosfiltrados.length > 0 ? (
           <div >

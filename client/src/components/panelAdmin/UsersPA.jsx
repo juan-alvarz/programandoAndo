@@ -6,23 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
-  getAllVideos,
-  deleteVideoById,
-  createsVideo,
   getUsers,
-  getUser,
   createsUser,
   deleteUserById,
-  deleteNotificationById,
   createNotification,
 } from "../../redux/actions";
 
 // import NavbarPA from "./NavbarPA";
 
-
 function CoursesPA() {
   const dispatch = useDispatch();
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const { users } = useSelector((state) => state.programandoando);
 
   useEffect(() => {
@@ -60,38 +54,14 @@ function CoursesPA() {
     }).then((result) => {
       if (result.isConfirmed) {
         // navigate("/userspa");
-        window.location.reload()
+        window.location.reload();
       }
     });
   };
 
-  // function handleSelectPrueba(value) {
-  //   const find = course.find((i) => i.value === value.value);
-  //   if (!find) {
-  //     setCourse(value);
-  //  setValue(
-  //    "videos",
-  //    [...video, value].map((e) => e.value)
-  //  );
-  //     console.log(course);
-  //   }
-  // }
-
-  // const optionListCourses = courses?.map((course) => {
-  //   return {
-  //     value: course._id,
-  //     label: course.name,
-  //   };
-  // });
-
   // const [course, setCourse] = useState([]);
   const [videoDelete, setVideoDelete] = useState();
   function handleSelectDelete(data) {
-    // const find = course.find((i) => i.value === data.value);
-    // if (!find) {
-    //   setCourse(data);
-    //   console.log(course);
-    // }
     setVideoDelete(data);
   }
 
@@ -100,53 +70,35 @@ function CoursesPA() {
     setEditCourse(data);
   }
 
-  // Create Course
-  // const [video, setVideo] = useState([]);
-  // function handleSelect(value) {
-  //   const find = video.find((i) => i.value === value.value);
-  //   if (!find) {
-  //     setVideo([...video, value]);
-  // setValue(
-  //   "videos",
-  //   [...video, value].map((e) => e.value)
-  // );
-  //     console.log(video);
-  //   }
-  // }
-  const handleCreateNotification = () =>{
-      const {name,description} = getValues()
-      const notification = {title: name, description}
-      // console.log(notification)
-      dispatch(createNotification(notification))
-      reset({        
-          name: "",
-          image: "",
-          URL: "",
-          description: "",
-        })
-      Swal.fire({
-        title: "Create Notification",
-        text: "Notification Created Successfully",
-        icon: "success",
-        confirmButtonText: "Back",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // navigate("/userspa");
-          window.location.reload()
-        }
-      });
-  }
+  const handleCreateNotification = () => {
+    const { name, description } = getValues();
+    const notification = { title: name, description };
+    // console.log(notification)
+    dispatch(createNotification(notification));
+    reset({
+      name: "",
+      image: "",
+      URL: "",
+      description: "",
+    });
+    Swal.fire({
+      title: "Create Notification",
+      text: "Notification Created Successfully",
+      icon: "success",
+      confirmButtonText: "Back",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // navigate("/userspa");
+        window.location.reload();
+      }
+    });
+  };
   const optionListUsers = users?.map((user) => {
     return {
       value: user._id,
       label: user.name,
     };
   });
-
-  // const handleDeleteSelect = (value) => {
-  //   const videoFilter = video.filter((v) => v !== value);
-  //   setVideo(videoFilter);
-  // };
 
   // ============ Delete =================
   const handleDeleteUser = (id) => {
@@ -159,10 +111,10 @@ function CoursesPA() {
     }).then((result) => {
       if (result.isConfirmed) {
         // navigate("/userspa");
-        window.location.reload()
+        window.location.reload();
       }
     });
-    setVideoDelete("Select User")
+    setVideoDelete("Select User");
   };
   return (
     <div className="text-2x1 font-semibold flex h-screen">
@@ -229,7 +181,6 @@ function CoursesPA() {
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
-                 
                 >
                   Send
                 </button>
@@ -267,7 +218,7 @@ function CoursesPA() {
           </div>
         </div>
 
-        {/* Delete School */}
+        {/* Delete User */}
         <div>
           <div className="h-screen">
             <form
@@ -298,19 +249,6 @@ function CoursesPA() {
                 </button>
               </div>
             </form>
-
-            {/* <div>
-              {videos.map((v, index) => (
-                <div key={index} className="w-60 my-10">
-                  <span
-                    className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                    onClick={() => handleDeleteSelect(v)}
-                  >
-                    {v.url}
-                  </span>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>

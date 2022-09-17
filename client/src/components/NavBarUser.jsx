@@ -5,9 +5,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink, useNavigate } from "react-router-dom";
 import { DetailSchool } from "./DetailSchool";
 import img from "../utils/images/LOGOCOMPLETOPA.png";
-import Notifications from './Notifications'
 import { getAllNotifications } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 
 
@@ -22,8 +22,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function NavBarUser() {
-
+function NavBarUser({delete_cookie}) {
+  console.log(DetailSchool)
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { notifications } = useSelector((state) => state.programandoando);
@@ -32,16 +32,40 @@ function NavBarUser() {
     dispatch(getAllNotifications());
   }, [dispatch]);
 
-  const handlelogout = (e) => {
+  const handlelogout = async (e) => {
     e.preventDefault();
 
     window.localStorage.removeItem("user");
+    delete_cookie("github-jwt")
     setTimeout(function () {
     
         navigate("/");
     }, 1000
     )
   }
+
+const duration = (props) => {
+
+  let today = new Date ()
+  let nowMillisec = today.getTime()
+  let notifMillisec = Date.parse(props)
+  let difMillisec = (nowMillisec - notifMillisec)
+
+  let seconds = (difMillisec / 1000).toFixed(0);
+  let minutes = (difMillisec / (1000 * 60)).toFixed(0);
+  let hours = (difMillisec / (1000 * 60 * 60)).toFixed(0);
+  let days = (difMillisec / (1000 * 60 * 60 * 24)).toFixed(0);
+
+  if (seconds < 60) {
+      return "a few moments ago";
+  } else if (minutes < 60) {
+      return minutes + " minutes ago";
+  } else if (hours < 24) {
+      return hours + " hours ago";
+  } else {
+      return days + " days"
+  }
+}
 
   return (
     <Disclosure
@@ -260,7 +284,7 @@ function NavBarUser() {
 </div> */}
                       
                       {/* Bell notification */}
-                      <Menu as="div" className="relative ml-3">
+                      <Menu as="div" className="relative ml-1">
                         <div>
                           <Menu.Button className="flex rounded-full mr-4 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open bell notification</span>
@@ -279,15 +303,19 @@ function NavBarUser() {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-72 origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <div style={{ backgroundColor: "rgb(201, 196, 184)"}} className="rounded-t-lg block py-2 px-4 font-medium text-center text-black-900">
+                                  Notifications
+                              </div>
                             {notifications.map( e => {
                               console.log(notifications)
                               return (
                                 <Menu.Item>
-                                  <div>
-                                    <div>{e.title}</div>
-                                    <div>{e.description}</div>
-                                  </div>
+                                    <div className="px-2 pt-1 pb-2 w-full border-t-2">
+                                      <div className="font-semibold text-sm mb-2 text-gray-900">{e.title}</div>
+                                      <div className="text-xs text-gray-900">{e.description} 🚀 </div>
+                                      <div className="text-xs text-blue-600 mt-2">{duration(e.createdAt)}</div>
+                                    </div>
                                 </Menu.Item>  
                               )  
                             })}
