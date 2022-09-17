@@ -19,9 +19,9 @@ export default function OneCourseDetail() {
 
   useEffect(() => {
     dispatch(getCourse(idCourse));
-    /* if (currentUser !== undefined || currentUser !== null) {
+    if (currentUser !== undefined || currentUser !== null) {
       dispatch(getUser(idGet));
-    } */
+    }
   }, [dispatch]);
 
   function toLoggin(e) {
