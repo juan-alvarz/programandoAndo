@@ -104,8 +104,7 @@ export default function CreateUser() {
       dispatch(createsUser(infoUser[0]));
       console.log(infoUser[0]);
       return Swal.fire({
-        title: "Create User",
-        text: "Create User Successfully",
+        title: "Checked email for use our website",
         icon: "success",
         confirmButtonText: "Back",
       }).then((result) => {

@@ -30,6 +30,7 @@ import {
   getFavoriteCourse,
   getScoringCourse,
   getNotifications,
+  getAllUsersBanned,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -571,5 +572,21 @@ export const submitPasswordUpdate = (payload) => async (dispatch) => {
 
     .catch((e) => console.log(e));
 
+  return response;
+};
+
+// ======================== Banned ========================================
+export const getUsersBanned = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/users/banned")
+    .then((res) => dispatch(getAllUsersBanned(res.data)))
+    .catch((e) => console.log(e));
+};
+
+export const restoreUser = (id, payload) => async (dispatch) => {
+  const response = await axios.patch(
+    `http://localhost:3001/api/users/${id}`,
+    payload
+  );
   return response;
 };

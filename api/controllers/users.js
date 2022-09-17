@@ -10,6 +10,7 @@ const {
   sendConfirmationEmail,
   sendChangePasswordEmail,
   sendEmailDonation,
+  bannedEmail,
 } = require("../config/nodemailer.config");
 
 const getAllUsers = async (req, res, next) => {
@@ -442,25 +443,37 @@ const updateUser = async (req, res, next) => {
 };
 
 const softDeleteUser = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const user = await usersModel.updateOne(
-      { _id: id },
-      {
-        banned: true,
-      }
-    );
-    const data = await usersModel.delete({ _id: id });
-    return res.json(data);
-  } catch (e) {
-    return res.json(e.message);
-  }
+  // try {
+  const { id } = req.params;
+  const user = await usersModel.updateOne(
+    { _id: id },
+    {
+      banned: true,
+    }
+  );
+  const userBanned = await usersModel.findById(id);
+  bannedEmail(userBanned.name, userBanned.email);
+  console.log(userBanned);
+  const data = await usersModel.delete({ _id: id });
+
+  return res.json(data);
+  // } catch (e) {
+  //   return res.json(e.message);
+  // }
 };
 
 const restoreUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const data = await usersModel.restore({ _id: id });
+
+    const user = await usersModel.updateOne(
+      { _id: id },
+      {
+        banned: false,
+      }
+    );
+
     return res.json(data);
   } catch (e) {
     return res.json(e.message);
@@ -475,6 +488,26 @@ const successDonation = (req, res) => {
     return res.status(200).json({ message: "success" });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+const getAllUsersBanned = async (req, res, next) => {
+  try {
+    const users = await usersModel
+      .findWithDeleted({})
+      .populate({
+        path: "schools",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      })
+      .populate("favorites")
+      .populate("ownPath");
+    const usersBanned = users.filter((e) => e.banned === true);
+    return res.json(usersBanned);
+  } catch (e) {
+    return res.send(e.message);
   }
 };
 
@@ -493,4 +526,5 @@ module.exports = {
   successDonation,
   updateFavorites,
   deleteFavorites,
+  getAllUsersBanned,
 };

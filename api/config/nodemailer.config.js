@@ -89,9 +89,25 @@ const sendNotificationEmail = (name, username, email, notification) => {
     .catch((err) => console.log(err));
 };
 
+const bannedEmail = (name, email) => {
+  console.log("Check");
+  transport
+    .sendMail({
+      from: accountTransport.auth.user,
+      to: email,
+      subject: "You are Banned",
+      html: `<h1>Email Banned</h1>
+        <h2>Hello ${name}</h2>
+        <p>We inform you that you have been banned for 30 days from our platform for violating any of the terms and conditions. If you have any questions, please contact us.</p>
+        </div>`,
+    })
+    .catch((err) => console.log(err));
+};
+
 module.exports = {
   sendConfirmationEmail,
   sendChangePasswordEmail,
   sendEmailDonation,
   sendNotificationEmail,
+  bannedEmail,
 };

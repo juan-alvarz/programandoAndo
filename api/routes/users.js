@@ -15,6 +15,7 @@ const {
   updateFavorites,
   deleteFavorites,
   changePasswordRequest,
+  getAllUsersBanned,
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -26,6 +27,8 @@ const {
 const { googleMiddleware } = require("../middleware/googleSession");
 
 router.get("/", getAllUsers);
+
+router.get("/banned", getAllUsersBanned);
 
 router.get("/:id", validatorGetUsers, getUserById);
 
