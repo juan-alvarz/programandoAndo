@@ -39,6 +39,7 @@ export default function CreateUser() {
       date: "",
       language: "",
       country: "",
+      image: { url: "", public_id: "" },
     },
   });
 
@@ -95,6 +96,7 @@ export default function CreateUser() {
           date: user.date,
           language: user.language.toLowerCase(),
           country: user.country,
+          image: { url: "", public_id: "" },
         };
       });
 
@@ -297,8 +299,7 @@ export default function CreateUser() {
                     placeholder="Password"
                     {...register("password", {
                       required: true,
-                      pattern:
-                        /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g,
+                      pattern: /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g,
                     })}
                   />
                   <div className="flex justify-end mt-0.5 w-full">

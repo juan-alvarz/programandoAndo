@@ -280,7 +280,7 @@ const submitChangePass = async (req, res, next) => {
     handleHtppError(res, "Fail in the query", 422);
   }
   res.status(200).send("Password changed succesfully");
-  return res.send(data);
+  // return;
 };
 
 const verifyUser = async (req, res, next) => {
@@ -391,10 +391,19 @@ const updateUser = async (req, res, next) => {
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
+          country: body.country ? body.country : user.country,
+          birthday: body.birthday ? body.birthday : user.birthday,
+          preferences: body.preferences ? body.preferences : user.preferences,
+          studyStatus: body.studyStatus ? body.studyStatus : user.studyStatus,
+          biography: body.biography ? body.biography : user.biography,
           scoring: body.scoring
             ? [...user.scoring, body.scoring]
             : user.scoring,
-          image: { url: cloudinary.url, public_id: cloudinary.public_id },
+          image: { url: body.url, public_id: body.public_id },
+          isWorking: body.isWorking ? body.isWorking : user.isWorking,
+          authorizeNotifications: body.authorizeNotifications
+            ? body.authorizeNotifications
+            : user.authorizeNotifications,
         }
       );
       if (!data.modifiedCount) {

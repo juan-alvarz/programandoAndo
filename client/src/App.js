@@ -45,6 +45,7 @@ import ProfilelUser from "./components/ProfilelUser";
 // Cloudinary
 import Cloudinary from "./components/Cloudinary";
 import { FolderUser } from "./components/FolderUser";
+import SubmitPassword from "./components/SubmitPassword";
 
 function App() {
   return (
@@ -103,7 +104,7 @@ function App() {
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
           <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
           <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
-          <Route path="/cloudinary" element={<Cloudinary />} />
+          <Route path="/modify/:changePassCode" element={<SubmitPassword />} />
         </Routes>
       </div>
     </BrowserRouter>

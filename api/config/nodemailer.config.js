@@ -37,7 +37,7 @@ const sendChangePasswordEmail = (name, email, changePasswordCode) => {
       html: `<h1>Change password for ${email}</h1>
         <h2>Hello ${name}</h2>
         <p>You have requested a password change for the email ${email},If you have not requested this password change, please contact support </p>
-        <a href=http://localhost:3000/changepass/${changePasswordCode}> Click here</a>
+        <a href=http://localhost:3000/modify/${changePasswordCode}> Click here</a>
         </div>`,
     })
     .catch((err) => console.log(err));
@@ -70,7 +70,7 @@ const sendEmailDonation = (name, email, amount) => {
     .catch((err) => console.log(err));
 };
 
-const sendNotificationEmail = (name, username,email,notification ) => {
+const sendNotificationEmail = (name, username, email, notification) => {
   console.log("Check");
   transport
     .sendMail({
@@ -93,5 +93,5 @@ module.exports = {
   sendConfirmationEmail,
   sendChangePasswordEmail,
   sendEmailDonation,
-  sendNotificationEmail
+  sendNotificationEmail,
 };

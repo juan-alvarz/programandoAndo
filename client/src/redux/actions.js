@@ -90,9 +90,8 @@ export const getCourse = (id) => (dispatch) => {
     .catch((e) => console.log(e));
 };
 export const favorite = (course) => (dispatch) => {
-  dispatch(favoriteCourse(course))
+  dispatch(favoriteCourse(course));
 };
-
 
 export const getFavorites = (id) => async (dispatch) => {
   const user = await axios.get(`http://localhost:3001/api/users/${id}`);
@@ -102,8 +101,8 @@ export const getFavorites = (id) => async (dispatch) => {
 
 export const getScoring = (id) => async (dispatch) => {
   const user = await axios.get(`http://localhost:3001/api/users/${id}`);
-  console.log("hola")
-  console.log(user.data.scoring)
+  console.log("hola");
+  console.log(user.data.scoring);
   dispatch(getScoringCourse(user.data.scoring));
 };
 
@@ -250,7 +249,6 @@ export const googleUserLogin = (payload) => async (dispatch) => {
     .catch((e) => console.log(e));
 
   return response;
-  
 };
 export const gitHubLogin = (payload) => async (dispatch) => {
   const response = await axios
@@ -262,7 +260,7 @@ export const gitHubLogin = (payload) => async (dispatch) => {
     .catch((e) => console.log(e));
 
   return response;
-}
+};
 
 export const verifyUser = async (code) => {
   const response = await axios.get(
@@ -327,32 +325,32 @@ export const getVideoByName = (name) => (dispatch) => {
 // =========================== Foro del video, utiliza el id de foro que trae el video ===================
 
 export const getForoById = (id) => (dispatch) => {
-  axios 
+  axios
     .get(`http://localhost:3001/api/foros/${id}`)
     .then((res) => dispatch(getForo(res.data)))
     .catch((e) => console.log(e));
-}
+};
 
 export const getAllForos = () => (dispatch) => {
   axios
     .get("http://localhost:3001/api/foros")
     .then((res) => dispatch(getForos(res.data)))
     .catch((e) => console.log(e));
-}
+};
 
-export const updateForo = (idForo ,payload) => (dispatch) => {
- axios
-  .put(`http://localhost:3001/api/foros/${idForo}`, payload)
-  .then((res) => dispatch(getForo(res.data)))
-  .catch((e) => console.log(e));
-}
+export const updateForo = (idForo, payload) => (dispatch) => {
+  axios
+    .put(`http://localhost:3001/api/foros/${idForo}`, payload)
+    .then((res) => dispatch(getForo(res.data)))
+    .catch((e) => console.log(e));
+};
 
 export const updateDeleteCommentorAnswer = (idForo, payload) => (dispatch) => {
   axios
-  .patch(`http://localhost:3001/api/foros/${idForo}`, payload)
-  .then((res) => dispatch(getForo(res.data)))
-  .catch((e) => console.log(e));
-}
+    .patch(`http://localhost:3001/api/foros/${idForo}`, payload)
+    .then((res) => dispatch(getForo(res.data)))
+    .catch((e) => console.log(e));
+};
 
 // ============================ Order ============================
 export function orderByName(payload) {
@@ -437,7 +435,7 @@ export const updateUser = (payload, id) => async (dispatch) => {
 
 // =========================== Delete ===========================
 export function deleteSchoolById(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     await axios
       .delete(`http://localhost:3001/api/schools/${id}`)
       .then(() => {
@@ -461,7 +459,7 @@ export function deleteSchoolById(id) {
 }
 
 export function deleteCourseById(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     await axios
       .delete(`http://localhost:3001/api/courses/${id}`)
       .then(() => {
@@ -485,7 +483,7 @@ export function deleteCourseById(id) {
 }
 
 export function deleteVideoById(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     await axios
       .delete(`http://localhost:3001/api/videos/softDelete/${id}`)
       .then(() => {
@@ -510,7 +508,7 @@ export function deleteVideoById(id) {
 }
 
 export function deleteUserById(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     await axios
       .delete(`http://localhost:3001/api/users/${id}`)
       .then(() => {
@@ -526,7 +524,7 @@ export function deleteUserById(id) {
 // =========================== Notification ===========================
 
 export function deleteNotificationById(id) {
-  return async function (dispatch) {
+  return async function(dispatch) {
     await axios
       .delete(`http://localhost:3001/api/notifications/${id}`)
       .then(() => {
@@ -554,4 +552,24 @@ export const createNotification = (payload) => async (dispatch) => {
   return response;
 };
 
+// =========================== Password ===========================
 
+export const forgetPasswordUpdate = (payload) => async (dispatch) => {
+  console.log(payload);
+  const response = await axios
+    .post("http://localhost:3001/api/users/forget_password", payload)
+
+    .catch((e) => console.log(e));
+
+  return response;
+};
+
+export const submitPasswordUpdate = (payload) => async (dispatch) => {
+  console.log(payload);
+  const response = await axios
+    .post("http://localhost:3001/api/users/auth/:changePassCode", payload)
+
+    .catch((e) => console.log(e));
+
+  return response;
+};
