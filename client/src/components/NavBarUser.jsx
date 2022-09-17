@@ -9,8 +9,6 @@ import { getAllNotifications } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
-
-
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Courses", href: "/allCourses", current: false },
@@ -22,9 +20,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function NavBarUser({delete_cookie}) {
-  console.log(DetailSchool)
-  const navigate = useNavigate()
+function NavBarUser({ delete_cookie }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { notifications } = useSelector((state) => state.programandoando);
 
@@ -36,41 +33,38 @@ function NavBarUser({delete_cookie}) {
     e.preventDefault();
 
     window.localStorage.removeItem("user");
-    delete_cookie("github-jwt")
-    setTimeout(function () {
-    
-        navigate("/");
-    }, 1000
-    )
-  }
+    delete_cookie("github-jwt");
+    setTimeout(function() {
+      navigate("/");
+    }, 1000);
+  };
 
-const duration = (props) => {
+  const duration = (props) => {
+    let today = new Date();
+    let nowMillisec = today.getTime();
+    let notifMillisec = Date.parse(props);
+    let difMillisec = nowMillisec - notifMillisec;
 
-  let today = new Date ()
-  let nowMillisec = today.getTime()
-  let notifMillisec = Date.parse(props)
-  let difMillisec = (nowMillisec - notifMillisec)
+    let seconds = (difMillisec / 1000).toFixed(0);
+    let minutes = (difMillisec / (1000 * 60)).toFixed(0);
+    let hours = (difMillisec / (1000 * 60 * 60)).toFixed(0);
+    let days = (difMillisec / (1000 * 60 * 60 * 24)).toFixed(0);
 
-  let seconds = (difMillisec / 1000).toFixed(0);
-  let minutes = (difMillisec / (1000 * 60)).toFixed(0);
-  let hours = (difMillisec / (1000 * 60 * 60)).toFixed(0);
-  let days = (difMillisec / (1000 * 60 * 60 * 24)).toFixed(0);
-
-  if (seconds < 60) {
+    if (seconds < 60) {
       return "a few moments ago";
-  } else if (minutes < 60) {
+    } else if (minutes < 60) {
       return minutes + " minutes ago";
-  } else if (hours < 24) {
+    } else if (hours < 24) {
       return hours + " hours ago";
-  } else {
-      return days + " days"
-  }
-}
+    } else {
+      return days + " days";
+    }
+  };
 
   return (
     <Disclosure
       as="nav"
-      style={{ backgroundColor: "rgb(17, 52, 82)"}}
+      style={{ backgroundColor: "rgb(17, 52, 82)" }}
       className="bg-gray-800"
     >
       {({ open }) => {
@@ -202,7 +196,7 @@ const duration = (props) => {
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button> */}
 
-{/* <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button"> 
+                      {/* <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification" class="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button"> 
 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
 <div class="flex relative">
   <div class="inline-flex relative -top-2 right-3 w-3 h-3 bg-red-500 rounded-full border-2 border-white dark:border-gray-900"></div>
@@ -282,16 +276,27 @@ const duration = (props) => {
     </div>
   </a>
 </div> */}
-                      
+
                       {/* Bell notification */}
                       <Menu as="div" className="relative ml-1">
                         <div>
                           <Menu.Button className="flex rounded-full mr-4 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span className="sr-only">Open bell notification</span>
-                            <svg style={{color: 'rgb(240, 240, 240)'}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                              <path fill-rule="evenodd" d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z" clip-rule="evenodd" />
+                            <span className="sr-only">
+                              Open bell notification
+                            </span>
+                            <svg
+                              style={{ color: "rgb(240, 240, 240)" }}
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              class="w-6 h-6"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                                clip-rule="evenodd"
+                              />
                             </svg>
-
                           </Menu.Button>
                         </div>
                         <Transition
@@ -304,20 +309,29 @@ const duration = (props) => {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-72 origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                              <div style={{ backgroundColor: "rgb(201, 196, 184)"}} className="rounded-t-lg block py-2 px-4 font-medium text-center text-black-900">
-                                  Notifications
-                              </div>
-                            {notifications.map( e => {
-                              console.log(notifications)
+                            <div
+                              style={{ backgroundColor: "rgb(201, 196, 184)" }}
+                              className="rounded-t-lg block py-2 px-4 font-medium text-center text-black-900"
+                            >
+                              Notifications
+                            </div>
+                            {notifications.map((e) => {
+                              console.log(notifications);
                               return (
                                 <Menu.Item>
-                                    <div className="px-2 pt-1 pb-2 w-full border-t-2">
-                                      <div className="font-semibold text-sm mb-2 text-gray-900">{e.title}</div>
-                                      <div className="text-xs text-gray-900">{e.description} 🚀 </div>
-                                      <div className="text-xs text-blue-600 mt-2">{duration(e.createdAt)}</div>
+                                  <div className="px-2 pt-1 pb-2 w-full border-t-2">
+                                    <div className="font-semibold text-sm mb-2 text-gray-900">
+                                      {e.title}
                                     </div>
-                                </Menu.Item>  
-                              )  
+                                    <div className="text-xs text-gray-900">
+                                      {e.description} 🚀{" "}
+                                    </div>
+                                    <div className="text-xs text-blue-600 mt-2">
+                                      {duration(e.createdAt)}
+                                    </div>
+                                  </div>
+                                </Menu.Item>
+                              );
                             })}
                           </Menu.Items>
                         </Transition>
@@ -358,7 +372,10 @@ const duration = (props) => {
                               {({ active }) => (
                                 <NavLink
                                   to="/donators"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
                                 >
                                   Donar
                                 </NavLink>
@@ -368,7 +385,10 @@ const duration = (props) => {
                               {({ active }) => (
                                 <NavLink
                                   to="/favorites"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
                                 >
                                   Favorites
                                 </NavLink>
@@ -378,7 +398,10 @@ const duration = (props) => {
                               {({ active }) => (
                                 <a
                                   href="#"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
                                   onClick={handlelogout}
                                 >
                                   Sign out
@@ -391,8 +414,8 @@ const duration = (props) => {
                     </div>
                   </div>
                 </div>
-                </div>
               </div>
+            </div>
 
             <Disclosure.Panel className="lg:hidden">
               <div className="space-y-1 px-2 pt-2">
@@ -455,14 +478,14 @@ const duration = (props) => {
                   >
                     {item.name}
                   </NavLink>
-                ))}                 
+                ))}
               </div>
             </Disclosure.Panel>
           </>
         );
       }}
     </Disclosure>
-  )
+  );
 }
 
-export default NavBarUser
+export default NavBarUser;

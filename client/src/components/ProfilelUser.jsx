@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser, getUsers, getUser } from "../redux/actions";
 import { NavLink } from "react-router-dom";
-import Swal from "sweetalert2";
-import ModifyProfileUser from "./ModifyProfileUser";
 import Cloudinary from "./Cloudinary";
 import ImageDefault from "../utils/images/userDefault.jpg";
 
@@ -11,11 +9,9 @@ function ProfilelUser() {
   let userLocal = window.localStorage.getItem("user");
   let userObj = userLocal && JSON.parse(userLocal);
 
-  const userRole = userObj && userObj.user.role;
+  // const userRole = userObj && userObj.user.role;
   const userId = userObj && userObj.user._id;
-  const userImage = userObj && userObj.user.image.url;
-
-  console.log(userId);
+  // const userImage = userObj && userObj.user.image.url;
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.programandoando);
@@ -26,23 +22,10 @@ function ProfilelUser() {
     (async function() {
       const id = userId;
       if (id) {
-        console.log(id);
         dispatch(getUser(id));
       }
     })();
   }, [dispatch, getUsers]);
-
-  // const [input, setInput] = useState({
-  //   name: "",
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  //   biography: "",
-  //   preferences: "",
-  //   country: "",
-  //   studyStatus: "",
-  //   birthday: "",
-  // });
 
   const [render, setRender] = useState(false);
   const handleRender = () => {
@@ -52,11 +35,14 @@ function ProfilelUser() {
   const [cloudinary, setCloudinary] = useState({});
 
   const handleSubmit = () => {
+    const reload = () => {
+      window.location.reload();
+    };
+    setTimeout(reload, 100);
     const id = userId;
     dispatch(updateUser(cloudinary, id)).then((r) => console.log(r));
     window.location.reload();
   };
-  console.log(cloudinary);
 
   return (
     <div>
@@ -71,7 +57,7 @@ function ProfilelUser() {
               alt="Photo by aldi sigun on Unsplash"
             />
           </div>
-          <div className="flex justify-start px-5 -mt-12 mb-5">
+          <div className="relative flex justify-start px-5 -mt-12 mb-5">
             <span clspanss="block relative h-32 w-32">
               <img
                 alt="Photo by aldi sigun on Unsplash"
@@ -79,26 +65,48 @@ function ProfilelUser() {
                 className="mx-auto object-cover rounded-full h-40 w-40 bg-white p-1"
               />
             </span>
+
+            <button
+              disabled={Object.entries(cloudinary).length === 0 ? true : false}
+              className=""
+              onClick={() => handleSubmit()}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 absolute bottom-5 left-5 text-red-800 font-bold"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                />
+              </svg>
+            </button>
+            <Cloudinary setCloudinary={setCloudinary} />
           </div>
           <div className="">
             <div className="px-7 mb-8">
               <h2 className="text-3xl font-bold text-green-800 ">
                 {user.name && user.name}
-                {/* {userObj && userObj.user.name} */}
               </h2>
               <p className="text-gray-400 mt-2">
-              {user.country && user.country}
-                {/* {userObj && userObj.user.country} */}
+                {user.country && user.country}
               </p>
-              {user.biography ? user.biography :
-              <p className="mt-2 text-gray-600 ">
-                {userObj && userObj.user.biografy}
-              </p>
-
-              }
+              {user.biography ? (
+                user.biography
+              ) : (
+                <p className="mt-2 text-gray-600 ">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Asperiores molestiae vitae odio non commodi itaque quisquam
+                  incidunt doloribus fugit nesciunt.
+                </p>
+              )}
               <h2 className="my-5 text-xl text-center font-bold text-green-800">
-              {user.email && user.email}
-                {/* {userObj && userObj.user.email} */}
+                {user.email && user.email}
               </h2>
               <div className="flex justify-center">
                 <NavLink to="/modifyProfileUser">
@@ -109,20 +117,9 @@ function ProfilelUser() {
                     Profile Edit
                   </button>
                 </NavLink>
-
-                <button
-                  disabled={
-                    Object.entries(cloudinary).length === 0 ? true : false
-                  }
-                  className="rounded-xl border-red-900 border-2"
-                  onClick={() => handleSubmit()}
-                >
-                  Edit
-                </button>
               </div>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-8"></div>
             </div>
-            <Cloudinary setCloudinary={setCloudinary} />
           </div>
         </div>
       </div>

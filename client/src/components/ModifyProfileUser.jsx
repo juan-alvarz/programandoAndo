@@ -3,7 +3,7 @@ import Select from "react-select";
 import { countries } from "../utils/countries";
 import { levelEducation } from "../utils/levelEducation";
 import { preferences } from "../utils/preferences";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { updateUser, getUsers, getUser } from "../redux/actions";
@@ -18,6 +18,7 @@ function ModifyProfileUser(prop) {
 
   const dispatch = useDispatch();
   // const { users, user } = useSelector((state) => state.programandoando);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getUsers());
@@ -154,9 +155,19 @@ function ModifyProfileUser(prop) {
 
       let payloadWorking = { user: userRole, isWorking: inputUser.isWorking };
       dispatch(updateUser(payloadWorking, userId));
-    }
 
-    console.log(inputUser);
+      console.log(inputUser);
+
+      return Swal.fire({
+        title: "The changes were successfully changed",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/profileUser");
+        }
+      });
+    }
   };
 
   // Modificar la vista del inpit password
