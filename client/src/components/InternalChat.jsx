@@ -1,19 +1,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, getUsers } from "../redux/actions";
+import Error404 from "./Error404";
+import Loader from "./Loader";
 
 function InternalChat() {
   const dispatch = useDispatch();
   // necesito el user con la sesión activa, y los usuarios disponibles para chatear
   const currentUser = JSON.parse(localStorage.getItem("user"));
-  const idGet = currentUser.user._id;
+  const idGet = currentUser !== null ? currentUser.user._id : null;
   const { user, users } = useSelector((state) => state.programandoando);
 
   useEffect(() => {
-    dispatch(getUser(idGet));
     dispatch(getUsers());
+    if (currentUser !== null) {
+      dispatch(getUser(idGet));
+    }
   });
-  if (Object.keys(users).length !== 0) {
+  if (currentUser === null) {
+    return <Error404 />;
+  } else if (Object.keys(users).length !== 0) {
     return (
       <div style={{ display: "flex" }}>
         <div
