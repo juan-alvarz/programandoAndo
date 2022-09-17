@@ -12,7 +12,7 @@ function Sidebar() {
   const menus = [
     { title: "Dashboard", href: "/", src: "Chart_fill", id: 0 },
     { title: "Administrator", href: "/administrator", src: "Chat", id: 1 },
-    { title: "Baneos", href: "/baneos", src: "Folder", id: 2 },
+    { title: "Banned", href: "/banned", src: "Folder", id: 2 },
 
     { title: "Videos", href: "/videospa", src: "User", gap: true, id: 3 },
     { title: "Courses", href: "/coursespa", src: "User", id: 4 },
@@ -32,23 +32,20 @@ function Sidebar() {
         <img
           src={arrowMenu}
           alt="arrowMenu"
-          className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 border-blue-900 ${
-            !open && "rotate-180"
-          }`}
+          className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 border-blue-900 ${!open &&
+            "rotate-180"}`}
           onClick={() => setOpen(!open)}
         />
         <div className="flex gap-x-4 items-center">
           <img
             src={logo}
             alt="logo"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
+            className={`cursor-pointer duration-500 ${open &&
+              "rotate-[360deg]"}`}
           />
           <h1
-            className={`text-white origin-left font-medium text-xl duration-300 ${
-              !open && "scale-0"
-            }`}
+            className={`text-white origin-left font-medium text-xl duration-300 ${!open &&
+              "scale-0"}`}
           >
             ProgramandoAndo
           </h1>

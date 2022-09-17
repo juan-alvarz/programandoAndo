@@ -89,9 +89,7 @@ function ProfilelUser() {
                 {userObj && userObj.user.country}
               </p>
               <p className="mt-2 text-gray-600 ">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Asperiores molestiae vitae odio non commodi itaque quisquam
-                incidunt doloribus fugit nesciunt.
+                {userObj && userObj.user.biografy}
               </p>
               <h2 className="my-5 text-xl text-center font-bold text-green-800">
                 {userObj && userObj.user.email}
