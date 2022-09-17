@@ -29,6 +29,7 @@ import {
   getSession,
   getFavoriteCourse,
   getScoringCourse,
+  getownPath,
   getNotifications,
 } from "./slice";
 
@@ -105,6 +106,12 @@ export const getScoring = (id) => async (dispatch) => {
   console.log("hola")
   console.log(user.data.scoring)
   dispatch(getScoringCourse(user.data.scoring));
+};
+
+export const getownPathCourse = (id) => async (dispatch) => {
+  const user = await axios.get(`http://localhost:3001/api/users/${id}`);
+  
+  dispatch(getownPath(user.data.ownPath));
 };
 
 // export const createsCourse = (payload) => async (dispatch) => {
