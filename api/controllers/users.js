@@ -10,6 +10,7 @@ const {
   sendConfirmationEmail,
   sendChangePasswordEmail,
   sendEmailDonation,
+  bannedEmail,
 } = require("../config/nodemailer.config");
 
 const getAllUsers = async (req, res, next) => {
@@ -280,7 +281,7 @@ const submitChangePass = async (req, res, next) => {
     handleHtppError(res, "Fail in the query", 422);
   }
   res.status(200).send("Password changed succesfully");
-  return res.send(data);
+  // return;
 };
 
 const verifyUser = async (req, res, next) => {
@@ -391,10 +392,20 @@ const updateUser = async (req, res, next) => {
           ownPath: body.ownPath ? body.ownPath : user.ownPath,
           favorites: body.favorites ? body.favorites : user.favorites,
           contributor: body.contributor ? body.contributor : user.contributor,
+          country: body.country ? body.country : user.country,
+          birthday: body.birthday ? body.birthday : user.birthday,
+          preferences: body.preferences ? body.preferences : user.preferences,
+          studyStatus: body.studyStatus ? body.studyStatus : user.studyStatus,
+          biography: body.biography ? body.biography : user.biography,
           scoring: body.scoring
             ? [...user.scoring, body.scoring]
             : user.scoring,
           image: { url: cloudinary.url, public_id: cloudinary.public_id },
+          image: { url: body.url, public_id: body.public_id },
+          isWorking: body.isWorking ? body.isWorking : user.isWorking,
+          authorizeNotifications: body.authorizeNotifications
+            ? body.authorizeNotifications
+            : user.authorizeNotifications,
         }
       );
       if (!data.modifiedCount) {
@@ -433,25 +444,37 @@ const updateUser = async (req, res, next) => {
 };
 
 const softDeleteUser = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const user = await usersModel.updateOne(
-      { _id: id },
-      {
-        banned: true,
-      }
-    );
-    const data = await usersModel.delete({ _id: id });
-    return res.json(data);
-  } catch (e) {
-    return res.json(e.message);
-  }
+  // try {
+  const { id } = req.params;
+  const user = await usersModel.updateOne(
+    { _id: id },
+    {
+      banned: true,
+    }
+  );
+  const userBanned = await usersModel.findById(id);
+  bannedEmail(userBanned.name, userBanned.email);
+  console.log(userBanned);
+  const data = await usersModel.delete({ _id: id });
+
+  return res.json(data);
+  // } catch (e) {
+  //   return res.json(e.message);
+  // }
 };
 
 const restoreUser = async (req, res, next) => {
   try {
     const { id } = req.params;
     const data = await usersModel.restore({ _id: id });
+
+    const user = await usersModel.updateOne(
+      { _id: id },
+      {
+        banned: false,
+      }
+    );
+
     return res.json(data);
   } catch (e) {
     return res.json(e.message);
@@ -466,6 +489,26 @@ const successDonation = (req, res) => {
     return res.status(200).json({ message: "success" });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+const getAllUsersBanned = async (req, res, next) => {
+  try {
+    const users = await usersModel
+      .findWithDeleted({})
+      .populate({
+        path: "schools",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      })
+      .populate("favorites")
+      .populate("ownPath");
+    const usersBanned = users.filter((e) => e.banned === true);
+    return res.json(usersBanned);
+  } catch (e) {
+    return res.send(e.message);
   }
 };
 
@@ -484,4 +527,5 @@ module.exports = {
   successDonation,
   updateFavorites,
   deleteFavorites,
+  getAllUsersBanned,
 };
