@@ -1,4 +1,3 @@
-const { schoolModel } = require("../models");
 const { uploadImage } = require("../config/cloudinaryconfig");
 const { schoolModel, usersModel } = require("../models");
 const fs = require("fs-extra")
