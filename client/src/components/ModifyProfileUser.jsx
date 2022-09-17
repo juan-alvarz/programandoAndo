@@ -3,7 +3,6 @@ import Select from "react-select";
 import { countries } from "../utils/countries";
 import { levelEducation } from "../utils/levelEducation";
 import { preferences } from "../utils/preferences";
-import photoPerfil from "../utils/images/michi-cool.jpg";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,32 +17,19 @@ function ModifyProfileUser(prop) {
   const userId = userObj && userObj.user._id;
 
   const dispatch = useDispatch();
-  const { users, user } = useSelector((state) => state.programandoando);
+  // const { users, user } = useSelector((state) => state.programandoando);
 
   useEffect(() => {
     dispatch(getUsers());
-    const id = users[0]._id;
-    dispatch(getUser(id));
-  }, [dispatch, getUsers]);
 
-  // useEffect(() => {
-  //   (async function () {
-  //     const usr = await axios
-  //       .get("http://localhost:3001/api/auth/me", {
-  //         withCredentials: true,
-  //       })
-  //       .then((res) => res.data);
-  //     if (usr) {
-  //       console.log(usr.decoded._id);
-  //       dispatch(getUser(usr.decoded._id));
-  //       // dispatch(getFavorites(usr.decoded._id));
-  //       window.localStorage.setItem(
-  //         "user",
-  //         JSON.stringify({ token: usr.tokenJwt, user })
-  //       );
-  //     }
-  //   })();
-  // }, [Object.keys(user).length !== 0]);
+    (async function() {
+      const id = userId;
+      if (id) {
+        console.log(id);
+        dispatch(getUser(id));
+      }
+    })();
+  }, [dispatch, getUsers]);
 
   const [inputUser, setInputUser] = useState({
     name: "",
@@ -60,34 +46,6 @@ function ModifyProfileUser(prop) {
     authorizeNotifications: false,
     isWorking: false,
   });
-
-  //  const handlelogout = () => {
-  //    window.localStorage.removeItem("user");
-  //    navigate("/");
-  //  };
-
-  // function handleInputs({ id }) {
-  //   const findInputs = users.find((user) => user._id);
-
-  //   if (findInputs) {
-  //     setInputUser({
-  //       name: findInputs.name,
-  //       username: findInputs.username,
-  //       emial: findInputs.email,
-  //       password: findInputs.email,
-  //       biography: findInputs.biography,
-  //       preferences: findInputs.preferences,
-  //       country: findInputs.country,
-  //       studyStatus: findInputs.studyStatus,
-  //       birthday: findInputs.birthday,
-  //     });
-  //   }
-  //   // console.log(findSelect.courses);
-  // }
-
-  // console.log(handleInputs());
-  // const findInputs = users.find((user) => user._id);
-  // console.log(findInputs);
 
   const handleChange = (e) => {
     setInputUser({
@@ -129,14 +87,6 @@ function ModifyProfileUser(prop) {
     };
   });
 
-  // let schoolPreferences = [];
-  // for (let i = 0; i < users.length; i++) {
-  //   const element = users[i].schools;
-  //   schoolPreferences.push(element);
-  // }
-
-  // console.log(schoolPreferences);
-
   const [selectedPreference, setSelectedPreference] = useState("");
   function handleSelecPreference(data) {
     setSelectedPreference(data);
@@ -148,14 +98,12 @@ function ModifyProfileUser(prop) {
     setSelectedCountry(data);
     setInputUser({ ...inputUser, country: data.label });
   }
-  // const country = selectedCountry.label;
 
   const [selectedEducation, setSelectedEducation] = useState("");
   function handleSelectEducation(data) {
     setSelectedEducation(data);
     setInputUser({ ...inputUser, studyStatus: data.label });
   }
-  // const education = selectedEducation.label;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -223,24 +171,12 @@ function ModifyProfileUser(prop) {
     setPassTwo(passTwo === "password" ? "text" : "password");
   }
 
-  const handleF5 = () => {
-    window.location.href = window.location.href;
-    return false;
-  };
-
   return (
     <section
       className="bg-white0"
       style={{ backgroundColor: "rgb(240,240,240)" }}
     >
       <div className="flex justify-center min-h-screen">
-        {/* <div
-          className="hidden bg-cover lg:block lg:w-2/5"
-          // style={require("backgroundImage: url('../utils/images/fav.png'/)")}
-        >
-          <img src={photoPerfil} alt="perfil-image" className="w-full h-full" />
-        </div> */}
-
         <div
           className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5"
           style={{
@@ -259,7 +195,7 @@ function ModifyProfileUser(prop) {
             <div className="mt-6">
               <div className="mt-3 md:flex md:items-center md:-mx-2"></div>
             </div>
-            <picture className="flex justify-center m-5">
+            {/* <picture className="flex justify-center m-5">
               <img
                 src={require("../utils/images/michi-cool.jpg")}
                 alt=""
@@ -270,7 +206,7 @@ function ModifyProfileUser(prop) {
                   // objectFit: "cover",
                 }}
               />
-            </picture>
+            </picture> */}
             <h2
               className="text-center font-bold text-2xl text-white"
               style={{ color: "#113452", textAlign: "center" }}
@@ -426,7 +362,6 @@ function ModifyProfileUser(prop) {
                   placeholder="Level of Education"
                   value={selectedEducation}
                   onChange={handleSelectEducation}
-                  // isSearchable={true}
                 />
               </div>
               <div>
@@ -465,10 +400,18 @@ function ModifyProfileUser(prop) {
                 />
               </div>
 
+              <NavLink to="/profileUser">
+                <button
+                  className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-md bg-red-00 hover:bg-red-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                  type="button"
+                >
+                  <span>Back Profile</span>
+                </button>
+              </NavLink>
+
               <button
                 className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
                 // type="button"
-                // onClick={handleF5}
               >
                 <span>Save</span>
               </button>

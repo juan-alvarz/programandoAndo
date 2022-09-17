@@ -14,7 +14,8 @@ const {
   successDonation,
   updateFavorites,
   deleteFavorites,
-  changePasswordRequest
+  changePasswordRequest,
+  getAllUsersBanned,
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -25,15 +26,15 @@ const {
 
 const { googleMiddleware } = require("../middleware/googleSession");
 
-
-
 router.get("/", getAllUsers);
+
+router.get("/banned", getAllUsersBanned);
 
 router.get("/:id", validatorGetUsers, getUserById);
 
 router.get("/auth/confirm/:confirmationCode", verifyUser);
 
-router.post("/auth/confirm/:changePassCode", submitChangePass);
+router.post("/auth/modify/:changePassCode", submitChangePass);
 
 router.post("/register", validatorCreateUser, createUser);
 
@@ -60,5 +61,6 @@ router.delete("/:id", validatorGetUsers, softDeleteUser);
 
 router.post("/emailDonationSuccess/", successDonation);
 
+router.post("/forget_password", changePasswordRequest);
 
 module.exports = router;
