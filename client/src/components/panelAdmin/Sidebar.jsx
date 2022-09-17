@@ -12,7 +12,7 @@ function Sidebar() {
   const menus = [
     { title: "Dashboard", href: "/", src: "Chart_fill", id: 0 },
     { title: "Administrator", href: "/administrator", src: "Chat", id: 1 },
-    { title: "Baneos", href: "/banned", src: "Folder", id: 2 },
+    { title: "Banned", href: "/banned", src: "Folder", id: 2 },
 
     { title: "Videos", href: "/videospa", src: "User", gap: true, id: 3 },
     { title: "Courses", href: "/coursespa", src: "User", id: 4 },

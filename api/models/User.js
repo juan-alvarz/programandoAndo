@@ -79,15 +79,7 @@ const UserSchema = new Schema(
         course: { type: Schema.Types.ObjectId, ref: "Course" },
         score: Number,
       },
-    ],
-    image: {
-      url: {
-        type: String,
-      },
-      public_id: {
-        type: String,
-      },
-    },
+    ],   
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -128,10 +120,13 @@ const UserSchema = new Schema(
     },
     image: {
       url: {
-        type: String
+        type: String,
+        default :""
       },
       public_id: {
-        type: String
+        type: String,
+        default :""
+
       }
     }
   },
