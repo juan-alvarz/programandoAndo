@@ -1,0 +1,9 @@
+const CLOUDINARY_CLOUD_NAME = "programandoandopf";
+const CLOUDINARY_API_KEY = "826345299649271";
+const CLOUDINARY_API_SECRET = "Qcjwj-lcq5rVYmQWfqlzTJ5ez98";
+
+module.exports = {
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET,
+};
