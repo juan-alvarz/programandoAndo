@@ -3,15 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const slice = createSlice({
   name: "programandoando",
   initialState: {
+    userBanned: [],
     stateFilter: [],
     courses: [],
     course: {},
     schools: [],
     school: {},
     users: [],
-    user: {
-          
-         },
+    user: {},
     videos: [],
     video: {},
     foro: {},
@@ -19,7 +18,7 @@ export const slice = createSlice({
     filters: [],
     favoritesUser: [],
     notifications: [],
-    scoring:[],
+    scoring: [],
   },
   reducers: {
     // ========= Courses ===========
@@ -50,7 +49,7 @@ export const slice = createSlice({
     },
     //
     getCoursesByAZ: (state, action) => {
-      state.filters = action.payload.sort(function (a, b) {
+      state.filters = action.payload.sort(function(a, b) {
         if (a.name.toUpperCase() > b.name.toUpperCase()) {
           return 1;
         }
@@ -62,7 +61,7 @@ export const slice = createSlice({
       state.courses = action.payload;
     },
     getCoursesByZA: (state, action) => {
-      state.filters = action.payload.sort(function (a, b) {
+      state.filters = action.payload.sort(function(a, b) {
         if (a.name.toUpperCase() > b.name.toUpperCase()) {
           return -1;
         }
@@ -208,6 +207,10 @@ export const slice = createSlice({
     getNotifications: (state, action) => {
       state.notifications = action.payload;
     },
+    // ============== Banned ==========================
+    getAllUsersBanned: (state, action) => {
+      state.userBanned = action.payload;
+    },
   },
 });
 
@@ -250,7 +253,8 @@ export const {
   uppdateCourse,
   uppdateVideo,
   uppdateUser,
-  favoriteCourse
+  favoriteCourse,
+  getAllUsersBanned,
 } = slice.actions;
 
 export default slice.reducer;

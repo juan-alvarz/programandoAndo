@@ -80,6 +80,14 @@ const UserSchema = new Schema(
         score: Number,
       },
     ],
+    image: {
+      url: {
+        type: String,
+      },
+      public_id: {
+        type: String,
+      },
+    },
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -103,6 +111,7 @@ const UserSchema = new Schema(
     changePassCode: {
       type: String,
     },
+
     chats: [
       {
         type: Schema.Types.ObjectId,
@@ -117,6 +126,14 @@ const UserSchema = new Schema(
       type: String,
       default: "",
     },
+    image: {
+      url: {
+        type: String
+      },
+      public_id: {
+        type: String
+      }
+    }
   },
   {
     timestamps: true,
