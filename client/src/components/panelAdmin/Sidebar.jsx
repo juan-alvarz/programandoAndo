@@ -23,8 +23,9 @@ function Sidebar() {
     { title: "Setting", href: "/setting", src: "Setting", gap: true, id: 8 },
   ];
   return (
-    <div className="flex">
+    <div  className="flex">
       <div
+        style={{ backgroundColor: "rgb(17, 52, 82)" }}
         className={`${
           open ? "w-72" : "w-20"
         } duration-300 h-screen p-5 pt-8 bg-blue-900 relative`}
@@ -58,9 +59,9 @@ function Sidebar() {
             <NavLink to={menu.href} key={index}>
               <li
                 key={index}
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white rounded-md ${
+                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-sky-900 rounded-md ${
                   menu.gap ? "mt-9" : "mt-2"
-                } ${menu.href === path ? "bg-white bg-opacity-50" : ""}`}
+                } ${menu.href === path ? "bg-sky-900 bg-opacity-60" : ""}`}
                 onClick={() => {
                   setClick(menu.id);
                 }}
