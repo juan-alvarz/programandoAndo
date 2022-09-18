@@ -17,6 +17,7 @@ import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
 import Google from "./Google";
 import Chat from "./Chat";
+import PWA from "./PWA";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
@@ -106,12 +107,12 @@ function Home() {
       <div>
         <Carousel />
       </div>
+      <PWA />
       <div
         style={{
           position: "fixed",
           right: "20px",
           bottom: "20px",
-          zIndex: 100,
         }}
       >
         <Chat />
