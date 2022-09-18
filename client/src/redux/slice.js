@@ -18,7 +18,8 @@ export const slice = createSlice({
     filters: [],
     favoritesUser: [],
     notifications: [],
-    scoring: [],
+    scoring:[],
+    ownPath:[]
   },
   reducers: {
     // ========= Courses ===========
@@ -79,8 +80,12 @@ export const slice = createSlice({
     getFavoriteCourse: (state, action) => {
       state.favoritesUser = action.payload;
     },
+    
     getScoringCourse: (state, action) => {
       state.scoring = action.payload;
+    },
+    getownPath: (state, action) => {
+      state.ownPath = action.payload;
     },
     createCourse: (state) => {
       return { ...state };
@@ -243,6 +248,7 @@ export const {
   getSession,
   getFavoriteCourse,
   getScoringCourse,
+  getownPath,
   deleteSchool,
   deleteCourse,
   deleteVideo,
