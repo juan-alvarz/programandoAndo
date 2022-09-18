@@ -110,16 +110,24 @@ function Home() {
       <div>
         <Carousel />
       </div>
-   {userObj? <Puntuation /> :<PuntuationNotLogged />  }
-     <br></br>
-     <br></br>
-     <br></br>
-     <h1>ACA ABAJO EL FORO GENERAL</h1>
-     <br></br>
-     <br></br>
-     <br></br>
-     {userObj? <Foro/> : <ForoNotLogged/>  }
-
+      {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+      <br></br>
+      <br></br>
+      <br></br>
+      <h1>ACA ABAJO EL FORO GENERAL</h1>
+      <br></br>
+      <br></br>
+      <br></br>
+      {userObj? <Foro/> : <ForoNotLogged/>  }
+      <div
+        style={{
+          position: "fixed",
+          right: "20px",
+          bottom: "20px",
+        }}
+      >
+        <Chat />
+      </div>
      <Footer />
     </div>
   );
