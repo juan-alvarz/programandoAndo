@@ -29,6 +29,7 @@ import {
   getSession,
   getFavoriteCourse,
   getScoringCourse,
+  getownPath,
   getNotifications,
   getAllUsersBanned,
 } from "./slice";
@@ -96,7 +97,7 @@ export const favorite = (course) => (dispatch) => {
 
 export const getFavorites = (id) => async (dispatch) => {
   const user = await axios.get(`http://localhost:3001/api/users/${id}`);
-  console.log(user);
+  // console.log(user);
   dispatch(getFavoriteCourse(user.data.favorites));
 };
 
@@ -105,6 +106,12 @@ export const getScoring = (id) => async (dispatch) => {
   console.log("hola");
   console.log(user.data.scoring);
   dispatch(getScoringCourse(user.data.scoring));
+};
+
+export const getownPathCourse = (id) => async (dispatch) => {
+  const user = await axios.get(`http://localhost:3001/api/users/${id}`);
+  
+  dispatch(getownPath(user.data.ownPath));
 };
 
 // export const createsCourse = (payload) => async (dispatch) => {
@@ -219,6 +226,13 @@ export const getUser = (id) => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
+export const userOpinion = (id, payload) => async (dispatch)=> {
+  await axios
+  .put(`http://localhost:3001/api/users/userOpinion/${id}`, payload)
+  .then((res) => dispatch(getUserById(res.data)))
+  .catch((e) => console.log(e))
+}
+
 export const createsUser = (payload) => async (dispatch) => {
   const response = await axios.post(
     "http://localhost:3001/api/users/register",
@@ -235,8 +249,16 @@ export const userLogin = (payload) => async (dispatch) => {
 
       dispatch(getSession(res.data));
     })
+    .catch((error) =>
+      Swal.fire({
+        title: "Login Error",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      })
+    );
 
-    .catch((e) => console.log(e));
   return response;
 };
 
@@ -244,22 +266,61 @@ export const googleUserLogin = (payload) => async (dispatch) => {
   const response = await axios
     .post("http://localhost:3001/api/users/google_login", payload)
     .then((res) => {
-      dispatch(getSession(res.data));
-      window.localStorage.setItem("user", JSON.stringify(res.data));
+      if (res.data.newUser === true) {
+        Swal.fire({
+          title: "Thans for register",
+          // text: "Can't create video please try again",
+          text: "Pending Account. Please Verify Your Email!",
+          icon: "warning",
+          confirmButtonText: "OK",
+        });
+        return;
+      }
+      if (res.data.user.status === "active") {
+        Swal.fire({
+          title: "Successful login",
+          text: "You are being redirected to the home",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // navigate("/");
+            window.location.href = "http://localhost:3000";
+          }
+        });
+        dispatch(getSession(res.data));
+        window.localStorage.setItem("user", JSON.stringify(res.data));
+      }
     })
-    .catch((e) => console.log(e));
-
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      })
+    );
   return response;
 };
-export const gitHubLogin = (payload) => async (dispatch) => {
+export const gitHubLogin = () => async (dispatch) => {
   const response = await axios
     .get("http://localhost:3001/api/auth/github_login")
     .then((res) => {
+      console.log(res.data);
       dispatch(getSession(res.data));
       window.localStorage.setItem("user", JSON.stringify(res.data));
     })
-    .catch((e) => console.log(e));
-
+    .catch((error) => {
+      console.log(error);
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    });
   return response;
 };
 
@@ -325,8 +386,8 @@ export const getVideoByName = (name) => (dispatch) => {
 
 // =========================== Foro del video, utiliza el id de foro que trae el video ===================
 
-export const getForoById = (id) => (dispatch) => {
-  axios
+export const getForoById = (id) =>  (dispatch) => {
+   axios 
     .get(`http://localhost:3001/api/foros/${id}`)
     .then((res) => dispatch(getForo(res.data)))
     .catch((e) => console.log(e));
@@ -339,12 +400,12 @@ export const getAllForos = () => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
-export const updateForo = (idForo, payload) => (dispatch) => {
+export const updateForo = (idForo ,payload) => (dispatch) => {
   axios
-    .put(`http://localhost:3001/api/foros/${idForo}`, payload)
-    .then((res) => dispatch(getForo(res.data)))
-    .catch((e) => console.log(e));
-};
+  .put(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
 
 export const updateDeleteCommentorAnswer = (idForo, payload) => (dispatch) => {
   axios

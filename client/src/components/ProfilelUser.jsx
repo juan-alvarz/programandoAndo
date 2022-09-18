@@ -4,6 +4,7 @@ import { updateUser, getUsers, getUser } from "../redux/actions";
 import { NavLink } from "react-router-dom";
 import Cloudinary from "./Cloudinary";
 import ImageDefault from "../utils/images/userDefault.jpg";
+import NavBar from "./NavBar";
 
 function ProfilelUser() {
   let userLocal = window.localStorage.getItem("user");
@@ -46,7 +47,8 @@ function ProfilelUser() {
 
   return (
     <div>
-      <div className=" bg-gray-200 flex flex-wrap items-center justify-center">
+        <NavBar/>
+      <div style={{ backgroundColor: "rgb(240, 240, 240)", height: '100%', paddingBottom: 90}} className=" flex flex-wrap items-center justify-center">
         <div className="container max-w-lg bg-white rounded shadow-lg transform duration-200 easy-in-out m-12">
           <div className="h-2/4 sm:h-64 overflow-hidden">
             <img
@@ -77,7 +79,7 @@ function ProfilelUser() {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6 absolute bottom-5 left-5 text-red-800 font-bold"
+                className="w-7 h-7 absolute bottom-5 left-5 text-red-800 font-bold bg-gray-400 rounded-full p-1"
               >
                 <path
                   strokeLinecap="round"
@@ -90,7 +92,7 @@ function ProfilelUser() {
           </div>
           <div className="">
             <div className="px-7 mb-8">
-              <h2 className="text-3xl font-bold text-green-800 ">
+              <h2 style={{color: 'rgb(55, 109, 109)'}} className="text-3xl font-bold text-green-800 ">
                 {user.name && user.name}
               </h2>
               <p className="text-gray-400 mt-2">
@@ -105,13 +107,14 @@ function ProfilelUser() {
                   incidunt doloribus fugit nesciunt.
                 </p>
               )}
-              <h2 className="my-5 text-xl text-center font-bold text-green-800">
+              <h2 style={{color: 'rgb(55, 109, 109)'}} className="my-3 text-md font-bold text-green-800">
                 {user.email && user.email}
               </h2>
               <div className="flex justify-center">
                 <NavLink to="/modifyProfileUser">
                   <button
-                    className="justify-center px-4 py-2 cursor-pointer bg-green-900 w-max mx-auto mt-8 rounded-lg text-gray-300 hover:bg-green-800 hover:text-gray-100 "
+                  style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                    className="justify-center px-4 py-2 cursor-pointer bg-green-900 w-max mx-auto mt-8 rounded-lg text-white hover:bg-green-800 hover:text-gray-100 "
                     onClick={handleRender}
                   >
                     Profile Edit

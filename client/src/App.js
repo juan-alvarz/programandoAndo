@@ -44,9 +44,9 @@ import ProfilelUser from "./components/ProfilelUser";
 // Cloudinary
 import Cloudinary from "./components/Cloudinary";
 import { FolderUser } from "./components/FolderUser";
-import SubmitPassword from "./components/SubmitPassword";
 import AgeCharts from "./components/panelAdmin/AgeCharts";
 import CountryCharts from "./components/panelAdmin/CountryCharts";
+import SubmitPassword from "./components/SubmitPassword";
 
 function App() {
   return (

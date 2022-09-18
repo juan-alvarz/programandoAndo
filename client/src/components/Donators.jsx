@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../redux/actions";
 import Footer from "./Footer";
+import logo from '../utils/images/PayPalLogo.png'
 
 function Donators() {
   const [amount, setAmount] = useState(0); // el monto a donar
@@ -124,7 +125,7 @@ function Donators() {
                 </div>
                 <div className="flex justify-center md:justify-start">
                   <img
-                    src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c530.png"
+                    src={logo}
                     alt="image paypal"
                     className="w-24 mt-5"
                   />

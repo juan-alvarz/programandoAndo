@@ -60,7 +60,7 @@ let unicos = [...personasMapArr.values()];*/
               <div class=""
                 style={{
                   width: 350,
-                  height: 250,
+                  height: 200,
                   backgroundColor: "rgb(17, 52, 82)",
                   marginTop: 5,
                   marginLeft: 10,
@@ -91,7 +91,7 @@ let unicos = [...personasMapArr.values()];*/
                 <a href="#">
                   <h5 class="rounded-lg p-5 m-5 text-2xl font-bold tracking-tight text-gray-900 "
                     style={{
-                      fontSize: 20,
+                      fontSize: 15,
                       display: "flex",
                       color: "rgb(201, 196, 184)",
                       justifyContent: "center",

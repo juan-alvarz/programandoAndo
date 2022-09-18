@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Puntuation from "./Puntuation";
+import PuntuationNotLogged from "./PuntuationNotLogged";
+import Foro from "./Foro";
+import ForoNotLogged from "./ForoNotLogged";
 import SearchBar from "./SearchBar";
 import {
   getVideoById,
@@ -15,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
-import Google from "./Google";
 import Chat from "./Chat";
 import PWA from "./PWA";
 
@@ -65,6 +67,8 @@ function Home() {
   }, [Object.keys(user).length !== 0]);
 
   const stat = useSelector((state) => state.programandoando);
+  // window.location.href = "/";
+
   // console.log(stat);
   return (
     <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
@@ -108,6 +112,15 @@ function Home() {
         <Carousel />
       </div>
       <PWA />
+      {userObj ? <Puntuation /> : <PuntuationNotLogged />}
+      <br></br>
+      <br></br>
+      <br></br>
+      <h1>ACA ABAJO EL FORO GENERAL</h1>
+      <br></br>
+      <br></br>
+      <br></br>
+      {userObj ? <Foro /> : <ForoNotLogged />}
       <div
         style={{
           position: "fixed",
@@ -118,8 +131,6 @@ function Home() {
         <Chat />
       </div>
       <Footer />
-      {/* <Puntuation /> */}
-      <Puntuation />
     </div>
   );
 }

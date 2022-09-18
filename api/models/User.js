@@ -15,6 +15,7 @@ const UserSchema = new Schema(
     },
     authorizeNotifications: {
       type: Boolean,
+      default: false
     },
     password: {
       type: String,
@@ -22,6 +23,7 @@ const UserSchema = new Schema(
     },
     biography: {
       type: String,
+      default: "Write here your description or biography"
     },
     preferences: {
       type: String,
@@ -43,6 +45,7 @@ const UserSchema = new Schema(
     },
     studyStatus: {
       type: String,
+      default: "None"
     },
     schools: [
       {
@@ -79,8 +82,7 @@ const UserSchema = new Schema(
         course: { type: Schema.Types.ObjectId, ref: "Course" },
         score: Number,
       },
-    ],
-
+    ],   
     favorites: [
       {
         type: Schema.Types.ObjectId,

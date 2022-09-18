@@ -13,13 +13,16 @@ export default function OneCourseDetail() {
   const { idCourse } = useParams();
   const { course, user } = useSelector((state) => state.programandoando);
   const currentUser = JSON.parse(localStorage.getItem("user"));
-  const idGet = currentUser.user._id;
+  const idGet = currentUser && currentUser.user._id;
   window.courseSelect = course;
 
   useEffect(() => {
     dispatch(getCourse(idCourse));
     dispatch(getUser(idGet));
   }, [dispatch]);
+
+  console.log(course)
+  console.log(user)
 
   // http://localhost:3001/api/users/:ID [PUT]
   async function handleClickVote(e) {

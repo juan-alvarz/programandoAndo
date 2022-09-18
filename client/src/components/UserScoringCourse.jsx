@@ -30,22 +30,32 @@ function UserScoringCourse() {
   console.log("componente")
   
   console.log(scoring)
+
+  let scoringRender=[]
+
+  for(let i=0;i<scoring.length;i++){
+    if(scoring[i].course){
+      scoringRender.push(scoring[i])
+    }
+  }
+
+  console.log(scoringRender)
   
 
 
   
 
   return (
-    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+    <div >
       
      <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4 mb-8 mt-10">
-          {scoring.map((course, index) => (
+          {scoringRender ? scoringRender.map((course, index) => (
             <div
               key={index}
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
               style={{
-                maxWidth: 350,
-                height: 300,
+                maxWidth: 250,
+                height: 250,
                 backgroundColor: "rgb(17, 52, 82)",
                 marginTop: 5,
                 marginLeft: 10,
@@ -61,13 +71,13 @@ function UserScoringCourse() {
                     src={course.course.image}
                     alt=""
                     style={{
-                      minHeight: 120,
-                      maxHeight: 170,
+                      minHeight: 100,
+                      maxHeight: 100,
                       width: "70%",
                       objectFit: "cover",
                       borderTopLeftRadius: 10,
                       borderTopRightRadius: 10,
-                      width: "500px",
+                      width: "200",
                     }}
                   />
                 </NavLink>
@@ -77,7 +87,7 @@ function UserScoringCourse() {
                 <div>
                   <h5
                     style={{
-                      fontSize: 20,
+                      fontSize: 12,
                       display: "flex",
                       color: "rgb(201, 196, 184)",
                       justifyContent: "center",
@@ -131,11 +141,21 @@ function UserScoringCourse() {
                       Read more
                     </NavLink>
                   </button>
+                  
                 </div>
+                <div className='ml-5 mt-5'>
+                     
+                      <h4
+                      style={{
+                        
+                        color: "rgb(201, 196, 184)",
+                      }}
+                      >Score: {course.score}</h4>
+                  </div>
                
               </div>
             </div>
-          ))}
+          )):<span>No tienes reviews en cursos</span>}
         </div>
    
   </div>

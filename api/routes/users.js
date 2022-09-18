@@ -16,6 +16,7 @@ const {
   deleteFavorites,
   changePasswordRequest,
   getAllUsersBanned,
+  userOpinion
 } = require("../controllers/users");
 const {
   validatorCreateUser,
@@ -50,6 +51,8 @@ router.post(
 );
 
 router.put("/:id", validatorGetUsers, updateUser);
+
+router.put("/userOpinion/:id", userOpinion)
 
 router.put("/addFavorites/:id", updateFavorites);
 
