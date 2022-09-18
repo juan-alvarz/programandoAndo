@@ -26,7 +26,8 @@
     "mongoose-delete": "^0.5.4",
     "nodemailer": "^6.7.8",
     "passport-github2": "^0.1.12",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "sweetalert2": "^11.4.33"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"

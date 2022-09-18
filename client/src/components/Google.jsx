@@ -23,14 +23,7 @@ export default function Google() {
     // console.log(userObject);
     setUser(userObject);
 
-    document.getElementById("googleSign").hidden = true;
-    Swal.fire({
-      title: "Successful login",
-      text: "You are being redirected to the home",
-      icon: "success",
-      timer: 2000,
-      showConfirmButton: false,
-    })
+    document.getElementById("googleSign").hidden = true; 
     setTimeout(function () {
       navigate("/");
     }, 2000);

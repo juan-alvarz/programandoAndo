@@ -54,7 +54,11 @@ function ProfilelUser() {
   const handleSubmit = () => {
     const id = userId;
     dispatch(updateUser(cloudinary, id)).then((r) => console.log(r));
-    window.location.reload();
+    const reload = () => {
+      window.location.reload();
+    };
+    setTimeout(reload, 100);
+    // window.location.reload();
   };
   console.log(cloudinary);
 
@@ -87,19 +91,20 @@ function ProfilelUser() {
                 {/* {userObj && userObj.user.name} */}
               </h2>
               <p className="text-gray-400 mt-2">
-              {user.country && user.country}
+                {user.country && user.country}
                 {/* {userObj && userObj.user.country} */}
               </p>
-              {user.biography ? user.biography :
-              <p className="mt-2 text-gray-600 ">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Asperiores molestiae vitae odio non commodi itaque quisquam
-                incidunt doloribus fugit nesciunt.
-              </p>
-
-              }
+              {user.biography ? (
+                user.biography
+              ) : (
+                <p className="mt-2 text-gray-600 ">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Asperiores molestiae vitae odio non commodi itaque quisquam
+                  incidunt doloribus fugit nesciunt.
+                </p>
+              )}
               <h2 className="my-5 text-xl text-center font-bold text-green-800">
-              {user.email && user.email}
+                {user.email && user.email}
                 {/* {userObj && userObj.user.email} */}
               </h2>
               <div className="flex justify-center">

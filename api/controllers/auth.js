@@ -14,6 +14,7 @@ const { sendConfirmationEmail } = require("../config/nodemailer.config");
 
 const { GITHUB, GITHUB_SECRET, SECRET } = process.env;
 const COOKIE_NAME = "github-jwt";
+const url = require("url");
 
 const getGitHubUser = async (code) => {
   // console.log(GITHUB);
@@ -91,24 +92,26 @@ const gitHubCreate = async (req, res, next) => {
       user,
     };
     sendConfirmationEmail(user.username, user.email, user.confirmationCode);
-    res.redirect('http://localhost:3000')    
+    res.redirect("http://localhost:3000");
   } else {
     if (find.status !== "active") {
-      return handleHtppError(
-        res,
-        "Pending Account. Please Verify Your Email!",
-        401
+      // handleHtppError(res, "Pending Account. Please Verify Your Email!", 401);
+      res.redirect(
+        url.format({
+          pathname: "http://localhost:3000",
+          query: {
+            message: "Pending_Account_Please_Verify_Your_Email!",
+          },
+        })
       );
+    } else {
+      const dataGithub = {
+        token: await tokenSign(find),
+        user: find,
+      };
+      res.cookie(COOKIE_NAME, dataGithub.token);
+      res.redirect("http://localhost:3000");
     }
-    const dataGithub = {
-      token: await tokenSign(find),
-      user: find,
-    };
-
-    res.cookie(COOKIE_NAME, dataGithub.token);
-
-    // console.log(dataGithub)
-    res.redirect('http://localhost:3000');
   }
 };
 
@@ -120,7 +123,7 @@ const isLogin = async (req, res) => {
       const findToken = cookie
         .find((e) => e.includes("github-jwt"))
         .split("=")[1];
-      console.log(findToken)
+      console.log(findToken);
       const decode = await verifyToken(findToken);
       // console.log(decode)
       return res.send(decode);
