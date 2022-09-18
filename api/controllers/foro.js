@@ -102,6 +102,36 @@ const updateDeleteCommentorAnswer = async (req, res) => {
         foro.save();
         return res.status(201).json(foro);
 
+  const updateDeleteCommentorAnswer = async (req, res) => {
+    const { id } = req.params;
+    const { commentId, ...body } = req.body;
+    try {
+      
+      const foro = await foroModel.findById(id).populate({
+        path: "comments",
+        populate: {
+          path: "authorComment",
+          select: "name",
+        },
+      })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "answers",
+          populate: {
+            path: "authorComment",
+            select: "name",
+          },
+        },
+      }); 
+      
+      switch (body.change) {
+        case "answer":
+          const data1 = foro.comments.filter((x) => x._id.toString() === commentId);
+      data1[0].answers.forEach((ele) => { if (ele._id.toString() === body.idAnswer) { ele.content = body.content } } )
+      foro.save();
+      return res.status(201).json(foro);
+    
       case "deleteAnswer":
         const data2 = foro.comments.filter(
           (x) => x._id.toString() === commentId
@@ -131,10 +161,9 @@ const updateDeleteCommentorAnswer = async (req, res) => {
         foro.save();
         return res.status(201).json(foro);
 
-      default:
-        return res.status(201).send(foro);
-    }
-  } catch (error) {
+        default: return res.status(201).send(foro)
+      }
+   } catch (error) {
     res.status(404).json(error.message);
   }
 };
@@ -143,7 +172,23 @@ const updateForo = async (req, res) => {
   const { id } = req.params;
   const { commentId, ...body } = req.body;
   try {
-    const foro = await foroModel.findById(id);
+    const foro = await foroModel.findById(id).populate({
+      path: "comments",
+      populate: {
+        path: "authorComment",
+        select: "name",
+      },
+    })
+    .populate({
+      path: "comments",
+      populate: {
+        path: "answers",
+        populate: {
+          path: "authorComment",
+          select: "name",
+        },
+      },
+    }); ;
 
     // put answer
     if (commentId) {

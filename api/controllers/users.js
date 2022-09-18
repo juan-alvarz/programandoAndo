@@ -157,6 +157,25 @@ const createUser = async (req, res, next) => {
   }
 };
 
+const userOpinion = async (req, res) => {
+  const {id} = req.params
+  const {puntuation, opinion} = req.body
+  const user = await usersModel.findById(id)
+  try {
+    if ( opinion && puntuation) {
+      user.pageOpinion = opinion
+      user.pagePuntuation = puntuation
+      user.save()
+      return res.status(200).send(user)
+    } else {
+      res.send("Es necesaria la puntuación y la opinión")
+    }
+  } catch (e) {
+    return res.json(e.message)
+  }
+} 
+
+
 const userLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -535,4 +554,5 @@ module.exports = {
   updateFavorites,
   deleteFavorites,
   getAllUsersBanned,
+  userOpinion
 };

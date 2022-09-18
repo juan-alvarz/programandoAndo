@@ -226,6 +226,13 @@ export const getUser = (id) => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
+export const userOpinion = (id, payload) => async (dispatch)=> {
+  await axios
+  .put(`http://localhost:3001/api/users/userOpinion/${id}`, payload)
+  .then((res) => dispatch(getUserById(res.data)))
+  .catch((e) => console.log(e))
+}
+
 export const createsUser = (payload) => async (dispatch) => {
   const response = await axios.post(
     "http://localhost:3001/api/users/register",
@@ -379,8 +386,8 @@ export const getVideoByName = (name) => (dispatch) => {
 
 // =========================== Foro del video, utiliza el id de foro que trae el video ===================
 
-export const getForoById = (id) => (dispatch) => {
-  axios
+export const getForoById = (id) =>  (dispatch) => {
+   axios 
     .get(`http://localhost:3001/api/foros/${id}`)
     .then((res) => dispatch(getForo(res.data)))
     .catch((e) => console.log(e));
@@ -393,12 +400,12 @@ export const getAllForos = () => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
-export const updateForo = (idForo, payload) => (dispatch) => {
+export const updateForo = (idForo ,payload) => (dispatch) => {
   axios
-    .put(`http://localhost:3001/api/foros/${idForo}`, payload)
-    .then((res) => dispatch(getForo(res.data)))
-    .catch((e) => console.log(e));
-};
+  .put(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
 
 export const updateDeleteCommentorAnswer = (idForo, payload) => (dispatch) => {
   axios
