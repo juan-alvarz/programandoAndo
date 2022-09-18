@@ -20,6 +20,8 @@ function classNames(...classes) {
 }
 
 function NavBarUser({ delete_cookie }) {
+  const { user } = useSelector((state) => state.programandoando);
+  const imgUser = Object.keys(user).length !== 0 && user.image.url;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { notifications } = useSelector((state) => state.programandoando);
@@ -342,7 +344,8 @@ function NavBarUser({ delete_cookie }) {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                              src={imgUser}
+                              // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                               alt=""
                             />
                           </Menu.Button>
@@ -357,16 +360,16 @@ function NavBarUser({ delete_cookie }) {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <Menu.Item>
+                            {/* <Menu.Item>
                               {({ active }) => (
-                                <NavLink
-                                  to='/profileUser'
+                                <a
+                                  href="#"
                                   className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                 >
-                                  Your profile
-                                </NavLink>
+                                  Your Profile user
+                                </a>
                               )}
-                            </Menu.Item>
+                            </Menu.Item> */}
                             <Menu.Item>
                               {({ active }) => (
                                 <NavLink
@@ -390,16 +393,6 @@ function NavBarUser({ delete_cookie }) {
                                   )}
                                 >
                                   Favorites
-                                </NavLink>
-                              )}
-                            </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <NavLink
-                                  to="/folderUser"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                >
-                                  User Folder
                                 </NavLink>
                               )}
                             </Menu.Item>
