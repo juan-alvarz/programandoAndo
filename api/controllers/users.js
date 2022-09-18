@@ -166,7 +166,7 @@ const userLogin = async (req, res, next) => {
     // console.log(hashPassword.password);
 
     if (!user) {
-      handleHtppError(res, "User dont exists", 404);
+      handleHtppError(res, "User doesn't exists", 404);
       return;
     }
 
@@ -179,7 +179,7 @@ const userLogin = async (req, res, next) => {
     const checkPassword = await compare(password, hashPassword.password);
 
     if (!checkPassword) {
-      handleHtppError(res, "Password Invalid", 401);
+      handleHtppError(res, "Invalid Password", 401);
       return;
     }
 
