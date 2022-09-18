@@ -11,9 +11,9 @@ function Sidebar() {
   const path = window.location.pathname;
 
   const menus = [
-    { title: "Dashboard", href: "/", src: "Chart_fill", id: 0 },
-    { title: "Administrator", href: "/administrator", src: "Chat", id: 1 },
-    { title: "Banned", href: "/banned", src: "Folder", id: 2 },
+    { title: "Dashboard", href: "/", src: "ArrowWhite", id: 0 },
+    { title: "Administrator", href: "/administrator", src: "Chart_fill", id: 1 },
+    { title: "Banned", href: "/banned", src: "GhostBanned", id: 2 },
 
     { title: "Videos", href: "/videospa", src: "User", gap: true, id: 3 },
     { title: "Courses", href: "/coursespa", src: "User", id: 4 },
@@ -21,7 +21,7 @@ function Sidebar() {
     { title: "Users", href: "/userspa", src: "User", id: 6 },
 
     // { title: "Search", href: "", src: "Search", gap: true, id: 7 },
-    { title: "Setting", href: "/setting", src: "Setting", gap: true, id: 8 },
+    // { title: "Setting", href: "/setting", src: "Setting", gap: true, id: 8 },
   ];
   return (
     <div  className="flex">
@@ -66,6 +66,7 @@ function Sidebar() {
                 }}
               >
                 <img
+                  
                   src={require(`../../utils/images/sidebar/${menu.src}.png`)}
                   alt="links"
                 />
