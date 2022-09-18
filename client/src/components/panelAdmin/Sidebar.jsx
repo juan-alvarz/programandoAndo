@@ -18,7 +18,7 @@ function Sidebar() {
     { title: "Videos", href: "/videospa", src: "User", gap: true, id: 3 },
     { title: "Courses", href: "/coursespa", src: "User", id: 4 },
     { title: "Schools", href: "/schoolspa", src: "User", id: 5 },
-    { title: "Users", href: "/userspa", src: "User", id: 6 },
+    { title: "Users", href: "/userspa", src: "User", id: 6 }, 
 
     // { title: "Search", href: "", src: "Search", gap: true, id: 7 },
     // { title: "Setting", href: "/setting", src: "Setting", gap: true, id: 8 },
