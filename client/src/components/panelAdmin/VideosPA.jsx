@@ -181,22 +181,22 @@ function VideosPA() {
           {/* <NavbarPA /> */}
           <div className="h-screen">
             <form
-              className="w-96 max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               onSubmit={handleSubmit(onSubmit)}
               action="#"
               method="POST"
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 className="text-gray-700 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Create Video
               </h2>
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Name
-              </label>
+              </label> */}
               <input
                 name="name"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Name"
                 {...register("name", {
                   required: true,
@@ -217,13 +217,13 @@ function VideosPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Author
-              </label>
+              </label> */}
               <input
                 name="author"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Author"
                 {...register("author", {
                   required: true,
@@ -233,13 +233,13 @@ function VideosPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Duration
-              </label>
+              </label> */}
               <input
                 name="duration"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Duration"
                 {...register("duration", {
                   required: true,
@@ -249,13 +249,13 @@ function VideosPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <div className="mt-4">
-                <label
+              <div className="mb-2">
+                {/* <label
                   htmlFor="Difficult"
                   className="block text-sm font-bold text-black undefined"
                 >
                   Difficult
-                </label>
+                </label> */}
                 <Select
                   name="difficult"
                   options={optionDifficult}
@@ -267,13 +267,13 @@ function VideosPA() {
                 />
               </div>
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              <label className="text-gray-700 font-bold mb-1" htmlFor="">
                 Profile Video
               </label>
               <input
                 name="profile"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="http://..."
                 {...register("profile", {
                   required: true,
@@ -290,13 +290,13 @@ function VideosPA() {
                 </small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              <label className="text-gray-700 font-bold mb-1" htmlFor="">
                 URL Video
               </label>
               <input
                 name="url"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="http://..."
                 {...register("url", {
                   required: true,
@@ -313,13 +313,13 @@ function VideosPA() {
                 </small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Description
-              </label>
+              </label> */}
               <textarea
                 // style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -327,7 +327,7 @@ function VideosPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-5">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
@@ -343,16 +343,16 @@ function VideosPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-96 max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 className="text-gray-700 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Edit Video
               </h2>
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Select Video
-              </label>
+              </label> */}
               <Select
                 options={optionListVideos}
                 placeholder="Select Video"
@@ -362,12 +362,12 @@ function VideosPA() {
                 className="font-light"
               />
 
-              <h2 className="text-gray-700 font-bold pt-5 text-center text-xl">
+              <h2 className="text-gray-700 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Form to Edit
               </h2>
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Name
-              </label>
+              </label> */}
               <input
                 name="name"
                 type="text"
@@ -376,9 +376,9 @@ function VideosPA() {
                 placeholder="Name"
                 onChange={(e) => handleChange(e)}
               />
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Author
-              </label>
+              </label> */}
               <input
                 name="author"
                 type="text"
@@ -387,9 +387,9 @@ function VideosPA() {
                 placeholder="Author"
                 onChange={(e) => handleChange(e)}
               />
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Duration
-              </label>
+              </label> */}
               <input
                 name="duration"
                 type="text"
@@ -398,12 +398,12 @@ function VideosPA() {
                 placeholder="Duration"
                 onChange={(e) => handleChange(e)}
               />
-              <label
+              {/* <label
                 htmlFor="Difficult"
                 className="block text-sm font-bold text-black undefined"
               >
                 Difficult
-              </label>
+              </label> */}
               <Select
                 name="difficult"
                 options={optionDifficult}
@@ -437,9 +437,9 @@ function VideosPA() {
                 onChange={(e) => handleChange(e)}
               />
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Description
-              </label>
+              </label> */}
 
               <textarea
                 style={{ resize: "none" }}
@@ -464,18 +464,18 @@ function VideosPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-96 max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
                 Delete Video
               </h2>
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Select Videos
-              </label>
+              </label> */}
               <Select
                 options={optionListVideos}
-                placeholder="Select course"
+                placeholder="Select video"
                 value={videoDelete}
                 onChange={handleSelectDelete}
                 isSearchable={true}

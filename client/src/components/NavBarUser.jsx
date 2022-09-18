@@ -7,7 +7,6 @@ import { DetailSchool } from "./DetailSchool";
 import img from "../utils/images/LOGOCOMPLETOPA.png";
 import { getAllNotifications } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 
 
@@ -22,8 +21,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function NavBarUser({delete_cookie}) {
-  console.log(DetailSchool)
+function NavBarUser() {
+
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { notifications } = useSelector((state) => state.programandoando);
@@ -32,11 +31,10 @@ function NavBarUser({delete_cookie}) {
     dispatch(getAllNotifications());
   }, [dispatch]);
 
-  const handlelogout = async (e) => {
+  const handlelogout = (e) => {
     e.preventDefault();
 
     window.localStorage.removeItem("user");
-    delete_cookie("github-jwt")
     setTimeout(function () {
     
         navigate("/");

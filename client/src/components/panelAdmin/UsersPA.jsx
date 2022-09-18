@@ -191,7 +191,7 @@ function CoursesPA() {
               <input
                 name="name"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Title"
                 {...register("name", {
                   required: true,
@@ -217,7 +217,7 @@ function CoursesPA() {
               <textarea
                 // style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -257,6 +257,7 @@ function CoursesPA() {
                 value={courseEdit}
                 onChange={handleSelectEdit}
                 isSearchable={true}
+                className='font-light'
               />
               <div className="flex justify-end items-center my-4 mt-10">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 ">
@@ -286,6 +287,7 @@ function CoursesPA() {
                 value={videoDelete}
                 onChange={handleSelectDelete}
                 isSearchable={true}
+                className='font-light'
               />
 
               <div className="flex justify-end items-center my-4 mt-10">

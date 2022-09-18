@@ -225,7 +225,7 @@ function CoursesPA() {
               <input
                 name="name"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Name"
                 {...register("name", {
                   required: true,
@@ -251,7 +251,7 @@ function CoursesPA() {
               <input
                 name="image"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
                 {...register("image", {
                   required: true,
@@ -275,7 +275,7 @@ function CoursesPA() {
               <textarea
                 // style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -293,6 +293,7 @@ function CoursesPA() {
                 value={video}
                 onChange={handleSelect}
                 isSearchable={true}
+                className="font-light"
               />
               <div
                 style={{
@@ -349,6 +350,7 @@ function CoursesPA() {
                 value={courseEdit}
                 onChange={handleSelectEdit}
                 isSearchable={true}
+                className="font-light"
               />
 
               {/* Edit form */}
@@ -361,7 +363,7 @@ function CoursesPA() {
                 name="name"
                 type="text"
                 value={render.name}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Name"
                 onChange={(e) => handleChange(e)}
               />
@@ -370,7 +372,7 @@ function CoursesPA() {
                 name="image"
                 type="text"
                 value={render.image}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
                 onChange={(e) => handleChange(e)}
               />
@@ -379,7 +381,7 @@ function CoursesPA() {
                 style={{ resize: "none" }}
                 name="description"
                 value={render.description}
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 onChange={(e) => handleChange(e)}
               />
@@ -413,6 +415,7 @@ function CoursesPA() {
                 value={videoEdit} //pendiente
                 onChange={handleSelectVideos}
                 isSearchable={true}
+                className="font-light"
               />
               <div
                 style={{
@@ -468,6 +471,7 @@ function CoursesPA() {
                 value={courseDelete}
                 onChange={handleSelectDelete}
                 isSearchable={true}
+                className="font-light"
               />
 
               <div className="flex justify-end items-center my-4 mt-10">
