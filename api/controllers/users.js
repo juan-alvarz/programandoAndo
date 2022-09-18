@@ -199,7 +199,7 @@ const userLogin = async (req, res, next) => {
 };
 
 const googleUserLogin = async (req, res, next) => {
-  const { name, username, email } = req.body;
+  const { name, username, email, image } = req.body;
   // console.log(req.body);
 
   let find = await usersModel.findOne({ email });
@@ -212,6 +212,7 @@ const googleUserLogin = async (req, res, next) => {
       name,
       username,
       email,
+      image,
       confirmationCode: emailToken,
     });
     user.set("password", undefined, { strict: false }); // oculto la password

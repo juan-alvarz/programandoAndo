@@ -60,17 +60,18 @@ const gitHubData = async (req, res, next) => {
   const gitHubUser = await getGitHubUser(code);
   const token = jwt.sign(gitHubUser, SECRET);
 
-  let { login, name, email } = jwt_decode(token);
+  let { login, name, email, avatar_url } = jwt_decode(token);
+  let image = { url: avatar_url, public_id: "" };
   let username = login;
 
-  req.body = { email, name, username };
+  req.body = { email, name, username, image };
   // console.log(req.body);
   next();
   // res.send(token);
 };
 
 const gitHubCreate = async (req, res, next) => {
-  const { name, username, email, path } = req.body;
+  const { name, username, email, image } = req.body;
   console.log(req.body);
 
   let find = await usersModel.findOne({ email });
@@ -83,6 +84,7 @@ const gitHubCreate = async (req, res, next) => {
       name,
       username,
       email,
+      image,
       confirmationCode: emailToken,
     });
     user.set("password", undefined, { strict: false }); // oculto la password

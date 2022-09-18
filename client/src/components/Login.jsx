@@ -83,13 +83,13 @@ export default function Login() {
           setTimeout(function() {
             setError("");
           }, 2000);
-          Swal.fire({
-            title: "Unsuccessful login",
-            text: "You must log in with an existing account",
-            icon: "error",
-            timer: 2000,
-            showConfirmButton: false,
-          });
+          // Swal.fire({
+          //   title: "Unsuccessful login",
+          //   text: "You must log in with an existing account",
+          //   icon: "error",
+          //   timer: 2000,
+          //   showConfirmButton: false,
+          // });
         }
       }, 500);
     }

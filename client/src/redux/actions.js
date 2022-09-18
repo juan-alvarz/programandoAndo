@@ -235,8 +235,16 @@ export const userLogin = (payload) => async (dispatch) => {
 
       dispatch(getSession(res.data));
     })
+    .catch((error) =>
+      Swal.fire({
+        title: "Login Error",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      })
+    );
 
-    .catch((e) => console.log(e));
   return response;
 };
 
