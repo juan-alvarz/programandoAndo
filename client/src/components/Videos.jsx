@@ -50,19 +50,8 @@ export const Videos = (props) => {
       Swal.fire({
         icon: "warning",
         title: "Access to videos denied...",
-        text: "You cannot login if you are not logged in. Please log in",
-        // footer: '<a href="">Why do I have this issue?</a>'
+        text: "You are not logged in. Please log in",
       });
-      // Swal.fire({
-      //   title: "Access to videos denied",
-      //   text: "You cannot login if you are not logged in. Please log in",
-      //   icon: "warning",
-      //   confirmButtonText: "Log in",
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     navigate("/login");
-      //   }
-      // })
     }
   };
 

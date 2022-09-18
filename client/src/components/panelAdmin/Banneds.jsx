@@ -4,12 +4,18 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Error404 from "../Error404";
 
 import { getUsersBanned, restoreUser } from "../../redux/actions";
 
 function Banned() {
   const dispatch = useDispatch();
   const { userBanned } = useSelector((state) => state.programandoando);
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+
+  let role = userObj && userObj.user.role;
 
   useEffect(() => {
     dispatch(getUsersBanned());
@@ -43,7 +49,7 @@ function Banned() {
     setBannedDelete("Select User");
   };
 
-  return (
+  return role === "admin" ? (
     <div className="text-2x1 font-semibold flex">
       <Sidebar />
       <div className="h-full w-full flex justify-center mt-10">
@@ -79,6 +85,8 @@ function Banned() {
         </div>
       </div>
     </div>
+  ) : (
+    <Error404 />
   );
 }
 

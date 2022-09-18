@@ -316,7 +316,7 @@ export default function Video() {
     ) : (
       Swal.fire({
         title: "Access to videos denied",
-        text: "You cannot login if you are not logged in. Please log in",
+        text: "You are not logged in. Please log in",
         icon: "warning",
         confirmButtonText: "Log in",
       }).then((result) => {

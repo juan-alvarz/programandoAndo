@@ -4,6 +4,7 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import Error404 from "../Error404";
 import {
   getAllCourses,
   getAllVideos,
@@ -21,6 +22,11 @@ function CoursesPA() {
   // const courseSlice = useSelector((state) => state.programandoando.course);
   // console.log(courseSlice);
   const [contador, setContador] = useState(0);
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  let role = userObj && userObj.user.role;
+
   useEffect(() => {
     dispatch(getAllCourses());
     dispatch(getAllVideos());
@@ -198,7 +204,7 @@ function CoursesPA() {
     dispatch(deleteCourseById(id));
     setCourseDelete("Selec Course");
   };
-  return (
+  return role === "admin" ? (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
       <div
@@ -255,8 +261,7 @@ function CoursesPA() {
                 placeholder="http://..."
                 {...register("image", {
                   required: true,
-                  pattern:
-                    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                  pattern: /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                   pattern: /.*(png|jpg|jpeg|gif)$/,
                 })}
               />
@@ -287,15 +292,15 @@ function CoursesPA() {
                 Videos
               </label> */}
               <div className="mb-2">
-              <Select
-                name="video"
-                options={optionListVideos}
-                placeholder="All Videos"
-                value={video}
-                onChange={handleSelect}
-                isSearchable={true}
-                className="font-light"
-              />
+                <Select
+                  name="video"
+                  options={optionListVideos}
+                  placeholder="All Videos"
+                  value={video}
+                  onChange={handleSelect}
+                  isSearchable={true}
+                  className="font-light"
+                />
               </div>
               <div
                 style={{
@@ -490,6 +495,8 @@ function CoursesPA() {
         </div>
       </div>
     </div>
+  ) : (
+    <Error404 />
   );
 }
 
