@@ -41,18 +41,18 @@ export default function Login() {
     }
   };
   const handleLogin = (e) => {
-    let emailRegex =
-      /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     e.preventDefault();
     if (!emailRegex.test(email)) {
       setEmailError("Invalid email");
-      setTimeout(function () {
+      setTimeout(function() {
         setEmailError("");
       }, 3000);
     }
+
     if (password.length > 64 || password.length < 8) {
       setPassError("The password must be between 8 and 64 characters");
-      setTimeout(function () {
+      setTimeout(function() {
         setPassError("");
       }, 3000);
     } else if (emailRegex.test(email)) {
@@ -63,12 +63,12 @@ export default function Login() {
       setPassword("");
       setEmail("");
 
-      setTimeout(function () {
+      setTimeout(function() {
         let usuarioLocal = window.localStorage.getItem("user");
 
         if (usuarioLocal) {
           setError("login exitoso");
-          setTimeout(function () {
+          setTimeout(function() {
             navigate("/");
           }, 2000);
           Swal.fire({
@@ -80,7 +80,7 @@ export default function Login() {
           });
         } else {
           setError("login incorrecto");
-          setTimeout(function () {
+          setTimeout(function() {
             setError("");
           }, 2000);
           Swal.fire({
@@ -181,7 +181,7 @@ export default function Login() {
         <div className="flex mt-4 gap-x-2">
           <Google />
         </div>
-        <GitHub/>
+        <GitHub />
         <p className="mt-8 text-xs font-medium text-center text-black">
           Don't have an account?
           <a
