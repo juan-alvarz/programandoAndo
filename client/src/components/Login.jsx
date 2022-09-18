@@ -178,10 +178,14 @@ export default function Login() {
         <div className="relative flex items-center justify-center w-full mt-6 border border-t">
           <div className="absolute px-5 bg-white font-bold">Or</div>
         </div>
-        <div className="flex mt-4 gap-x-2">
-          <Google />
+        <div style={{display: "flex"}}>
+          <div className="flex mt-4 ">
+            <Google />
+          </div>
+          <div className="flex mt-3.5 ">
+          <GitHub/>
+          </div>
         </div>
-        <GitHub/>
         <p className="mt-8 text-xs font-medium text-center text-black">
           Don't have an account?
           <a

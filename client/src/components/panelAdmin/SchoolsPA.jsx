@@ -247,7 +247,7 @@ function SchoolsPA() {
       <Sidebar />
       <div
         className="w-full h-full flex justify-around"
-        style={{ backgroundColor: "#C9C4B8" }}
+        style={{ backgroundColor: "rgb(240, 240, 240)" }}
       >
         {/* 1hool */}
         <div>
@@ -269,7 +269,7 @@ function SchoolsPA() {
               <input
                 name="name"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Name"
                 {...register("name", {
                   required: true,
@@ -295,7 +295,7 @@ function SchoolsPA() {
               <input
                 name="image"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
                 {...register("image", {
                   required: true,
@@ -319,7 +319,7 @@ function SchoolsPA() {
               <textarea
                 // style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -337,6 +337,7 @@ function SchoolsPA() {
                 value={course}
                 onChange={handleSelect}
                 isSearchable={true}
+                className="font-light"
               />
               <div
                 style={{
@@ -393,6 +394,7 @@ function SchoolsPA() {
                 value={schoolSelectValue}
                 onChange={handleSelectEdit}
                 isSearchable={true}
+                className='font-light'
               />
 
               <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
@@ -402,7 +404,7 @@ function SchoolsPA() {
                 name="name"
                 type="text"
                 value={render.name}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="Name"
                 onChange={(e) => handleChange(e)}
               />
@@ -411,7 +413,7 @@ function SchoolsPA() {
                 name="image"
                 type="text"
                 value={render.image}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
                 placeholder="http://..."
                 onChange={(e) => handleChange(e)}
               />
@@ -420,7 +422,7 @@ function SchoolsPA() {
                 style={{ resize: "none" }}
                 name="description"
                 value={render.description}
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 onChange={(e) => handleChange(e)}
               />
@@ -455,6 +457,7 @@ function SchoolsPA() {
                 value={courseEdit}
                 onChange={handleSelectCourses}
                 isSearchable={true}
+                className="font-light"
               />
               <div
                 style={{
@@ -512,6 +515,7 @@ function SchoolsPA() {
                 value={schoolDelete}
                 onChange={handleSelectDelete}
                 isSearchable={true}
+                className="font-light"
               />
 
               <div className="flex justify-end items-center my-4 mt-10">

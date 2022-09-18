@@ -148,7 +148,6 @@ function Home() {
           position: "fixed",
           right: "20px",
           bottom: "20px",
-          zIndex: 100,
         }}
       >
         <Chat />

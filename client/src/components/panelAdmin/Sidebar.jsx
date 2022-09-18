@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import arrowMenu from "../../utils/images/sidebar/control.png";
-import logo from "../../utils/images/sidebar/logo.png";
+// import logo from "../../utils/images/sidebar/logo.png";
+import logo from '../../utils/images/LOGOPA.png'
 
 function Sidebar() {
   const [click, setClick] = useState(0);
@@ -23,44 +24,43 @@ function Sidebar() {
     { title: "Setting", href: "/setting", src: "Setting", gap: true, id: 8 },
   ];
   return (
-    <div className="flex">
+    <div  className="flex">
       <div
+        style={{ backgroundColor: "rgb(17, 52, 82)" }}
         className={`${
-          open ? "w-72" : "w-20"
+          open ? "w-60" : "w-20"
         } duration-300 h-screen p-5 pt-8 bg-blue-900 relative`}
       >
         <img
           src={arrowMenu}
           alt="arrowMenu"
-          className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 border-blue-900 ${
-            !open && "rotate-180"
-          }`}
+          className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 border-blue-900 ${!open &&
+            "rotate-180"}`}
           onClick={() => setOpen(!open)}
         />
-        <div className="flex gap-x-4 items-center">
+        <div className="flex gap-x-4 justify-center">
           <img
+            style={{width: 150}}
             src={logo}
             alt="logo"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
+            className={`cursor-pointer duration-500 ${open &&
+              "rotate-[360deg]"}`}
           />
-          <h1
-            className={`text-white origin-left font-medium text-xl duration-300 ${
-              !open && "scale-0"
-            }`}
+          {/* <h1
+            className={`text-white origin-left font-medium text-xl duration-300 ${!open &&
+              "scale-0"}`}
           >
             ProgramandoAndo
-          </h1>
+          </h1> */}
         </div>
         <ul className="pt-6">
           {menus.map((menu, index) => (
             <NavLink to={menu.href} key={index}>
               <li
                 key={index}
-                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-white rounded-md ${
+                className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-sky-900 rounded-md ${
                   menu.gap ? "mt-9" : "mt-2"
-                } ${menu.href === path ? "bg-white bg-opacity-50" : ""}`}
+                } ${menu.href === path ? "bg-sky-900 bg-opacity-60" : ""}`}
                 onClick={() => {
                   setClick(menu.id);
                 }}

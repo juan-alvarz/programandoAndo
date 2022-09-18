@@ -124,14 +124,13 @@ const UserSchema = new Schema(
     image: {
       url: {
         type: String,
-        default :""
+        default: "",
       },
       public_id: {
         type: String,
-        default :""
-
-      }
-    }
+        default: "",
+      },
+    },
   },
   {
     timestamps: true,
