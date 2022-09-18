@@ -133,7 +133,7 @@ function CoursesPA() {
               action="#"
               method="POST"
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Notification
               </h2>
 
@@ -196,7 +196,7 @@ function CoursesPA() {
               className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Edit User
               </h2>
               <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -226,7 +226,7 @@ function CoursesPA() {
               className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Delete User
               </h2>
               <label className="text-gray-700 font-bold py-2" htmlFor="">

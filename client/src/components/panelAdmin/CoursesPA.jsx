@@ -215,7 +215,7 @@ function CoursesPA() {
               action="#"
               method="POST"
             >
-              <h2 className="text-gray-700 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Create Course
               </h2>
 
@@ -273,9 +273,9 @@ function CoursesPA() {
                 Description
               </label> */}
               <textarea
-                // style={{ resize: "none" }}
+                style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 py-1 px-3 mb-2 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -320,7 +320,7 @@ function CoursesPA() {
                 ))}
               </div>
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-6">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
@@ -340,7 +340,7 @@ function CoursesPA() {
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Edit Course
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -357,7 +357,7 @@ function CoursesPA() {
 
               {/* Edit form */}
 
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Form to Edit
               </h2>
 
@@ -461,7 +461,7 @@ function CoursesPA() {
               className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Delete Course
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">

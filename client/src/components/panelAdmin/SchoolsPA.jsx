@@ -254,12 +254,12 @@ function SchoolsPA() {
           {/* <NavbarPA /> */}
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               onSubmit={handleSubmit(onSubmit)}
               action="#"
               method="POST"
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Create School
               </h2>
 
@@ -378,11 +378,11 @@ function SchoolsPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Edit School
               </h2>
               <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -397,7 +397,7 @@ function SchoolsPA() {
                 className='font-light'
               />
 
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Form to Edit
               </h2>
               <input
@@ -500,10 +500,10 @@ function SchoolsPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Delete Schools
               </h2>
               <label className="text-gray-700 font-bold py-2" htmlFor="">

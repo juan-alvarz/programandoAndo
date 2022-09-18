@@ -4,6 +4,7 @@ import { updateUser, getUsers, getUser } from "../redux/actions";
 import { NavLink } from "react-router-dom";
 import Cloudinary from "./Cloudinary";
 import ImageDefault from "../utils/images/userDefault.jpg";
+import NavBar from "./NavBar";
 
 function ProfilelUser() {
   let userLocal = window.localStorage.getItem("user");
@@ -46,6 +47,7 @@ function ProfilelUser() {
 
   return (
     <div>
+        <NavBar/>
       <div className=" bg-gray-200 flex flex-wrap items-center justify-center">
         <div className="container max-w-lg bg-white rounded shadow-lg transform duration-200 easy-in-out m-12">
           <div className="h-2/4 sm:h-64 overflow-hidden">

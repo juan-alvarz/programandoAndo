@@ -317,7 +317,7 @@ function VideosPA() {
                 Description
               </label> */}
               <textarea
-                // style={{ resize: "none" }}
+                style={{ resize: "none" }}
                 name="description"
                 className="text-gray-700 font-light shadow border rounded border-gray-300 py-1 px-3 mb-2 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
