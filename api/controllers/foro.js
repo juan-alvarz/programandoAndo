@@ -90,7 +90,23 @@ const createForo = async (req, res) => {
     const { commentId, ...body } = req.body;
     try {
       
-      const foro = await foroModel.findById(id); 
+      const foro = await foroModel.findById(id).populate({
+        path: "comments",
+        populate: {
+          path: "authorComment",
+          select: "name",
+        },
+      })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "answers",
+          populate: {
+            path: "authorComment",
+            select: "name",
+          },
+        },
+      }); 
       
       switch (body.change) {
         case "answer":
@@ -119,7 +135,7 @@ const createForo = async (req, res) => {
        console.log("si esta haciendo la accion")
         foro.save();
         return res.status(201).json(foro);
-  
+
         default: return res.status(201).send(foro)
       }
    } catch (error) {
@@ -131,7 +147,23 @@ const updateForo = async (req, res) => {
   const { id } = req.params;
   const { commentId, ...body } = req.body;
   try {
-    const foro = await foroModel.findById(id);
+    const foro = await foroModel.findById(id).populate({
+      path: "comments",
+      populate: {
+        path: "authorComment",
+        select: "name",
+      },
+    })
+    .populate({
+      path: "comments",
+      populate: {
+        path: "answers",
+        populate: {
+          path: "authorComment",
+          select: "name",
+        },
+      },
+    }); ;
 
     // put answer 
     if (commentId) { 

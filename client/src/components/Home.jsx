@@ -3,13 +3,16 @@ import NavBar from "./NavBar";
 import data from "../utils/data";
 import Footer from "./Footer";
 import Puntuation from "./Puntuation"
+import PuntuationNotLogged from "./PuntuationNotLogged"
+import Foro from "./Foro"
+import ForoNotLogged from "./ForoNotLogged"
 import SearchBar from "./SearchBar";
 import {
   getVideoById,
   clearFilter,
   getAllNotifications,
   getUser,
-  getFavorites, 
+  getFavorites
 } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -83,9 +86,17 @@ function Home() {
       <div>
         <Carousel />
       </div>
-      <Footer />
-     {/* <Puntuation /> */}
-     <Puntuation /> 
+   {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+     <br></br>
+     <br></br>
+     <br></br>
+     <h1>ACA ABAJO EL FORO GENERAL</h1>
+     <br></br>
+     <br></br>
+     <br></br>
+     {userObj? <Foro/> : <ForoNotLogged/>  }
+
+     <Footer />
     </div>
   );
 }
