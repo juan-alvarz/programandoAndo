@@ -42,7 +42,6 @@ export default function Google() {
         "595173528563-62kj2r0qatrvjl30lgal6kghk7m4envk.apps.googleusercontent.com",
       callback: handleCallbackResponse,
     });
-
     google.accounts.id.renderButton(document.getElementById("googleSign"), {
       theme: "outline",
       size: "large",

@@ -67,7 +67,7 @@ export default function Login() {
         let usuarioLocal = window.localStorage.getItem("user");
 
         if (usuarioLocal) {
-          setError("login exitoso");
+          // setError("login exitoso");
           setTimeout(function() {
             navigate("/");
           }, 2000);
@@ -79,10 +79,10 @@ export default function Login() {
             showConfirmButton: false,
           });
         } else {
-          setError("login incorrecto");
-          setTimeout(function() {
-            setError("");
-          }, 2000);
+          // setError("login incorrecto");
+          // setTimeout(function() {
+          //   setError("");
+          // }, 2000);
           // Swal.fire({
           //   title: "Unsuccessful login",
           //   text: "You must log in with an existing account",
@@ -229,11 +229,11 @@ export default function Login() {
         <div className="relative flex items-center justify-center w-full mt-6 border border-t">
           <div className="absolute px-5 bg-white font-bold">Or</div>
         </div>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", paddingLeft: 15 }}>
           <div className="flex mt-4 ">
             <Google />
           </div>
-          <div className="flex mt-3.5 ">
+          <div className="flex mt-3.5 " style={{ paddingLeft: 25 }}>
             <GitHub />
           </div>
         </div>
