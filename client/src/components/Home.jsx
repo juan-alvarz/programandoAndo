@@ -10,23 +10,18 @@ import {
   getUser,
   getFavorites,
 } from "../redux/actions";
-import { NavLink, useParams, useSearchParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
-import Google from "./Google";
 import Chat from "./Chat";
-import Swal from "sweetalert2";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
   const { idVideo } = useParams();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.programandoando);
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const query = searchParams.get("message");
 
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
@@ -69,37 +64,6 @@ function Home() {
 
   const stat = useSelector((state) => state.programandoando);
   // window.location.href = "/";
-
-  useEffect(() => {
-    if (query === "Pending_Account_Please_Verify_Your_Email!") {
-      Swal.fire({
-        title: "Ups Something Happens",
-        // text: "Can't create video please try again",
-        text: "Pending Account. Please Verify Your Email!",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    (async function() {
-      const usr = await axios
-        .get(`http://localhost:3001/api/auth/me`, {
-          withCredentials: true,
-        })
-        .then((res) => res.data);
-      if (usr) {
-        Swal.fire({
-          title: "Successful login",
-          text: "You are being redirected to the home",
-          icon: "success",
-          timer: 2000,
-          showConfirmButton: false,
-        });
-      }
-    })();
-  }, []);
 
   // console.log(stat);
   return (

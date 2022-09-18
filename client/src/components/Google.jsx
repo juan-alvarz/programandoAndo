@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 export default function Google() {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
@@ -21,15 +20,15 @@ export default function Google() {
     dispatch(googleUserLogin({ token })).then((r) => console.log(r));
 
     // console.log(userObject);
-    setUser(userObject);
+    // setUser(userObject);
 
-    document.getElementById("googleSign").hidden = true; 
-    setTimeout(function () {
-      navigate("/");
-    }, 2000);
+    // document.getElementById("googleSign").hidden = true;
+    // setTimeout(function () {
+    //   navigate("/");
+    // }, 2000);
   };
 
-  console.log(user);
+  // console.log(user);
 
   const handleSignOut = (event) => {
     setUser({});
@@ -59,12 +58,12 @@ export default function Google() {
       {Object.keys(user).length != 0 && (
         <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
       )}
-      {user && (
+      {/* {user && (
         <div>
           <img src={user.picture}></img>
           <h3>{user.name}</h3>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

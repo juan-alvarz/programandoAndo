@@ -244,21 +244,27 @@ export const googleUserLogin = (payload) => async (dispatch) => {
   const response = await axios
     .post("http://localhost:3001/api/users/google_login", payload)
     .then((res) => {
-      if (res.data.user.status === "pending") {
+      if (res.data.newUser === true) {
         Swal.fire({
-          title: "Ups Something Happens",
+          title: "Thans for register",
           // text: "Can't create video please try again",
           text: "Pending Account. Please Verify Your Email!",
-          icon: "error",
+          icon: "warning",
           confirmButtonText: "OK",
         });
-      } else {
+        return;
+      }
+      if (res.data.user.status === "active") {
         Swal.fire({
           title: "Successful login",
           text: "You are being redirected to the home",
           icon: "success",
-          timer: 2000,
-          showConfirmButton: false,
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // navigate("/");
+            window.location.href = "http://localhost:3000";
+          }
         });
         dispatch(getSession(res.data));
         window.localStorage.setItem("user", JSON.stringify(res.data));

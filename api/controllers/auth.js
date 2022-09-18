@@ -92,13 +92,20 @@ const gitHubCreate = async (req, res, next) => {
       user,
     };
     sendConfirmationEmail(user.username, user.email, user.confirmationCode);
-    res.redirect("http://localhost:3000");
+    res.redirect(
+      url.format({
+        pathname: "http://localhost:3000/login",
+        query: {
+          message: "Thanks_for_register",
+        },
+      })
+    );
   } else {
     if (find.status !== "active") {
       // handleHtppError(res, "Pending Account. Please Verify Your Email!", 401);
       res.redirect(
         url.format({
-          pathname: "http://localhost:3000",
+          pathname: "http://localhost:3000/login",
           query: {
             message: "Pending_Account_Please_Verify_Your_Email!",
           },
@@ -110,7 +117,7 @@ const gitHubCreate = async (req, res, next) => {
         user: find,
       };
       res.cookie(COOKIE_NAME, dataGithub.token);
-      res.redirect("http://localhost:3000");
+      res.redirect("http://localhost:3000/login");
     }
   }
 };
