@@ -29,6 +29,7 @@ import {
   getSession,
   getFavoriteCourse,
   getScoringCourse,
+  getownPath,
   getNotifications,
   getAllUsersBanned,
 } from "./slice";
@@ -105,6 +106,12 @@ export const getScoring = (id) => async (dispatch) => {
   console.log("hola");
   console.log(user.data.scoring);
   dispatch(getScoringCourse(user.data.scoring));
+};
+
+export const getownPathCourse = (id) => async (dispatch) => {
+  const user = await axios.get(`http://localhost:3001/api/users/${id}`);
+  
+  dispatch(getownPath(user.data.ownPath));
 };
 
 // export const createsCourse = (payload) => async (dispatch) => {
@@ -218,6 +225,13 @@ export const getUser = (id) => (dispatch) => {
     .then((res) => dispatch(getUserById(res.data)))
     .catch((e) => console.log(e));
 };
+
+export const userOpinion = (id, payload) => async (dispatch)=> {
+  await axios
+  .put(`http://localhost:3001/api/users/userOpinion/${id}`, payload)
+  .then((res) => dispatch(getUserById(res.data)))
+  .catch((e) => console.log(e))
+}
 
 export const createsUser = (payload) => async (dispatch) => {
   const response = await axios.post(
@@ -372,8 +386,8 @@ export const getVideoByName = (name) => (dispatch) => {
 
 // =========================== Foro del video, utiliza el id de foro que trae el video ===================
 
-export const getForoById = (id) => (dispatch) => {
-  axios
+export const getForoById = (id) =>  (dispatch) => {
+   axios 
     .get(`http://localhost:3001/api/foros/${id}`)
     .then((res) => dispatch(getForo(res.data)))
     .catch((e) => console.log(e));
@@ -386,12 +400,12 @@ export const getAllForos = () => (dispatch) => {
     .catch((e) => console.log(e));
 };
 
-export const updateForo = (idForo, payload) => (dispatch) => {
+export const updateForo = (idForo ,payload) => (dispatch) => {
   axios
-    .put(`http://localhost:3001/api/foros/${idForo}`, payload)
-    .then((res) => dispatch(getForo(res.data)))
-    .catch((e) => console.log(e));
-};
+  .put(`http://localhost:3001/api/foros/${idForo}`, payload)
+  .then((res) => dispatch(getForo(res.data)))
+  .catch((e) => console.log(e));
+}
 
 export const updateDeleteCommentorAnswer = (idForo, payload) => (dispatch) => {
   axios

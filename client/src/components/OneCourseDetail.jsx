@@ -21,6 +21,9 @@ export default function OneCourseDetail() {
     dispatch(getUser(idGet));
   }, [dispatch]);
 
+  console.log(course)
+  console.log(user)
+
   // http://localhost:3001/api/users/:ID [PUT]
   async function handleClickVote(e) {
     e.preventDefault();

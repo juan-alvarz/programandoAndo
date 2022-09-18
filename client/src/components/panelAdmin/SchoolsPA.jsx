@@ -260,22 +260,22 @@ function SchoolsPA() {
           {/* <NavbarPA /> */}
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               onSubmit={handleSubmit(onSubmit)}
               action="#"
               method="POST"
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Create School
               </h2>
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Name
-              </label>
+              </label> */}
               <input
                 name="name"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Name"
                 {...register("name", {
                   required: true,
@@ -295,13 +295,13 @@ function SchoolsPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              <label className="text-gray-700 font-bold mb-1" htmlFor="">
                 Image School
               </label>
               <input
                 name="image"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="http://..."
                 {...register("image", {
                   required: true,
@@ -318,13 +318,13 @@ function SchoolsPA() {
                 </small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Description
-              </label>
+              </label> */}
               <textarea
-                // style={{ resize: "none" }}
+                style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-2 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -332,9 +332,10 @@ function SchoolsPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Courses
-              </label>
+              </label> */}
+              <div className="mb-2">
               <Select
                 name="course"
                 options={optionListCourses}
@@ -344,6 +345,7 @@ function SchoolsPA() {
                 isSearchable={true}
                 className="font-light"
               />
+              </div>
               <div
                 style={{
                   overflow: "scroll",
@@ -367,8 +369,9 @@ function SchoolsPA() {
                 ))}
               </div>
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-5">
                 <button
+                style={{backgroundColor: 'rgb(55, 109, 109)'}}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -383,16 +386,16 @@ function SchoolsPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Edit School
               </h2>
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Select Schools
-              </label>
+              </label> */}
               <Select
                 options={optionListSchools}
                 placeholder="Select school"
@@ -402,14 +405,14 @@ function SchoolsPA() {
                 className="font-light"
               />
 
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Form to Edit
               </h2>
               <input
                 name="name"
                 type="text"
                 value={render.name}
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Name"
                 onChange={(e) => handleChange(e)}
               />
@@ -418,7 +421,7 @@ function SchoolsPA() {
                 name="image"
                 type="text"
                 value={render.image}
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="http://..."
                 onChange={(e) => handleChange(e)}
               />
@@ -427,7 +430,7 @@ function SchoolsPA() {
                 style={{ resize: "none" }}
                 name="description"
                 value={render.description}
-                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-2 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 onChange={(e) => handleChange(e)}
               />
@@ -462,7 +465,7 @@ function SchoolsPA() {
                 value={courseEdit}
                 onChange={handleSelectCourses}
                 isSearchable={true}
-                className="font-light"
+                className="font-light my-2"
               />
               <div
                 style={{
@@ -489,8 +492,9 @@ function SchoolsPA() {
                 ))}
               </div>
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-5">
                 <button
+                style={{backgroundColor: 'rgb(55, 109, 109)'}}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -505,15 +509,15 @@ function SchoolsPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Delete Schools
               </h2>
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Select school
-              </label>
+              </label> */}
               <Select
                 options={optionListSchools}
                 placeholder="Select School"
@@ -523,8 +527,9 @@ function SchoolsPA() {
                 className="font-light"
               />
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-5">
                 <button
+                style={{backgroundColor: 'rgb(55, 109, 109)'}}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   type="button"
                   onClick={() => handleDeleteCourse(schoolDelete["value"])}

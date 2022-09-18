@@ -50,20 +50,26 @@ function Banned() {
   };
 
   return role === "admin" ? (
-    <div className="text-2x1 font-semibold flex">
+    <div
+      style={{ backgroundColor: "rgb(240, 240, 240)" }}
+      className="text-2x1 font-semibold flex"
+    >
       <Sidebar />
-      <div className="h-full w-full flex justify-center mt-10">
+      <div className="h-full w-full flex justify-center">
         <div className="h-screen">
           <form
-            className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+            className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
             action=""
           >
-            <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+            <h2
+              style={{ backgroundColor: "rgb(17, 52, 82)" }}
+              className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+            >
               Restore User
             </h2>
-            <label className="text-gray-700 font-bold py-2" htmlFor="">
+            {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
               Select User
-            </label>
+            </label> */}
             <Select
               options={optionListUsers}
               placeholder="Select users"
@@ -74,6 +80,7 @@ function Banned() {
 
             <div className="flex justify-end items-center my-4 mt-10">
               <button
+                style={{ backgroundColor: "rgb(55, 109, 109)" }}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                 type="button"
                 onClick={() => handleRestoreUser(bannedDelete["value"])}
