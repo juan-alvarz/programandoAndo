@@ -4,7 +4,11 @@ import Select from "react-select";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllVideos, getAllCourses, createSchoolUser } from "../redux/actions";
+import {
+  getAllVideos,
+  getAllCourses,
+  createSchoolUser,
+} from "../redux/actions";
 import Swal from "sweetalert2";
 
 import NavBar from "./NavBar";
@@ -17,8 +21,6 @@ export default function CreateCourse() {
   const dispatch = useDispatch();
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
-
-  console.log(courses);
 
   useEffect(() => {
     dispatch(getAllVideos());
@@ -86,15 +88,13 @@ export default function CreateCourse() {
   const handleDeleteSelect = (value) => {
     const coursesFilter = course.filter((v) => v !== value);
     setCourse(coursesFilter);
-  }; 
+  };
   // console.log(optionList);
-  let pattern =
-    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-  let reg_exUrl =
-    /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
+  let pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  let reg_exUrl = /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
   let reg_exImg = /.*(png|jpg|jpeg|gif)$/;
   return (
-    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+    <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
       <NavBar />
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
@@ -102,7 +102,10 @@ export default function CreateCourse() {
             className="flex flex-col items-center"
             style={{ color: "rgb(168,76,101)" }}
           >
-            <h2 style={{ color: "rgb(17, 52, 82)" }} className="text-3xl font-semibold text-center text-black uppercase">
+            <h2
+              style={{ color: "rgb(17, 52, 82)" }}
+              className="text-3xl font-semibold text-center text-black uppercase"
+            >
               Create route
             </h2>
           </div>
@@ -159,8 +162,7 @@ export default function CreateCourse() {
                 placeholder="Image or Logo course"
                 {...register("image", {
                   required: true,
-                  pattern:
-                    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                  pattern: /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                   pattern: /.*(png|jpg|jpeg|gif)$/,
                 })}
               />
@@ -188,7 +190,9 @@ export default function CreateCourse() {
                 {...register("description", { required: true })}
               />
               {errors.description?.type === "required" && (
-                <small className="text-red-600 font-bold">Description empty</small>
+                <small className="text-red-600 font-bold">
+                  Description empty
+                </small>
               )}
             </div>
 
@@ -240,8 +244,6 @@ export default function CreateCourse() {
                 </span>
                 CREATE ROUTE
               </button>
-
-              <Google />
             </div>
           </form>
         </div>

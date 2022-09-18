@@ -22,7 +22,7 @@ import SchoolsPA from "./components/panelAdmin/SchoolsPA";
 import CoursesPA from "./components/panelAdmin/CoursesPA";
 import UsersPA from "./components/panelAdmin/UsersPA";
 import Administrator from "./components/panelAdmin/Administrator";
-import Baneos from "./components/panelAdmin/Baneos";
+import Banneds from "./components/panelAdmin/Banneds";
 import Loader from "./components/Loader";
 import { Favorites } from "./components/Favorites";
 import CancelDonation from "./components/CancelDonation";
@@ -46,6 +46,7 @@ import Cloudinary from "./components/Cloudinary";
 import { FolderUser } from "./components/FolderUser";
 import AgeCharts from "./components/panelAdmin/AgeCharts";
 import CountryCharts from "./components/panelAdmin/CountryCharts";
+import SubmitPassword from "./components/SubmitPassword";
 
 function App() {
   return (
@@ -75,7 +76,7 @@ function App() {
           <Route path="/coursespa" element={<CoursesPA />} />
           <Route path="/userspa" element={<UsersPA />} />
           <Route path="/administrator" element={<Administrator />} />
-          <Route path="/baneos" element={<Baneos />} />
+          <Route path="/banned" element={<Banneds />} />
           <Route path="/setting" element={<Settings />} />
           <Route path="/execute-payment" element={<SuccessDonation />} />
           <Route path="/cancel-payment" element={<CancelDonation />} />
@@ -105,7 +106,7 @@ function App() {
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
           <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
           <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
-          <Route path="/cloudinary" element={<Cloudinary />} />
+          <Route path="/modify/:changePassCode" element={<SubmitPassword />} />
         </Routes>
       </div>
     </BrowserRouter>
