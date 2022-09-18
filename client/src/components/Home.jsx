@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Puntuation from "./Puntuation";
@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
-import Google from "./Google";
 import Chat from "./Chat";
 
 function Home() {
@@ -64,6 +63,8 @@ function Home() {
   }, [Object.keys(user).length !== 0]);
 
   const stat = useSelector((state) => state.programandoando);
+  // window.location.href = "/";
+
   // console.log(stat);
   return (
     <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>

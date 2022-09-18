@@ -13,7 +13,7 @@ export default function OneCourseDetail() {
   const { idCourse } = useParams();
   const { course, user } = useSelector((state) => state.programandoando);
   const currentUser = JSON.parse(localStorage.getItem("user"));
-  const idGet = currentUser.user._id;
+  const idGet = currentUser && currentUser.user._id;
   window.courseSelect = course;
 
   useEffect(() => {

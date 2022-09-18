@@ -231,13 +231,14 @@ export default function Video() {
                         <h2> -- ESTA ES UNA ANSWER: {answer.content}</h2>
                         <h1>
                           Author de la respuesta:{" "}
-                          {answer.authorComment.name ? (
+                          {answer.authorComment && answer.authorComment.name ? (
                             <h1>Hola</h1>
                           ) : (
                             <h1>No sirve</h1>
                           )}
                         </h1>
-                        {answer.authorComment._id === userObj.user._id ? (
+                        {answer.authorComment &&
+                        answer.authorComment._id === userObj.user._id ? (
                           <button
                             className="button"
                             type="submit"

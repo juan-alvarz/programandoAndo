@@ -6,19 +6,20 @@ import ver from "../utils/images/ver.png";
 import ocultar from "../utils/images/ojo.png";
 import { Link } from "react-router-dom";
 import { userLogin } from "../redux/actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Google from "./Google";
 import GitHub from "./GitHub";
 import NavBar from "./NavBar";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.programandoando);
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const [usuario, setUsuario] = useState({});
-
+  const query = searchParams.get("message");
   useEffect(() => {}, []);
 
   const [password, setPassword] = useState("");
@@ -41,18 +42,17 @@ export default function Login() {
     }
   };
   const handleLogin = (e) => {
-    let emailRegex =
-      /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     e.preventDefault();
     if (!emailRegex.test(email)) {
       setEmailError("Invalid email");
-      setTimeout(function () {
+      setTimeout(function() {
         setEmailError("");
       }, 3000);
     }
     if (password.length > 64 || password.length < 8) {
       setPassError("The password must be between 8 and 64 characters");
-      setTimeout(function () {
+      setTimeout(function() {
         setPassError("");
       }, 3000);
     } else if (emailRegex.test(email)) {
@@ -63,12 +63,12 @@ export default function Login() {
       setPassword("");
       setEmail("");
 
-      setTimeout(function () {
+      setTimeout(function() {
         let usuarioLocal = window.localStorage.getItem("user");
 
         if (usuarioLocal) {
-          setError("login exitoso");
-          setTimeout(function () {
+          // setError("login exitoso");
+          setTimeout(function() {
             navigate("/");
           }, 2000);
           Swal.fire({
@@ -79,17 +79,17 @@ export default function Login() {
             showConfirmButton: false,
           });
         } else {
-          setError("login incorrecto");
-          setTimeout(function () {
-            setError("");
-          }, 2000);
-          Swal.fire({
-            title: "Unsuccessful login",
-            text: "You must log in with an existing account",
-            icon: "error",
-            timer: 2000,
-            showConfirmButton: false,
-          });
+          // setError("login incorrecto");
+          // setTimeout(function() {
+          //   setError("");
+          // }, 2000);
+          // Swal.fire({
+          //   title: "Unsuccessful login",
+          //   text: "You must log in with an existing account",
+          //   icon: "error",
+          //   timer: 2000,
+          //   showConfirmButton: false,
+          // });
         }
       }, 500);
     }
@@ -104,7 +104,58 @@ export default function Login() {
       setVerPassword("password");
     }
   };
+  useEffect(() => {
+    (async function() {
+      const usr = await axios
+        .get(`http://localhost:3001/api/auth/me`, {
+          withCredentials: true,
+        })
+        .then((res) => res.data);
+      if (usr) {
+        // Swal.fire({
+        //   title: "Successful login",
+        //   text: "You are being redirected to the home",
+        //   icon: "success",
+        //   timer: 2000,
+        //   showConfirmButton: false,
+        // });
+        Swal.fire({
+          title: "Successful login",
+          text: "You are being redirected to the home",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          }
+        });
+      }
+    })();
+  }, []);
 
+  useEffect(() => {
+    if (query === "Pending_Account_Please_Verify_Your_Email!") {
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: "Pending Account. Please Verify Your Email!",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (query === "Thanks_for_register") {
+      Swal.fire({
+        title: "Thanks for register",
+        // text: "Can't create video please try again",
+        text: "Now please check your email for verify your account",
+        icon: "info",
+        confirmButtonText: "OK",
+      });
+    }
+  }, []);
   return (
     <div
       style={{ backgroundColor: "rgb(240, 240, 240)" }}
@@ -178,12 +229,12 @@ export default function Login() {
         <div className="relative flex items-center justify-center w-full mt-6 border border-t">
           <div className="absolute px-5 bg-white font-bold">Or</div>
         </div>
-        <div style={{display: "flex"}}>
+        <div style={{ display: "flex", paddingLeft: 20 }}>
           <div className="flex mt-4 ">
             <Google />
           </div>
-          <div className="flex mt-3.5 ">
-          <GitHub/>
+          <div className="flex mt-3.5 " style={{ paddingLeft: 25 }}>
+            <GitHub />
           </div>
         </div>
         <p className="mt-8 text-xs font-medium text-center text-black">

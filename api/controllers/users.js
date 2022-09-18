@@ -126,7 +126,7 @@ const createUser = async (req, res, next) => {
       password,
       confirmationCode: emailToken,
       username,
-      image: {url: "",public_id: ""}
+      image: { url: "", public_id: "" },
     };
     const userData = await usersModel.create(newBody);
     userData.set("password", undefined, { strict: false }); //No muestre la password al crear
@@ -199,7 +199,7 @@ const userLogin = async (req, res, next) => {
 };
 
 const googleUserLogin = async (req, res, next) => {
-  const { name, username, email } = req.body;
+  const { name, username, email, image } = req.body;
   // console.log(req.body);
 
   let find = await usersModel.findOne({ email });
@@ -212,6 +212,7 @@ const googleUserLogin = async (req, res, next) => {
       name,
       username,
       email,
+      image,
       confirmationCode: emailToken,
     });
     user.set("password", undefined, { strict: false }); // oculto la password
@@ -219,6 +220,7 @@ const googleUserLogin = async (req, res, next) => {
     const data = {
       token: await tokenSign(user),
       user,
+      newUser: true,
     };
     sendConfirmationEmail(user.username, user.email, user.confirmationCode);
     res.send(data);
@@ -375,7 +377,7 @@ const updateUser = async (req, res, next) => {
           scoring: body.scoring
             ? [...user.scoring, body.scoring]
             : user.scoring,
-          image: {url: body.url,public_id: body.public_id}
+          image: { url: body.url, public_id: body.public_id },
         }
       );
       if (!data.modifiedCount) {
@@ -403,8 +405,10 @@ const updateUser = async (req, res, next) => {
           scoring: body.scoring
             ? [...user.scoring, body.scoring]
             : user.scoring,
-          image: (body.url && body.public_id) ? {url: body.url, public_id: body.public_id} :
-          {url: user.image.url, public_id: user.image.public_id},
+          image:
+            body.url && body.public_id
+              ? { url: body.url, public_id: body.public_id }
+              : { url: user.image.url, public_id: user.image.public_id },
           isWorking: body.isWorking ? body.isWorking : user.isWorking,
           authorizeNotifications: body.authorizeNotifications
             ? body.authorizeNotifications
