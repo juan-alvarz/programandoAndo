@@ -33,7 +33,6 @@ export default function AllCourses() {
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
 
-  let userID = userObj.user._id;
   const [favoritoAgregado, setFavoritoAgregado] = useState("");
 
   // =============== Paginado ==========================
@@ -201,18 +200,15 @@ export default function AllCourses() {
     const prev = () => {
       if (cursoActual > 1) {
         setCursoActual(cursoActual - 1);
-        // dispatch(getFavorites(userID));
       }
     };
     const next = () => {
       if (cursoActual < Math.ceil(courses.length / cursosPagina)) {
         setCursoActual(cursoActual + 1);
-        // dispatch(getFavorites(userID));
       }
     };
     const paginado = (numeroPagina) => {
       setCursoActual(numeroPagina);
-      // dispatch(getFavorites(userID));
     };
     // ==============================================
     return (
