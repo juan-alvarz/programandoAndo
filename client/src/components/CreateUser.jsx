@@ -39,10 +39,12 @@ export default function CreateUser() {
       date: "",
       language: "",
       country: "",
-      image: { url: "", public_id: "" },
+      image: {
+        url: "",
+        public_id: "",
+      },
     },
   });
-
   // Modificar la vista del inpit password
   const [pass, setPass] = React.useState("password");
   const [passTwo, setPassTwo] = React.useState("password");
@@ -241,7 +243,7 @@ export default function CreateUser() {
                     placeholder="Email"
                     {...register("email", {
                       required: true,
-                      pattern: /^[\w]+@{1}[\w]+\.[a-z]{2,3}$/,
+                      pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                     })}
                   />
                   {errors.email?.type === "required" && (
@@ -272,7 +274,7 @@ export default function CreateUser() {
                     placeholder="Re-Email"
                     {...register("reEmail", {
                       required: true,
-                      pattern: /^[\w]+@{1}[\w]+\.[a-z]{2,3}$/,
+                      pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                     })}
                   />
                   {errors.reEmail?.type === "required" && (

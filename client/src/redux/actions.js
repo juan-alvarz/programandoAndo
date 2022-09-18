@@ -233,7 +233,7 @@ export const userLogin = (payload) => async (dispatch) => {
     .then((res) => {
       window.localStorage.setItem("user", JSON.stringify(res.data));
 
-      dispatch(getSession(res.data));
+      dispatch(getSession(res.data.user));
     })
     .catch((error) =>
       Swal.fire({

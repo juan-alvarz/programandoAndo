@@ -120,13 +120,14 @@ const createUser = async (req, res, next) => {
     let username = body.email.split("@").shift();
     const password = await encrypt(body.password); //encrypta la password
     const emailToken = await verifyEmailToken(body.email);
-
+    let defaultImg =
+      "https://res.cloudinary.com/programandoandopf/image/upload/v1663498930/PF/1053244_ypwq4p.png";
     const newBody = {
       ...body,
       password,
       confirmationCode: emailToken,
       username,
-      image: { url: "", public_id: "" },
+      image: { url: defaultImg, public_id: "" },
     };
     const userData = await usersModel.create(newBody);
     userData.set("password", undefined, { strict: false }); //No muestre la password al crear

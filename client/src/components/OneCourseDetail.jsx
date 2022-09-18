@@ -65,6 +65,7 @@ export default function OneCourseDetail() {
       Object.keys(user).length !== 0
         ? user.scoring?.map((scor) => scor.course._id)
         : null;
+    console.log(idVotados);
     //curso en el que está parado, busca si ya lo votó o no
     const sameVote = idVotados?.find((id) => id === idCourse); //el curso actual y busca si el usuario votó
 
