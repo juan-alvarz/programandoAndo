@@ -186,7 +186,7 @@ function VideosPA() {
               action="#"
               method="POST"
             >
-              <h2 className="text-gray-700 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Create Video
               </h2>
 
@@ -319,7 +319,7 @@ function VideosPA() {
               <textarea
                 // style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 py-1 px-3 mb-2 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -329,6 +329,7 @@ function VideosPA() {
 
               <div className="flex justify-end items-center my-4 mt-5">
                 <button
+                  style={{backgroundColor: 'rgb(55, 109, 109)'}}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -347,7 +348,7 @@ function VideosPA() {
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
-              <h2 className="text-gray-700 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Edit Video
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -362,7 +363,7 @@ function VideosPA() {
                 className="font-light"
               />
 
-              <h2 className="text-gray-700 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Form to Edit
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -372,7 +373,7 @@ function VideosPA() {
                 name="name"
                 type="text"
                 value={render.name}
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Name"
                 onChange={(e) => handleChange(e)}
               />
@@ -383,7 +384,7 @@ function VideosPA() {
                 name="author"
                 type="text"
                 value={render.author}
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Author"
                 onChange={(e) => handleChange(e)}
               />
@@ -394,7 +395,7 @@ function VideosPA() {
                 name="duration"
                 type="text"
                 value={render.duration}
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Duration"
                 onChange={(e) => handleChange(e)}
               />
@@ -404,34 +405,36 @@ function VideosPA() {
               >
                 Difficult
               </label> */}
-              <Select
-                name="difficult"
-                options={optionDifficult}
-                placeholder="Difficult"
-                value={selectedDifficultEdit}
-                onChange={handleSelectDifficultEdit}
-                isSearchable={false}
-                className="font-light"
-              />
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              <div className="mb-2">
+                <Select
+                  name="difficult"
+                  options={optionDifficult}
+                  placeholder="Difficult"
+                  value={selectedDifficultEdit}
+                  onChange={handleSelectDifficultEdit}
+                  isSearchable={false}
+                  className="font-light"
+                />
+              </div>
+              <label className="text-gray-700 font-bold mb-1" htmlFor="">
                 Profile Video
               </label>
               <input
                 name="profile"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="http://..."
                 value={render.profile}
                 onChange={(e) => handleChange(e)}
               />
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              <label className="text-gray-700 font-bold mb-1" htmlFor="">
                 URL Video
               </label>
               <input
                 name="url"
                 type="text"
-                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="http://..."
                 value={render.url}
                 onChange={(e) => handleChange(e)}
@@ -445,12 +448,13 @@ function VideosPA() {
                 style={{ resize: "none" }}
                 name="description"
                 value={render.description}
-                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-2 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 onChange={(e) => handleChange(e)}
               />
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-3">
                 <button
+                  style={{backgroundColor: 'rgb(55, 109, 109)'}}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -467,7 +471,7 @@ function VideosPA() {
               className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
                 Delete Video
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -482,8 +486,9 @@ function VideosPA() {
                 className="font-light"
               />
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-5">
                 <button
+                  style={{backgroundColor: 'rgb(55, 109, 109)'}}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   type="button"
                   onClick={() => handleDeleteVideo(videoDelete["value"])}

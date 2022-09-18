@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import arrowMenu from "../../utils/images/sidebar/control.png";
-import logo from "../../utils/images/sidebar/logo.png";
+// import logo from "../../utils/images/sidebar/logo.png";
+import logo from '../../utils/images/LOGOPA.png'
 
 function Sidebar() {
   const [click, setClick] = useState(0);
@@ -27,7 +28,7 @@ function Sidebar() {
       <div
         style={{ backgroundColor: "rgb(17, 52, 82)" }}
         className={`${
-          open ? "w-72" : "w-20"
+          open ? "w-60" : "w-20"
         } duration-300 h-screen p-5 pt-8 bg-blue-900 relative`}
       >
         <img
@@ -37,19 +38,20 @@ function Sidebar() {
             "rotate-180"}`}
           onClick={() => setOpen(!open)}
         />
-        <div className="flex gap-x-4 items-center">
+        <div className="flex gap-x-4 justify-center">
           <img
+            style={{width: 150}}
             src={logo}
             alt="logo"
             className={`cursor-pointer duration-500 ${open &&
               "rotate-[360deg]"}`}
           />
-          <h1
+          {/* <h1
             className={`text-white origin-left font-medium text-xl duration-300 ${!open &&
               "scale-0"}`}
           >
             ProgramandoAndo
-          </h1>
+          </h1> */}
         </div>
         <ul className="pt-6">
           {menus.map((menu, index) => (
