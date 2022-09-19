@@ -31,7 +31,7 @@ export default function AllCourses() {
 
   //Usuario registrado
   let userLocal = window.localStorage.getItem("user");
-  let userObj = JSON.parse(userLocal);
+  let userObj = userLocal && JSON.parse(userLocal);
 
   const [favoritoAgregado, setFavoritoAgregado] = useState("");
 

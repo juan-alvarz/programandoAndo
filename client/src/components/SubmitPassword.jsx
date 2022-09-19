@@ -13,27 +13,15 @@ export default function SubmitPassword() {
   const { changePassCode } = useParams();
 
   const modifyPassword = async (code, payload) => {
+    dispatch(submitPasswordUpdate(payload, code));
     console.log(code);
     console.log(payload);
-    const response = await axios.post(
-      `http://localhost:3001/api/users/auth/modify/${code}`,
-      payload
-    );
-    return response.data;
   };
-
-  // if (path === `/confirm/${changePassCode}`) {
-  //   verifyUser(changePassCode);
-  // }
-
   const { users } = useSelector((state) => state.programandoando);
 
   console.log(users);
 
   const dispatch = useDispatch();
-
-  // const allEmail = users.map((e) => e.email);
-  // const allId = users.map((i) => i._id);
 
   useEffect(() => {
     dispatch(getUsers());
@@ -79,15 +67,15 @@ export default function SubmitPassword() {
       // handlelogout();
       // dispatch(submitPasswordUpdate({ password: data.password }));
       modifyPassword(changePassCode, { password: data.password });
-      return Swal.fire({
-        text: "Successfully",
-        icon: "success",
-        confirmButtonText: "Back",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/");
-        }
-      });
+      // return Swal.fire({
+      //   text: "Successfully",
+      //   icon: "success",
+      //   confirmButtonText: "Back",
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     navigate("/");
+      //   }
+      // });
     }
   };
 

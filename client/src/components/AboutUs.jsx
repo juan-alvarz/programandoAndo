@@ -14,8 +14,8 @@ import { getUser } from "../redux/actions";
 
 function AboutUs() {
   let userLocal = window.localStorage.getItem("user");
-  let userObj = JSON.parse(userLocal);
-  let idUser = userObj.user._id;
+  let userObj = userLocal && JSON.parse(userLocal);
+  let idUser = userObj && userObj.user._id;
 
   const dispatch = useDispatch();
 
