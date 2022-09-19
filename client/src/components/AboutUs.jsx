@@ -8,7 +8,21 @@ import Fran from "../utils/images/FrancoAboutUs1.png";
 import Dani from "../utils/images/DanielAboutUs1.png";
 import Juan from "../utils/images/JuanAboutUs1.png";
 import Roge from "../utils/images/RogelioAboutUs1.png";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUser } from "../redux/actions";
+
 function AboutUs() {
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  let idUser = userObj.user._id;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(getAllNotifications());
+    dispatch(getUser(idUser));
+  }, [dispatch]);
   return (
     <section style={{ backgroundColor: "rgb(240, 240, 240)" }}>
       <NavBar />

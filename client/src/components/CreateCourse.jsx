@@ -8,6 +8,7 @@ import {
   getAllVideos,
   getAllCourses,
   createSchoolUser,
+  getUser,
 } from "../redux/actions";
 import Swal from "sweetalert2";
 
@@ -21,10 +22,12 @@ export default function CreateCourse() {
   const dispatch = useDispatch();
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
+  let idUser = userObj.user._id;
 
   useEffect(() => {
     dispatch(getAllVideos());
     dispatch(getAllCourses());
+    dispatch(getUser(idUser));
   }, [dispatch]);
 
   // react-hook-forms

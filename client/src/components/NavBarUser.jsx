@@ -31,7 +31,7 @@ function NavBarUser({ delete_cookie }) {
 
   useEffect(() => {
     dispatch(getAllNotifications());
-    dispatch(getUser(idUser));
+    // dispatch(getUser(idUser));
   }, [dispatch]);
 
   const imgUser = Object.keys(user).length !== 0 && user.image.url;

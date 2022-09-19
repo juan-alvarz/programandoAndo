@@ -4,13 +4,15 @@ import Swal from "sweetalert2";
 import Error404 from "./Error404";
 import NavBar from "./NavBar";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../redux/actions";
+import { getUsers, getUser } from "../redux/actions";
 import Footer from "./Footer";
 import logo from "../utils/images/PayPalLogo.png";
 
 function Donators() {
   const [amount, setAmount] = useState(0); // el monto a donar
   const user = JSON.parse(localStorage.getItem("user"));
+
+  let idUser = user.user._id;
   const dispatch = useDispatch();
   const users = useSelector((state) => state.programandoando.users);
 
@@ -30,6 +32,7 @@ function Donators() {
 
   useEffect(() => {
     dispatch(getUsers());
+    dispatch(getUser(idUser));
   }, [dispatch]);
 
   //manda lo que se tiene en el input

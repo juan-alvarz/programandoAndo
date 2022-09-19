@@ -9,14 +9,23 @@ import { Paginated } from "./Paginated";
 import { Videos } from "./Videos";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSchools } from "../redux/actions";
+import { getAllSchools, getUser } from "../redux/actions";
 import { useState } from "react";
 import { CourseDetail } from "./CourseDetail";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 function Courses() {
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  let idUser = userObj.user._id;
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(getAllNotifications());
+    dispatch(getUser(idUser));
+  }, [dispatch]);
 
   const { schools } = useSelector((state) => state.programandoando);
   // console.log(schools);
