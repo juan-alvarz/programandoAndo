@@ -21,7 +21,7 @@ function classNames(...classes) {
 
 function NavBarUser({ delete_cookie }) {
   const { user } = useSelector((state) => state.programandoando);
-  const imgUser = Object.keys(user).length !== 0 && user.image.url;
+  const imgUser = user && Object.keys(user).length !== 0 && user.image.url;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { notifications } = useSelector((state) => state.programandoando);
@@ -189,7 +189,6 @@ function NavBarUser({ delete_cookie }) {
                       </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
                       {/* Bell notification */}
                       <Menu as="div" className="relative ml-1">
                         <div>
@@ -275,8 +274,11 @@ function NavBarUser({ delete_cookie }) {
                             <Menu.Item>
                               {({ active }) => (
                                 <NavLink
-                                  to='/profileUser'
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  to="/profileUser"
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
                                 >
                                   Your Profile
                                 </NavLink>

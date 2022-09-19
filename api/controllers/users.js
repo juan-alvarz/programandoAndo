@@ -120,13 +120,14 @@ const createUser = async (req, res, next) => {
     let username = body.email.split("@").shift();
     const password = await encrypt(body.password); //encrypta la password
     const emailToken = await verifyEmailToken(body.email);
-
+    let defaultImg =
+      "https://res.cloudinary.com/programandoandopf/image/upload/v1663498930/PF/1053244_ypwq4p.png";
     const newBody = {
       ...body,
       password,
       confirmationCode: emailToken,
       username,
-      image: { url: "", public_id: "" },
+      image: { url: defaultImg, public_id: "" },
     };
     const userData = await usersModel.create(newBody);
     userData.set("password", undefined, { strict: false }); //No muestre la password al crear
@@ -158,23 +159,22 @@ const createUser = async (req, res, next) => {
 };
 
 const userOpinion = async (req, res) => {
-  const {id} = req.params
-  const {puntuation, opinion} = req.body
-  const user = await usersModel.findById(id)
+  const { id } = req.params;
+  const { puntuation, opinion } = req.body;
+  const user = await usersModel.findById(id);
   try {
-    if ( opinion && puntuation) {
-      user.pageOpinion = opinion
-      user.pagePuntuation = puntuation
-      user.save()
-      return res.status(200).send(user)
+    if (opinion && puntuation) {
+      user.pageOpinion = opinion;
+      user.pagePuntuation = puntuation;
+      user.save();
+      return res.status(200).send(user);
     } else {
-      res.send("Es necesaria la puntuación y la opinión")
+      res.send("Es necesaria la puntuación y la opinión");
     }
   } catch (e) {
-    return res.json(e.message)
+    return res.json(e.message);
   }
-} 
-
+};
 
 const userLogin = async (req, res, next) => {
   try {
@@ -554,5 +554,5 @@ module.exports = {
   updateFavorites,
   deleteFavorites,
   getAllUsersBanned,
-  userOpinion
+  userOpinion,
 };
