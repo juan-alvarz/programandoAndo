@@ -5,7 +5,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink, useNavigate } from "react-router-dom";
 import { DetailSchool } from "./DetailSchool";
 import img from "../utils/images/LOGOCOMPLETOPA.png";
-import { getAllNotifications } from "../redux/actions";
+import { getAllNotifications, getUser } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const navigation = [
@@ -21,14 +21,20 @@ function classNames(...classes) {
 
 function NavBarUser({ delete_cookie }) {
   const { user } = useSelector((state) => state.programandoando);
-  const imgUser = Object.keys(user).length !== 0 && user.image.url;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { notifications } = useSelector((state) => state.programandoando);
 
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  let idUser = userObj.user._id;
+
   useEffect(() => {
     dispatch(getAllNotifications());
+    // dispatch(getUser(idUser));
   }, [dispatch]);
+
+  const imgUser = Object.keys(user).length !== 0 && user.image.url;
 
   const handlelogout = (e) => {
     e.preventDefault();
@@ -189,7 +195,6 @@ function NavBarUser({ delete_cookie }) {
                       </div>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
                       {/* Bell notification */}
                       <Menu as="div" className="relative ml-1">
                         <div>
@@ -229,7 +234,7 @@ function NavBarUser({ delete_cookie }) {
                               Notifications
                             </div>
                             {notifications.map((e) => {
-                              console.log(notifications);
+                              // console.log(notifications);
                               return (
                                 <Menu.Item>
                                   <div className="px-2 pt-1 pb-2 w-full border-t-2">
@@ -275,8 +280,11 @@ function NavBarUser({ delete_cookie }) {
                             <Menu.Item>
                               {({ active }) => (
                                 <NavLink
-                                  to='/profileUser'
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  to="/profileUser"
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
                                 >
                                   Your Profile
                                 </NavLink>
@@ -295,7 +303,7 @@ function NavBarUser({ delete_cookie }) {
                                 </NavLink>
                               )}
                             </Menu.Item>
-                            <Menu.Item>
+                            {/* <Menu.Item>
                               {({ active }) => (
                                 <NavLink
                                   to="/favorites"
@@ -307,12 +315,15 @@ function NavBarUser({ delete_cookie }) {
                                   Favorites
                                 </NavLink>
                               )}
-                            </Menu.Item>
+                            </Menu.Item> */}
                             <Menu.Item>
                               {({ active }) => (
                                 <NavLink
                                   to="/folderUser"
-                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block px-4 py-2 text-sm text-gray-700"
+                                  )}
                                 >
                                   User Folder
                                 </NavLink>

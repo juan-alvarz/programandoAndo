@@ -136,7 +136,6 @@ function InternalChat() {
                     <button onClick={(e) => handleUserChat(e, user)}>
                       {user.username}
                     </button>
-                    <hr />
                   </div>
                 ))}
               </ol>

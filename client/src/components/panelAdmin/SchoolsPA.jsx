@@ -4,6 +4,8 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import Error404 from "../Error404";
+
 import {
   getAllSchools,
   getAllCourses,
@@ -20,6 +22,10 @@ function SchoolsPA() {
   const { schools, courses } = useSelector((state) => state.programandoando);
 
   // console.log(schools);
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+
+  let role = userObj && userObj.user.role;
 
   useEffect(() => {
     dispatch(getAllSchools());
@@ -242,7 +248,7 @@ function SchoolsPA() {
   //   setVideo(videoFilter);
   // };
 
-  return (
+  return role === "admin" ? (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
       <div
@@ -299,8 +305,7 @@ function SchoolsPA() {
                 placeholder="http://..."
                 {...register("image", {
                   required: true,
-                  pattern:
-                    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                  pattern: /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                   pattern: /.*(png|jpg|jpeg|gif)$/,
                 })}
               />
@@ -397,7 +402,7 @@ function SchoolsPA() {
                 value={schoolSelectValue}
                 onChange={handleSelectEdit}
                 isSearchable={true}
-                className='font-light'
+                className="font-light"
               />
 
               <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
@@ -550,6 +555,8 @@ function SchoolsPA() {
         </div>
       </div>
     </div>
+  ) : (
+    <Error404 />
   );
 }
 

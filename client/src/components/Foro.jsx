@@ -1,57 +1,105 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getForoById, updateForo, updateDeleteCommentorAnswer, getAllForos } from "../redux/actions";
-import { useForm } from 'react-hook-form';
-
-
-
+import {
+  getForoById,
+  updateForo,
+  updateDeleteCommentorAnswer,
+  getAllForos,
+} from "../redux/actions";
+import { useForm } from "react-hook-form";
 
 export default function Foro() {
+  let foroId = "6325148393901f7583647c03";
+  const dispatch = useDispatch();
+  const { foro } = useSelector((state) => state.programandoando);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-    let foroId = "6325148393901f7583647c03"
-    const dispatch = useDispatch();
-    const { foro } = useSelector((state) => state.programandoando);
-    const {register, formState: {errors}, handleSubmit} = useForm();
-
-    const [contador, setContador] = useState(1)
+  const [contador, setContador] = useState(1);
   //  const [contador2, setContador2] = useState(2)
-    const [state, setState] = useState({ input1: "", input2: "" })
+  const [state, setState] = useState({ input1: "", input2: "" });
 
-       useEffect(() => {
-        setTimeout(function(){
-          dispatch(getForoById(foroId));
-        }, 4000)
-       }, [contador]);
+  useEffect(() => {
+    setTimeout(function() {
+      dispatch(getForoById(foroId));
+    }, 4000);
+  }, [contador]);
 
-       useEffect(() => {
-        setTimeout(function(){
-          dispatch(getForoById(foroId));
-        }, 0.1)
-       }, [contador]);
+  useEffect(() => {
+    setTimeout(function() {
+      dispatch(getForoById(foroId));
+    }, 0.1);
+  }, [contador]);
 
+  const usuario = window.localStorage.getItem("user");
+  let userObj = JSON.parse(usuario);
+  // console.log(foro)
+  // COMENTARIO
 
-    const usuario = window.localStorage.getItem('user')
-    let userObj = JSON.parse(usuario);
-    console.log(foro)  
-    // COMENTARIO 
+  const [commentario, setCommentario] = useState({
+    content: "",
+    authorComment: userObj.user._id,
+    commentId: "", // este siempre sale vacio che
+  });
 
-    const [commentario, setCommentario] = useState({
-      content: "",
-      authorComment: userObj.user._id,
-      commentId: "", // este siempre sale vacio che 
+  function handleChange(e) {
+    setCommentario({ ...commentario, content: e.target.value });
+    setState({ ...state, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmitComment(e) {
+    e.preventDefault();
+    dispatch(updateForo(foroId, commentario));
+    setState({ input2: "" });
+    setContador(contador + 1);
+  }
+
+  function deleteComment4(e, id) {
+    e.preventDefault();
+    //return deleteComment
+    dispatch(
+      updateDeleteCommentorAnswer(foroId, {
+        commentId: id,
+        change: "deleteComment",
+      })
+    );
+    dispatch(getForoById(foroId));
+    setContador(contador + 1);
+  }
+
+  function deleteAnswer(e, id, idAnswer) {
+    e.preventDefault();
+    //return deleteComment
+    dispatch(
+      updateDeleteCommentorAnswer(foroId, {
+        commentId: id,
+        change: "deleteAnswer",
+        idAnswer: idAnswer,
+      })
+    );
+    setContador(contador + 1);
+  }
+
+  // RESPUESTA
+  const [respuesta, setRespuesta] = useState({
+    content: "",
+    authorComment: userObj.user._id,
+    commentId: "",
+    change: "respuesta",
+  });
+
+  function handleChangeRespuesta(e) {
+    setRespuesta({
+      ...respuesta,
+      commentId: e.target.dataset.commentid,
+      content: e.target.value,
     });
-  
-    function handleChange(e) {
-      setCommentario({...commentario, content: e.target.value,});
-      setState({...state, [e.target.name]: e.target.value,})
-    }
-  
-    function handleSubmitComment(e) {
-      e.preventDefault();
-      dispatch(updateForo(foroId, commentario))
-      setState({input2: ""})
-      setContador(contador + 1)
-    }
+    setState({ ...state, input1: e.target.value });
+    setContador(contador + 1);
+  }
 
     function deleteComment4(e, id){
       e.preventDefault()
@@ -68,13 +116,7 @@ export default function Foro() {
       setContador(contador + 1)
     }
   
-    // RESPUESTA 
-    const [respuesta, setRespuesta] = useState({
-      content: "",
-      authorComment: userObj.user._id,
-      commentId: "",
-      change: "respuesta"
-    });
+ 
   
     function handleChangeRespuesta(e) {
       setRespuesta({...respuesta, commentId: e.target.dataset.commentid,  content: e.target.value, });
@@ -98,12 +140,12 @@ export default function Foro() {
             <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-t-xl mb-5'>
                <p style={{color: 'rgb(240, 240, 240)'}} className="text-center py-5 text-xl font-bold uppercase"> General Forum </p> 
             </div>
-            <div style={{height: 500}} className='flex justify-center overflow-hidden hover:overflow-y-scroll'>
+            <div style={{height: 500}} className='flex justify-center overflow-hidden hover:overflow-y-scroll scrolling-touch'>
             <form className="bg-white w-10/12" onSubmit={handleSubmit(handleSubmitRespuesta)}> 
             {Object.keys(foro).length > 0 ? (
               foro.comments.map(            
                 (comment) => 
-                <ol style={{borderWidth: 1, height: 320}} className='rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll'>
+                <ol style={{borderWidth: 1, height: 320}} className='rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll scrolling-touch'>
                 <div className="bg-gray-400 rounded-t-md py-1">
                 <p className="text-lg text-center font-bold text-white">{comment.authorComment? comment.authorComment.name: "no se encuenta master"}</p>
                 </div>
@@ -130,7 +172,7 @@ export default function Foro() {
                 </div>
             <div style={{display: 'flex', justifyContent: 'center'}} className="my-5">
               <input
-                className="border border-gray-300 rounded-l-md pl-3"
+                className="border border-gray-300 rounded-l-md pl-3 text-xs"
                 type="text"
                 placeholder="Comment..."
                 data-commentid={comment._id}

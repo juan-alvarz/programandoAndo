@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { set, useForm } from "react-hook-form";
 import { difficult } from "../../utils/difficult";
+import Error404 from "../Error404";
+
 import {
   getAllVideos,
   deleteVideoById,
@@ -17,6 +19,10 @@ import {
 function VideosPA() {
   const dispatch = useDispatch();
   const { videos } = useSelector((state) => state.programandoando);
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  let role = userObj && userObj.user.role;
 
   useEffect(() => {
     dispatch(getAllVideos());
@@ -169,7 +175,7 @@ function VideosPA() {
     // setValue("difficult", data.label);
   }
   // console.log(selectedDifficultEdit)
-  return (
+  return role === "admin" ? (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
       <div
@@ -186,7 +192,10 @@ function VideosPA() {
               action="#"
               method="POST"
             >
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Create Video
               </h2>
 
@@ -277,8 +286,7 @@ function VideosPA() {
                 placeholder="http://..."
                 {...register("profile", {
                   required: true,
-                  pattern:
-                    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                  pattern: /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                 })}
               />
               {errors.profile?.type === "required" && (
@@ -300,8 +308,7 @@ function VideosPA() {
                 placeholder="http://..."
                 {...register("url", {
                   required: true,
-                  pattern:
-                    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                  pattern: /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                 })}
               />
               {errors.url?.type === "required" && (
@@ -329,7 +336,7 @@ function VideosPA() {
 
               <div className="flex justify-end items-center my-4 mt-5">
                 <button
-                  style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -348,7 +355,10 @@ function VideosPA() {
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Edit Video
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -363,7 +373,10 @@ function VideosPA() {
                 className="font-light"
               />
 
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Form to Edit
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -454,7 +467,7 @@ function VideosPA() {
               />
               <div className="flex justify-end items-center my-4 mt-3">
                 <button
-                  style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -471,7 +484,10 @@ function VideosPA() {
               className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Delete Video
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -488,7 +504,7 @@ function VideosPA() {
 
               <div className="flex justify-end items-center my-4 mt-5">
                 <button
-                  style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   type="button"
                   onClick={() => handleDeleteVideo(videoDelete["value"])}
@@ -501,6 +517,8 @@ function VideosPA() {
         </div>
       </div>
     </div>
+  ) : (
+    <Error404 />
   );
 }
 

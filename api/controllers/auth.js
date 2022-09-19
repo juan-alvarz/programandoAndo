@@ -17,110 +17,119 @@ const COOKIE_NAME = "github-jwt";
 const url = require("url");
 
 const getGitHubUser = async (code) => {
-  // console.log(GITHUB);
-  // console.log(GITHUB_SECRET);
-  // console.log(SECRET);
-  const githubToken = await axios
-    .post(
-      `https://github.com/login/oauth/access_token?client_id=${GITHUB}&client_secret=${GITHUB_SECRET}&code=${code}`
-    )
-    .then((res) => res.data)
+  try {
+    const githubToken = await axios
+      .post(
+        `https://github.com/login/oauth/access_token?client_id=${GITHUB}&client_secret=${GITHUB_SECRET}&code=${code}`
+      )
+      .then((res) => res.data)
 
-    .catch((error) => {
-      console.log(error.message);
-    });
-  // console.log(githubToken);
+      .catch((error) => {
+        console.log(error.message);
+      });
+    // console.log(githubToken);
 
-  const decoded = querystring.parse(githubToken);
-  // console.log(decoded);
+    const decoded = querystring.parse(githubToken);
+    // console.log(decoded);
 
-  const accessToken = decoded.access_token;
-  // console.log(accessToken);
+    const accessToken = decoded.access_token;
+    // console.log(accessToken);
 
-  return axios
-    .get("https://api.github.com/user", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-    .then((res) => res.data)
-    .catch((error) => {
-      console.error(`Error getting user from GitHub`);
-      throw error;
-    });
+    return axios
+      .get("https://api.github.com/user", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res) => res.data)
+      .catch((error) => {
+        console.error(`Error getting user from GitHub`);
+        throw error;
+      });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 const gitHubData = async (req, res, next) => {
-  const { code } = req.query;
-  const { path } = req.query;
-  console.log(code);
-  console.log(path);
+  try {
+    const { code } = req.query;
+    const { path } = req.query;
+    console.log(code);
+    console.log(path);
 
-  if (!code) {
-    handleHtppError(res, "No code!", 404);
+    if (!code) {
+      handleHtppError(res, "No code!", 404);
+    }
+    const gitHubUser = await getGitHubUser(code);
+    const token = jwt.sign(gitHubUser, SECRET);
+
+    let { login, name, email, avatar_url } = jwt_decode(token);
+    let image = { url: avatar_url, public_id: "" };
+    let username = login;
+
+    req.body = { email, name, username, image };
+    // console.log(req.body);
+    next();
+    // res.send(token);
+  } catch (error) {
+    console.log(error.message);
   }
-  const gitHubUser = await getGitHubUser(code);
-  const token = jwt.sign(gitHubUser, SECRET);
-
-  let { login, name, email, avatar_url } = jwt_decode(token);
-  let image = { url: avatar_url, public_id: "" };
-  let username = login;
-
-  req.body = { email, name, username, image };
-  // console.log(req.body);
-  next();
-  // res.send(token);
 };
 
 const gitHubCreate = async (req, res, next) => {
-  const { name, username, email, image } = req.body;
-  console.log(req.body);
+  try {
+    const { name, username, email, image } = req.body;
+    console.log(req.body);
 
-  let find = await usersModel.findOne({ email });
-  // console.log(find);
+    let find = await usersModel.findOne({ email });
+    // console.log(find);
 
-  if (!find) {
-    const emailToken = await verifyEmailToken(email);
+    if (!find) {
+      const emailToken = await verifyEmailToken(email);
 
-    let user = await usersModel.create({
-      name,
-      username,
-      email,
-      image,
-      confirmationCode: emailToken,
-    });
-    user.set("password", undefined, { strict: false }); // oculto la password
+      let user = await usersModel.create({
+        name,
+        username,
+        email,
+        image,
+        confirmationCode: emailToken,
+      });
+      user.set("password", undefined, { strict: false }); // oculto la password
 
-    const data = {
-      token: await tokenSign(user),
-      user,
-    };
-    sendConfirmationEmail(user.username, user.email, user.confirmationCode);
-    res.redirect(
-      url.format({
-        pathname: "http://localhost:3000/login",
-        query: {
-          message: "Thanks_for_register",
-        },
-      })
-    );
-  } else {
-    if (find.status !== "active") {
-      // handleHtppError(res, "Pending Account. Please Verify Your Email!", 401);
+      const data = {
+        token: await tokenSign(user),
+        user,
+      };
+      sendConfirmationEmail(user.username, user.email, user.confirmationCode);
       res.redirect(
         url.format({
           pathname: "http://localhost:3000/login",
           query: {
-            message: "Pending_Account_Please_Verify_Your_Email!",
+            message: "Thanks_for_register",
           },
         })
       );
     } else {
-      const dataGithub = {
-        token: await tokenSign(find),
-        user: find,
-      };
-      res.cookie(COOKIE_NAME, dataGithub.token);
-      res.redirect("http://localhost:3000/login");
+      if (find.status !== "active") {
+        // handleHtppError(res, "Pending Account. Please Verify Your Email!", 401);
+        res.redirect(
+          url.format({
+            pathname: "http://localhost:3000/login",
+            query: {
+              message: "Pending_Account_Please_Verify_Your_Email!",
+            },
+          })
+        );
+      } else {
+        const dataGithub = {
+          token: await tokenSign(find),
+          user: find,
+        };
+        res.cookie(COOKIE_NAME, dataGithub.token);
+        res.redirect("http://localhost:3000/login");
+      }
     }
+  } catch (error) {
+    console.log(error.message);
   }
 };
 
