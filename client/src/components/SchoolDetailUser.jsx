@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "./Loader";
 
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 
 import Video from "./Video";
 import Course from "./Course";
@@ -9,41 +9,36 @@ import { Paginated } from "./Paginated";
 import { Videos } from "./Videos";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSchools, getUser } from "../redux/actions";
+import { getAllSchools, getSchool } from "../redux/actions";
 import { useState } from "react";
 import { CourseDetail } from "./CourseDetail";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 function Courses() {
-  let userLocal = window.localStorage.getItem("user");
-  let userObj = userLocal && JSON.parse(userLocal);
-  let idUser = userObj && userObj.user._id;
-
   const dispatch = useDispatch();
+  const params = useParams();
+  //   console.log(params.id);
 
-  useEffect(() => {
-    // dispatch(getAllNotifications());
-    dispatch(getUser(idUser));
-  }, [dispatch]);
-
+  const id = params.id;
   const { schools } = useSelector((state) => state.programandoando);
-  // console.log(schools);
+  const { school } = useSelector((state) => state.programandoando);
   const location = useLocation();
   const name = location.state;
   let cursos = schools;
+  //   console.log(schools);
 
   useEffect(() => {
-    dispatch(getAllSchools());
+    dispatch(getSchool(id));
   }, [dispatch]);
 
   let cursosfiltrados = [];
   for (let i = 0; i < cursos.length; i++) {
-    if (cursos[i].name === name) {
+    if (cursos[i]._id === id) {
       cursosfiltrados.push(cursos[i]);
     }
   }
-  // console.log(cursosfiltrados)
+  console.log(cursosfiltrados);
 
   // -------------------------------
   let durationCourse = (course) => {

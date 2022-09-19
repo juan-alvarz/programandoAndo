@@ -1,17 +1,31 @@
 import React from "react";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
-import Lucho from '../utils/images/LuisAboutUs1.png'
-import Santi from '../utils/images/SantiagoAboutUs1.png'
-import Agus from '../utils/images/AgustinAboutUs1.png'
-import Fran from '../utils/images/FrancoAboutUs1.png'
-import Dani from '../utils/images/DanielAboutUs1.png'
-import Juan from '../utils/images/JuanAboutUs1.png'
-import Roge from '../utils/images/RogelioAboutUs1.png'
+import Lucho from "../utils/images/LuisAboutUs1.png";
+import Santi from "../utils/images/SantiagoAboutUs1.png";
+import Agus from "../utils/images/AgustinAboutUs1.png";
+import Fran from "../utils/images/FrancoAboutUs1.png";
+import Dani from "../utils/images/DanielAboutUs1.png";
+import Juan from "../utils/images/JuanAboutUs1.png";
+import Roge from "../utils/images/RogelioAboutUs1.png";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUser } from "../redux/actions";
 
 function AboutUs() {
+  // console.log("uwu");
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = userLocal && JSON.parse(userLocal);
+  let idUser = userObj && userObj.user._id;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(getAllNotifications());
+    dispatch(getUser(idUser));
+  }, [dispatch]);
   return (
-    <section style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+    <section style={{ backgroundColor: "rgb(240, 240, 240)" }}>
       <NavBar />
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
@@ -84,7 +98,7 @@ function AboutUs() {
             </ul>
           </div>
           <div className="text-center text-gray-500">
-          <img
+            <img
               className="mx-auto mb-4 w-36 h-36 rounded-full"
               src={Santi}
               alt="Santi Avatar"

@@ -27,11 +27,12 @@ export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const { favoritesUser } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
-  console.log(favoritesUser)
+  // console.log(favoritesUser);
 
   //Usuario registrado
   let userLocal = window.localStorage.getItem("user");
-  let userObj = JSON.parse(userLocal);
+  let userObj = userLocal && JSON.parse(userLocal);
+
   const [favoritoAgregado, setFavoritoAgregado] = useState("");
 
   // =============== Paginado ==========================
@@ -42,7 +43,6 @@ export default function AllCourses() {
   //======================================================
   const [coursesPowFilter, setCoursesPowFilter] = useState([]);
 
-  
   useEffect(() => {
     dispatch(getAllCourses());
     if (userObj) {
@@ -85,7 +85,7 @@ export default function AllCourses() {
           style={{
             display: "flex",
             justifyContent: "center",
-            padding: "10px",  
+            padding: "10px",
           }}
         >
           <SearchBar path={path} setPagina={setCursoActual} />
@@ -215,7 +215,6 @@ export default function AllCourses() {
       <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
         <NavBar />
         <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
-          {/* Filtrados */}
           <div
             style={{
               display: "flex",
@@ -246,7 +245,6 @@ export default function AllCourses() {
               </span>
             </div>
 
-            {/* DURATION */}
             <div>
               <select
                 id="countries"

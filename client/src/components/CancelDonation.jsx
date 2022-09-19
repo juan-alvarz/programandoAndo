@@ -20,14 +20,14 @@ export default function CancelDonation() {
           margin: "auto",
         }}
       >
-        <img src={card} alt="" style={{ width: "30vh", padding: "10px" }} />
-        <h1 style={{ padding: "10px", fontSize: "1.3rem" }}>Cancel donation</h1>
-        <span>
-          you have cancelled the donation, do not worry if you cannot donate,
+        <img src={card} alt="" style={{ width: "20vh", margin: "40px" }} />
+        <h1 className="text-2xl font-bold my-5" style={{ color: "rgb(55, 109, 109)" }}>Cancel donation</h1>
+        <span className="max-w-2xl text-sm text-center md:text-md md:text-center md:text lg:text-lg my-2">
+          You have cancelled the donation, do not worry if you cannot donate,
           you can help us in other ways, such as by sharing the page on your
           networks or encouraging its use with your close contacts, remember
           that all the content on the page is totally free, we invite you to
-          continue studying and learning
+          continue studying and learning.
         </span>
       </div>
     </div>

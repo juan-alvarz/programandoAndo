@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AboutUs from "./components/AboutUs";
 import Home from "./components/Home";
-import LandingPage from "./components/LandingPage";
 import RankUserHome from "./components/RankUserHome";
 import Courses from "./components/Courses";
 import CreateCourse from "./components/CreateCourse";
@@ -22,7 +21,7 @@ import SchoolsPA from "./components/panelAdmin/SchoolsPA";
 import CoursesPA from "./components/panelAdmin/CoursesPA";
 import UsersPA from "./components/panelAdmin/UsersPA";
 import Administrator from "./components/panelAdmin/Administrator";
-import Baneos from "./components/panelAdmin/Baneos";
+import Banneds from "./components/panelAdmin/Banneds";
 import Loader from "./components/Loader";
 import { Favorites } from "./components/Favorites";
 import CancelDonation from "./components/CancelDonation";
@@ -32,7 +31,6 @@ import Settings from "./components/panelAdmin/Settings";
 import InternalChat from "./components/InternalChat";
 import Chat from "./components/Chat";
 import UserCreatedCourse from "./components/UserCreatedCourse";
-import AgeCharts from "./components/AgeCharts";
 import UserScoringCourse from "./components/UserScoringCourse";
 
 import RankUserDonation from "./components/RankUserDonation";
@@ -43,15 +41,17 @@ import ModifyProfileAdmin from "./components/ModifyProfileAdmin";
 import ProfileAdmin from "./components/ProfileAdmin";
 import ProfilelUser from "./components/ProfilelUser";
 // Cloudinary
-import Cloudinary from "./components/Cloudinary";
 import { FolderUser } from "./components/FolderUser";
+import AgeCharts from "./components/panelAdmin/AgeCharts";
+import CountryCharts from "./components/panelAdmin/CountryCharts";
+import SubmitPassword from "./components/SubmitPassword";
+import SchoolDetailUser from "./components/SchoolDetailUser";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          {/* <Route path="/" element={<LandingPage />} /> */}
           <Route path="/" element={<Home />} />
           <Route path="/allCourses" element={<AllCourses />} />
           <Route path="/course/:idCourse" element={<OneCourseDetail />} />
@@ -66,7 +66,6 @@ function App() {
           <Route path="/forgetPassword" element={<ForgetPassword />} />
 
           <Route path="/sidebar" element={<Sidebar />} />
-          {/* <Route path="/panelAdmin" element={<PanelAdmin />} /> */}
 
           {/* Panel Admin */}
           <Route path="/videospa" element={<VideosPA />} />
@@ -74,7 +73,7 @@ function App() {
           <Route path="/coursespa" element={<CoursesPA />} />
           <Route path="/userspa" element={<UsersPA />} />
           <Route path="/administrator" element={<Administrator />} />
-          <Route path="/baneos" element={<Baneos />} />
+          <Route path="/banned" element={<Banneds />} />
           <Route path="/setting" element={<Settings />} />
           <Route path="/execute-payment" element={<SuccessDonation />} />
           <Route path="/cancel-payment" element={<CancelDonation />} />
@@ -98,12 +97,14 @@ function App() {
           {/* Perfil de usuario */}
           <Route path="/chat" element={<Chat />} />
           <Route path="/createdCourse" element={<UserCreatedCourse />} />
-          <Route path="/AgeChart" element={<AgeCharts />} />
+          <Route path="/ageChart" element={<AgeCharts />} />
+          <Route path="/countryChart" element={<CountryCharts />} />
           <Route path="/profileUser" element={<ProfilelUser />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
           <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
           <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
-          <Route path="/cloudinary" element={<Cloudinary />} />
+          <Route path="/modify/:changePassCode" element={<SubmitPassword />} />
+          <Route path="/school/:id" element={<SchoolDetailUser />} />
         </Routes>
       </div>
     </BrowserRouter>

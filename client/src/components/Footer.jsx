@@ -15,6 +15,13 @@ const Footer = () => {
   }, [dispatch]);
 
   let data = schools;
+  let dataCustomFalse = []
+  // console.log(data)
+  for (let i = 0; i < data.length; i++){
+    if (data[i].custom === false)
+      dataCustomFalse.push(data[i])
+  }
+
   return (
     <footer
       style={{ backgroundColor: "rgb(17, 52, 82)"}}
@@ -35,8 +42,8 @@ const Footer = () => {
               Schools
             </h2>
             <div>
-              {data ? (
-                data.map((elemento, index) => {
+              {dataCustomFalse ? (
+                dataCustomFalse.map((elemento, index) => {
                   let name = elemento.name;
                   return (
                     <div

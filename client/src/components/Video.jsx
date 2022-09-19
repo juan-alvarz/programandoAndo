@@ -13,6 +13,7 @@ import NavBar from "./NavBar";
 import { Videos } from "./Videos";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import Loader from "./Loader";
 
 export default function Video() {
   const { video, course, foro } = useSelector((state) => state.programandoando);
@@ -36,15 +37,20 @@ export default function Video() {
   useEffect(() => {
     dispatch(getVideoById(idVideo));
     dispatch(getCourse(idCourse));
+    dispatch(getForoById(video.foro));
   }, [idVideo]);
 
   useEffect(() => {
     dispatch(getForoById(video.foro));
-  }, [video.foro, contador]);
+  }, [dispatch, video.foro, contador]);
 
   useEffect(() => {
     dispatch(getForoById(video.foro));
-  }, [video.foro, contador]);
+  }, [dispatch, video.foro, contador]);
+
+  //   useEffect(() => {
+  //     dispatch(getForoById(video.foro));
+  // }, [video.foro, contador]);
 
   // COMENTARIO
   const [commentario, setCommentario] = useState({
@@ -56,6 +62,7 @@ export default function Video() {
   function handleChange(e) {
     setCommentario({ ...commentario, content: e.target.value });
     setState({ ...state, [e.target.name]: e.target.value });
+    setContador(contador + 1);
   }
 
   function handleSubmitComment(e) {
@@ -89,7 +96,7 @@ export default function Video() {
         change: "deleteComment",
       })
     ); //.then(setContador(contador + 1))
-    setContador(contador + 1);
+    //   setContador(contador+1)
   }
 
   function deleteAnswer(e, id, idAnswer) {
@@ -120,6 +127,7 @@ export default function Video() {
       content: e.target.value,
     });
     setState({ ...state, input1: e.target.value });
+    setContador(contador + 1);
   }
 
   function handleSubmitRespuesta(data, e) {
@@ -130,192 +138,283 @@ export default function Video() {
     setContador(contador + 1);
   }
 
-  console.log(foro);
+  function handleSubmitRespuesta(data, e) {
+    e.target.reset();
+    e.preventDefault();
+    dispatch(updateForo(video.foro, respuesta));
+    setState({ input1: "" });
+    setContador(contador + 1);
+  }
+
+  // console.log(foro);
 
   if (!Object.keys(course).length) {
-    return <h2>Cargando Video!</h2>;
+    return <Loader />;
   } else {
     return usuario ? (
       <div
         style={{
           width: "100%",
           backgroundColor: "rgb(240, 240, 240)",
-          height: "100vh",
         }}
       >
         <NavBar />
-        <div>
-          {/* Video */}
-          <div className="mb-10 flex flex-col sm:flex-row">
-            <iframe
-              className="sm:w-screen"
-              height="515"
-              src={video.url}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-            {/* Texto Card */}
-            <div className="px-10 flex flex-col justify-between w-full">
-              <div>
-                <h2
-                  className="pt-5 pb-1.5 text-xl font-bold "
+        <div style={{ display: "flex" }}>
+          <div style={{ display: "flex" }}>
+            <div className="max-w-screen-xl m-5 ">
+              {/* Video */}
+              <div className="mb-10 flex flex-col sm:flex-row">
+                <iframe
+                  className="sm:w-screen"
+                  height="515"
+                  src={video.url}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+              {/* Texto Card */}
+              <div className="px-10 flex flex-col justify-between w-full">
+                <div>
+                  <h2
+                    className="pt-5 pb-1.5 text-2xl font-bold "
+                    style={{ color: "rgb(17, 52, 82)" }}
+                  >
+                    {video.name}
+                  </h2>
+                  <h3
+                    className="pb-5 text-lg font-semibold"
+                    style={{ fontSize: "15px", color: "rgb(17, 52, 82)" }}
+                  >
+                    Autor:{" "}
+                    <a href={video.profile} target="_blank">
+                      {video.author}
+                    </a>
+                  </h3>
+                </div>
+                <p
+                  className="pb-5 text-justify font-medium"
                   style={{ color: "rgb(17, 52, 82)" }}
                 >
-                  {video.name}
-                </h2>
-                <h3
-                  className="pb-5 text-lg font-semibold"
-                  style={{ fontSize: "15px", color: "rgb(17, 52, 82)" }}
-                >
-                  Autor:{" "}
-                  <a href={video.profile} target="_blank">
-                    {video.author}
-                  </a>
-                </h3>
-              </div>
-              <p
-                className="pb-5 text-justify font-medium"
-                style={{ color: "rgb(17, 52, 82)" }}
-              >
-                {video.description}
-              </p>
-              <div className="pb-5 flex justify-between font-medium">
+                  {video.description}
+                </p>
+                {/* <div className="pb-5 flex justify-between font-medium"> */}
                 <p
-                  className="capitalize font-bold"
+                  className="capitalize font-bold flex justify-end"
                   style={{ color: "rgb(55, 109, 109)" }}
                 >
                   Nivel: {video.difficult}
                 </p>
                 <p
-                  className="font-semibold"
+                  className="font-semibold flex justify-end"
                   style={{ color: "rgb(55, 109, 109)" }}
                 >
                   Tiempo: {video.duration}
                 </p>
+                {/* </div> */}
+                <p className="flex justify-end">
+                  <a
+                    href={video.profile}
+                    target="_blank"
+                    className="text-blue-500"
+                  >
+                    {video.profile}
+                  </a>
+                </p>
               </div>
-              <p className="flex justify-end">
-                <a
-                  href={video.profile}
-                  target="_blank"
-                  className="text-blue-500"
-                >
-                  {video.profile}
-                </a>
-              </p>
             </div>
           </div>
-          {/* Courses */}
-          <Videos videos={course.videos} idCourse={idCourse} />
-        </div>
-        FORO FUNCIONAL
-        <div>
-          <form onSubmit={handleSubmit(handleSubmitRespuesta)}>
-            {Object.keys(foro).length > 0 ? (
-              foro.comments.map((comment) => {
-                <ol>
-                  <br></br>
-                  <h1>abajo un nuevo comentario</h1>
-                  <h2>ESTE ES EL COMENTARIO: -- {comment.content}</h2>
-                  <h2>
-                    Autor ---{" "}
-                    {comment.authorComment
-                      ? comment.authorComment.name
-                      : "no se encuenta master"}
-                  </h2>
-                  <br></br>
-                  <h3>
-                    {comment.answers?.map((answer) => (
-                      <ol>
-                        <h2> -- ESTA ES UNA ANSWER: {answer.content}</h2>
-                        <h1>
-                          Author de la respuesta:{" "}
-                          {answer.authorComment.name ? (
-                            <h1>Hola</h1>
-                          ) : (
-                            <h1>No sirve</h1>
-                          )}
-                        </h1>
-                        {answer.authorComment._id === userObj.user._id ? (
+          {/* CHAT */}
+          <div className="bg-white w-3/12 rounded-md m-5">
+            <div
+              style={{ backgroundColor: "rgb(17, 52, 82)" }}
+              className="rounded-t-xl mb-5"
+            >
+              <p
+                style={{ color: "rgb(240, 240, 240)" }}
+                className="text-center py-5 text-xl font-bold uppercase"
+              >
+                {" "}
+                General Forum{" "}
+              </p>
+            </div>
+            <div>
+              <div
+                style={{ height: 600 }}
+                className="flex justify-center overflow-hidden hover:overflow-y-scroll scrolling-touch"
+              >
+                <form
+                  className="bg-white w-10/12"
+                  onSubmit={handleSubmit(handleSubmitRespuesta)}
+                >
+                  {Object.keys(foro).length > 0 ? (
+                    foro.comments.map((comment) => (
+                      <ol
+                        style={{ borderWidth: 1, height: 320 }}
+                        className="rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll scrolling-touch"
+                      >
+                        <div className="bg-gray-400 rounded-t-md py-1">
+                          <p className="text-lg text-center font-bold text-white">
+                            {comment.authorComment
+                              ? comment.authorComment.name
+                              : "no se encuenta master"}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-md text-center font-bold pt-5">
+                            {comment.content}
+                          </p>
+                        </div>
+                        <div className=" my-5">
+                          <h3>
+                            {comment.answers?.map((answer) => (
+                              <ol className="bg-gray-200 my-3 mx-3 p-4 rounded-md">
+                                <p className="text-sm font-bold">
+                                  {answer.authorComment
+                                    ? answer.authorComment.name
+                                    : "no se encuenta master"}
+                                </p>
+                                <p className="text-xs">{answer.content}</p>
+
+                                {answer.authorComment ? (
+                                  answer.authorComment._id ===
+                                  userObj.user._id ? (
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "flex-end",
+                                      }}
+                                    >
+                                      <button
+                                        style={{ width: 130 }}
+                                        className="bg-gray-700 text-xs hover:bg-red-700 text-white font-bold py-2 px-2 rounded"
+                                        type="submit"
+                                        onClick={(e) =>
+                                          deleteAnswer(
+                                            e,
+                                            comment._id,
+                                            answer._id
+                                          )
+                                        }
+                                      >
+                                        Delete answer
+                                      </button>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )
+                                ) : (
+                                  <h1></h1>
+                                )}
+                              </ol>
+                            ))}
+                          </h3>
+                        </div>
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                          className="my-5"
+                        >
+                          <input
+                            className="border border-gray-300 rounded-l-md pl-3 text-xs"
+                            type="text"
+                            placeholder="Comment..."
+                            data-commentid={comment._id}
+                            name="hola"
+                            onChange={(e) => handleChangeRespuesta(e)}
+                          />
                           <button
-                            className="button"
+                            style={{
+                              width: 130,
+                              backgroundColor: "rgb(55, 109, 109)",
+                            }}
+                            className="bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-r-md"
                             type="submit"
-                            onClick={(e) =>
-                              deleteAnswer(e, comment._id, answer._id)
-                            }
+                            onClick={(e) => handleSubmitRespuesta(e)}
+                            disabled={state.input1 ? "" : true}
                           >
-                            Eliminar respuesta
+                            Send reply
                           </button>
+                        </div>
+                        {comment.authorComment ? (
+                          userObj.user._id === comment.authorComment._id ? (
+                            <button
+                              className="button"
+                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                              type="submit"
+                              onClick={(e) => deleteComment4(e, comment._id)}
+                            >
+                              Delete Comment
+                            </button>
+                          ) : (
+                            ""
+                          )
                         ) : (
                           ""
                         )}
                       </ol>
-                    ))}
-                  </h3>
-                  <br></br>
-                  <h3>Comentar</h3>{" "}
+                    ))
+                  ) : (
+                    <h2>No se cumplió master</h2>
+                  )}
+                </form>
+              </div>
+              <div
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="rounded-b-md"
+              >
+                <div
+                  style={{ display: "flex", justifyContent: "center" }}
+                  className="mt-5 pt-5"
+                >
+                  <p
+                    style={{ color: "rgb(240, 240, 240)" }}
+                    className="uppercase mb-3 font-bold text-sm"
+                  >
+                    Post your questions / comments here
+                  </p>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "center" }}
+                  className="pb-5"
+                >
                   <input
+                    style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                    className="border border-white text-sm rounded-l-md pl-3"
                     type="text"
-                    placeholder="Comment..."
-                    data-commentid={comment._id}
-                    name="hola"
-                    onChange={(e) => handleChangeRespuesta(e)}
+                    placeholder="New answer"
+                    value={state.input2}
+                    name="input2"
+                    onChange={(e) => handleChange(e)}
                   />
                   <button
-                    className="button"
+                    style={{
+                      width: 130,
+                      backgroundColor: "#fff",
+                      color: "rgb(17, 52, 82)",
+                    }}
+                    className="bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-r-md"
                     type="submit"
-                    onClick={(e) => handleSubmitRespuesta(e)}
-                    disabled={state.input1 ? "" : true}
+                    onClick={(e) => handleSubmitComment(e)}
+                    disabled={state.input2 ? "" : true}
                   >
                     Send Comment
                   </button>
-                  {comment.authorComment ? (
-                    userObj.user._id === comment.authorComment._id ? (
-                      <button
-                        className="button"
-                        type="submit"
-                        onClick={(e) => deleteComment4(e, comment._id)}
-                      >
-                        Delete Comment
-                      </button>
-                    ) : (
-                      ""
-                    )
-                  ) : (
-                    ""
-                  )}
-                </ol>;
-              })
-            ) : (
-              <h2>No se cumplió master</h2>
-            )}
-          </form>
+                </div>
+              </div>
+              {/* CHAT */}
+            </div>
+          </div>
         </div>
-        <br></br>
-        <br></br>
-        <h2>INPUT PARA ENVIAR UN COMENTARIO</h2>{" "}
-        <input
-          type="text"
-          placeholder="Comment..."
-          value={state.input2}
-          name="input2"
-          onChange={(e) => handleChange(e)}
-        />
-        <button
-          className="button"
-          type="submit"
-          onClick={(e) => handleSubmitComment(e)}
-          disabled={state.input2 ? "" : true}
-        >
-          Send Comment
-        </button>
-        <h1>EL DE ARRIBA ES UN INPUT PARA UN COMENTARIO, NO UNA RESPUESTA</h1>
+        <div>
+          {/* Courses */}
+          <Videos videos={course.videos} idCourse={idCourse} />
+        </div>
       </div>
     ) : (
       Swal.fire({
         title: "Access to videos denied",
-        text: "You cannot login if you are not logged in. Please log in",
+        text: "You are not logged in. Please log in",
         icon: "warning",
         confirmButtonText: "Log in",
       }).then((result) => {

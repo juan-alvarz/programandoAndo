@@ -15,6 +15,7 @@ const UserSchema = new Schema(
     },
     authorizeNotifications: {
       type: Boolean,
+      default: false
     },
     password: {
       type: String,
@@ -22,6 +23,7 @@ const UserSchema = new Schema(
     },
     biography: {
       type: String,
+      default: "Write here your description or biography"
     },
     preferences: {
       type: String,
@@ -43,6 +45,7 @@ const UserSchema = new Schema(
     },
     studyStatus: {
       type: String,
+      default: "None"
     },
     schools: [
       {
@@ -79,7 +82,7 @@ const UserSchema = new Schema(
         course: { type: Schema.Types.ObjectId, ref: "Course" },
         score: Number,
       },
-    ],
+    ],   
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -103,6 +106,7 @@ const UserSchema = new Schema(
     changePassCode: {
       type: String,
     },
+
     chats: [
       {
         type: Schema.Types.ObjectId,
@@ -116,6 +120,16 @@ const UserSchema = new Schema(
     pageOpinion: {
       type: String,
       default: "",
+    },
+    image: {
+      url: {
+        type: String,
+        default: "",
+      },
+      public_id: {
+        type: String,
+        default: "",
+      },
     },
   },
   {

@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Puntuation from "./Puntuation";
+import PuntuationNotLogged from "./PuntuationNotLogged";
+import Foro from "./Foro";
+import ForoNotLogged from "./ForoNotLogged";
 import SearchBar from "./SearchBar";
 import {
   getVideoById,
@@ -15,8 +18,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
-import Google from "./Google";
 import Chat from "./Chat";
+import RankUserHome from "./RankUserHome";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
@@ -31,7 +34,7 @@ function Home() {
 
   let verified = userObj && userObj.user.status;
 
-  console.log(document.cookie);
+  // console.log(document.cookie);
 
   // delete_cookie("github-jwt")
 
@@ -64,6 +67,8 @@ function Home() {
   }, [Object.keys(user).length !== 0]);
 
   const stat = useSelector((state) => state.programandoando);
+  // window.location.href = "/";
+
   // console.log(stat);
   return (
     <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
@@ -106,19 +111,27 @@ function Home() {
       <div>
         <Carousel />
       </div>
+      <div className="flex justify-evenly mt-10 mb-20">
+        <div>
+          {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+        </div>
+        <div>
+          <RankUserHome/>
+        </div>
+      </div>
+        <div className="flex justify-center">
+          {userObj? <Foro/> : <ForoNotLogged/>  }
+        </div>
       <div
         style={{
           position: "fixed",
           right: "20px",
           bottom: "20px",
-          zIndex: 100,
         }}
       >
         <Chat />
       </div>
       <Footer />
-      {/* <Puntuation /> */}
-      <Puntuation />
     </div>
   );
 }
