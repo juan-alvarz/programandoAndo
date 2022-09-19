@@ -93,7 +93,7 @@ const getUserById = async (req, res, next) => {
             select: "username",
           },
         },
-      });
+      }).populate("ownPath");
     /* if (!user) {
       handleHtppError(res, "user doesn't exist", 404);
       // res.status(404);
