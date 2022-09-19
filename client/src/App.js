@@ -106,7 +106,6 @@ function App() {
           <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
           <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
           <Route path="/modify/:changePassCode" element={<SubmitPassword />} />
-          <Route path="/TEST" element={<TEST />} />
         </Routes>
       </div>
     </BrowserRouter>

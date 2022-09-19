@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, getUsers } from "../redux/actions";
+import {
+  getUser,
+  getUsers,
+  getChatById,
+  update_getChat,
+  create_getChat,
+} from "../redux/actions";
 import Error404 from "./Error404";
 import axios from "axios";
 import Loader from "./Loader";
@@ -11,7 +17,7 @@ function InternalChat() {
   // necesito el user con la sesión activa, y los usuarios disponibles para chatear
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const idGet = currentUser !== null ? currentUser.user._id : null;
-  const { user, users } = useSelector((state) => state.programandoando);
+  const { user, users, chat } = useSelector((state) => state.programandoando);
   const usersToChat = users.filter((user) => user._id !== idGet); //no puedes chatear contigo mismo...
 
   let userChat = {}; //usuario con el cual quiero chatear estando en mi cuenta
@@ -33,6 +39,18 @@ function InternalChat() {
     return repite;
   }
 
+  function handleUserChat(e, userToChat) {
+    e.preventDefault();
+    userChat = userToChat;
+    commonChat = compare(user, userToChat); //user.chats = [{...}] <===> userToChat.chats = ['']
+    if (commonChat !== "no se repiten") {
+      dispatch(getChatById(commonChat));
+    }
+    const chatNow = user.chats.filter((chat) => chat._id === commonChat);
+    setChatActual(chatNow);
+    setUserActual(userToChat);
+  }
+
   //el cambio del chat lo va ejecutando
   function handleChangeChat(e) {
     e.preventDefault();
@@ -44,43 +62,49 @@ function InternalChat() {
     e.preventDefault();
     //si existe el chat, lo actualiza
     if (chatActual.length !== 0) {
-      const payload = { author: user._id, content: message };
+      const mensaje = message;
+      const payload = { author: user._id, content: mensaje };
       setMessage("");
-      await axios.put(
-        `http://localhost:3001/api/chat/${chatActual[0]._id}`,
-        payload
-      );
-    } // si no existe el chat, lo crea
-    else {
+      dispatch(update_getChat(chatActual[0]._id, payload));
+    } else {
+      const mensaje = message;
       const payload = {
         transmitter: user._id,
         receiver: userActual._id,
         content: {
           author: user._id,
-          content: message,
+          content: mensaje,
         },
       };
-      await axios.post(`http://localhost:3001/api/chat/`, payload);
       setMessage("");
+      dispatch(create_getChat(payload));
     }
   }
 
   //cambia el chat según el usuario que toquemos
-  function handleUserChat(e, userToChat) {
-    e.preventDefault();
-    userChat = userToChat;
-    commonChat = compare(user, userToChat); //user.chats = [{...}] <===> userToChat.chats = ['']
-    const muestrameEsto = user.chats.filter((chat) => chat._id === commonChat);
-    setChatActual(muestrameEsto);
-    setUserActual(userToChat);
-  }
-
   useEffect(() => {
     dispatch(getUsers());
     if (currentUser !== null) {
       dispatch(getUser(idGet));
     }
-  }, [users]);
+    if (commonChat !== "no se repiten") {
+      dispatch(getChatById(commonChat));
+    }
+  }, [dispatch]);
+
+  /* 
+  const updateChatLive = async () => {
+    let count = 0;
+    while (count < 6) {
+      if (commonChat !== "no se repite") {
+        setTimeout(async () => {
+          dispatch(getChatById(commonChat));
+        }, 1000);
+        count++;
+      }
+    }
+  };
+  updateChatLive(); */
 
   if (currentUser === null) {
     //si no está logueado, no existe chat
@@ -113,35 +137,20 @@ function InternalChat() {
         </div>
         <div style={{ paddingLeft: "2vh", borderLeft: "5px solid gray" }}>
           {Object.keys(userActual).length !== 0 ? (
-            /* 
-            <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
-            <div class="w-1/4">
-              <img
-                src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
-                class="object-cover h-12 w-12 rounded-full"
-                alt=""
-              />
-            </div>
-            <div class="w-full">
-              <div class="text-lg font-semibold">Luis1994</div>
-              <span class="text-gray-500">Pick me at 9:00 Am</span>
-            </div>
-          </div>
-            */
             <div>
               <h1>{userActual.username}</h1>
-              {chatActual.length !== 0 ? (
-                chatActual.map((message) =>
-                  message.content?.map((cont) => (
-                    <div>
-                      <span>
-                        <strong>{cont.author.username}:</strong> {cont.content}
-                      </span>
-                    </div>
-                  ))
-                )
+
+              {Object.keys(chat).length !== 0 ? (
+                chat.content.map((con) => (
+                  <div>
+                    <strong>{con.author.name}: </strong>
+                    <span>{con.content}</span>
+                  </div>
+                ))
               ) : (
-                <span>No hay chats aún, inicia un chat!</span>
+                <span>
+                  No hay chats aún, inicia un chat con {userActual.username}!
+                </span>
               )}
               <form onSubmit={(e) => handleSubmitChat(e)}>
                 <input
@@ -157,6 +166,13 @@ function InternalChat() {
             <span>Aún no hay usuario seleccionado</span>
           )}
         </div>
+        {/* <ChatContent
+          id={
+            commonChat !== "no se repiten"
+              ? commonChat
+              : "63279ce3d8ca8a2f96ae93b2"
+          }
+        /> */}
       </div>
     );
   }
