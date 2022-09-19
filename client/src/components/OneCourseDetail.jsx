@@ -21,8 +21,8 @@ export default function OneCourseDetail() {
     dispatch(getUser(idGet));
   }, [dispatch]);
 
-  console.log(course)
-  console.log(user)
+  // console.log(course)
+  // console.log(user)
 
   // http://localhost:3001/api/users/:ID [PUT]
   async function handleClickVote(e) {
@@ -68,7 +68,7 @@ export default function OneCourseDetail() {
       Object.keys(user).length !== 0
         ? user.scoring?.map((scor) => scor.course._id)
         : null;
-    console.log(idVotados);
+    // console.log(idVotados);
     //curso en el que está parado, busca si ya lo votó o no
     const sameVote = idVotados?.find((id) => id === idCourse); //el curso actual y busca si el usuario votó
 
@@ -76,7 +76,7 @@ export default function OneCourseDetail() {
       Object.keys(user).length !== 0
         ? user.scoring.filter((scor) => scor.course._id === sameVote)
         : null;
-    console.log(user);
+    // console.log(user);
     return (
       <div style={{ backgroundColor: "rgb(240, 240, 240)", height: "100vh" }}>
         <NavBar />

@@ -85,7 +85,7 @@ export const Videos = (props) => {
       </div>
       <div className="grid gap-8 lg:gap-8 mx-5 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:mx-28 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-stretch ">
         {videosActuales.map((elemento, index) => {
-          console.log(elemento);
+          // console.log(elemento);
           return (
             <div key={index}>
               <NavLink

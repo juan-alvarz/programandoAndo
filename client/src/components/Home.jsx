@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import Puntuation from "./Puntuation"
-import PuntuationNotLogged from "./PuntuationNotLogged"
-import Foro from "./Foro"
-import ForoNotLogged from "./ForoNotLogged"
+import Puntuation from "./Puntuation";
+import PuntuationNotLogged from "./PuntuationNotLogged";
+import Foro from "./Foro";
+import ForoNotLogged from "./ForoNotLogged";
 import SearchBar from "./SearchBar";
 import {
   getVideoById,
   clearFilter,
   getAllNotifications,
   getUser,
-  getFavorites
+  getFavorites,
 } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ function Home() {
 
   let verified = userObj && userObj.user.status;
 
-  console.log(document.cookie);
+  // console.log(document.cookie);
 
   // delete_cookie("github-jwt")
 
@@ -110,7 +110,7 @@ function Home() {
       <div>
         <Carousel />
       </div>
-      {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+      {userObj ? <Puntuation /> : <PuntuationNotLogged />}
       <br></br>
       <br></br>
       <br></br>
@@ -118,7 +118,7 @@ function Home() {
       <br></br>
       <br></br>
       <br></br>
-      {userObj? <Foro/> : <ForoNotLogged/>  }
+      {userObj ? <Foro /> : <ForoNotLogged />}
       <div
         style={{
           position: "fixed",
@@ -128,7 +128,7 @@ function Home() {
       >
         <Chat />
       </div>
-     <Footer />
+      <Footer />
     </div>
   );
 }

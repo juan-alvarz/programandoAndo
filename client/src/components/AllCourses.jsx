@@ -27,7 +27,7 @@ export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const { favoritesUser } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
-  console.log(favoritesUser);
+  // console.log(favoritesUser);
 
   //Usuario registrado
   let userLocal = window.localStorage.getItem("user");

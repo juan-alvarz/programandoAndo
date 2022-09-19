@@ -69,6 +69,7 @@ const getUserById = async (req, res, next) => {
         path: "scoring",
         populate: {
           path: "course",
+          populate: { path: "videos" },
         },
       })
       .populate({
@@ -95,12 +96,17 @@ const getUserById = async (req, res, next) => {
           },
         },
       })
-      .populate("ownPath");
-    /* if (!user) {
-      handleHtppError(res, "user doesn't exist", 404);
-      // res.status(404);
-      // return res.send("user doesn't exist");
-    } */
+      .populate({
+        path: "ownPath",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      });
+
+    if (!user) {
+      return handleHtppError(res, "user doesn't exist", 404);
+    }
     res.send(user);
   } catch (e) {
     return res.send(e.message);
@@ -159,23 +165,22 @@ const createUser = async (req, res, next) => {
 };
 
 const userOpinion = async (req, res) => {
-  const {id} = req.params
-  const {puntuation, opinion} = req.body
-  const user = await usersModel.findById(id)
+  const { id } = req.params;
+  const { puntuation, opinion } = req.body;
+  const user = await usersModel.findById(id);
   try {
-    if ( opinion && puntuation) {
-      user.pageOpinion = opinion
-      user.pagePuntuation = puntuation
-      user.save()
-      return res.status(200).send(user)
+    if (opinion && puntuation) {
+      user.pageOpinion = opinion;
+      user.pagePuntuation = puntuation;
+      user.save();
+      return res.status(200).send(user);
     } else {
-      res.send("Es necesaria la puntuación y la opinión")
+      res.send("Es necesaria la puntuación y la opinión");
     }
   } catch (e) {
-    return res.json(e.message)
+    return res.json(e.message);
   }
-} 
-
+};
 
 const userLogin = async (req, res, next) => {
   try {
@@ -555,5 +560,5 @@ module.exports = {
   updateFavorites,
   deleteFavorites,
   getAllUsersBanned,
-  userOpinion
+  userOpinion,
 };

@@ -47,6 +47,7 @@ import { FolderUser } from "./components/FolderUser";
 import AgeCharts from "./components/panelAdmin/AgeCharts";
 import CountryCharts from "./components/panelAdmin/CountryCharts";
 import SubmitPassword from "./components/SubmitPassword";
+import SchoolDetailUser from "./components/SchoolDetailUser";
 
 function App() {
   return (
@@ -100,13 +101,14 @@ function App() {
           {/* Perfil de usuario */}
           <Route path="/chat" element={<Chat />} />
           <Route path="/createdCourse" element={<UserCreatedCourse />} />
-          <Route path="/ageChart" element={<AgeCharts/>}/>
-          <Route path="/countryChart" element={<CountryCharts/>}/>
+          <Route path="/ageChart" element={<AgeCharts />} />
+          <Route path="/countryChart" element={<CountryCharts />} />
           <Route path="/profileUser" element={<ProfilelUser />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
           <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
           <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
           <Route path="/modify/:changePassCode" element={<SubmitPassword />} />
+          <Route path="/school/:id" element={<SchoolDetailUser />} />
         </Routes>
       </div>
     </BrowserRouter>
