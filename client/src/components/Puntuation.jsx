@@ -81,16 +81,18 @@ function handleChange(e) {
 }
 
     return(
-        <div>
-            <div>
-            <br></br>
-            <br></br>
-           <p>Hola {user.name}, gracias por dejar tu feedback</p>
-           <br></br>
-           {user.pageOpinion? <p>Tu opinion: {user.pageOpinion}</p>: <p>Tu opinion es muy importante para nosotros, te invitamos a que nos dejes tu comentario y nos des una puntuacion</p>}
-           <br></br>
-           <br></br>
+        <div style={{width: 500, backgroundColor: "#fff", borderRadius: 10, height: 600}} className="shadow-lg py-5 overflow-visible">
+            <div >
+                <div style={{display: "flex", justifyContent: "center", color: 'rgb(55, 109, 109)'}} className='font-bold'>
+                    <p>Hello {user.name},</p>
+                </div>
+                <div style={{display: "flex", justifyContent: "center"}} className='px-10 my-5 text-center'>
+                    {user.pageOpinion? <p>Tu opinion: {user.pageOpinion}</p>: <p>Your opinion is very important to us, we invite you to leave us your comment and give us a rating.</p>}
+                </div>
+
+           <div style={{display: 'flex', justifyContent: 'center'}} className="my-5">
             <input
+            className="border border-gray-300 rounded-l-md pl-3"
              type="text"
              placeholder="Comment..."
              value = {opinionUser.opinion} 
@@ -98,39 +100,56 @@ function handleChange(e) {
              onChange={(e) => handleChange(e)}
             />
             <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            style={{width: 130, backgroundColor: 'rgb(55, 109, 109)'}}
+            className="bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-r-md"
              type="submit"
              onClick={(e) => handleClickVote(e)}
              disabled={opinionUser.opinion? "": true}
-            >Puntuar la pagina</button>
-
-            <h3>Promedio de la página </h3>
-
-            <svg
-                      aria-hidden="true"
-                      class="w-5 h-5 text-yellow-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                    <span>{total}/10</span>
-                    <br></br>
-                    <br></br>
+            >Rate the page</button>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <h3 className="font-bold">Page average </h3>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}} className="mb-5">
+                <div style={{display: "flex"}} className="content-center">
+                <svg
+                    aria-hidden="true"
+                    class="w-5 h-5 text-yellow-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+                <span >{total}/10</span>
+                </div>
+            </div>
             </div>
 
-            <div>
+            <div className="">
             {Object.keys(users).length > 0 ? ( 
                 users.map(
                     (user) => ( 
                     (user.pageOpinion !== "" && user.pagePuntuation !== 0? (
-                        <ol>
-                            <p>Autor: {user.name}</p>
-                            <p>Comentario: {user.pageOpinion} </p>
-                            <p>Puntuation: {user.pagePuntuation}</p>  
-                            <br></br>
-                            <br></br>
+                        <ol className="mb-5 bg-gray-200  py-1">
+                            <div style={{display: 'flex', justifyContent: 'center', color: 'rgb(55, 109, 109)'}}>
+                            <p className="text-sm font-bold">{user.name}</p>
+                            </div>
+                            <div style={{display: 'flex', justifyContent: 'center'}}>
+                            <p className="text-sm my-1">{user.pageOpinion} </p>
+                            </div>
+                            <div style={{display: 'flex', justifyContent: 'center'}}>
+                            <svg
+                                aria-hidden="true"
+                                class="w-5 h-5 text-yellow-400"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                            </svg>
+                            <p style={{color: 'rgb(17, 52, 82)'}} className="text-sm font-bold">{user.pagePuntuation}</p>
+                            </div>  
                         </ol>
                         )
                         :  ""

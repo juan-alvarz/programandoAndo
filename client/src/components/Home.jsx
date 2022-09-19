@@ -110,15 +110,17 @@ function Home() {
       <div>
         <Carousel />
       </div>
-      {userObj? <Puntuation /> :<PuntuationNotLogged />  }
-      <br></br>
-      <br></br>
-      <br></br>
-      <h1>ACA ABAJO EL FORO GENERAL</h1>
-      <br></br>
-      <br></br>
-      <br></br>
-      {userObj? <Foro/> : <ForoNotLogged/>  }
+      <div className="flex justify-evenly mt-10 mb-20">
+        <div>
+          {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+        </div>
+        <div>
+          {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+        </div>
+      </div>
+        <div className="flex justify-center">
+          {userObj? <Foro/> : <ForoNotLogged/>  }
+        </div>
       <div
         style={{
           position: "fixed",

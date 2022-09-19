@@ -146,11 +146,11 @@ export default function Video() {
         style={{
           width: "100%",
           backgroundColor: "rgb(240, 240, 240)",
-          height: "100vh",
         }}
       >
         <NavBar />
         <div>
+          <div>
           {/* Video */}
           <div className="mb-10 flex flex-col sm:flex-row">
             <iframe
@@ -162,8 +162,9 @@ export default function Video() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            {/* Texto Card */}
-            <div className="px-10 flex flex-col justify-between w-full">
+          </div>
+          {/* Texto Card */}
+          <div className="px-10 flex flex-col justify-between w-full">
               <div>
                 <h2
                   className="pt-5 pb-1.5 text-xl font-bold "
@@ -211,10 +212,8 @@ export default function Video() {
                 </a>
               </p>
             </div>
-          </div>
-          {/* Courses */}
-          <Videos videos={course.videos} idCourse={idCourse} />
-        </div>
+            </div>
+          {/* CHAT */}
         FORO FUNCIONAL
         <div>
           <form onSubmit={handleSubmit(handleSubmitRespuesta)}> 
@@ -290,6 +289,10 @@ export default function Video() {
             Send Comment
           </button>
           <p>EL DE ARRIBA ES UN INPUT PARA UN COMENTARIO, NO UNA RESPUESTA</p>
+          {/* CHAT */}
+          {/* Courses */}
+          <Videos videos={course.videos} idCourse={idCourse} />
+        </div>
       </div>
     ) : (
       Swal.fire({

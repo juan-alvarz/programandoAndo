@@ -94,78 +94,98 @@ export default function Foro() {
     //   return <h2>Cargando Video!</h2>;
     // } else {
     return (
-          <div>
-               <p> FORO FUNCIONAL </p> 
-            <form onSubmit={handleSubmit(handleSubmitRespuesta)}> 
+          <div className="bg-white w-7/12 rounded-md mb-10">
+            <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-t-xl mb-5'>
+               <p style={{color: 'rgb(240, 240, 240)'}} className="text-center py-5 text-xl font-bold uppercase"> General Forum </p> 
+            </div>
+            <div style={{height: 500}} className='flex justify-center overflow-hidden hover:overflow-y-scroll'>
+            <form className="bg-white w-10/12" onSubmit={handleSubmit(handleSubmitRespuesta)}> 
             {Object.keys(foro).length > 0 ? (
               foro.comments.map(            
                 (comment) => 
-                <ol>
-                  <br></br>
-                  <h1>abajo un nuevo comentario</h1>
-                <p>ESTE ES EL COMENTARIO: -- {comment.content}</p> 
-                <p>Autor  --- {comment.authorComment? comment.authorComment.name: "no se encuenta master"}</p>
-                <br></br>
+                <ol style={{borderWidth: 1, height: 320}} className='rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll'>
+                <div className="bg-gray-400 rounded-t-md py-1">
+                <p className="text-lg text-center font-bold text-white">{comment.authorComment? comment.authorComment.name: "no se encuenta master"}</p>
+                </div>
+                <div >
+                <p className="text-md text-center font-bold pt-5">{comment.content}</p> 
+                </div>
+                <div className=" my-5">
                 <h3>{comment.answers?.map(
                   (answer) => 
-                  <ol>
-                  <p> -- ESTA ES UNA ANSWER: {answer.content}</p>
-                  <p>Author de la respuesta: {answer.authorComment? answer.authorComment.name: <p>No tiene autor</p>}</p>
-                  {answer.authorComment? answer.authorComment._id === userObj.user._id? <button
-                 className="button"
-                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                 type="submit"
-                onClick={(e) => deleteAnswer(e, comment._id, answer._id)}
-                >Eliminar respuesta</button>: "" : <h1></h1>}
-            </ol>
+                  <ol className="bg-gray-200 my-3 mx-3 p-4 rounded-md">
+                  <p className="text-sm font-bold">{answer.authorComment? answer.authorComment.name: <p>No tiene autor</p>}</p>
+                  <p className="text-xs">{answer.content}</p>
+                  {answer.authorComment? answer.authorComment._id === userObj.user._id? 
+                  <div style={{display: "flex", justifyContent: "flex-end"}}>
+                  <button
+                    style={{width: 130}}
+                    className="bg-gray-700 text-xs hover:bg-red-700 text-white font-bold py-2 px-2 rounded"
+                    type="submit"
+                    onClick={(e) => deleteAnswer(e, comment._id, answer._id)}
+                    >Delete answer</button></div>: "" : <h1></h1>}
+                  </ol>
                 )}
                 </h3>
-                <br></br>
-            <h3>Comentar</h3>    <input
-              type="text"
-              placeholder="Comment..."
-              data-commentid={comment._id}
-              name="hola"
-              onChange={(e) => handleChangeRespuesta(e)}
-              />
-            <button
-              className="button"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              type="submit"
-             onClick={(e) => handleSubmitRespuesta(e)}
-           disabled={state.input1? "": true}
-              > 
-             Send Comment</button>  
-             {comment.authorComment? userObj.user._id === comment.authorComment._id?<button
-              className="button"
+                </div>
+            <div style={{display: 'flex', justifyContent: 'center'}} className="my-5">
+              <input
+                className="border border-gray-300 rounded-l-md pl-3"
+                type="text"
+                placeholder="Comment..."
+                data-commentid={comment._id}
+                name="hola"
+                onChange={(e) => handleChangeRespuesta(e)}
+                />
+              <button
+              style={{width: 130, backgroundColor: 'rgb(55, 109, 109)'}}
+                className="bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-r-md"
+                type="submit"
+                onClick={(e) => handleSubmitRespuesta(e)}
+                disabled={state.input1? "": true}
+                > 
+              Send Reply</button> 
+             </div> 
+             {comment.authorComment? userObj.user._id === comment.authorComment._id?
+             <div style={{display: "flex", justifyContent: "flex-end"}}>
+             <button
+              style={{width: 130}}
+              className="mb-4 mr-4 bg-gray-700 text-xs hover:bg-red-700 text-white font-bold py-2 px-2 rounded"
               type="submit"
              onClick={(e) => deleteComment4(e, comment._id)}
               > 
-             Delete Comment</button> : "" : ""} 
+             Delete Comment</button></div> : "" : ""} 
                 </ol>) 
             ) : (
               <h2>No se cumplió master</h2>
             )}
             </form>
-            <br></br>
-          <br></br>
-         <p>INPUT PARA ENVIAR UN COMENTARIO</p> <input
-              type="text"
-              placeholder="Comment..."
-              value= {state.input2}
-              name= "input2"
-              onChange={(e) => handleChange(e)}
-            />
-             <button
-              className="button"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              type="submit"
-              onClick={(e) => handleSubmitComment(e)}
-              disabled={state.input2? "": true}
-              >
-              Send Comment
-            </button>
-            <p>EL DE ARRIBA ES UN INPUT PARA UN COMENTARIO, NO UNA RESPUESTA</p>
+            </div>
+            <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-b-md'>
+              <div style={{display: 'flex', justifyContent: 'center'}} className="mt-5 pt-5">
+                <p style={{color: 'rgb(240, 240, 240)'}} className="uppercase mb-3 font-bold text-sm">Post your questions / comments here</p> 
+              </div>
+              <div style={{display: 'flex', justifyContent: 'center'}} className="pb-5">
+                <input
+                style={{backgroundColor: 'rgb(17, 52, 82)'}}
+                className="border border-white text-sm rounded-l-md pl-3"
+                  type="text"
+                  placeholder="New answer"
+                  value= {state.input2}
+                  name= "input2"
+                  onChange={(e) => handleChange(e)}
+                />
+                <button
+                style={{width: 130, backgroundColor: '#fff', color: 'rgb(17, 52, 82)'}}
+                className="bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-r-md"
+                  type="submit"
+                  onClick={(e) => handleSubmitComment(e)}
+                  disabled={state.input2? "": true}
+                  >
+                  Send Comment
+                </button>
+                </div>
+              </div>
         </div>
       )
     }
