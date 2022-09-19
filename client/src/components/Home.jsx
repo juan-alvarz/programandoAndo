@@ -1,21 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import Puntuation from "./Puntuation";
+import Puntuation from "./Puntuation"
+import PuntuationNotLogged from "./PuntuationNotLogged"
+import Foro from "./Foro"
+import ForoNotLogged from "./ForoNotLogged"
 import SearchBar from "./SearchBar";
 import {
   getVideoById,
   clearFilter,
   getAllNotifications,
   getUser,
-  getFavorites,
+  getFavorites
 } from "../redux/actions";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
-import Google from "./Google";
 import Chat from "./Chat";
 
 function Home() {
@@ -64,6 +66,8 @@ function Home() {
   }, [Object.keys(user).length !== 0]);
 
   const stat = useSelector((state) => state.programandoando);
+  // window.location.href = "/";
+
   // console.log(stat);
   return (
     <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
@@ -106,19 +110,27 @@ function Home() {
       <div>
         <Carousel />
       </div>
+      <div className="flex justify-evenly mt-10 mb-20">
+        <div>
+          {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+        </div>
+        <div>
+          {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+        </div>
+      </div>
+        <div className="flex justify-center">
+          {userObj? <Foro/> : <ForoNotLogged/>  }
+        </div>
       <div
         style={{
           position: "fixed",
           right: "20px",
           bottom: "20px",
-          zIndex: 100,
         }}
       >
         <Chat />
       </div>
-      <Footer />
-      {/* <Puntuation /> */}
-      <Puntuation />
+     <Footer />
     </div>
   );
 }

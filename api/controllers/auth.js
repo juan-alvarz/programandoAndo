@@ -14,6 +14,7 @@ const { sendConfirmationEmail } = require("../config/nodemailer.config");
 
 const { GITHUB, GITHUB_SECRET, SECRET } = process.env;
 const COOKIE_NAME = "github-jwt";
+const url = require("url");
 
 const getGitHubUser = async (code) => {
   // console.log(GITHUB);
@@ -59,17 +60,18 @@ const gitHubData = async (req, res, next) => {
   const gitHubUser = await getGitHubUser(code);
   const token = jwt.sign(gitHubUser, SECRET);
 
-  let { login, name, email } = jwt_decode(token);
+  let { login, name, email, avatar_url } = jwt_decode(token);
+  let image = { url: avatar_url, public_id: "" };
   let username = login;
 
-  req.body = { email, name, username };
+  req.body = { email, name, username, image };
   // console.log(req.body);
   next();
   // res.send(token);
 };
 
 const gitHubCreate = async (req, res, next) => {
-  const { name, username, email, path } = req.body;
+  const { name, username, email, image } = req.body;
   console.log(req.body);
 
   let find = await usersModel.findOne({ email });
@@ -82,6 +84,7 @@ const gitHubCreate = async (req, res, next) => {
       name,
       username,
       email,
+      image,
       confirmationCode: emailToken,
     });
     user.set("password", undefined, { strict: false }); // oculto la password
@@ -91,24 +94,33 @@ const gitHubCreate = async (req, res, next) => {
       user,
     };
     sendConfirmationEmail(user.username, user.email, user.confirmationCode);
-    res.redirect('http://localhost:3000')    
+    res.redirect(
+      url.format({
+        pathname: "http://localhost:3000/login",
+        query: {
+          message: "Thanks_for_register",
+        },
+      })
+    );
   } else {
     if (find.status !== "active") {
-      return handleHtppError(
-        res,
-        "Pending Account. Please Verify Your Email!",
-        401
+      // handleHtppError(res, "Pending Account. Please Verify Your Email!", 401);
+      res.redirect(
+        url.format({
+          pathname: "http://localhost:3000/login",
+          query: {
+            message: "Pending_Account_Please_Verify_Your_Email!",
+          },
+        })
       );
+    } else {
+      const dataGithub = {
+        token: await tokenSign(find),
+        user: find,
+      };
+      res.cookie(COOKIE_NAME, dataGithub.token);
+      res.redirect("http://localhost:3000/login");
     }
-    const dataGithub = {
-      token: await tokenSign(find),
-      user: find,
-    };
-
-    res.cookie(COOKIE_NAME, dataGithub.token);
-
-    // console.log(dataGithub)
-    res.redirect('http://localhost:3000');
   }
 };
 
@@ -120,7 +132,7 @@ const isLogin = async (req, res) => {
       const findToken = cookie
         .find((e) => e.includes("github-jwt"))
         .split("=")[1];
-      console.log(findToken)
+      console.log(findToken);
       const decode = await verifyToken(findToken);
       // console.log(decode)
       return res.send(decode);

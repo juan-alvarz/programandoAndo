@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../redux/actions";
+import { getUsers } from "../../redux/actions";
 import {Bar} from 'react-chartjs-2'
 import { Chart as ChartJS } from 'chart.js/auto'
 
@@ -10,10 +10,9 @@ function AgeCharts() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-          dispatch(getUsers());
-      }, [dispatch]);
+        dispatch(getUsers());
+    }, [dispatch]);  
 
-    // console.log(users)
     var birthdaysMillisec = [820497600000, 1104516000000, 1199188800000, 1483207200000, 1988128800000, 2461492800000]
     // users.map(e => Date.parse(e.birthday))
 
@@ -69,18 +68,18 @@ function AgeCharts() {
     console.log(ages66to75)
     console.log(moreTo76)
 
-    const [userAge, setUserAge] = useState ({
-        labels: ['16 - 25', '26 - 35', '36 - 45', '46 - 55', '56 - 65', '66 - 75', '75 - 100'],
-        datasets: [
-            {
-                label: 'Ages chart',
-                data: [ages16to25.length, ages26to35.length, ages36to45.length, ages46to55.length, ages56to65.length, ages66to75.length, moreTo76.length]
-            }
-        ]
-    })
+    const labels = ['16 - 25', '26 - 35', '36 - 45', '46 - 55', '56 - 65', '66 - 75', '75 - 100'];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Ages chart',
+            data: [ages16to25.length, ages26to35.length, ages36to45.length, ages46to55.length, ages56to65.length, ages66to75.length, moreTo76.length],
+            backgroundColor: ['rgb(55, 109, 109)'],
+        }]
+    }
 
   return (
-    <Bar data={userAge}/>
+    <Bar data={data}/>
   )
 }
 

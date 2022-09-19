@@ -187,6 +187,25 @@ const createUser = async (req, res, next) => {
   }
 };
 
+const userOpinion = async (req, res) => {
+  const {id} = req.params
+  const {puntuation, opinion} = req.body
+  const user = await usersModel.findById(id)
+  try {
+    if ( opinion && puntuation) {
+      user.pageOpinion = opinion
+      user.pagePuntuation = puntuation
+      user.save()
+      return res.status(200).send(user)
+    } else {
+      res.send("Es necesaria la puntuación y la opinión")
+    }
+  } catch (e) {
+    return res.json(e.message)
+  }
+} 
+
+
 const userLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -229,7 +248,7 @@ const userLogin = async (req, res, next) => {
 };
 
 const googleUserLogin = async (req, res, next) => {
-  const { name, username, email } = req.body;
+  const { name, username, email, image } = req.body;
   // console.log(req.body);
 
   let find = await usersModel.findOne({ email });
@@ -242,6 +261,7 @@ const googleUserLogin = async (req, res, next) => {
       name,
       username,
       email,
+      image,
       confirmationCode: emailToken,
     });
     user.set("password", undefined, { strict: false }); // oculto la password
@@ -249,6 +269,7 @@ const googleUserLogin = async (req, res, next) => {
     const data = {
       token: await tokenSign(user),
       user,
+      newUser: true,
     };
     sendConfirmationEmail(user.username, user.email, user.confirmationCode);
     res.send(data);
@@ -563,4 +584,5 @@ module.exports = {
   updateFavorites,
   deleteFavorites,
   getAllUsersBanned,
+  userOpinion
 };

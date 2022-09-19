@@ -5,10 +5,13 @@ const jwt_decode = require("jwt-decode");
 const googleMiddleware = async (req, res, next) => {
   const { token } = req.body;
 
-  let { email, name } = jwt_decode(token);
+  let uwu = jwt_decode(token);
+  console.log(uwu);
+  let { email, name, picture } = jwt_decode(token);
   let username = email.split("@").shift();
+  let image = { url: picture, public_id: "" };
 
-  req.body = { email, name, username };
+  req.body = { email, name, username, image };
 
   next();
 };
