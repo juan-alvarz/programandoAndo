@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { getUser } from "../redux/actions";
 
 function AboutUs() {
+  // console.log("uwu");
   let userLocal = window.localStorage.getItem("user");
   let userObj = userLocal && JSON.parse(userLocal);
   let idUser = userObj && userObj.user._id;
