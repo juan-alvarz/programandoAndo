@@ -111,11 +111,11 @@ function Home() {
       <div>
         <Carousel />
       </div>
-      <div className="flex justify-evenly mt-10 mb-20">
-        <div>
+      <div className="grid md:grid-cols-1 lg:grid-cols-2 my-24">
+        <div className="mb-10 lg:mb-0 flex justify-center">
           {userObj? <Puntuation /> :<PuntuationNotLogged />  }
         </div>
-        <div>
+        <div className="flex justify-center">
           <RankUserHome/>
         </div>
       </div>

@@ -151,7 +151,7 @@ export default function Video() {
       <NavBar />
         <div style={{display: 'flex'}}>
           <div style={{display: 'flex'}}>
-            <div className='max-w-screen-lg m-5'>
+            <div className='max-w-screen-xl m-5'>
                 {/* Video */}
                 <div className="mb-10 flex flex-col sm:flex-row">
                   <iframe
@@ -270,27 +270,29 @@ export default function Video() {
                   > 
                   Send reply</button>
                   </div>  
-                  {comment.authorComment? userObj.user._id === comment.authorComment._id?<button
-                  className="button"
-                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  {comment.authorComment? userObj.user._id === comment.authorComment._id?
+                  <div style={{display: "flex", justifyContent: "flex-end"}}>
+                  <button
+                  style={{width: 130}}
+                  className="bg-gray-700 text-xs hover:bg-red-700 text-white font-bold mx-2 py-2 px-2 rounded"
                   type="submit"
                   onClick={(e) => deleteComment4(e, comment._id)}
                   > 
-                  Delete Comment</button> : "" : ""} 
+                  Delete Comment</button></div> : "" : ""} 
                 </ol>) 
             ) : (
               <h2>No se cumplió master</h2>
             )}
             </form>
           </div>
-            <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-b-md'>
+            <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-b-xl'>
             <div style={{display: 'flex', justifyContent: 'center'}} className="mt-5 pt-5">
               <p style={{color: 'rgb(240, 240, 240)'}} className="uppercase mb-3 font-bold text-sm">Post your questions / comments here</p> 
             </div>
             <div style={{display: 'flex', justifyContent: 'center'}} className="pb-5">
               <input
               style={{backgroundColor: 'rgb(17, 52, 82)'}}
-              className="border border-white text-sm rounded-l-md pl-3"
+              className="text-white border border-white text-sm rounded-l-md pl-3"
               type="text"
               placeholder="New answer"
               value= {state.input2}
@@ -309,8 +311,8 @@ export default function Video() {
             </div>
           </div>
           {/* CHAT */}
-        </div>
-            </div>
+          </div>
+          </div>
       </div>
           <div>
           {/* Courses */}
