@@ -4,12 +4,18 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Error404 from "../Error404";
 
 import { getUsersBanned, restoreUser } from "../../redux/actions";
 
 function Banned() {
   const dispatch = useDispatch();
   const { userBanned } = useSelector((state) => state.programandoando);
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+
+  let role = userObj && userObj.user.role;
 
   useEffect(() => {
     dispatch(getUsersBanned());
@@ -43,8 +49,11 @@ function Banned() {
     setBannedDelete("Select User");
   };
 
-  return (
-    <div style={{ backgroundColor: "rgb(240, 240, 240)" }} className="text-2x1 font-semibold flex">
+  return role === "admin" ? (
+    <div
+      style={{ backgroundColor: "rgb(240, 240, 240)" }}
+      className="text-2x1 font-semibold flex"
+    >
       <Sidebar />
       <div className="h-full w-full flex justify-center">
         <div className="h-screen">
@@ -52,7 +61,10 @@ function Banned() {
             className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
             action=""
           >
-            <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+            <h2
+              style={{ backgroundColor: "rgb(17, 52, 82)" }}
+              className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+            >
               Restore User
             </h2>
             {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -68,7 +80,7 @@ function Banned() {
 
             <div className="flex justify-end items-center my-4 mt-10">
               <button
-              style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                style={{ backgroundColor: "rgb(55, 109, 109)" }}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                 type="button"
                 onClick={() => handleRestoreUser(bannedDelete["value"])}
@@ -80,6 +92,8 @@ function Banned() {
         </div>
       </div>
     </div>
+  ) : (
+    <Error404 />
   );
 }
 

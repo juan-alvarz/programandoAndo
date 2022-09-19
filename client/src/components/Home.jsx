@@ -20,6 +20,7 @@ import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
 import Chat from "./Chat";
 import PWA from "./PWA";
+import RankUserHome from "./RankUserHome";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
@@ -34,7 +35,7 @@ function Home() {
 
   let verified = userObj && userObj.user.status;
 
-  console.log(document.cookie);
+  // console.log(document.cookie);
 
   // delete_cookie("github-jwt")
 
@@ -111,16 +112,15 @@ function Home() {
       <div>
         <Carousel />
       </div>
-      <PWA />
-      {userObj ? <Puntuation /> : <PuntuationNotLogged />}
-      <br></br>
-      <br></br>
-      <br></br>
-      <h1>ACA ABAJO EL FORO GENERAL</h1>
-      <br></br>
-      <br></br>
-      <br></br>
-      {userObj ? <Foro /> : <ForoNotLogged />}
+      <div className="flex justify-evenly mt-10 mb-20">
+        <div>{userObj ? <Puntuation /> : <PuntuationNotLogged />}</div>
+        <div>
+          <RankUserHome />
+        </div>
+      </div>
+      <div className="flex justify-center">
+        {userObj ? <Foro /> : <ForoNotLogged />}
+      </div>
       <div
         style={{
           position: "fixed",

@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import Error404 from "../Error404";
+
 import {
   getUsers,
   createsUser,
@@ -18,6 +20,11 @@ function CoursesPA() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { users } = useSelector((state) => state.programandoando);
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+
+  let role = userObj && userObj.user.role;
 
   useEffect(() => {
     dispatch(getUsers());
@@ -116,7 +123,7 @@ function CoursesPA() {
     });
     setVideoDelete("Select User");
   };
-  return (
+  return role === "admin" ? (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
       <div
@@ -209,7 +216,7 @@ function CoursesPA() {
                 value={courseEdit}
                 onChange={handleSelectEdit}
                 isSearchable={true}
-                className='font-light'
+                className="font-light"
               />
               <div className="flex justify-end items-center my-4 mt-5">
                 <button style={{backgroundColor: 'rgb(55, 109, 109)'}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 ">
@@ -239,7 +246,7 @@ function CoursesPA() {
                 value={videoDelete}
                 onChange={handleSelectDelete}
                 isSearchable={true}
-                className='font-light'
+                className="font-light"
               />
 
               <div className="flex justify-end items-center my-4 mt-5">
@@ -257,6 +264,8 @@ function CoursesPA() {
         </div>
       </div>
     </div>
+  ) : (
+    <Error404 />
   );
 }
 

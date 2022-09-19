@@ -566,12 +566,12 @@ const RankUserDonation = () => {
   return (
     <div>
       <h2
-        className="text-center font-bold text-4xl my-5"
-        style={{ color: "#113452" }}
+        className="text-center font-bold text-4xl my-5 uppercase"
+        style={{ color: "#376D6D" }}
       >
         User Ranking
       </h2>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-3">
         <Paginated
           setPagina={paginado}
           videos={ranking.length}

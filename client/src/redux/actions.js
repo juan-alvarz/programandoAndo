@@ -103,7 +103,7 @@ export const getFavorites = (id) => async (dispatch) => {
 
 export const getScoring = (id) => async (dispatch) => {
   const user = await axios.get(`http://localhost:3001/api/users/${id}`);
-  console.log("hola");
+  // console.log("hola");
   console.log(user.data.scoring);
   dispatch(getScoringCourse(user.data.scoring));
 };
@@ -626,13 +626,33 @@ export const forgetPasswordUpdate = (payload) => async (dispatch) => {
   return response;
 };
 
-export const submitPasswordUpdate = (payload) => async (dispatch) => {
+export const submitPasswordUpdate = (payload, code) => async (dispatch) => {
   console.log(payload);
   const response = await axios
-    .post("http://localhost:3001/api/users/auth/:changePassCode", payload)
-
-    .catch((e) => console.log(e));
-
+    .post(`http://localhost:3001/api/users/auth/modify/${code}`, payload)
+    .then(() => {
+      Swal.fire({
+        title: "Success",
+        text: "Password changed successfully",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // navigate("/userspa");
+          // window.location.reload();
+          window.location.href = "http://localhost:3000";
+        }
+      });
+    })
+    .catch((error) =>
+      Swal.fire({
+        title: "Ups Something Happens",
+        // text: "Can't create video please try again",
+        text: error.response.data.error,
+        icon: "error",
+        confirmButtonText: "OK",
+      }).then(console.log(error))
+    );
   return response;
 };
 

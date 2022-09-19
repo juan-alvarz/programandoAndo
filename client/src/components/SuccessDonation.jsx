@@ -47,7 +47,10 @@ function SuccessDonation() {
               alignItems: "center",
             }}
           >
-            <div className="text-2xl font-bold mt-24" style={{ color: "rgb(55, 109, 109)" }}>
+            <div
+              className="text-2xl font-bold mt-24"
+              style={{ color: "rgb(55, 109, 109)" }}
+            >
               <h1>Success Donation!</h1>
             </div>
             <div
@@ -65,7 +68,7 @@ function SuccessDonation() {
                 here you are a special gift for you, keep it learning!
               </span>
             </div>
-            <div >
+            <div>
               <a
                 href="#"
                 className="flex flex-col items-center rounded-lg p-10 border border-blue-800 border shadow-md md:flex-row md:max-w-xl"
@@ -77,16 +80,26 @@ function SuccessDonation() {
                   class="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
                   src={logo}
                   alt="not found"
-                  style={{ padding: "5px", width: 100, backgroundColor: "rgb(17, 52, 82)", }}
+                  style={{
+                    padding: "5px",
+                    width: 100,
+                    backgroundColor: "rgb(17, 52, 82)",
+                  }}
                 />
-                <div style={{backgroundColor: "#fff",}} class="flex flex-col justify-between p-4 leading-normal">
+                <div
+                  style={{ backgroundColor: "#fff" }}
+                  class="flex flex-col justify-between p-4 leading-normal"
+                >
                   <h5
                     class="mb-2 text-2xl font-bold tracking-tight"
                     style={{ color: "rgb(240, 240, 240)" }}
                   >
                     {userToUpdate.username} is a new contributor!
                   </h5>
-                  <p class="mb-3 font-normal" style={{ color: "rgb(240, 240, 240)" }}>
+                  <p
+                    class="mb-3 font-normal"
+                    style={{ color: "rgb(240, 240, 240)" }}
+                  >
                     We want to thank <strong>{userToUpdate.username}</strong>{" "}
                     for contributing to <strong>programandoando</strong> and
                     help support it, voluntarily contributing {amount} USD and
@@ -118,21 +131,28 @@ function SuccessDonation() {
               paddingTop: "35px",
             }}
           >
-            <h1 className="text-2xl font-bold" style={{ color: "rgb(55, 109, 109)" }}>Donate Section</h1>
+            <h1
+              className="text-2xl font-bold"
+              style={{ color: "rgb(55, 109, 109)" }}
+            >
+              Donate Section
+            </h1>
             <span
-            className="max-w-2xl text-sm text-center md:text-md md:text-center md:text lg:text-lg leading-tight my-2"
+              className="max-w-2xl text-sm text-center md:text-md md:text-center md:text lg:text-lg leading-tight my-2"
               style={{
                 paddin: "35px",
                 marginTop: "20px",
                 textAlign: "justify",
               }}
             >
-              <strong style={{ color: "rgb(168, 76, 101)" }}>ProgramandoAndo</strong> manages to stay with the help of
-              donations, remember that all content is available for free if you
-              do not want to donate on this page you can get a special and
-              personalized card for yourself when you donate and contribute to
-              the maintenance of the page, at this time you have not donated. if
-              you want contribute, follow this
+              <strong style={{ color: "rgb(168, 76, 101)" }}>
+                ProgramandoAndo
+              </strong>{" "}
+              manages to stay with the help of donations, remember that all
+              content is available for free if you do not want to donate on this
+              page you can get a special and personalized card for yourself when
+              you donate and contribute to the maintenance of the page, at this
+              time you have not donated. if you want contribute, follow this
             </span>
             <div>
               <NavLink to="/donators">

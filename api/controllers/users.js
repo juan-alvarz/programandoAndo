@@ -69,6 +69,7 @@ const getUserById = async (req, res, next) => {
         path: "scoring",
         populate: {
           path: "course",
+          populate: { path: "videos" },
         },
       })
       .populate({
@@ -95,12 +96,17 @@ const getUserById = async (req, res, next) => {
           },
         },
       })
-      .populate("ownPath");
-    /* if (!user) {
-      handleHtppError(res, "user doesn't exist", 404);
-      // res.status(404);
-      // return res.send("user doesn't exist");
-    } */
+      .populate({
+        path: "ownPath",
+        populate: {
+          path: "courses",
+          populate: { path: "videos" },
+        },
+      });
+
+    if (!user) {
+      return handleHtppError(res, "user doesn't exist", 404);
+    }
     res.send(user);
   } catch (e) {
     return res.send(e.message);
@@ -184,7 +190,7 @@ const userLogin = async (req, res, next) => {
     // console.log(hashPassword.password);
 
     if (!user) {
-      handleHtppError(res, "User dont exists", 404);
+      handleHtppError(res, "User doesn't exists", 404);
       return;
     }
 
@@ -197,7 +203,7 @@ const userLogin = async (req, res, next) => {
     const checkPassword = await compare(password, hashPassword.password);
 
     if (!checkPassword) {
-      handleHtppError(res, "Password Invalid", 401);
+      handleHtppError(res, "Invalid Password", 401);
       return;
     }
 

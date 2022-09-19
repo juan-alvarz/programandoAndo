@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { DetailSchool } from "./DetailSchool";
 import img from "../utils/images/LOGOCOMPLETOPA.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllNotifications } from "../redux/actions";
+import { getAllNotifications, getUser } from "../redux/actions";
 import axios from "axios";
 
 const navigation = [
@@ -22,15 +22,18 @@ function classNames(...classes) {
 
 function NavBarAdmin({ delete_cookie }) {
   const { user } = useSelector((state) => state.programandoando);
-  console.log(user);
+  // console.log(user);
   const imgUser = Object.keys(user).length !== 0 && user.image.url;
-
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  let idUser = userObj.user._id;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { notifications } = useSelector((state) => state.programandoando);
 
   useEffect(() => {
     dispatch(getAllNotifications());
+    dispatch(getUser(idUser));
   }, [dispatch]);
 
   const handlelogout = async (e) => {
@@ -233,7 +236,7 @@ function NavBarAdmin({ delete_cookie }) {
                               Notifications
                             </div>
                             {notifications.map((e) => {
-                              console.log(notifications);
+                              // console.log(notifications);
                               return (
                                 <Menu.Item>
                                   <div className="px-2 pt-1 pb-2 w-full border-t-2">
@@ -290,7 +293,7 @@ function NavBarAdmin({ delete_cookie }) {
                             <Menu.Item>
                               {({ active }) => (
                                 <NavLink
-                                  to="/sidebar"
+                                  to="/administrator"
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
