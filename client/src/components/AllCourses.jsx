@@ -215,7 +215,6 @@ export default function AllCourses() {
       <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
         <NavBar />
         <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
-          {/* Filtrados */}
           <div
             style={{
               display: "flex",
@@ -246,7 +245,6 @@ export default function AllCourses() {
               </span>
             </div>
 
-            {/* DURATION */}
             <div>
               <select
                 id="countries"

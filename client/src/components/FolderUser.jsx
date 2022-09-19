@@ -4,11 +4,17 @@ import { Favorites } from "./Favorites";
 import NavBar from "./NavBar";
 import UserCreatedCourse from "./UserCreatedCourse";
 import UserScoringCourse from "./UserScoringCourse";
+import Error404 from "./Error404";
 
 export const FolderUser = () => {
   const [creados, setCreados] = useState("");
   const [score, setScore] = useState("");
   const [favoritos, setFavoritos] = useState("");
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = userLocal && JSON.parse(userLocal);
+
+  // console.log(userObj);
 
   const handleCreados = () => {
     if (creados === "") {
@@ -33,7 +39,7 @@ export const FolderUser = () => {
     }
   };
 
-  return (
+  return userObj !== null ? (
     <div>
       <NavBar />
       <div style={{ marginLeft: "0%" }}>
@@ -78,5 +84,7 @@ export const FolderUser = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <Error404 />
   );
 };

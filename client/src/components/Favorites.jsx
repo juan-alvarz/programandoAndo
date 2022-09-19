@@ -161,7 +161,7 @@ export const Favorites = () => {
                     {course.name}
                   </h5>
                 </div>
-                <p
+                {/* <p
                   style={{
                     fontSize: 15,
                     display: "flex",
@@ -176,7 +176,7 @@ export const Favorites = () => {
                   className="mb-3 font-normal text-gray-700"
                 >
                   {course.description}
-                </p>
+                </p> */}
                 <span
                   style={{
                     fontSize: 15,
@@ -193,7 +193,7 @@ export const Favorites = () => {
                   {/* <strong>Time Inversion: </strong>
                 {finallyOneDuration(course.duration)} */}
                 </span>
-                <div className="ml-5 mt-5">
+                {/* <div className="ml-5 mt-5">
                   <h4
                     style={{
                       color: "rgb(201, 196, 184)",
@@ -201,7 +201,7 @@ export const Favorites = () => {
                   >
                     Score: {course.score}
                   </h4>
-                </div>
+                </div> */}
                 <div
                   style={{
                     display: "flex",

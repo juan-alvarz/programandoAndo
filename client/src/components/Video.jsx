@@ -161,7 +161,7 @@ export default function Video() {
         <NavBar />
         <div style={{ display: "flex" }}>
           <div style={{ display: "flex" }}>
-            <div className="max-w-screen-lg m-5">
+            <div className="max-w-screen-xl m-5 ">
               {/* Video */}
               <div className="mb-10 flex flex-col sm:flex-row">
                 <iframe

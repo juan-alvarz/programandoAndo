@@ -6,7 +6,7 @@ import NavBar from "./NavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../redux/actions";
 import Footer from "./Footer";
-import logo from '../utils/images/PayPalLogo.png'
+import logo from "../utils/images/PayPalLogo.png";
 
 function Donators() {
   const [amount, setAmount] = useState(0); // el monto a donar
@@ -20,7 +20,7 @@ function Donators() {
   for (let i = 0; i < amounts.length; i++) {
     totalAmount = totalAmount + amounts[i];
   }
-  console.log(totalAmount);
+  // console.log(totalAmount);
 
   //actualiza el monto cada que cambia
   const handleChange = (e) => {
@@ -124,11 +124,7 @@ function Donators() {
                   {`The community has donated ${totalAmount} usd so far. Thank you all for continuing to help make this possible!`}
                 </div>
                 <div className="flex justify-center md:justify-start">
-                  <img
-                    src={logo}
-                    alt="image paypal"
-                    className="w-24 mt-5"
-                  />
+                  <img src={logo} alt="image paypal" className="w-24 mt-5" />
                 </div>
               </div>
             </div>
