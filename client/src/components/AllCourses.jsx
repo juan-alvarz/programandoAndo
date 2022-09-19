@@ -22,8 +22,9 @@ import imageNotFound from "../utils/images/404person.png";
 import fav from "../utils/images/fav.png";
 
 import { updateUser } from "../redux/actions";
+import FiltersCourses from "./FiltersCourses";
 
-export default function AllCourses() {
+export default function AllCourses({}) {
   const courses = useSelector((state) => state.programandoando.courses);
   const { favoritesUser } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
@@ -165,12 +166,12 @@ export default function AllCourses() {
     //=========== lógica del duration ==========
 
     //=========== handles =================
-    const handleFilterAlph = (e) => {
-      setCursoActual(1);
-      e.target.checked === true
-        ? dispatch(getAllCoursesZA())
-        : dispatch(getAllCoursesAZ());
-    };
+    // const handleFilterAlph = (e) => {
+    //   setCursoActual(1);
+    //   e.target.checked === true
+    //     ? dispatch(getAllCoursesZA())
+    //     : dispatch(getAllCoursesAZ());
+    // };
     const handleFilterDuration = (e) => {
       if (e.target.value === "allDurations") {
         dispatch(getAllCourses());
@@ -211,75 +212,11 @@ export default function AllCourses() {
       setCursoActual(numeroPagina);
     };
     // ==============================================
+
     return (
       <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
         <NavBar />
-        <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
-          {/* Filtrados */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <span className="pr-2">A-Z</span>
-              <label
-                for="default-toggle"
-                className="inline-flex relative items-center cursor-pointer"
-              >
-                <div></div>
-                <input
-                  type="checkbox"
-                  value=""
-                  id="default-toggle"
-                  className="sr-only peer"
-                  onChange={(e) => handleFilterAlph(e)}
-                />
-                <div
-                  style={{ backgroundColor: "rgb(17, 52, 82)" }}
-                  className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
-                ></div>
-              </label>
-              <span style={{ paddingRight: "10px", paddingLeft: "10px" }}>
-                Z-A
-              </span>
-            </div>
-
-            {/* DURATION */}
-            <div>
-              <select
-                id="countries"
-                style={{ width: 130 }}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% py-1"
-                onChange={(e) => handleFilterDuration(e)}
-              >
-                <option value={"allDurations"}>All Durations</option>
-                <option value={"10hmore"}>More than 10 hours</option>
-                <option value={"10h"}>Up to 10 hours</option>
-                <option value={"5h"}>Up to 5 hours</option>
-                <option value={"3h"}>Up to 3 hours</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Paginated */}
-          <div className="grid justify-items-center my-5">
-            <Paginated
-              setPagina={paginado}
-              videos={courses.length}
-              videosPagina={cursosPagina}
-              paginaActual={cursoActual}
-              prev={prev}
-              next={next}
-            />
-          </div>
-
-          <div>
-            <SearchBar path={path} setPagina={setCursoActual} />
-          </div>
-        </div>
-
+        <FiltersCourses />
         {/* Cards */}
         <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-8">
           {cursosActuales.map((course, index) => (
@@ -391,8 +328,7 @@ export default function AllCourses() {
             </div>
           ))}
         </div>
-        <h2 className="bg-green-300 bg-gray-700">{favoritoAgregado}</h2>
-
+        <h2 className="bg-green-300">{favoritoAgregado}</h2>
         <Footer />
       </div>
     );
