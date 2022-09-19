@@ -566,12 +566,12 @@ const RankUserDonation = () => {
   return (
     <div>
       <h2
-        className="text-center font-bold text-4xl my-5"
-        style={{ color: "#113452" }}
+        className="text-center font-bold text-4xl my-5 uppercase"
+        style={{ color: "#376D6D" }}
       >
-        User Ranking{" "}
+        User Ranking
       </h2>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-3">
         <Paginated
           setPagina={paginado}
           videos={ranking.length}
@@ -581,19 +581,19 @@ const RankUserDonation = () => {
           next={next}
         ></Paginated>
       </div>
-      <div >
+      <div className="grid grid-col-1 justify-center">
         {usersActuales ? (
           usersActuales.map((elemento, index) => {
             return (
               <div
                 key={index}
-                className="m-3 p-3 rounded-md shadow-lg"
+                className="m-3 p-3 rounded-md shadow-lg  "
                 style={{
                   backgroundColor: "rgb(17, 52, 82)",
-                  margin: "20px 30%",
+                  width: "23rem",
                 }}
               >
-                <ul className="w-96 flex flex-col justify-center">
+                <ul className="w-96 flex flex-col justify-center pr-8">
                   <li className="pb-3 sm:pb-4">
                     <div className="flex items-center space-x-4">
                       <div className="flex-1 min-w-0">

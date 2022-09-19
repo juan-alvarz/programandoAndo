@@ -19,6 +19,7 @@ import Carousel from "./Carousel";
 import img from "../utils/images/LAPTOPVIDEOS.png";
 import axios from "axios";
 import Chat from "./Chat";
+import RankUserHome from "./RankUserHome";
 
 function Home() {
   const { video } = useSelector((state) => state.programandoando);
@@ -115,7 +116,7 @@ function Home() {
           {userObj? <Puntuation /> :<PuntuationNotLogged />  }
         </div>
         <div>
-          {userObj? <Puntuation /> :<PuntuationNotLogged />  }
+          <RankUserHome/>
         </div>
       </div>
         <div className="flex justify-center">

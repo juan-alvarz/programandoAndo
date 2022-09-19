@@ -98,12 +98,12 @@ export default function Foro() {
             <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-t-xl mb-5'>
                <p style={{color: 'rgb(240, 240, 240)'}} className="text-center py-5 text-xl font-bold uppercase"> General Forum </p> 
             </div>
-            <div style={{height: 500}} className='flex justify-center overflow-hidden hover:overflow-y-scroll'>
+            <div style={{height: 500}} className='flex justify-center overflow-hidden hover:overflow-y-scroll scrolling-touch'>
             <form className="bg-white w-10/12" onSubmit={handleSubmit(handleSubmitRespuesta)}> 
             {Object.keys(foro).length > 0 ? (
               foro.comments.map(            
                 (comment) => 
-                <ol style={{borderWidth: 1, height: 320}} className='rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll'>
+                <ol style={{borderWidth: 1, height: 320}} className='rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll scrolling-touch'>
                 <div className="bg-gray-400 rounded-t-md py-1">
                 <p className="text-lg text-center font-bold text-white">{comment.authorComment? comment.authorComment.name: "no se encuenta master"}</p>
                 </div>
@@ -130,7 +130,7 @@ export default function Foro() {
                 </div>
             <div style={{display: 'flex', justifyContent: 'center'}} className="my-5">
               <input
-                className="border border-gray-300 rounded-l-md pl-3"
+                className="border border-gray-300 rounded-l-md pl-3 text-xs"
                 type="text"
                 placeholder="Comment..."
                 data-commentid={comment._id}

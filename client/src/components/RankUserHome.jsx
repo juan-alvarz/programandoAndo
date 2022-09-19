@@ -224,86 +224,98 @@ const RankUserHome = () => {
   }
   return (
     <div
-      className="flex h-screen justify-center items-center"
+      className="flex justify-center items-center"
       style={{ backgroundColor: "rgb(240, 240, 240)" }}
     >
-      <div className="w-96 flex flex-col justify-center">
-        {userForHome ? (
-          userForHome.map((elemento, index) => {
-            return (
-              <div
-                key={index}
-                className="m-3 py-3 px-5 rounded-md shadow-lg"
-                style={{ backgroundColor: "rgb(17, 52, 82)" }}
-              >
-                <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-                  <li className="pb-3 sm:pb-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-1 min-w-0">
-                        <p
-                          className="text-sm font-medium text-gray-900 truncate "
-                          style={{ color: "rgb(201, 196, 184)", fontSize: 19 }}
-                        >
-                          {elemento.name}
-                        </p>
-                        <p
-                          className="text-sm text-gray-500 truncate dark:text-gray-400"
+      <div style={{width: 500, backgroundColor: "#fff", borderRadius: 10, height: 600}} className="shadow-lg py-5" >
+        <h2
+          className="text-center font-bold text-2xl pb-2 uppercase"
+          style={{ color: "#376D6D" }}
+        >
+          top 5 donators
+        </h2>
+        <div className=" flex justify-center">
+        <div  className="w-10/12">
+          {userForHome ? (
+            userForHome.map((elemento, index) => {
+              return (
+                <div
+                  key={index}
+                  className="m-3 py-4 px-5 rounded-md shadow-lg "
+                  style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                >
+                  <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+                    <li className="pb-3 sm:py-1">
+                      <div className="flex items-center space-x-4">
+                        <div className="flex-1 min-w-0">
+                          <p
+                            className="text-sm font-medium text-gray-900 truncate "
+                            style={{
+                              color: "rgb(201, 196, 184)",
+                              fontSize: 19,
+                            }}
+                          >
+                            {elemento.name}
+                          </p>
+                          <p
+                            className="text-sm text-gray-500 truncate dark:text-gray-400"
+                            style={{ color: "rgb(201, 196, 184)" }}
+                          >
+                            {elemento.username}
+                          </p>
+                        </div>
+                        <div
+                          className="inline-flex items-center text-base font-semibold"
                           style={{ color: "rgb(201, 196, 184)" }}
                         >
-                          {elemento.username}
-                        </p>
+                          <img
+                            src={index === 0 ? oro : ""}
+                            className="pr-0.5"
+                          ></img>
+                          <img
+                            src={index === 1 ? plata : ""}
+                            className="pr-0.5"
+                          ></img>
+                          <img
+                            src={index === 2 ? bronce : ""}
+                            className="pr-0.5"
+                          ></img>
+                          {elemento.contributor}
+                        </div>
+                        <div>
+                          <NavLink to="/userrank" state={elemento}>
+                            <button
+                              style={{width: 130, backgroundColor: 'rgb(55, 109, 109)'}}
+                              className="bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-md"
+                              type="button"
+                            >
+                              More Detail
+                            </button>
+                          </NavLink>
+                        </div>
                       </div>
-                      <div
-                        className="inline-flex items-center text-base font-semibold"
-                        style={{ color: "rgb(201, 196, 184)" }}
-                      >
-                        <img
-                          src={index === 0 ? oro : ""}
-                          className="pr-0.5"
-                        ></img>
-                        <img
-                          src={index === 1 ? plata : ""}
-                          className="pr-0.5"
-                        ></img>
-                        <img
-                          src={index === 2 ? bronce : ""}
-                          className="pr-0.5"
-                        ></img>
-                        {elemento.contributor}
-                      </div>
-                      <div>
-                        <NavLink to="/userrank" state={elemento}>
-                          <button
-                            style={{
-                              width: "100%",
-                              backgroundColor: "#376D6D",
-                            }}
-                            type="button"
-                            className="my-3 p-3 text-white font-bold rounded-lg text-sm px-0.5 py-1.5 mr-2 mb-2"
-                          >
-                            More Detail
-                          </button>
-                        </NavLink>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            );
-          })
-        ) : (
-          <span className="font-bold text-2xl text-white">No hay usuarios</span>
-        )}
-        <div className="max-w-md  divide-gray-200">
-          <NavLink to="/rankusers">
-            <button
-              style={{ width: "95%", backgroundColor: "#376D6D" }}
-              type="button"
-              class="text-white rounded-lg ml-2 my-3 py-2 font-bold text-lg"
-            >
-              View More
-            </button>
-          </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })
+          ) : (
+            <span className="font-bold text-2xl text-white">
+              No hay usuarios
+            </span>
+          )}
+          <div className="flex justify-center  divide-gray-200">
+            <NavLink to="/rankusers">
+              <button
+                style={{width: 130, backgroundColor: 'rgb(55, 109, 109)'}}
+                className="my-2 bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-md"
+                type="button"
+              >
+                View More
+              </button>
+            </NavLink>
+          </div>
+        </div>
         </div>
       </div>
     </div>

@@ -81,7 +81,7 @@ function handleChange(e) {
 }
 
     return(
-        <div style={{width: 500, backgroundColor: "#fff", borderRadius: 10, height: 600}} className="shadow-lg py-5 overflow-visible">
+        <div style={{width: 500, backgroundColor: "#fff", borderRadius: 10, height: 600}} className="shadow-lg py-5 overflow-hidden hover:overflow-y-scroll scrolling-touch">
             <div >
                 <div style={{display: "flex", justifyContent: "center", color: 'rgb(55, 109, 109)'}} className='font-bold'>
                     <p>Hello {user.name},</p>
@@ -126,12 +126,12 @@ function handleChange(e) {
             </div>
             </div>
 
-            <div className="">
+            <div className="mx-3">
             {Object.keys(users).length > 0 ? ( 
                 users.map(
                     (user) => ( 
                     (user.pageOpinion !== "" && user.pagePuntuation !== 0? (
-                        <ol className="mb-5 bg-gray-200  py-1">
+                        <ol className="mb-5 bg-gray-200  py-1 rounded-md">
                             <div style={{display: 'flex', justifyContent: 'center', color: 'rgb(55, 109, 109)'}}>
                             <p className="text-sm font-bold">{user.name}</p>
                             </div>
