@@ -48,7 +48,7 @@ function ProfilelUser() {
   return (
     <div>
         <NavBar/>
-      <div style={{ backgroundColor: "rgb(240, 240, 240)", height: '100%', paddingBottom: 90}} className=" flex flex-wrap items-center justify-center">
+      <div style={{ backgroundColor: "rgb(240, 240, 240)", height: '100%', paddingBottom: 110}} className=" flex flex-wrap items-center justify-center">
         <div className="container max-w-lg bg-white rounded shadow-lg transform duration-200 easy-in-out m-12">
           <div className="h-2/4 sm:h-64 overflow-hidden">
             <img

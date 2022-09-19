@@ -229,11 +229,11 @@ export default function Login() {
         <div className="relative flex items-center justify-center w-full mt-6 border border-t">
           <div className="absolute px-5 bg-white font-bold">Or</div>
         </div>
-        <div style={{ display: "flex", paddingLeft: 20 }}>
+        <div style={{ display: "flex" }}>
           <div className="flex mt-4 ">
             <Google />
           </div>
-          <div className="flex mt-3.5 " style={{ paddingLeft: 25 }}>
+          <div className="flex mt-3.5 " style={{ paddingLeft: 10 }}>
             <GitHub />
           </div>
         </div>
