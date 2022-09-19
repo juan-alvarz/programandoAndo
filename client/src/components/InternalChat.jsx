@@ -11,6 +11,7 @@ import Error404 from "./Error404";
 import axios from "axios";
 import Loader from "./Loader";
 import ChatContent from "./ChatContent";
+import NavBarUser from "./NavBarUser";
 
 function InternalChat() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function InternalChat() {
   function handleChangeChat(e) {
     e.preventDefault();
     setMessage(e.target.value);
+    dispatch(getChatById(chatActual[0]._id));
   }
 
   //envía el chat
@@ -80,7 +82,20 @@ function InternalChat() {
       dispatch(create_getChat(payload));
     }
   }
+  function handleReload(e) {
+    e.preventDefault();
+    dispatch(getChatById(chatActual[0]._id));
+  }
 
+  function updateLiveChat() {
+    let count = 0;
+    while (count <= 10) {
+      setTimeout(() => {
+        dispatch(getChatById(chatActual[0]._id));
+      }, 1000);
+    }
+  }
+  //updateLiveChat();
   //cambia el chat según el usuario que toquemos
   useEffect(() => {
     dispatch(getUsers());
@@ -92,87 +107,89 @@ function InternalChat() {
     }
   }, [dispatch]);
 
-  /* 
-  const updateChatLive = async () => {
-    let count = 0;
-    while (count < 6) {
-      if (commonChat !== "no se repite") {
-        setTimeout(async () => {
-          dispatch(getChatById(commonChat));
-        }, 1000);
-        count++;
-      }
-    }
-  };
-  updateChatLive(); */
-
   if (currentUser === null) {
     //si no está logueado, no existe chat
     return <Error404 />;
-  } else if (Object.keys(users).length === 0) {
+  }
+  //pantala de carga
+  else if (Object.keys(users).length === 0) {
     return <Loader />;
   } else {
     return (
-      <div style={{ display: "flex" }}>
-        <div
-          style={{
-            border: "3px solid cadetblue",
-          }}
-        >
-          <span style={{ color: "#21252B", background: "cadetblue" }}>
-            USERS AVAILABLE
-          </span>
-          {
-            <ol>
-              {usersToChat.map((user) => (
-                <div>
-                  <button onClick={(e) => handleUserChat(e, user)}>
-                    {user.username}
-                  </button>
-                  <hr />
-                </div>
-              ))}
-            </ol>
-          }
-        </div>
-        <div style={{ paddingLeft: "2vh", borderLeft: "5px solid gray" }}>
-          {Object.keys(userActual).length !== 0 ? (
-            <div>
-              <h1>{userActual.username}</h1>
-
-              {Object.keys(chat).length !== 0 ? (
-                chat.content.map((con) => (
-                  <div>
-                    <strong>{con.author.name}: </strong>
-                    <span>{con.content}</span>
+      <div>
+        <NavBarUser />
+        <div style={{ display: "flex", justifyContent: "" }}>
+          <div
+            style={{
+              border: "3px solid cadetblue",
+            }}
+          >
+            <span style={{ color: "#21252B", background: "cadetblue" }}>
+              USERS AVAILABLE
+            </span>
+            {
+              <ol>
+                {usersToChat.map((user) => (
+                  <div
+                    style={{ padding: "10px", border: "1px solid cadetblue" }}
+                  >
+                    <button onClick={(e) => handleUserChat(e, user)}>
+                      {user.username}
+                    </button>
+                    <hr />
                   </div>
-                ))
-              ) : (
-                <span>
-                  No hay chats aún, inicia un chat con {userActual.username}!
-                </span>
-              )}
-              <form onSubmit={(e) => handleSubmitChat(e)}>
-                <input
-                  type="text"
-                  placeholder="Send a message"
-                  value={message}
-                  onChange={(e) => handleChangeChat(e)}
-                />
-                <button type="submit">Send</button>
-              </form>
-            </div>
-          ) : (
-            <span>Aún no hay usuario seleccionado</span>
-          )}
+                ))}
+              </ol>
+            }
+          </div>
+          <div
+            style={{
+              paddingLeft: "2vh",
+              borderLeft: "5px solid gray",
+              overflow: "auto",
+              height: "80vh",
+            }}
+          >
+            {Object.keys(userActual).length !== 0 ? (
+              <div>
+                <div
+                  style={{
+                    padding: "10px",
+                    textAlign: "center",
+                    fontSize: "1.2rem",
+                  }}
+                >
+                  <h1>{userActual.username}</h1>
+                </div>
+
+                {Object.keys(chat).length !== 0 && chatActual.length !== 0 ? (
+                  chat.content.map((con) => (
+                    <div>
+                      <strong>{con.author.name}: </strong>
+                      <span>{con.content}</span>
+                    </div>
+                  ))
+                ) : (
+                  <span>
+                    No hay chats aún, inicia un chat con {userActual.username}!
+                  </span>
+                )}
+                <form onSubmit={(e) => handleSubmitChat(e)}>
+                  <input
+                    type="text"
+                    placeholder="Send a message"
+                    value={message}
+                    onChange={(e) => handleChangeChat(e)}
+                  />
+                  <button type="submit">Send</button>
+                  <button onClick={(e) => handleReload(e)}>Reload</button>
+                </form>
+              </div>
+            ) : (
+              <span>Aún no hay usuario seleccionado</span>
+            )}
+          </div>
         </div>
-        {/* <ChatContent
-          id={
-            commonChat !== "no se repiten"
-              ? commonChat
-              : "63279ce3d8ca8a2f96ae93b2"
-          }
-        /> */}
       </div>
     );
   }

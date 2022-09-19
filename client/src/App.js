@@ -101,13 +101,14 @@ function App() {
           {/* Perfil de usuario */}
           <Route path="/chat" element={<Chat />} />
           <Route path="/createdCourse" element={<UserCreatedCourse />} />
-          <Route path="/ageChart" element={<AgeCharts/>}/>
-          <Route path="/countryChart" element={<CountryCharts/>}/>
+          <Route path="/ageChart" element={<AgeCharts />} />
+          <Route path="/countryChart" element={<CountryCharts />} />
           <Route path="/profileUser" element={<ProfilelUser />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
           <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
           <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
           <Route path="/modify/:changePassCode" element={<SubmitPassword />} />
+          <Route path="/test" element={<TEST />} />
         </Routes>
       </div>
     </BrowserRouter>
