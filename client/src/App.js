@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AboutUs from "./components/AboutUs";
 import Home from "./components/Home";
-import LandingPage from "./components/LandingPage";
 import RankUserHome from "./components/RankUserHome";
 import Courses from "./components/Courses";
 import CreateCourse from "./components/CreateCourse";
@@ -42,19 +41,18 @@ import ModifyProfileAdmin from "./components/ModifyProfileAdmin";
 import ProfileAdmin from "./components/ProfileAdmin";
 import ProfilelUser from "./components/ProfilelUser";
 // Cloudinary
-import Cloudinary from "./components/Cloudinary";
 import { FolderUser } from "./components/FolderUser";
 import AgeCharts from "./components/panelAdmin/AgeCharts";
 import CountryCharts from "./components/panelAdmin/CountryCharts";
 import SubmitPassword from "./components/SubmitPassword";
 import TEST from "./components/TEST";
+import SchoolDetailUser from "./components/SchoolDetailUser";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          {/* <Route path="/" element={<LandingPage />} /> */}
           <Route path="/" element={<Home />} />
           <Route path="/allCourses" element={<AllCourses />} />
           <Route path="/course/:idCourse" element={<OneCourseDetail />} />
@@ -69,7 +67,6 @@ function App() {
           <Route path="/forgetPassword" element={<ForgetPassword />} />
 
           <Route path="/sidebar" element={<Sidebar />} />
-          {/* <Route path="/panelAdmin" element={<PanelAdmin />} /> */}
 
           {/* Panel Admin */}
           <Route path="/videospa" element={<VideosPA />} />
@@ -101,13 +98,14 @@ function App() {
           {/* Perfil de usuario */}
           <Route path="/chat" element={<Chat />} />
           <Route path="/createdCourse" element={<UserCreatedCourse />} />
-          <Route path="/ageChart" element={<AgeCharts/>}/>
-          <Route path="/countryChart" element={<CountryCharts/>}/>
+          <Route path="/ageChart" element={<AgeCharts />} />
+          <Route path="/countryChart" element={<CountryCharts />} />
           <Route path="/profileUser" element={<ProfilelUser />} />
           <Route path="/profileAdmin" element={<ProfileAdmin />} />
           <Route path="/modifyProfileUser" element={<ModifyProfileUser />} />
           <Route path="/modifyProfileAdmin" element={<ModifyProfileAdmin />} />
           <Route path="/modify/:changePassCode" element={<SubmitPassword />} />
+          <Route path="/school/:id" element={<SchoolDetailUser />} />
         </Routes>
       </div>
     </BrowserRouter>

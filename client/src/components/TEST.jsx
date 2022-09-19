@@ -7,75 +7,61 @@ import Loader from "./Loader";
 import { NavLink } from "react-router-dom";import logo from "../utils/images/LOGOPA.png";
 
 function TEST() {
-  const userToUpdate = { username: "Leo Messi" };
-  const amount = 45
-  const currentAmount = 3
-  return (
-    <div style={{ backgroundColor: "rgb(240, 240, 240)", height: "100vh" }}>
-      <NavBar />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "60%",
-          margin: "auto",
-          paddingTop: "35px",
-        }}
-      >
-          <h1 className="text-2xl font-bold" style={{ color: "rgb(55, 109, 109)" }}>Success Donation!</h1>
-        <div
-          className="max-w-2xl text-sm text-center md:text-md md:text-left md:text lg:text-lg leading-tight my-2"
-          style={{
-            textAlign: "center",
-            paddingTop: "15px",
-            paddingBottom: "15px",
-          }}
-        >
-          <span>
-            Thanks for contributing to the page, remember that all the content
-            is totally free, the donation helps to keep the page and now you
-            enter the list of people who have helped keep it going, here you are
-            a special gift for you, keep it learning!
-          </span>
-        </div>
-        <div className="flex rounded-lg border border-blue-800 border shadow-md md:flex-row md:max-w-xl" style={{marginTop: 40}}>
-              <div className="flex items-center rounded-l-lg" style={{backgroundColor: "rgb(17, 52, 82)", padding: "5px", width: 350}}>
-                <img
-                  style={{backgroundColor: "rgb(17, 52, 82)"}}
-                  class="px-3 h-96 rounded-l-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                  src={logo}
-                  alt="not found"
-                />
-              </div>
-              <div className="p-5 bg-white">
-                <div
-                  class="flex flex-col justify-between p-4 leading-normal"
-                >
-                  <h5
-                    class="mb-2 text-2xl font-bold tracking-tight"
-                    style={{ color: "rgb(55, 109, 109)" }}
-                  >
-                    {userToUpdate.username} is a new contributor!
-                  </h5>
-                  <p
-                    class="mb-3 font-normal"
-                    
-                  >
-                    We want to thank <strong>{userToUpdate.username}</strong> for
-                    contributing to <strong style={{ color: "rgb(168, 76, 101)" }}>ProgramandoAndo</strong> and help
-                    support it, voluntarily contributing {amount} USD and has
-                    collaborated with {amount + currentAmount} USD in total.
-                    <br />
-                    Thanks you so much {userToUpdate.username}
-                  </p>
-                </div>
-              </div>
-        </div>
+  let foroId = "6325148393901f7583647c03"
+
+    const dispatch = useDispatch();
+    const { foro } = useSelector((state) => state.programandoando);
+   
+    useEffect(() => {
+         dispatch(getForoById(foroId));
+       }, [foroId]);
+
+console.log(foro)
+
+if (!foro ) {
+    <h1>Cargando Foro</h1>
+} else { 
+    return (
+      <div className="bg-white w-7/12 rounded-md mb-10">
+      <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-t-xl mb-5'>
+         <p style={{color: 'rgb(240, 240, 240)'}} className="text-center py-5 text-xl font-bold uppercase"> General Forum </p> 
       </div>
+      <div style={{height: 500}} className='flex justify-center overflow-hidden hover:overflow-y-scroll scrolling-touch'>
+        <form className="bg-white w-10/12"> 
+        {Object.keys(foro).length > 0 ? (
+          foro.comments.map(            
+            (comment) => 
+            <ol style={{borderWidth: 1, height: 320}} className='rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll scrolling-touch'>
+            <div className="bg-gray-400 rounded-t-md py-1">
+              <p className="text-lg text-center font-bold text-white">{comment.authorComment? comment.authorComment.name: "no se encuenta master"}</p>
+            </div>
+            <div >
+              <p className="text-md text-center font-bold pt-5">{comment.content}</p> 
+            </div>
+            <div className=" my-5">
+              <h3>{comment.answers?.map(
+                (answer) => 
+                <ol className="bg-gray-200 my-3 mx-3 p-4 rounded-md">
+                <p className="text-sm font-bold">{answer.authorComment? answer.authorComment.name: <p>No tiene autor</p>}</p>
+                <p className="text-xs">{answer.content}</p>
+                </ol>
+              )}
+              </h3>
+            </div>
+            <input
+                placeholder="Comment..."
+                />
+                <h3>Registrate para Comentar !!</h3> 
+            </ol>) 
+        ) : (
+          <h2>No se cumplió master</h2>
+        )}
+        </form>
+        </div>
+        
     </div>
-  );
+    )
+  }
 }
 
 export default TEST;

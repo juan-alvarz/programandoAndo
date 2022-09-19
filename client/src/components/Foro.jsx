@@ -1,57 +1,105 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getForoById, updateForo, updateDeleteCommentorAnswer, getAllForos } from "../redux/actions";
-import { useForm } from 'react-hook-form';
-
-
-
+import {
+  getForoById,
+  updateForo,
+  updateDeleteCommentorAnswer,
+  getAllForos,
+} from "../redux/actions";
+import { useForm } from "react-hook-form";
 
 export default function Foro() {
+  let foroId = "6325148393901f7583647c03";
+  const dispatch = useDispatch();
+  const { foro } = useSelector((state) => state.programandoando);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-    let foroId = "6325148393901f7583647c03"
-    const dispatch = useDispatch();
-    const { foro } = useSelector((state) => state.programandoando);
-    const {register, formState: {errors}, handleSubmit} = useForm();
-
-    const [contador, setContador] = useState(1)
+  const [contador, setContador] = useState(1);
   //  const [contador2, setContador2] = useState(2)
-    const [state, setState] = useState({ input1: "", input2: "" })
+  const [state, setState] = useState({ input1: "", input2: "" });
 
-       useEffect(() => {
-        setTimeout(function(){
-          dispatch(getForoById(foroId));
-        }, 4000)
-       }, [contador]);
+  useEffect(() => {
+    setTimeout(function() {
+      dispatch(getForoById(foroId));
+    }, 4000);
+  }, [contador]);
 
-       useEffect(() => {
-        setTimeout(function(){
-          dispatch(getForoById(foroId));
-        }, 0.1)
-       }, [contador]);
+  useEffect(() => {
+    setTimeout(function() {
+      dispatch(getForoById(foroId));
+    }, 0.1);
+  }, [contador]);
 
+  const usuario = window.localStorage.getItem("user");
+  let userObj = JSON.parse(usuario);
+  // console.log(foro)
+  // COMENTARIO
 
-    const usuario = window.localStorage.getItem('user')
-    let userObj = JSON.parse(usuario);
-    console.log(foro)  
-    // COMENTARIO 
+  const [commentario, setCommentario] = useState({
+    content: "",
+    authorComment: userObj.user._id,
+    commentId: "", // este siempre sale vacio che
+  });
 
-    const [commentario, setCommentario] = useState({
-      content: "",
-      authorComment: userObj.user._id,
-      commentId: "", // este siempre sale vacio che 
+  function handleChange(e) {
+    setCommentario({ ...commentario, content: e.target.value });
+    setState({ ...state, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmitComment(e) {
+    e.preventDefault();
+    dispatch(updateForo(foroId, commentario));
+    setState({ input2: "" });
+    setContador(contador + 1);
+  }
+
+  function deleteComment4(e, id) {
+    e.preventDefault();
+    //return deleteComment
+    dispatch(
+      updateDeleteCommentorAnswer(foroId, {
+        commentId: id,
+        change: "deleteComment",
+      })
+    );
+    dispatch(getForoById(foroId));
+    setContador(contador + 1);
+  }
+
+  function deleteAnswer(e, id, idAnswer) {
+    e.preventDefault();
+    //return deleteComment
+    dispatch(
+      updateDeleteCommentorAnswer(foroId, {
+        commentId: id,
+        change: "deleteAnswer",
+        idAnswer: idAnswer,
+      })
+    );
+    setContador(contador + 1);
+  }
+
+  // RESPUESTA
+  const [respuesta, setRespuesta] = useState({
+    content: "",
+    authorComment: userObj.user._id,
+    commentId: "",
+    change: "respuesta",
+  });
+
+  function handleChangeRespuesta(e) {
+    setRespuesta({
+      ...respuesta,
+      commentId: e.target.dataset.commentid,
+      content: e.target.value,
     });
-  
-    function handleChange(e) {
-      setCommentario({...commentario, content: e.target.value,});
-      setState({...state, [e.target.name]: e.target.value,})
-    }
-  
-    function handleSubmitComment(e) {
-      e.preventDefault();
-      dispatch(updateForo(foroId, commentario))
-      setState({input2: ""})
-      setContador(contador + 1)
-    }
+    setState({ ...state, input1: e.target.value });
+    setContador(contador + 1);
+  }
 
     function deleteComment4(e, id){
       e.preventDefault()
@@ -68,13 +116,7 @@ export default function Foro() {
       setContador(contador + 1)
     }
   
-    // RESPUESTA 
-    const [respuesta, setRespuesta] = useState({
-      content: "",
-      authorComment: userObj.user._id,
-      commentId: "",
-      change: "respuesta"
-    });
+ 
   
     function handleChangeRespuesta(e) {
       setRespuesta({...respuesta, commentId: e.target.dataset.commentid,  content: e.target.value, });

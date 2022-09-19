@@ -37,7 +37,7 @@ export default function HearthFav({ course, userObj, cursosActuales }) {
 
   useEffect(() => {
     dispatch(getFavorites(userID));
-    console.log(contador);
+    // console.log(contador);
   }, [dispatch, contador]);
 
   // console.log(status)

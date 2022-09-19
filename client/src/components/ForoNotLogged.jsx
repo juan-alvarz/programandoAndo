@@ -1,25 +1,27 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getForoById, updateForo, updateDeleteCommentorAnswer } from "../redux/actions";
-import { useForm } from 'react-hook-form';
-
+import {
+  getForoById,
+  updateForo,
+  updateDeleteCommentorAnswer,
+} from "../redux/actions";
+import { useForm } from "react-hook-form";
 
 export default function ForoNotLogged() {
+  let foroId = "6325148393901f7583647c03";
 
-    let foroId = "6325148393901f7583647c03"
+  const dispatch = useDispatch();
+  const { foro } = useSelector((state) => state.programandoando);
 
-    const dispatch = useDispatch();
-    const { foro } = useSelector((state) => state.programandoando);
-   
-    useEffect(() => {
-         dispatch(getForoById(foroId));
-       }, [foroId]);
+  useEffect(() => {
+    dispatch(getForoById(foroId));
+  }, [foroId]);
 
-console.log(foro)
+  // console.log(foro)
 
-if (!foro ) {
-    <h1>Cargando Foro</h1>
-} else { 
+  if (!foro) {
+    <h1>Cargando Foro</h1>;
+  } else {
     return (
       <div className="bg-white w-7/12 rounded-md mb-10">
       <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-t-xl'>

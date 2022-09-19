@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import arrowMenu from "../../utils/images/sidebar/control.png";
 // import logo from "../../utils/images/sidebar/logo.png";
-import logo from '../../utils/images/LOGOPA.png'
+import logo from "../../utils/images/LOGOPA.png";
+import Error404 from "../Error404";
 
 function Sidebar() {
   const [click, setClick] = useState(0);
   const [open, setOpen] = useState(true);
 
   const path = window.location.pathname;
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+
+  let role = userObj && userObj.user.role;
 
   const menus = [
     { title: "Dashboard", href: "/", src: "ArrowWhite", id: 0 },
@@ -23,8 +29,8 @@ function Sidebar() {
     // { title: "Search", href: "", src: "Search", gap: true, id: 7 },
     // { title: "Setting", href: "/setting", src: "Setting", gap: true, id: 8 },
   ];
-  return (
-    <div  className="flex">
+  return role === "admin" ? (
+    <div className="flex">
       <div
         style={{ backgroundColor: "rgb(17, 52, 82)" }}
         className={`${
@@ -40,7 +46,7 @@ function Sidebar() {
         />
         <div className="flex gap-x-4 justify-center">
           <img
-            style={{width: 150}}
+            style={{ width: 150 }}
             src={logo}
             alt="logo"
             className={`cursor-pointer duration-500 ${open &&
@@ -84,6 +90,8 @@ function Sidebar() {
         <h1>Home Page</h1>
       </div> */}
     </div>
+  ) : (
+    <Error404 />
   );
 }
 

@@ -163,4 +163,3 @@ function handleChange(e) {
 }
 
 export default Puntuation;
-

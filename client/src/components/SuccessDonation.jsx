@@ -121,21 +121,28 @@ function SuccessDonation() {
               paddingTop: "35px",
             }}
           >
-            <h1 className="text-2xl font-bold" style={{ color: "rgb(55, 109, 109)" }}>Donate Section</h1>
+            <h1
+              className="text-2xl font-bold"
+              style={{ color: "rgb(55, 109, 109)" }}
+            >
+              Donate Section
+            </h1>
             <span
-            className="max-w-2xl text-sm text-center md:text-md md:text-center md:text lg:text-lg leading-tight my-2"
+              className="max-w-2xl text-sm text-center md:text-md md:text-center md:text lg:text-lg leading-tight my-2"
               style={{
                 paddin: "35px",
                 marginTop: "20px",
                 textAlign: "justify",
               }}
             >
-              <strong style={{ color: "rgb(168, 76, 101)" }}>ProgramandoAndo</strong> manages to stay with the help of
-              donations, remember that all content is available for free if you
-              do not want to donate on this page you can get a special and
-              personalized card for yourself when you donate and contribute to
-              the maintenance of the page, at this time you have not donated. if
-              you want contribute, follow this
+              <strong style={{ color: "rgb(168, 76, 101)" }}>
+                ProgramandoAndo
+              </strong>{" "}
+              manages to stay with the help of donations, remember that all
+              content is available for free if you do not want to donate on this
+              page you can get a special and personalized card for yourself when
+              you donate and contribute to the maintenance of the page, at this
+              time you have not donated. if you want contribute, follow this
             </span>
             <div>
               <NavLink to="/donators">

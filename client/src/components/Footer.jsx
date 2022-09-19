@@ -16,7 +16,7 @@ const Footer = () => {
 
   let data = schools;
   let dataCustomFalse = []
-  console.log(data)
+  // console.log(data)
   for (let i = 0; i < data.length; i++){
     if (data[i].custom === false)
       dataCustomFalse.push(data[i])

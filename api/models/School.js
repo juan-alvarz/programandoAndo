@@ -18,16 +18,16 @@ const SchoolSchema = new Schema(
     ],
     image: {
       url: {
-        type: String
+        type: String,
       },
       public_id: {
-        type: String
-      }
+        type: String,
+      },
     },
     custom: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   {
     timestamps: true,

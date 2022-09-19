@@ -50,19 +50,8 @@ export const Videos = (props) => {
       Swal.fire({
         icon: "warning",
         title: "Access to videos denied...",
-        text: "You cannot login if you are not logged in. Please log in",
-        // footer: '<a href="">Why do I have this issue?</a>'
+        text: "You are not logged in. Please log in",
       });
-      // Swal.fire({
-      //   title: "Access to videos denied",
-      //   text: "You cannot login if you are not logged in. Please log in",
-      //   icon: "warning",
-      //   confirmButtonText: "Log in",
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     navigate("/login");
-      //   }
-      // })
     }
   };
 
@@ -96,7 +85,7 @@ export const Videos = (props) => {
       </div>
       <div className="grid gap-8 lg:gap-8 mx-5 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:mx-28 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 justify-items-stretch ">
         {videosActuales.map((elemento, index) => {
-          console.log(elemento);
+          // console.log(elemento);
           return (
             <div key={index}>
               <NavLink
