@@ -81,7 +81,7 @@ function handleChange(e) {
 }
 
     return(
-        <div style={{width: 500, backgroundColor: "#fff", borderRadius: 10, height: 600}} className="shadow-xl py-5 overflow-hidden hover:overflow-y-scroll scrolling-touch">
+        <div style={{backgroundColor: "#fff", borderRadius: 10, height: 600}} className="w-80 md:w-3/6 shadow-xl py-5 overflow-hidden hover:overflow-y-scroll scrolling-touch">
             <div >
                 <div style={{display: "flex", justifyContent: "center", color: 'rgb(55, 109, 109)'}} className='font-bold'>
                     <p>Hello {user.name},</p>
@@ -90,7 +90,7 @@ function handleChange(e) {
                     {user.pageOpinion? <p>Tu opinion: {user.pageOpinion}</p>: <p>Your opinion is very important to us, we invite you to leave us your comment and give us a rating.</p>}
                 </div>
 
-           <div style={{display: 'flex', justifyContent: 'center'}} className="my-5">
+           <div style={{display: 'flex', justifyContent: 'center'}} className="my-5 mx-2">
             <input
             className="border border-gray-300 rounded-l-md pl-3"
              type="text"

@@ -36,7 +36,7 @@ console.log(total)
 
     return(
            
-        <div style={{width: 500, backgroundColor: "#fff", borderRadius: 10, height: 600}} className="shadow-xl py-5 overflow-hidden hover:overflow-y-scroll scrolling-touch">
+        <div style={{backgroundColor: "#fff", borderRadius: 10, height: 600}} className="w-80 md:w-3/6 shadow-xl py-5 overflow-hidden hover:overflow-y-scroll scrolling-touch">
             <div style={{display: "flex", justifyContent: "center", color: 'rgb(55, 109, 109)'}} className="mb-1">
                 <h1 className="font-bold">Calificacion Promedio</h1>
             </div>

@@ -136,7 +136,7 @@ export default function Foro() {
     //   return <h2>Cargando Video!</h2>;
     // } else {
     return (
-          <div className="bg-white w-7/12 rounded-md mb-10">
+          <div className="bg-white md:w-7/12 rounded-md mb-10">
             <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-t-xl mb-5'>
                <p style={{color: 'rgb(240, 240, 240)'}} className="text-center py-5 text-xl font-bold uppercase"> General Forum </p> 
             </div>
