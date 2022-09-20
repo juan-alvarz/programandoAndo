@@ -1,4 +1,6 @@
-const { schoolModel } = require("../models");
+const { uploadImage } = require("../config/cloudinaryconfig");
+const { schoolModel, usersModel } = require("../models");
+const fs = require("fs-extra");
 
 // ============================= GET SCHOOLS DATABASE ========================
 
@@ -70,13 +72,67 @@ const createSchool = async (req, res) => {
   const find = await schoolModel.findOne({ name: name });
 
   if (!find) {
-    const created = await schoolModel.create({
-      name,
-      description,
-      courses,
-      image,
-    });
-    res.send(created);
+    if (req.files?.image) {
+      var result = await uploadImage(req.files.image.tempFilePath);
+      console.log(result);
+      // console.log(result.public_id)
+
+      const created = await schoolModel.create({
+        name,
+        description,
+        courses,
+        image: { url: result.secure_url, public_id: result.public_id },
+      });
+      await fs.unlink(req.files.image.tempFilePath);
+      res.send(created);
+    } else {
+      const created = await schoolModel.create({
+        name,
+        description,
+        courses,
+        image: { url: image, public_id: "" },
+      });
+      res.send(created);
+    }
+  } else {
+    res.send({ msg: "School already exist" });
+  }
+};
+
+const createSchoolUser = async (req, res) => {
+  const { name, description, courses, image } = req.body;
+  const { id } = req.params;
+  const findUser = await usersModel.findById(id);
+  const find = await schoolModel.findOne({ name: name });
+
+  if (!find) {
+    if (req.files?.image) {
+      var result = await uploadImage(req.files.image.tempFilePath);
+      console.log(result);
+      // console.log(result.public_id)
+
+      const created = await schoolModel.create({
+        name,
+        description,
+        courses,
+        image: { url: result.secure_url, public_id: result.public_id },
+      });
+      await fs.unlink(req.files.image.tempFilePath);
+      res.send(created);
+    } else {
+      const created = await schoolModel.create({
+        name,
+        description,
+        courses,
+        image: { url: image, public_id: "" },
+        custom: true,
+      });
+      await usersModel.updateOne(
+        { _id: id },
+        { ownPath: [...findUser.ownPath, created._id.toString()] }
+      );
+      res.status(201).send(created);
+    }
   } else {
     res.send({ msg: "School already exist" });
   }
@@ -138,4 +194,5 @@ module.exports = {
   restoreSchool,
   softDeleteSchool,
   updateSchool,
+  createSchoolUser,
 };

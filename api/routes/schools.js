@@ -7,6 +7,7 @@ const {
   softDeleteSchool,
   restoreSchool,
   updateSchool,
+  createSchoolUser,
 } = require("../controllers/schools");
 const {
   validatorCreateSchool,
@@ -18,6 +19,8 @@ router.get("/", getAllSchool);
 router.get("/:id", validatorGetSchool, getSchoolId);
 
 router.post("/", validatorCreateSchool, createSchool);
+
+router.post("/:id", validatorCreateSchool, createSchoolUser);
 
 router.put("/:id", validatorGetSchool, updateSchool);
 

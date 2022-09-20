@@ -13,9 +13,39 @@ const UserSchema = new Schema(
       type: String,
       unique: true,
     },
+    authorizeNotifications: {
+      type: Boolean,
+      default: false,
+    },
     password: {
       type: String,
       select: false,
+    },
+    biography: {
+      type: String,
+      default: "Write here your description or biography",
+    },
+    preferences: {
+      type: String,
+      enum: [
+        "front-end",
+        "back-end",
+        "databases",
+        "allSchools",
+        "data science",
+        "MERN route",
+        "PERN route",
+        "design UX/UI",
+      ],
+      default: "allSchools",
+    },
+    isWorking: {
+      type: Boolean,
+      default: false,
+    },
+    studyStatus: {
+      type: String,
+      default: "None",
     },
     schools: [
       {
@@ -47,10 +77,12 @@ const UserSchema = new Schema(
         ref: "School",
       },
     ],
-    scoring: {
-      type: Schema.Types.ObjectId,
-      ref: "Courses",
-    },
+    scoring: [
+      {
+        course: { type: Schema.Types.ObjectId, ref: "Course" },
+        score: Number,
+      },
+    ],
     favorites: [
       {
         type: Schema.Types.ObjectId,
@@ -60,10 +92,6 @@ const UserSchema = new Schema(
     contributor: {
       type: Number,
       default: 0,
-    },
-    suscribe: {
-      type: Boolean,  
-      default: false,    
     },
     banned: { type: Boolean, default: false },
     status: {
@@ -78,8 +106,32 @@ const UserSchema = new Schema(
     changePassCode: {
       type: String,
     },
-  },
 
+    chats: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Chat",
+      },
+    ],
+    pagePuntuation: {
+      type: Number,
+      default: 0,
+    },
+    pageOpinion: {
+      type: String,
+      default: "",
+    },
+    image: {
+      url: {
+        type: String,
+        default: "",
+      },
+      public_id: {
+        type: String,
+        default: "",
+      },
+    },
+  },
   {
     timestamps: true,
     versionKey: false,

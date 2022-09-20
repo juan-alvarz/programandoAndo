@@ -9,17 +9,26 @@ import { Paginated } from "./Paginated";
 import { Videos } from "./Videos";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSchools } from "../redux/actions";
+import { getAllSchools, getUser } from "../redux/actions";
 import { useState } from "react";
 import { CourseDetail } from "./CourseDetail";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 function Courses() {
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = userLocal && JSON.parse(userLocal);
+  let idUser = userObj && userObj.user._id;
+
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    // dispatch(getAllNotifications());
+    dispatch(getUser(idUser));
+  }, [dispatch]);
+
   const { schools } = useSelector((state) => state.programandoando);
-  console.log(schools);
+  // console.log(schools);
   const location = useLocation();
   const name = location.state;
   let cursos = schools;
@@ -34,9 +43,7 @@ function Courses() {
       cursosfiltrados.push(cursos[i]);
     }
   }
-  console.log(cursosfiltrados)
-
-  
+  // console.log(cursosfiltrados)
 
   // -------------------------------
   let durationCourse = (course) => {
@@ -76,11 +83,11 @@ function Courses() {
   //-----------------------------------------------
 
   return (
-    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+    <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
       <NavBar />
       <div>
         {cursosfiltrados.length > 0 ? (
-          <div >
+          <div>
             <Course
               name={cursosfiltrados[0].name}
               description={cursosfiltrados[0].description}
@@ -98,7 +105,10 @@ function Courses() {
                 <div>
                   {elemento.courses.map((el, index) => {
                     return (
-                      <div key={index} className='lg:mx-32 lg:border-t-2 lg:py-5 lg:my-5'>
+                      <div
+                        key={index}
+                        className="lg:mx-32 lg:border-t-2 lg:py-5 lg:my-5"
+                      >
                         <CourseDetail element={el}></CourseDetail>
                         <div>
                           <Videos
@@ -118,7 +128,7 @@ function Courses() {
           <div></div>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

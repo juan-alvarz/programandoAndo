@@ -4,6 +4,7 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import Error404 from "../Error404";
 import {
   getAllCourses,
   getAllVideos,
@@ -21,10 +22,15 @@ function CoursesPA() {
   // const courseSlice = useSelector((state) => state.programandoando.course);
   // console.log(courseSlice);
   const [contador, setContador] = useState(0);
+
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  let role = userObj && userObj.user.role;
+
   useEffect(() => {
     dispatch(getAllCourses());
     dispatch(getAllVideos());
-  }, [dispatch,])
+  }, [dispatch]);
 
   const {
     register,
@@ -32,7 +38,7 @@ function CoursesPA() {
     formState: { errors },
     getValues,
     setValue,
-    reset
+    reset,
   } = useForm({
     defaultValues: {
       name: "",
@@ -46,17 +52,17 @@ function CoursesPA() {
     const get = getValues();
     console.log(get);
 
-    handleSelect(video)
+    handleSelect(video);
     console.log(data);
-    dispatch(createsCourse(get)); 
-    setVideo([])
+    dispatch(createsCourse(get));
+    setVideo([]);
     reset({
       name: "",
       image: "",
       description: "",
       videos: [],
-    })      
-    setContador(contador+1)
+    });
+    setContador(contador + 1);
   };
 
   const optionListCourses = courses?.map((course) => {
@@ -149,7 +155,6 @@ function CoursesPA() {
     // console.log(videoFilter)
     setVideoEdit(videoFilter);
   };
-  
 
   const handleDeleteRenderVideo = (e) => {
     // console.log(render.videos)
@@ -165,6 +170,7 @@ function CoursesPA() {
   useEffect(() => {
     console.log(render);
   }, [render]);
+
   const renderuwu = render;
   const handleSubmitEdit = (e) => {
     const get = getValues();
@@ -184,50 +190,53 @@ function CoursesPA() {
     //   ["addVideos"]: uwu2
     // });
     console.log(uwu2);
+    console.log(courseEdit.value);
     dispatch(updateCourse(uwu2, courseEdit.value));
     setRender({
       name: "",
       description: "",
       image: "",
       videos: [],
-    })
-    setEditCourse("Select Course")
-    setVideoEdit([])
-
+    });
+    setEditCourse("Select Course");
+    setVideoEdit([]);
   };
 
   const handleDeleteCourse = (id) => {
     dispatch(deleteCourseById(id));
-    setCourseDelete("Selec Course")
+    setCourseDelete("Selec Course");
   };
-  return (
+  return role === "admin" ? (
     <div className="text-2x1 font-semibold flex h-screen">
       <Sidebar />
       <div
         className="w-full h-full flex justify-around"
-        style={{ backgroundColor: "#C9C4B8" }}
+        style={{ backgroundColor: "rgb(240, 240, 240)" }}
       >
         {/* Create School */}
         <div>
           {/* <NavbarPA /> */}
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               onSubmit={handleSubmit(onSubmit)}
               action="#"
               method="POST"
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Create Course
               </h2>
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Name
-              </label>
+              </label> */}
               <input
                 name="name"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Name"
                 {...register("name", {
                   required: true,
@@ -247,18 +256,17 @@ function CoursesPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              <label className="text-gray-700 font-bold mb-1" htmlFor="">
                 Image Course
               </label>
               <input
                 name="image"
                 type="text"
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="http://..."
                 {...register("image", {
                   required: true,
-                  pattern:
-                    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                  pattern: /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                   pattern: /.*(png|jpg|jpeg|gif)$/,
                 })}
               />
@@ -271,13 +279,13 @@ function CoursesPA() {
                 </small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Description
-              </label>
+              </label> */}
               <textarea
-                // style={{ resize: "none" }}
+                style={{ resize: "none" }}
                 name="description"
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 py-1 px-3 mb-2 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 {...register("description", { required: true })}
               />
@@ -285,17 +293,20 @@ function CoursesPA() {
                 <small className="text-red-600 font-bold">Input empty</small>
               )}
 
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Videos
-              </label>
-              <Select
-                name="video"
-                options={optionListVideos}
-                placeholder="All Videos"
-                value={video}
-                onChange={handleSelect}
-                isSearchable={true}
-              />
+              </label> */}
+              <div className="mb-2">
+                <Select
+                  name="video"
+                  options={optionListVideos}
+                  placeholder="All Videos"
+                  value={video}
+                  onChange={handleSelect}
+                  isSearchable={true}
+                  className="font-light"
+                />
+              </div>
               <div
                 style={{
                   overflow: "scroll",
@@ -319,8 +330,9 @@ function CoursesPA() {
                 ))}
               </div>
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-5">
                 <button
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -335,27 +347,34 @@ function CoursesPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Edit Course
               </h2>
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Select Courses
-              </label>
+              </label> */}
               <Select
                 options={optionListCourses}
                 placeholder="Select course"
                 value={courseEdit}
                 onChange={handleSelectEdit}
                 isSearchable={true}
+                className="font-light"
               />
 
               {/* Edit form */}
 
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Form to Edit
               </h2>
 
@@ -363,7 +382,7 @@ function CoursesPA() {
                 name="name"
                 type="text"
                 value={render.name}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="Name"
                 onChange={(e) => handleChange(e)}
               />
@@ -372,7 +391,7 @@ function CoursesPA() {
                 name="image"
                 type="text"
                 value={render.image}
-                className="text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-3"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline py-1 px-3 mb-2"
                 placeholder="http://..."
                 onChange={(e) => handleChange(e)}
               />
@@ -381,7 +400,7 @@ function CoursesPA() {
                 style={{ resize: "none" }}
                 name="description"
                 value={render.description}
-                className="text-gray-700 shadow border rounded border-gray-300 mb-3 py-1 px-3 focus:outline-none focus:shadow-outline"
+                className="text-gray-700 font-light shadow border rounded border-gray-300 mb-2 py-1 px-3 focus:outline-none focus:shadow-outline"
                 placeholder="Description"
                 onChange={(e) => handleChange(e)}
               />
@@ -395,7 +414,6 @@ function CoursesPA() {
                   borderColor: "white",
                 }}
                 className=""
-                // onChange={(e) => handleChange(e)}
               >
                 {render.videos.map((v, index) => (
                   <div key={index} className="text-center">
@@ -408,15 +426,17 @@ function CoursesPA() {
                   </div>
                 ))}
               </div>
-
-              <Select
-                name="video"
-                options={optionListVideos}
-                placeholder="All Videos"
-                value={videoEdit} //pendiente
-                onChange={handleSelectVideos}
-                isSearchable={true}
-              />
+              <div className="my-2">
+                <Select
+                  name="video"
+                  options={optionListVideos}
+                  placeholder="All Videos"
+                  value={videoEdit} //pendiente
+                  onChange={handleSelectVideos}
+                  isSearchable={true}
+                  className="font-light"
+                />
+              </div>
               <div
                 style={{
                   overflow: "scroll",
@@ -427,9 +447,7 @@ function CoursesPA() {
                   borderColor: "white",
                 }}
                 className=""
-                // onChange={(e) => handleChange(e)}
               >
-                {/* {render.videos.map((e) => e)} */}
                 {videoEdit.map((v, index) => (
                   <div key={index} className="text-center">
                     <span
@@ -442,15 +460,16 @@ function CoursesPA() {
                 ))}
               </div>
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-5">
                 <button
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
                   Edit Course
                 </button>
               </div>
-            </form>          
+            </form>
           </div>
         </div>
 
@@ -458,25 +477,30 @@ function CoursesPA() {
         <div>
           <div className="h-screen">
             <form
-              className="w-full max-w-xs bg-white flex flex-col py-5 px-8 rounded-lg shadow-lg"
+              className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 className="text-gray-700 font-bold py-2 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Delete Course
               </h2>
-              <label className="text-gray-700 font-bold py-2" htmlFor="">
+              {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Select Courses
-              </label>
+              </label> */}
               <Select
                 options={optionListCourses}
                 placeholder="Select course"
                 value={courseDelete}
                 onChange={handleSelectDelete}
                 isSearchable={true}
+                className="font-light"
               />
 
-              <div className="flex justify-end items-center my-4 mt-10">
+              <div className="flex justify-end items-center my-4 mt-5">
                 <button
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   type="button"
                   onClick={() => handleDeleteCourse(courseDelete["value"])}
@@ -485,23 +509,12 @@ function CoursesPA() {
                 </button>
               </div>
             </form>
-
-            {/* <div>
-              {videos.map((v, index) => (
-                <div key={index} className="w-60 my-10">
-                  <span
-                    className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                    onClick={() => handleDeleteSelect(v)}
-                  >
-                    {v.url}
-                  </span>
-                </div>
-              ))}
-            </div> */}
           </div>
         </div>
       </div>
     </div>
+  ) : (
+    <Error404 />
   );
 }
 

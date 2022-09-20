@@ -13,11 +13,17 @@ export const DetailSchool = () => {
   }, [dispatch]);
 
   let data = schools;
+  let dataCustomFalse = []
+// console.log(data)
+  for (let i = 0; i < data.length; i++){
+    if (data[i].custom === false)
+      dataCustomFalse.push(data[i])
+  }
 
   return (
     <div>
-      {data ? (
-        data.map((elemento, index) => {
+      {dataCustomFalse ? (
+        dataCustomFalse.map((elemento, index) => {
           let name = elemento.name;
           return (
             <div className="hover:bg-sky-900" key={index}>

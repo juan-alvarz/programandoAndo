@@ -4,7 +4,12 @@ import Select from "react-select";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllVideos, createsCourse, getAllCourses } from "../redux/actions";
+import {
+  getAllVideos,
+  getAllCourses,
+  createSchoolUser,
+  getUser,
+} from "../redux/actions";
 import Swal from "sweetalert2";
 
 import NavBar from "./NavBar";
@@ -15,12 +20,14 @@ export default function CreateCourse() {
 
   const { videos, courses } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
-
-  console.log(courses);
+  let userLocal = window.localStorage.getItem("user");
+  let userObj = JSON.parse(userLocal);
+  let idUser = userObj.user._id;
 
   useEffect(() => {
     dispatch(getAllVideos());
     dispatch(getAllCourses());
+    dispatch(getUser(idUser));
   }, [dispatch]);
 
   // react-hook-forms
@@ -35,7 +42,7 @@ export default function CreateCourse() {
       name: "",
       image: "",
       description: "",
-      videos: [],
+      courses: [],
     },
   });
 
@@ -43,9 +50,9 @@ export default function CreateCourse() {
     const get = getValues();
     console.log(get);
 
-    handleSelect(video);
+    handleSelect(course);
     console.log(data);
-    dispatch(createsCourse(get));
+    dispatch(createSchoolUser(get, userObj.user._id));
 
     Swal.fire({
       title: "Create Course",
@@ -59,41 +66,38 @@ export default function CreateCourse() {
     });
   };
 
-  const [video, setVideo] = useState([]);
+  const [course, setCourse] = useState([]);
 
   const handleSelect = (value) => {
-    const find = video.find((i) => i.value === value.value);
+    const find = course.find((i) => i.value === value.value);
     if (!find) {
-      setVideo([...video, value]);
+      setCourse([...course, value]);
       setValue(
-        "videos",
-        [...video, value].map((e) => e.value)
+        "courses",
+        [...course, value].map((e) => e.value)
       );
-      console.log(video);
+      console.log(course);
     }
     // console.log(find);
   };
 
-  const optionList = videos?.map((video) => {
+  const optionList = courses?.map((courses) => {
     return {
-      value: video._id,
-      label: video.name,
+      value: courses._id,
+      label: courses.name,
     };
   });
 
   const handleDeleteSelect = (value) => {
-    const videoFilter = video.filter((v) => v !== value);
-    setVideo(videoFilter);
+    const coursesFilter = course.filter((v) => v !== value);
+    setCourse(coursesFilter);
   };
-
   // console.log(optionList);
-  let pattern =
-    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-  let reg_exUrl =
-    /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
+  let pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  let reg_exUrl = /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
   let reg_exImg = /.*(png|jpg|jpeg|gif)$/;
   return (
-    <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+    <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
       <NavBar />
       <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
@@ -101,7 +105,10 @@ export default function CreateCourse() {
             className="flex flex-col items-center"
             style={{ color: "rgb(168,76,101)" }}
           >
-            <h2 style={{ color: "rgb(17, 52, 82)" }} className="text-3xl font-semibold text-center text-black uppercase">
+            <h2
+              style={{ color: "rgb(17, 52, 82)" }}
+              className="text-3xl font-semibold text-center text-black uppercase"
+            >
               Create route
             </h2>
           </div>
@@ -158,8 +165,7 @@ export default function CreateCourse() {
                 placeholder="Image or Logo course"
                 {...register("image", {
                   required: true,
-                  pattern:
-                    /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
+                  pattern: /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/,
                   pattern: /.*(png|jpg|jpeg|gif)$/,
                 })}
               />
@@ -187,15 +193,17 @@ export default function CreateCourse() {
                 {...register("description", { required: true })}
               />
               {errors.description?.type === "required" && (
-                <small className="text-red-600 font-bold">Description empty</small>
+                <small className="text-red-600 font-bold">
+                  Description empty
+                </small>
               )}
             </div>
 
             <Select
-              name="video"
+              name="course"
               options={optionList}
-              placeholder="All Videos"
-              value={video}
+              placeholder="All Courses"
+              value={course}
               onChange={handleSelect}
               isSearchable={true}
               className="font-light"
@@ -203,7 +211,6 @@ export default function CreateCourse() {
 
             <div
               style={{
-                overflow: "scroll",
                 height: "160px",
                 backgroundColor: "rgb(198, 198, 198)",
                 borderRadius: 5,
@@ -212,13 +219,13 @@ export default function CreateCourse() {
               }}
               className=""
             >
-              {video.map((v, index) => (
+              {course.map((c, index) => (
                 <div key={index} className="text-center">
                   <span
                     className="cursor-pointer bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded hover:bg-pink-800 hover:text-gray-200"
-                    onClick={() => handleDeleteSelect(v)}
+                    onClick={() => handleDeleteSelect(c)}
                   >
-                    {v.label}
+                    {c.label}
                   </span>
                 </div>
               ))}
@@ -238,7 +245,7 @@ export default function CreateCourse() {
                     style={{ color: "rgb(201, 196, 184)" }}
                   />
                 </span>
-                Create Course
+                CREATE ROUTE
               </button>
             </div>
           </form>

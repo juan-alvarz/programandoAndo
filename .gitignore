@@ -11,8 +11,9 @@ api/config/account_transport.json
 #paypal credentials
 api/config/paypalcredentials.js
 
-<<<<<<< HEAD
-client\src\utils\gitHubCredentials.js
-=======
+#Github credentials
 client/src/utils/gitHubCredentials.js
->>>>>>> 0660f6cd2bff634c84d9767050b1377569f4499b
+
+#Cloudinary credentilas
+api/config/cloudinarycredentials.js
+
