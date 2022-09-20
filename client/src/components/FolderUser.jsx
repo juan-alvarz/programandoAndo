@@ -40,14 +40,14 @@ export const FolderUser = () => {
   };
 
   return userObj !== null ? (
-    <div>
+    <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
       <NavBar />
       <div style={{ marginLeft: "0%" }}>
-        <div className="mt-5">
-          <div>
+        <div>
+          <div className="flex justify-center">
             <button
               onClick={handleCreados}
-              className="mb-10 text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+              className="mt-5 -mb-2 text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
             >
               Rutas creadas
             </button>
@@ -57,10 +57,10 @@ export const FolderUser = () => {
           </div>
         </div>
         <div>
-          <div>
+          <div className="flex justify-center">
             <button
               onClick={handleScore}
-              className="mb-10 text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+              className="-mb-2 text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
             >
               Cursos votados
             </button>
@@ -70,10 +70,10 @@ export const FolderUser = () => {
           </div>
         </div>
         <div>
-          <div>
+          <div className="flex justify-center -mt-3">
             <button
               onClick={handleFavoritos}
-              className="mb-10 text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+              className="-mb-2 text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
             >
               Favoritos
             </button>

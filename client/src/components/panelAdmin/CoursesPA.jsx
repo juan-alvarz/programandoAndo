@@ -170,6 +170,7 @@ function CoursesPA() {
   useEffect(() => {
     console.log(render);
   }, [render]);
+
   const renderuwu = render;
   const handleSubmitEdit = (e) => {
     const get = getValues();
@@ -189,6 +190,7 @@ function CoursesPA() {
     //   ["addVideos"]: uwu2
     // });
     console.log(uwu2);
+    console.log(courseEdit.value);
     dispatch(updateCourse(uwu2, courseEdit.value));
     setRender({
       name: "",
@@ -221,7 +223,10 @@ function CoursesPA() {
               action="#"
               method="POST"
             >
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Create Course
               </h2>
 
@@ -327,7 +332,7 @@ function CoursesPA() {
 
               <div className="flex justify-end items-center my-4 mt-5">
                 <button
-                style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -346,7 +351,10 @@ function CoursesPA() {
               action=""
               onSubmit={(e) => handleSubmitEdit(e)}
             >
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Edit Course
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -363,7 +371,10 @@ function CoursesPA() {
 
               {/* Edit form */}
 
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Form to Edit
               </h2>
 
@@ -416,15 +427,15 @@ function CoursesPA() {
                 ))}
               </div>
               <div className="my-2">
-              <Select
-                name="video"
-                options={optionListVideos}
-                placeholder="All Videos"
-                value={videoEdit} //pendiente
-                onChange={handleSelectVideos}
-                isSearchable={true}
-                className="font-light"
-              />
+                <Select
+                  name="video"
+                  options={optionListVideos}
+                  placeholder="All Videos"
+                  value={videoEdit} //pendiente
+                  onChange={handleSelectVideos}
+                  isSearchable={true}
+                  className="font-light"
+                />
               </div>
               <div
                 style={{
@@ -451,7 +462,7 @@ function CoursesPA() {
 
               <div className="flex justify-end items-center my-4 mt-5">
                 <button
-                style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -469,7 +480,10 @@ function CoursesPA() {
               className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Delete Course
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -486,7 +500,7 @@ function CoursesPA() {
 
               <div className="flex justify-end items-center my-4 mt-5">
                 <button
-                style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   type="button"
                   onClick={() => handleDeleteCourse(courseDelete["value"])}

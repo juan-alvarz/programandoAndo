@@ -24,195 +24,163 @@ function FiltersCourses({
   cursoActual,
   prev,
   next,
+  setCursoActual,
+  primerCurso,
+  ultimoCurso,
+  handleFilterAlph,
 }) {
   //Usuario registrado
-  let userLocal = window.localStorage.getItem("user");
-  let userObj = JSON.parse(userLocal);
+  // let userLocal = window.localStorage.getItem("user");
+  // let userObj = JSON.parse(userLocal);
 
   // const courses = useSelector((state) => state.programandoando.courses);
 
-  const [coursesPowFilter, setCoursesPowFilter] = useState([]);
+  // const [coursesPowFilter, setCoursesPowFilter] = useState([]);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllCourses());
-    if (userObj) {
-      dispatch(getUser(userObj.user._id));
-      dispatch(getFavorites(userObj.user._id));
-    }
-  }, [dispatch, coursesPowFilter]);
+  // useEffect(() => {
+  //   dispatch(getAllCourses());
+  //   if (userObj) {
+  //     dispatch(getUser(userObj.user._id));
+  //     dispatch(getFavorites(userObj.user._id));
+  //   }
+  // }, [dispatch, coursesPowFilter]);
 
-  const handleFilterAlph = (e) => {
-    setCursoActual(1);
-    e.target.checked === true
-      ? dispatch(getAllCoursesZA())
-      : dispatch(getAllCoursesAZ());
-  };
-
-  // =============== Paginado ==========================
-  const [cursoActual, setCursoActual] = useState(1);
-  const [cursosPagina] = useState(6);
-  const ultimoCurso = cursoActual * cursosPagina;
-  const primerCurso = ultimoCurso - cursosPagina;
-  //======================================================
-
-  let finallyOneDuration = (time) => {
-    let hours = Math.floor(time / 3600);
-    time %= 3600;
-    let minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-    minutes = String(minutes).padStart(2, "0");
-    hours = String(hours).padStart(2, "0");
-    seconds = String(seconds).padStart(2, "0");
-
-    let stringNumber = `${hours}h ${minutes}min ${seconds}seg`;
-    return stringNumber;
-  };
+  // const handleFilterAlph = (e) => {
+  //   setCursoActual(1);
+  //   e.target.checked === true
+  //     ? dispatch(getAllCoursesZA())
+  //     : dispatch(getAllCoursesAZ());
+  // };
 
   const path = "courses";
 
   /*==================course not found page========================== */
-  if (courses.msg === "error") {
-    return (
-      <div
-        style={{
-          backgroundColor: "rgb(198, 198, 198)",
-        }}
-      >
-        <div>
-          <NavBar />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "10px",
-          }}
-        >
-          <SearchBar path={path} setPagina={setCursoActual} />
-        </div>
-        <div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "90%",
-              margin: "auto",
-            }}
-          >
-            <img
-              src={imageNotFound}
-              alt="notfound"
-              style={{ width: "35%", marginTop: 40 }}
-            />
-            <h1
-              style={{
-                fontSize: "2rem",
-                padding: "30px",
-              }}
-            >
-              Course not found
-            </h1>
-            <span>no results found, please try another course</span>
-          </div>
-        </div>
-      </div>
-    );
-  } else if (!courses.length) {
-    /* ======================Loading page====================== */
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
-  } else {
-    /* =======================All correct!=================== */
-    let durationCourse = (course) => {
-      let temporaly = course.videos.map((e) => e.duration);
 
-      const toSeconds = (time) => {
-        if (time.length > 5) {
-          let parse = time.split(":");
-          let newParse = [
-            parseInt(parse[0]) * 3600,
-            parseInt(parse[1], 10) * 60,
-            parseInt(parse[2], 10),
-          ];
-          let sumParse = newParse[0] + newParse[1] + newParse[2];
-          return sumParse;
-        }
-        if (time.length <= 5) {
-          let parse = time.split(":");
-          let newParse = [parseInt(parse[0], 10) * 60, parseInt(parse[1], 10)];
-          let sumParse = newParse[0] + newParse[1];
-          return sumParse;
-        }
-      };
-      let secondsDuration = temporaly.map((e) => toSeconds(e));
+  // return (
+  //   <div
+  //     style={{
+  //       backgroundColor: "rgb(198, 198, 198)",
+  //     }}
+  //   >
+  //     <div>{/* <NavBar /> */}</div>
+  //     <div
+  //       style={{
+  //         display: "flex",
+  //         justifyContent: "center",
+  //         padding: "10px",
+  //       }}
+  //     >
+  //       {/* <SearchBar path={path} setPagina={setCursoActual} /> */}
+  //     </div>
+  //     <div>
+  //       <div
+  //         style={{
+  //           display: "flex",
+  //           flexDirection: "column",
+  //           alignItems: "center",
+  //           width: "90%",
+  //           margin: "auto",
+  //         }}
+  //       >
+  //         <img
+  //           src={imageNotFound}
+  //           alt="notfound"
+  //           style={{ width: "35%", marginTop: 40 }}
+  //         />
+  //         <h1
+  //           style={{
+  //             fontSize: "2rem",
+  //             padding: "30px",
+  //           }}
+  //         >
+  //           Course not found
+  //         </h1>
+  //         <span>no results found, please try another course</span>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
+  // } else if (!courses.length) {
+  //   /* ======================Loading page====================== */
+  //   return (
+  //     <div>
+  //       <Loader />
+  //     </div>
+  //   );
 
-      let oneDuration = secondsDuration.reduce((sum, a) => sum + a, 0);
+  /* =======================All correct!=================== */
+  // let durationCourse = (course) => {
+  //   let temporaly = course.videos.map((e) => e.duration);
 
-      let object = {
-        ...course,
-        duration: oneDuration,
-      };
+  //   const toSeconds = (time) => {
+  //     if (time.length > 5) {
+  //       let parse = time.split(":");
+  //       let newParse = [
+  //         parseInt(parse[0]) * 3600,
+  //         parseInt(parse[1], 10) * 60,
+  //         parseInt(parse[2], 10),
+  //       ];
+  //       let sumParse = newParse[0] + newParse[1] + newParse[2];
+  //       return sumParse;
+  //     }
+  //     if (time.length <= 5) {
+  //       let parse = time.split(":");
+  //       let newParse = [parseInt(parse[0], 10) * 60, parseInt(parse[1], 10)];
+  //       let sumParse = newParse[0] + newParse[1];
+  //       return sumParse;
+  //     }
+  //   };
+  //   let secondsDuration = temporaly.map((e) => toSeconds(e));
 
-      return object;
-    };
+  //   let oneDuration = secondsDuration.reduce((sum, a) => sum + a, 0);
 
-    let coursesPow = courses.map((e) => durationCourse(e));
+  //   let object = {
+  //     ...course,
+  //     duration: oneDuration,
+  //   };
 
-    //=========== lógica del duration ==========
-
-    //=========== handles =================
-    // const handleFilterAlph = (e) => {
-    //   setCursoActual(1);
-    //   e.target.checked === true
-    //     ? dispatch(getAllCoursesZA())
-    //     : dispatch(getAllCoursesAZ());
-    // };
-
-    const handleFilterDuration = (e) => {
-      if (e.target.value === "allDurations") {
-        dispatch(getAllCourses());
-        setCursoActual(1);
-      }
-      if (e.target.value === "10hmore") {
-        dispatch(getCourses10more());
-        setCursoActual(1);
-      }
-      if (e.target.value === "10h") {
-        dispatch(getCourses10h());
-        setCursoActual(1);
-      }
-      if (e.target.value === "5h") {
-        dispatch(getCourses5h());
-        setCursoActual(1);
-      }
-      if (e.target.value === "3h") {
-        dispatch(getCourses3h());
-        setCursoActual(1);
-      }
-    };
-
-    //==========================================
-
-    const cursosActuales = coursesPow.slice(primerCurso, ultimoCurso);
-    // const prev = () => {
-    //   if (cursoActual > 1) {
-    //     setCursoActual(cursoActual - 1);
-    //   }
-    // };
-    // const next = () => {
-    //   if (cursoActual < Math.ceil(courses.length / cursosPagina)) {
-    //     setCursoActual(cursoActual + 1);
-    //   }
-  }
-  // const paginado = (numeroPagina) => {
-  //   setCursoActual(numeroPagina);
+  //   return object;
   // };
+
+  // let coursesPow = courses.map((e) => durationCourse(e));
+
+  //=========== lógica del duration ==========
+
+  //=========== handles =================
+  // const handleFilterAlph = (e) => {
+  //   setCursoActual(1);
+  //   e.target.checked === true
+  //     ? dispatch(getAllCoursesZA())
+  //     : dispatch(getAllCoursesAZ());
+  // };
+
+  const handleFilterDuration = (e) => {
+    if (e.target.value === "allDurations") {
+      dispatch(getAllCourses());
+      setCursoActual(1);
+    }
+    if (e.target.value === "10hmore") {
+      dispatch(getCourses10more());
+      setCursoActual(1);
+    }
+    if (e.target.value === "10h") {
+      dispatch(getCourses10h());
+      setCursoActual(1);
+    }
+    if (e.target.value === "5h") {
+      dispatch(getCourses5h());
+      setCursoActual(1);
+    }
+    if (e.target.value === "3h") {
+      dispatch(getCourses3h());
+      setCursoActual(1);
+    }
+  };
+
+  //==========================================
+
   // ==============================================
 
   return (
@@ -290,9 +258,9 @@ function FiltersCourses({
           />
         </div>
 
-        {/* <div>
+        <div>
           <SearchBar path={path} setPagina={setCursoActual} />
-        </div> */}
+        </div>
       </div>
     </div>
   );

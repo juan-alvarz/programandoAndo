@@ -185,7 +185,10 @@ export default function OneCourseDetail() {
       Object.keys(user).length !== 0
         ? user.scoring?.map((scor) => scor.course._id)
         : null;
+<<<<<<< HEAD
     // console.log(idVotados);
+=======
+>>>>>>> Roge
     //curso en el que está parado, busca si ya lo votó o no
     const sameVote = idVotados?.find((id) => id === idCourse); //el curso actual y busca si el usuario votó
 
@@ -193,6 +196,10 @@ export default function OneCourseDetail() {
       Object.keys(user).length !== 0
         ? user.scoring.filter((scor) => scor.course._id === sameVote)
         : null;
+<<<<<<< HEAD
+=======
+
+>>>>>>> Roge
     return (
       <div style={{ backgroundColor: "rgb(240, 240, 240)", height: "100vh" }}>
         <NavBar />

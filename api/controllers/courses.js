@@ -11,7 +11,7 @@ const getCourses = async (req, res) => {
   try {
     if (name) {
       const nombre = await courseModel
-        .find({ name: { $regex: "." + name + ".", $options: "<i>" } })
+        .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
         .populate("videos");
       console.log(nombre);
       if (!nombre.length) {
@@ -99,6 +99,7 @@ const updateCourse = async (req, res) => {
   const course = await courseModel.findById(id);
   console.log(req.body);
   console.log(addVideos);
+  console.log(id);
   try {
     // const actualizado = await courseModel.updateOne({ _id: id }, body);
     //const scores = await courseModel.findById(id).select("scores");
@@ -110,7 +111,9 @@ const updateCourse = async (req, res) => {
         image: image ? image : course.image,
         videos: addVideos ? addVideos : course.videos,
         scores: body.scores ? [...course.scores, body.scores] : course.scores,
-        score: average([...course.scores, body.scores]),
+        score: body.score
+          ? average([...course.scores, body.scores])
+          : course.score,
       }
     );
 
