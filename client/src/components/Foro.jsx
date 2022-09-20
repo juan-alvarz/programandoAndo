@@ -101,7 +101,6 @@ export default function Foro() {
     setContador(contador + 1);
   }
 
-<<<<<<< HEAD
   function deleteComment4(e, id) {
     e.preventDefault();
     //return deleteComment
@@ -150,7 +149,7 @@ export default function Foro() {
   //   return <h2>Cargando Video!</h2>;
   // } else {
   return (
-    <div className="bg-white w-7/12 rounded-md mb-10">
+    <div className="bg-white md:w-7/12 rounded-md mb-10">
       <div
         style={{ backgroundColor: "rgb(17, 52, 82)" }}
         className="rounded-t-xl mb-5"
@@ -159,7 +158,8 @@ export default function Foro() {
           style={{ color: "rgb(240, 240, 240)" }}
           className="text-center py-5 text-xl font-bold uppercase"
         >
-          General Forum
+          {" "}
+          General Forum{" "}
         </p>
       </div>
       <div
@@ -176,53 +176,6 @@ export default function Foro() {
                 style={{ borderWidth: 1, height: 320 }}
                 className="rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll scrolling-touch"
               >
-=======
-    function deleteComment4(e, id){
-      e.preventDefault()
-      //return deleteComment
-         dispatch(updateDeleteCommentorAnswer(foroId, {commentId: id, change: "deleteComment"}))
-         dispatch(getForoById(foroId));
-         setContador(contador + 1)
-    }
-  
-    function deleteAnswer(e, id, idAnswer){
-      e.preventDefault()
-      //return deleteComment
-      dispatch(updateDeleteCommentorAnswer(foroId, {commentId: id, change: "deleteAnswer", idAnswer: idAnswer}))
-      setContador(contador + 1)
-    }
-  
- 
-  
-    function handleChangeRespuesta(e) {
-      setRespuesta({...respuesta, commentId: e.target.dataset.commentid,  content: e.target.value, });
-      setState({ ...state, input1: e.target.value})
-      setContador(contador + 1)
-    }
-    
-    function handleSubmitRespuesta(data, e) {
-      e.preventDefault();
-      e.target.reset()
-      dispatch(updateForo(foroId, respuesta)).then(setContador(contador + 1))
-      setState({ input1: ""})
-      setContador(contador + 1)
-    }
-  
-    // if (!Object.keys(course).length) {
-    //   return <h2>Cargando Video!</h2>;
-    // } else {
-    return (
-          <div className="bg-white md:w-7/12 rounded-md mb-10">
-            <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-t-xl mb-5'>
-               <p style={{color: 'rgb(240, 240, 240)'}} className="text-center py-5 text-xl font-bold uppercase"> General Forum </p> 
-            </div>
-            <div style={{height: 500}} className='flex justify-center overflow-hidden hover:overflow-y-scroll scrolling-touch'>
-            <form className="bg-white w-10/12" onSubmit={handleSubmit(handleSubmitRespuesta)}> 
-            {Object.keys(foro).length > 0 ? (
-              foro.comments.map(            
-                (comment) => 
-                <ol style={{borderWidth: 1, height: 320}} className='rounded-md my-5 border-gray-300 overflow-hidden hover:overflow-y-scroll scrolling-touch'>
->>>>>>> Roge
                 <div className="bg-gray-400 rounded-t-md py-1">
                   <p className="text-lg text-center font-bold text-white">
                     {comment.authorComment
@@ -371,4 +324,3 @@ export default function Foro() {
     </div>
   );
 }
-//  }
