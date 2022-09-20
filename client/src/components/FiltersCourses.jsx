@@ -17,12 +17,19 @@ import { Paginated } from "./Paginated";
 import SearchBar from "./SearchBar";
 import imageNotFound from "../utils/images/404person.png";
 
-function FiltersCourses() {
+function FiltersCourses({
+  paginado,
+  courses,
+  cursosPagina,
+  cursoActual,
+  prev,
+  next,
+}) {
   //Usuario registrado
   let userLocal = window.localStorage.getItem("user");
   let userObj = JSON.parse(userLocal);
 
-  const courses = useSelector((state) => state.programandoando.courses);
+  // const courses = useSelector((state) => state.programandoando.courses);
 
   const [coursesPowFilter, setCoursesPowFilter] = useState([]);
 
@@ -193,103 +200,102 @@ function FiltersCourses() {
     //==========================================
 
     const cursosActuales = coursesPow.slice(primerCurso, ultimoCurso);
-    const prev = () => {
-      if (cursoActual > 1) {
-        setCursoActual(cursoActual - 1);
-      }
-    };
-    const next = () => {
-      if (cursoActual < Math.ceil(courses.length / cursosPagina)) {
-        setCursoActual(cursoActual + 1);
-      }
-    };
-    const paginado = (numeroPagina) => {
-      setCursoActual(numeroPagina);
-    };
-    // ==============================================
+    // const prev = () => {
+    //   if (cursoActual > 1) {
+    //     setCursoActual(cursoActual - 1);
+    //   }
+    // };
+    // const next = () => {
+    //   if (cursoActual < Math.ceil(courses.length / cursosPagina)) {
+    //     setCursoActual(cursoActual + 1);
+    //   }
+  }
+  // const paginado = (numeroPagina) => {
+  //   setCursoActual(numeroPagina);
+  // };
+  // ==============================================
 
-    return (
-      <div>
-        <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
-          {/* Filtrados */}
+  return (
+    <div>
+      <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
+        {/* Filtrados */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           <div
             style={{
               display: "flex",
               alignItems: "center",
             }}
           >
-            <div
+            <span className="pr-2">A-Z</span>
+            <label
+              for="default-toggle"
+              className="inline-flex relative items-center cursor-pointer"
+            >
+              <div></div>
+              <input
+                type="checkbox"
+                value=""
+                id="default-toggle"
+                className="sr-only peer"
+                onChange={(e) => handleFilterAlph(e)}
+              />
+              <div
+                style={{
+                  backgroundColor: "rgb(17, 52, 82)",
+                }}
+                className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
+              ></div>
+            </label>
+            <span
               style={{
-                display: "flex",
-                alignItems: "center",
+                paddingRight: "10px",
+                paddingLeft: "10px",
               }}
             >
-              <span className="pr-2">A-Z</span>
-              <label
-                for="default-toggle"
-                className="inline-flex relative items-center cursor-pointer"
-              >
-                <div></div>
-                <input
-                  type="checkbox"
-                  value=""
-                  id="default-toggle"
-                  className="sr-only peer"
-                  onChange={(e) => handleFilterAlph(e)}
-                />
-                <div
-                  style={{
-                    backgroundColor: "rgb(17, 52, 82)",
-                  }}
-                  className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"
-                ></div>
-              </label>
-              <span
-                style={{
-                  paddingRight: "10px",
-                  paddingLeft: "10px",
-                }}
-              >
-                Z-A
-              </span>
-            </div>
-
-            {/* DURATION */}
-            <div>
-              <select
-                id="countries"
-                style={{ width: 130 }}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% py-1"
-                onChange={(e) => handleFilterDuration(e)}
-              >
-                <option value={"allDurations"}>All Durations</option>
-                <option value={"10hmore"}>More than 10 hours</option>
-                <option value={"10h"}>Up to 10 hours</option>
-                <option value={"5h"}>Up to 5 hours</option>
-                <option value={"3h"}>Up to 3 hours</option>
-              </select>
-            </div>
+              Z-A
+            </span>
           </div>
 
-          {/* Paginated */}
-          <div className="grid justify-items-center my-5">
-            <Paginated
-              setPagina={paginado}
-              videos={courses.length}
-              videosPagina={cursosPagina}
-              paginaActual={cursoActual}
-              prev={prev}
-              next={next}
-            />
+          {/* DURATION */}
+          <div>
+            <select
+              id="countries"
+              style={{ width: 130 }}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40% py-1"
+              onChange={(e) => handleFilterDuration(e)}
+            >
+              <option value={"allDurations"}>All Durations</option>
+              <option value={"10hmore"}>More than 10 hours</option>
+              <option value={"10h"}>Up to 10 hours</option>
+              <option value={"5h"}>Up to 5 hours</option>
+              <option value={"3h"}>Up to 3 hours</option>
+            </select>
           </div>
+        </div>
 
-          {/* <div>
+        {/* Paginated */}
+        <div className="grid justify-items-center my-5">
+          <Paginated
+            setPagina={paginado}
+            videos={courses.length}
+            videosPagina={cursosPagina}
+            paginaActual={cursoActual}
+            prev={prev}
+            next={next}
+          />
+        </div>
+
+        {/* <div>
           <SearchBar path={path} setPagina={setCursoActual} />
         </div> */}
-        </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default FiltersCourses;
