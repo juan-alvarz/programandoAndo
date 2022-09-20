@@ -1,7 +1,7 @@
 
 ![LOGOCOMPLETOPA](https://user-images.githubusercontent.com/85974372/191377595-7212249a-c181-43cb-80e7-d598fe91e123.png)
 
-[ProgramandoAndo](linkDeployment)
+[ProgramandoAndo](https://programando-ando-deploy.vercel.app)
 ---
 Este proyecto va enfocado en aquellas personas que quieren iniciarse y avanzar en el mundo de la programación, enfocado en brindar una ruta o punto de apoyo en la forma o ruta de aprendizaje. Se enfoca en diversos temas, desde como inicarse con comandos básicos de Windows, escalar en inglés conversacional, hasta Diseño UI/UX
 
@@ -43,4 +43,4 @@ Se implementa un apartado de perfil, donde puedes cambiar tu foto de perfil, nom
 * React, TailwindCSS, Redux Toolkit
 ---
 # Ingreso a la plataforma
-[ProgramandoAndo](linkdelDeploy)
+[ProgramandoAndo](https://programando-ando-deploy.vercel.app)
