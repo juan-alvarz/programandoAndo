@@ -3,8 +3,12 @@ import oro from "../utils/images/oro.png";
 import plata from "../utils/images/plata.png";
 import bronce from "../utils/images/bronce.png";
 import { useState } from "react";
-import { Paginated } from "./Paginated";
+import { Paginated} from "./Paginated";
+import NavBar from "./NavBar"
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../redux/actions";
+import { useEffect } from "react";
 let usuariosPrueba = [
   {
     language: "english",
@@ -530,6 +534,33 @@ let usuariosPrueba = [
 ];
 
 const RankUserDonation = () => {
+  
+  
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.programandoando);
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+  let rankingDB = [];
+  for (let i = 0; i < usuariosPrueba.length; i++) {
+    if (usuariosPrueba[i].contributor > 0) {
+      rankingDB.push(usuariosPrueba[i]);
+    }
+  }
+  rankingDB.sort((a, b) => b.contributor - a.contributor);
+
+
+
+
+
+
+
+
+
+
+
+
+
   let ranking = [];
   for (let i = 0; i < usuariosPrueba.length; i++) {
     if (usuariosPrueba[i].contributor > 0) {
@@ -565,6 +596,7 @@ const RankUserDonation = () => {
 
   return (
     <div>
+      <NavBar></NavBar>
       <h2
         className="text-center font-bold text-4xl my-5 uppercase"
         style={{ color: "#376D6D" }}
