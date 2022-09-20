@@ -45,6 +45,7 @@ import { FolderUser } from "./components/FolderUser";
 import AgeCharts from "./components/panelAdmin/AgeCharts";
 import CountryCharts from "./components/panelAdmin/CountryCharts";
 import SubmitPassword from "./components/SubmitPassword";
+import TEST from "./components/TEST";
 import SchoolDetailUser from "./components/SchoolDetailUser";
 
 function App() {

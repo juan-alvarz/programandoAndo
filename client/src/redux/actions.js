@@ -32,6 +32,7 @@ import {
   getownPath,
   getNotifications,
   getAllUsersBanned,
+  getChat,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -670,4 +671,24 @@ export const restoreUser = (id, payload) => async (dispatch) => {
     payload
   );
   return response;
+};
+
+// ================== functional chat ==================
+export const getChatById = (id) => async (dispatch) => {
+  await axios
+    .get(`http://localhost:3001/api/chat/${id}`)
+    .then((res) => dispatch(getChat(res.data)));
+};
+
+export const update_getChat = (id, payload) => async (dispatch) => {
+  //update
+  await axios.put(`http://localhost:3001/api/chat/${id}`, payload);
+  //get again
+  await axios
+    .get(`http://localhost:3001/api/chat/${id}`)
+    .then((r) => dispatch(getChat(r.data)));
+};
+
+export const create_getChat = (payload) => async (dispatch) => {
+  await axios.post(`http://localhost:3001/api/chat`, payload);
 };

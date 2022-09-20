@@ -210,7 +210,7 @@ export default function Foro() {
               <div style={{display: 'flex', justifyContent: 'center'}} className="pb-5">
                 <input
                 style={{backgroundColor: 'rgb(17, 52, 82)'}}
-                className="border border-white text-sm rounded-l-md pl-3"
+                className="text-white border border-white text-sm rounded-l-md pl-3"
                   type="text"
                   placeholder="New answer"
                   value= {state.input2}

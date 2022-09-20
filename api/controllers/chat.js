@@ -82,10 +82,24 @@ const getChatById = async (req, res) => {
     return res.status(400).json(error.message);
   }
 };
-
+/* remove_user_from_room: function (user_name, room_name)
+{ console.log("remove_user_from_room: " + room_name + ", user: " + user_name);
+active_rooms.update( {'room_name': room_name }, { $pull: {'users': user_name } } ) }, */
 const deleteChat = async (req, res) => {
   try {
     const { id } = req.params;
+    const chat = await chatModel.findById(id);
+    await usersModel.updateOne(
+      { _id: chat.transmitter },
+      { $pull: { chats: chat._id } }
+    );
+    await usersModel.updateOne(
+      { _id: chat.receiver },
+      { $pull: { chats: chat._id } }
+    );
+
+    //await usersModel.updateOne({_id: transmitter}, {})
+    //await usersModel.updateOne({_id: receiver}, {$pull:{'chats':}})
     const data = await chatModel.deleteOne({ _id: id });
     return res.status(200).json({ message: "deleted successfully" });
   } catch (error) {
