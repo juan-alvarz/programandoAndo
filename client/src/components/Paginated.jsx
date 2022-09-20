@@ -5,13 +5,19 @@ export const Paginated = ({
   videos,
   videosPagina,
   paginaActual,
-  prev,
-  next,
 }) => {
   const numeroPaginas = [];
   for (let i = 1; i <= Math.ceil(videos / videosPagina); i++) {
     numeroPaginas.push(i);
   }
+  const prev = () => {
+    if (paginaActual <= 1) return;
+    setPagina(paginaActual - 1);
+  };
+  const next = () => {
+    if (paginaActual >= numeroPaginas.length) return;
+    setPagina(paginaActual + 1);
+  };
   // console.log(numeroPaginas);
   return (
     <div>
@@ -52,7 +58,7 @@ export const Paginated = ({
               );
             }
           })}
-          {numeroPaginas.length < 2 ? (
+          {numeroPaginas.length === 1 ? (
             <li>
               <button
                 style={{ width: 70 }}

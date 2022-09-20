@@ -140,7 +140,10 @@ function CoursesPA() {
               action="#"
               method="POST"
             >
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Notification
               </h2>
 
@@ -186,7 +189,7 @@ function CoursesPA() {
 
               <div className="flex justify-end items-center my-4 mt-4">
                 <button
-                style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   disabled={Object.entries(errors).length === 0 ? "" : true}
                 >
@@ -198,7 +201,7 @@ function CoursesPA() {
         </div>
 
         {/* Edit School */}
-        <div>
+        {/* <div>
           <div className="h-screen">
             <form
               className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
@@ -210,22 +213,22 @@ function CoursesPA() {
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
                 Select User
               </label> */}
-              <Select
+        {/* <Select
                 options={optionListUsers}
                 placeholder="Select users"
                 value={courseEdit}
                 onChange={handleSelectEdit}
                 isSearchable={true}
                 className="font-light"
-              />
-              <div className="flex justify-end items-center my-4 mt-5">
+              /> */}
+        {/* <div className="flex justify-end items-center my-4 mt-5">
                 <button style={{backgroundColor: 'rgb(55, 109, 109)'}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 ">
                   Edit
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+          </div> */}
+        {/* </div>  */}
 
         {/* Delete User */}
         <div>
@@ -234,7 +237,10 @@ function CoursesPA() {
               className="w-96 max-w-xs bg-white flex flex-col mt-5 py-2 px-8 rounded-lg shadow-lg"
               action=""
             >
-              <h2 style={{backgroundColor: 'rgb(17, 52, 82)'}} className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl">
+              <h2
+                style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                className="text-gray-300 font-bold my-2 p-2 rounded-md bg-gray-200 text-center text-xl"
+              >
                 Delete User
               </h2>
               {/* <label className="text-gray-700 font-bold py-2" htmlFor="">
@@ -251,7 +257,7 @@ function CoursesPA() {
 
               <div className="flex justify-end items-center my-4 mt-5">
                 <button
-                style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                  style={{ backgroundColor: "rgb(55, 109, 109)" }}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 "
                   type="button"
                   onClick={() => handleDeleteUser(videoDelete["value"])}

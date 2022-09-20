@@ -99,6 +99,7 @@ const updateCourse = async (req, res) => {
   const course = await courseModel.findById(id);
   console.log(req.body);
   console.log(addVideos);
+  console.log(id);
   try {
     // const actualizado = await courseModel.updateOne({ _id: id }, body);
     //const scores = await courseModel.findById(id).select("scores");
