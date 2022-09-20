@@ -471,7 +471,7 @@ export const updateCourse = (payload, id) => async (dispatch) => {
       Swal.fire({
         title: "Ups Something Happens",
         // text: "Can't create video please try again",
-        text: error.response.data.error,
+        text: error.response.data.msg,
         icon: "error",
         confirmButtonText: "OK",
       }).then(console.log(error))

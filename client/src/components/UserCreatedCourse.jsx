@@ -54,7 +54,7 @@ function UserCreatedCourse({}) {
 
   // =============== Paginado ==========================
   const [cursoActual, setCursoActual] = useState(1);
-  const [cursosPagina] = useState(6);
+  const [cursosPagina] = useState(5);
   const ultimoCurso = cursoActual * cursosPagina;
   const primerCurso = ultimoCurso - cursosPagina;
 
@@ -77,7 +77,7 @@ function UserCreatedCourse({}) {
 
   return (
     <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
-      <div className="flex flex-col items-center justify-around px-5 py-10 lg:flex-row">
+      <div className="flex flex-col items-center justify-around px-5 py-3 lg:flex-row ">
         {/* Paginated */}
         <div className="grid justify-items-center my-5">
           <Paginated
@@ -92,7 +92,7 @@ function UserCreatedCourse({}) {
       </div>
 
       {/* Cards */}
-      <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-5 mb-8">
+      <div className="grid grid-row-auto justify-items-center sm:grid-cols-1 md:grid-cols-1 xl:grid-cols-5 mb-5">
         {cursosActuales &&
           cursosActuales.map((course, index) => (
             <div
@@ -100,7 +100,7 @@ function UserCreatedCourse({}) {
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
               style={{
                 maxWidth: 400,
-                height: 580,
+                height: 400,
                 backgroundColor: "rgb(17, 52, 82)",
                 marginTop: 5,
                 marginLeft: 10,
@@ -182,7 +182,7 @@ function UserCreatedCourse({}) {
                     display: "flex",
                     justifyContent: "center",
                     alignContent: "center",
-                    marginTop: 15,
+                    marginTop: -120,
                   }}
                 >
                   <button>

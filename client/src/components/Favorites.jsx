@@ -62,7 +62,7 @@ export const Favorites = () => {
 
   // =============== Paginado ==========================
   const [cursoActual, setCursoActual] = useState(1);
-  const [cursosPagina] = useState(6);
+  const [cursosPagina] = useState(5);
   const ultimoCurso = cursoActual * cursosPagina;
   const primerCurso = ultimoCurso - cursosPagina;
 
@@ -115,7 +115,7 @@ export const Favorites = () => {
               className="max-w-sm h-auto my-3 rounded overflow-hidden shadow-lg"
               style={{
                 maxWidth: 400,
-                height: 580,
+                height: 400,
                 backgroundColor: "rgb(17, 52, 82)",
                 marginTop: 5,
                 marginLeft: 10,
