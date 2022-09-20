@@ -27,6 +27,36 @@ const getAllUsers = async (req, res, next) => {
           },
         })
         .populate("favorites")
+        .populate({
+          path: "scoring",
+          populate: {
+            path: "course",
+          },
+        })
+        .populate({
+          path: "chats",
+          populate: {
+            path: "transmitter",
+            select: "username",
+          },
+        })
+        .populate({
+          path: "chats",
+          populate: {
+            path: "receiver",
+            select: "username",
+          },
+        })
+        .populate({
+          path: "chats",
+          populate: {
+            path: "content",
+            populate: {
+              path: "author",
+              select: "username",
+            },
+          },
+        })
         .populate("ownPath");
       if (!data) {
         handleHtppError(res, "User not found", 404);

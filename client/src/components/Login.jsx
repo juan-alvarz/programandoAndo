@@ -50,6 +50,7 @@ export default function Login() {
         setEmailError("");
       }, 3000);
     }
+
     if (password.length > 64 || password.length < 8) {
       setPassError("The password must be between 8 and 64 characters");
       setTimeout(function() {

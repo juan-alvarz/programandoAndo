@@ -18,6 +18,7 @@ export const slice = createSlice({
     filters: [],
     favoritesUser: [],
     notifications: [],
+    chat: {},
     scoring: [],
     ownPath: [],
   },
@@ -216,6 +217,10 @@ export const slice = createSlice({
     getAllUsersBanned: (state, action) => {
       state.userBanned = action.payload;
     },
+    // ============== getChat ======================
+    getChat: (state, action) => {
+      state.chat = action.payload;
+    },
   },
 });
 
@@ -261,6 +266,7 @@ export const {
   uppdateUser,
   favoriteCourse,
   getAllUsersBanned,
+  getChat,
 } = slice.actions;
 
 export default slice.reducer;
