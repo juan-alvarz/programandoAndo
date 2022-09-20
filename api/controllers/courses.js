@@ -11,7 +11,7 @@ const getCourses = async (req, res) => {
   try {
     if (name) {
       const nombre = await courseModel
-        .find({ name: { $regex: "." + name + ".", $options: "<i>" } })
+        .find({ name: { $regex: ".*" + name + ".*", $options: "<i>" } })
         .populate("videos");
       console.log(nombre);
       if (!nombre.length) {

@@ -79,7 +79,12 @@ function InternalChat() {
         },
       };
       setMessage("");
+      chatActual.length !== 0
+        ? console.log(chatActual)
+        : console.log("no hay chatActual");
+      //console.log(chatActual[0]._id);
       dispatch(create_getChat(payload));
+      //dispatch(getChatById(chatActual[0]._id));
     }
   }
   function handleReload(e) {
