@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSchools } from "../redux/actions";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+// import PWA from "./PWA";
 
 const Footer = () => {
   const dispatch = useDispatch();
@@ -72,27 +73,21 @@ const Footer = () => {
               style={{ color: "rgb(55, 109, 109)" }}
               className="mb-6 text-xs font-semibold text-yellow-300 uppercase"
             >
-              Follow us
+              Download
             </h2>
             <ul className="text-xs text-gray-400">
-              <li className="mb-2">
+              {/* <li className="mb-2">
+              {isReadyForInstall && (
                 <a
                   style={{ color: "rgb(201, 196, 184)" }}
                   href="https://github.com/"
                   className="hover:underline "
+                  onClick={downloadApp}
                 >
-                  Github
+                  Download PWA
                 </a>
-              </li>
-              <li>
-                <a
-                  style={{ color: "rgb(201, 196, 184)" }}
-                  href="https://discord.com/"
-                  className="hover:underline"
-                >
-                  Discord
-                </a>
-              </li>
+                )}
+              </li> */}
             </ul>
           </div>
         </div>
