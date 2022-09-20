@@ -12,6 +12,10 @@ import axios from "axios";
 import Loader from "./Loader";
 import ChatContent from "./ChatContent";
 import NavBarUser from "./NavBarUser";
+import Footer from "./Footer";
+import arrowMenu from "../utils/images/sidebar/control.png";
+import logo from "../utils/images/LOGOPA.png";
+
 
 function InternalChat() {
   const dispatch = useDispatch();
@@ -26,6 +30,7 @@ function InternalChat() {
   const [userActual, setUserActual] = useState({});
   const [chatActual, setChatActual] = useState([]);
   const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(true);
 
   //saca el id de los chats necesarios
   function compare(user1, user2) {
@@ -116,22 +121,21 @@ function InternalChat() {
     return <Loader />;
   } else {
     return (
-      <div>
+      <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
         <NavBarUser />
-        <div style={{ display: "flex", justifyContent: "" }}>
-          <div
-            style={{
-              border: "3px solid cadetblue",
-            }}
+        <div className="m-5 rounded-xl" style={{ display: "flex", backgroundColor: '#fff' }}>
+          {/* <div  
+          className="rounded-xl"
           >
-            <span style={{ color: "#21252B", background: "cadetblue" }}>
+            <div className="py-3 rounded-tl-xl" style={{display: 'flex', justifyContent:'center', color: 'rgb(198, 198, 198)', backgroundColor: 'rgb(55, 109, 109)' }}>
               USERS AVAILABLE
-            </span>
+            </div>
             {
               <ol>
                 {usersToChat.map((user) => (
                   <div
-                    style={{ padding: "10px", border: "1px solid cadetblue" }}
+                    className="m-1 p-2 rounded-md"
+                    style={{borderWidth: 1, borderColor: 'rgb(55, 109, 109)'}}
                   >
                     <button onClick={(e) => handleUserChat(e, user)}>
                       {user.username}
@@ -140,6 +144,39 @@ function InternalChat() {
                 ))}
               </ol>
             }
+          </div> */}
+          <div
+            style={{ backgroundColor: 'rgb(55, 109, 109)' }}
+            className={`${
+              open ? "w-60" : "w-20"
+            } duration-300 h-screen p-5 pt-8 bg-blue-900 relative`}
+          >
+            <img
+              src={arrowMenu}
+              alt="arrowMenu"
+              className={`absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 border-blue-900 ${!open &&
+                "rotate-180"}`}
+              onClick={() => setOpen(!open)}
+            />
+            <div className="flex gap-x-4 justify-center">
+            <div className="py-3 rounded-tl-xl" style={{display: 'flex', justifyContent:'center', color: 'rgb(198, 198, 198)', backgroundColor: 'rgb(55, 109, 109)' }}>
+              USERS AVAILABLE
+            </div>
+            </div>
+
+              <ol>
+                {usersToChat.map((user) => (
+                  <div
+                    className="m-1 p-2 rounded-md"
+                    style={{borderWidth: 1, borderColor: 'rgb(55, 109, 109)'}}
+                  >
+                    <button onClick={(e) => handleUserChat(e, user)}>
+                      {user.username}
+                    </button>
+                  </div>
+                ))}
+              </ol>
+
           </div>
           <div
             style={{
@@ -189,6 +226,7 @@ function InternalChat() {
             )}
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }
