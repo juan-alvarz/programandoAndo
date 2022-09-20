@@ -14,8 +14,7 @@ import ChatContent from "./ChatContent";
 import NavBarUser from "./NavBarUser";
 import Footer from "./Footer";
 import arrowMenu from "../utils/images/sidebar/control.png";
-import icono from '../utils/images/MaileraIcono.png'
-
+import icono from "../utils/images/MaileraIcono.png";
 
 function InternalChat() {
   const dispatch = useDispatch();
@@ -115,7 +114,7 @@ function InternalChat() {
     if (commonChat !== "no se repiten") {
       dispatch(getChatById(commonChat));
     }
-  }, [dispatch]);
+  }, [dispatch, chat]);
 
   if (currentUser === null) {
     //si no está logueado, no existe chat
@@ -126,9 +125,12 @@ function InternalChat() {
     return <Loader />;
   } else {
     return (
-      <div style={{backgroundColor: 'rgb(240, 240, 240)'}}>
+      <div style={{ backgroundColor: "rgb(240, 240, 240)" }}>
         <NavBarUser />
-        <div className="m-5 rounded-xl" style={{ display: "flex", backgroundColor: '#fff' }}>
+        <div
+          className="m-5 rounded-xl"
+          style={{ display: "flex", backgroundColor: "#fff" }}
+        >
           {/* <div  
           className="rounded-xl"
           >
@@ -151,7 +153,7 @@ function InternalChat() {
             }
           </div> */}
           <div
-            style={{ backgroundColor: 'rgb(55, 109, 109)', height: 750}}
+            style={{ backgroundColor: "rgb(55, 109, 109)", height: 750 }}
             className={`${
               open ? "w-36 md:w-96 rounded-l-xl" : "w-10 md:w-36 rounded-l-xl"
             } duration-300 h-screen p-5 pt-8 bg-blue-900 relative`}
@@ -164,33 +166,51 @@ function InternalChat() {
               onClick={() => setOpen(!open)}
             />
             <div className="flex gap-x-4 justify-center">
-            <img
-            style={{ width: 150 }}
-            src={icono}
-            alt="logo"
-            className={`cursor-pointer duration-500 ${open &&
-              "rotate-[360deg]"}`}
-            />
+              <img
+                style={{ width: 150 }}
+                src={icono}
+                alt="logo"
+                className={`cursor-pointer duration-500 ${open &&
+                  "rotate-[360deg]"}`}
+              />
             </div>
 
-              <ol style={{height: 500}} className="px-3 rounded-xl mt-10 overflow-hidden hover:overflow-y-scroll scrolling-touch">
-                {usersToChat.map((user) => (
+            <ol
+              style={{ height: 500 }}
+              className="px-3 rounded-xl mt-10 overflow-hidden hover:overflow-y-scroll scrolling-touch"
+            >
+              {usersToChat.map((user) => (
+                <div className="text-white">
+                  {/* user.image.length > 1 ? user.image : */}
                   <div
-                    className="text-white"
+                    className="flex w-full my-1 p-2 text-xs rounded-md cursor-pointer"
+                    style={{
+                      borderWidth: 1,
+                      borderColor: "rgb(201, 196, 184)",
+                    }}
+                    onClick={(e) => handleUserChat(e, user)}
                   >
-                    {/* user.image.length > 1 ? user.image : */}
-                    <div className="flex w-full my-1 p-2 text-xs rounded-md cursor-pointer" style={{borderWidth: 1, borderColor: 'rgb(201, 196, 184)'}} onClick={(e) => handleUserChat(e, user)}>
-                      <img className='w-12 h-12 rounded-full' src={user.image && user.image.url.length > 1 ? user.image.url : 'https://www.pngmart.com/files/21/Account-User-PNG-Photo.png' }/>
-                      <button className={`${!open && "scale-0"} origin-left duration-200 ml-3`} onClick={(e) => handleUserChat(e, user)}>
-                        {user.username}
-                      </button>
-                    </div>
+                    <img
+                      className="w-12 h-12 rounded-full"
+                      src={
+                        user.image && user.image.url.length > 1
+                          ? user.image.url
+                          : "https://www.pngmart.com/files/21/Account-User-PNG-Photo.png"
+                      }
+                    />
+                    <button
+                      className={`${!open &&
+                        "scale-0"} origin-left duration-200 ml-3`}
+                      onClick={(e) => handleUserChat(e, user)}
+                    >
+                      {user.username}
+                    </button>
                   </div>
-                ))}
-              </ol>
-
+                </div>
+              ))}
+            </ol>
           </div>
-          <div style={{position: 'relative', width: '100%'}}>
+          <div style={{ position: "relative", width: "100%" }}>
             {Object.keys(userActual).length !== 0 ? (
               <div>
                 <div
@@ -199,38 +219,64 @@ function InternalChat() {
                     padding: "10px",
                     textAlign: "center",
                     fontSize: "1.2rem",
-                    color: 'rgb(17, 52, 82)'
+                    color: "rgb(17, 52, 82)",
                   }}
                 >
-                  <h1 >{userActual.username}</h1>
+                  <h1>{userActual.username}</h1>
                 </div>
                 <div className="mx-4 md:mx-16 my-6">
-                {Object.keys(chat).length !== 0 && chatActual.length !== 0 ? (
-                  chat.content.map((con) => (
-                    con.author._id === idGet ? (
-                    <div className="my-5">
-                      {/* <strong style={{color: 'rgb(17, 52, 82)'}}>{con.author.name}: </strong> */}
-                      <span style={{backgroundColor: 'rgb(17, 52, 82)'}} className='p-2 rounded-lg text-white font-bold'>{con.content}</span>
-                    </div>
-                    ) : (
-                      <div className="flex justify-end my-5">
-                        {/* <strong className='mr-2' style={{color: 'rgb(55, 109, 109)'}}>{con.author.name}: </strong> */}
-                        <span style={{backgroundColor: 'rgb(55, 109, 109)'}} className='p-2 rounded-lg text-white font-bold'>{con.content}</span>
-                      </div>
+                  {Object.keys(chat).length !== 0 && chatActual.length !== 0 ? (
+                    chat.content.map((con) =>
+                      con.author._id === idGet ? (
+                        <div className="my-5">
+                          {/* <strong style={{color: 'rgb(17, 52, 82)'}}>{con.author.name}: </strong> */}
+                          <span
+                            style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                            className="p-2 rounded-lg text-white font-bold"
+                          >
+                            {con.content}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="flex justify-end my-5">
+                          {/* <strong className='mr-2' style={{color: 'rgb(55, 109, 109)'}}>{con.author.name}: </strong> */}
+                          <span
+                            style={{ backgroundColor: "rgb(55, 109, 109)" }}
+                            className="p-2 rounded-lg text-white font-bold"
+                          >
+                            {con.content}
+                          </span>
+                        </div>
+                      )
                     )
-                  ))
-                ) : (
-                  <span style={{color: 'rgb(168, 76, 101)'}} className="font-bold">
-                    No chats yet, start a chat with {userActual.username}!
-                  </span>
-                )}
+                  ) : (
+                    <span
+                      style={{ color: "rgb(168, 76, 101)" }}
+                      className="font-bold"
+                    >
+                      No chats yet, start a chat with {userActual.username}!
+                    </span>
+                  )}
                 </div>
-                <form style={{position: 'absolute', bottom: '0px', width: '100%'}} onSubmit={(e) => handleSubmitChat(e)}>
-                  <div style={{display: "flex"}} className='h-16'>
-                    <div style={{backgroundColor: 'rgb(17, 52, 82)', width: '100%'}} className="flex justify-center">
+                <form
+                  style={{ position: "absolute", bottom: "0px", width: "100%" }}
+                  onSubmit={(e) => handleSubmitChat(e)}
+                >
+                  <div style={{ display: "flex" }} className="h-16">
+                    <div
+                      style={{
+                        backgroundColor: "rgb(17, 52, 82)",
+                        width: "100%",
+                      }}
+                      className="flex justify-center"
+                    >
                       <input
-                        style={{color: '#fff', backgroundColor: 'rgb(17, 52, 82)', width: '100%'}}
-                        className='pl-10'
+                        style={{
+                          color: "#fff",
+                          backgroundColor: "rgb(17, 52, 82)",
+                          width: "100%",
+                        }}
+                        className="pl-10"
                         type="text"
                         placeholder="Send a message"
                         value={message}
@@ -240,18 +286,38 @@ function InternalChat() {
                     {/* <button onClick={(e) => handleReload(e)}>Reload</button> */}
                   </div>
                 </form>
-                    <div style={{position: 'absolute', right: '0px', bottom: '0px'}} className="flex w-24 h-16">
-                      <button style={{backgroundColor: 'rgb(17, 52, 82)', color: '#fff'}} className="w-24 flex justify-center items-center"  type="submit">Send</button>
-                    </div>
+                <div
+                  style={{ position: "absolute", right: "0px", bottom: "0px" }}
+                  className="flex w-24 h-16"
+                >
+                  <button
+                    style={{
+                      backgroundColor: "rgb(17, 52, 82)",
+                      color: "#fff",
+                    }}
+                    className="w-24 flex justify-center items-center"
+                    type="submit"
+                  >
+                    Send
+                  </button>
+                </div>
               </div>
             ) : (
-              <div style={{width: '100%', heigth: '100%', display: "flex", color: 'rgb(168, 76, 101)'}} className="place-content-center my-80 text-center font-bold">
+              <div
+                style={{
+                  width: "100%",
+                  heigth: "100%",
+                  display: "flex",
+                  color: "rgb(168, 76, 101)",
+                }}
+                className="place-content-center my-80 text-center font-bold"
+              >
                 <p className="">No user selected yet</p>
               </div>
             )}
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     );
   }
