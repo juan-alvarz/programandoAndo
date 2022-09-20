@@ -7,14 +7,63 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "logo192.png",
-      "sizes": "192x192",
+      "src": "icon-20.png",
+      "sizes": "20x20",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "logo512.png",
+      "src": "icon-29.png",
+      "sizes": "29x29",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-40.png",
+      "sizes": "20x20",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-50.png",
+      "sizes": "50x50",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-60.png",
+      "sizes": "60x60",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-76.png",
+      "sizes": "76x76",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-Small@3x.png",
+      "sizes": "87x87",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "iTunesArtwork.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+
+    {
+      "src": "LOGOPA.png",
+      "sizes": "256x251",
       "type": "image/png",
       "purpose": "any"
     }
@@ -25,7 +74,7 @@
   "orientation": "portrait",
   "prefer_related_application": false,
   "scope": "/",
-  "short_name": "PA",
+  "short_name": "pa",
   "start_url": "/",
-  "theme_color": "orange"
+  "theme_color": "purple"
 }

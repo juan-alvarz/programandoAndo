@@ -23,9 +23,8 @@ import imageNotFound from "../utils/images/404person.png";
 import fav from "../utils/images/fav.png";
 
 import { updateUser } from "../redux/actions";
-import FiltersCourses from "./FiltersCourses";
 
-export default function AllCourses({}) {
+export default function AllCourses() {
   const courses = useSelector((state) => state.programandoando.courses);
   const { favoritesUser } = useSelector((state) => state.programandoando);
   const dispatch = useDispatch();
@@ -197,7 +196,7 @@ export default function AllCourses({}) {
 
   let coursesPow = courses.length > 0 && courses.map((e) => durationCourse(e));
 
-  //=========== lógica del duration ==========
+  //=========== lÃ³gica del duration ==========
 
   //=========== handles =================
   // const handleFilterAlph = (e) => {
@@ -488,7 +487,7 @@ export default function AllCourses({}) {
               </div>
             ))}
           </div>
-          <h2 className="bg-green-300">{favoritoAgregado}</h2>
+          <h2 className="bg-green-300 ">{favoritoAgregado}</h2>
         </div>
       )}
       {/* Cards */}
