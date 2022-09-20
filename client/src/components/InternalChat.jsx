@@ -232,12 +232,12 @@ function InternalChat() {
                         onChange={(e) => handleChangeChat(e)}
                       />
                     </div>
-                    {/* <button onClick={(e) => handleReload(e)}>Reload</button> */}
                   </div>
-                </form>
-                    <div style={{position: 'absolute', right: '0px', bottom: '0px'}} className="flex w-24 h-16">
-                      <button style={{backgroundColor: 'rgb(17, 52, 82)', color: '#fff'}} className="w-24 flex justify-center items-center"  type="submit">Send</button>
+                    <div style={{position: 'absolute', right: '0px', bottom: '0px'}} className="flex w-24 h-16 mr-20">
+                      <button style={{backgroundColor: 'rgb(17, 52, 82)', color: '#fff', borderWidth: 1, borderColor: 'rgb(201, 196, 184)'}} className="my-4 p-2 rounded-md w-24 flex justify-center items-center" type="submit">Send</button>
+                      <button style={{backgroundColor: 'rgb(17, 52, 82)', color: '#fff', borderWidth: 1, borderColor: 'rgb(201, 196, 184)'}} className="my-4 p-2 rounded-md ml-6 w-24 flex justify-center items-center" onClick={(e) => handleReload(e)}>Reload</button>
                     </div>
+                </form>
               </div>
             ) : (
               <div style={{width: '100%', heigth: '100%', display: "flex", color: 'rgb(168, 76, 101)'}} className="place-content-center my-80 text-center font-bold">
