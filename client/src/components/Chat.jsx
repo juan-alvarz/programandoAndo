@@ -33,7 +33,7 @@ const Chat = () => {
 
   return (
     open === false ? 
-    <div style={{width: 350, height: 570, display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+    <div style={{width: 60, height: 60, display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
         <button className='animate-bounce' style={{width: 60, backgroundColor: 'rgb(168, 76, 101)', borderRadius: "34px 8px 34px 34px"}} onClick={handleOpen}>
             <img style={{padding: 10}} src={img} alt='chatbot image'/>
         </button>

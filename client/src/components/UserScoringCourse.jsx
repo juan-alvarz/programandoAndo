@@ -119,7 +119,7 @@ function UserScoringCourse() {
               }}
             >
               <picture>
-                <NavLink to={`/course/${course._id}`}>
+                <NavLink to={`/course/${course.course._id}`}>
                   <img
                     className="rounded-t-lg object-cover"
                     src={course.course.image}
@@ -221,7 +221,7 @@ function UserScoringCourse() {
                 >
                   <button>
                     <NavLink
-                      to={`/course/${course._id}`}
+                      to={`/course/${course.course._id}`}
                       style={{
                         backgroundColor: "rgb(17, 52, 82)",
                         color: "rgb(201, 196, 184)",

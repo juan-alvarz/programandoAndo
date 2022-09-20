@@ -13,7 +13,6 @@ import NavBar from "./NavBar";
 import { Videos } from "./Videos";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
-import Loader from "./Loader";
 
 export default function Video() {
   const { video, course, foro } = useSelector((state) => state.programandoando);
@@ -146,10 +145,10 @@ export default function Video() {
     setContador(contador + 1);
   }
 
-  // console.log(foro);
+  console.log(foro);
 
   if (!Object.keys(course).length) {
-    return <Loader />;
+    return <h2>Cargando Video!</h2>;
   } else {
     return usuario ? (
       <div
@@ -159,13 +158,14 @@ export default function Video() {
         }}
       >
         <NavBar />
-        <div style={{ display: "flex" }}>
+        <div className=" xl:flex pl-2 justify-between">
           <div style={{ display: "flex" }}>
-            <div className="max-w-screen-xl m-5 ">
+            <div className="max-w-screen-xl py-5">
               {/* Video */}
               <div className="mb-10 flex flex-col sm:flex-row">
                 <iframe
-                  className="sm:w-screen"
+                  className="sm:w-screen px-5"
+                  width="380"
                   height="515"
                   src={video.url}
                   title="YouTube video player"
@@ -175,7 +175,7 @@ export default function Video() {
                 ></iframe>
               </div>
               {/* Texto Card */}
-              <div className="px-10 flex flex-col justify-between w-full">
+              <div className="px-10 flex flex-col justify-between sm:w-screen lg:w-full ">
                 <div>
                   <h2
                     className="pt-5 pb-1.5 text-2xl font-bold "
@@ -199,7 +199,7 @@ export default function Video() {
                 >
                   {video.description}
                 </p>
-                {/* <div className="pb-5 flex justify-between font-medium"> */}
+
                 <p
                   className="capitalize font-bold flex justify-end"
                   style={{ color: "rgb(55, 109, 109)" }}
@@ -207,26 +207,27 @@ export default function Video() {
                   Nivel: {video.difficult}
                 </p>
                 <p
-                  className="font-semibold flex justify-end"
+                  className="font-semibold flex justify-end py-2"
                   style={{ color: "rgb(55, 109, 109)" }}
                 >
                   Tiempo: {video.duration}
                 </p>
-                {/* </div> */}
-                <p className="flex justify-end">
+
+                <button className="flex justify-end ">
                   <a
                     href={video.profile}
                     target="_blank"
-                    className="text-blue-500"
+                    className=" text-white font-bold py-2 px-4 rounded"
+                    style={{ backgroundColor: "#376D6D" }}
                   >
-                    {video.profile}
+                    Youtube
                   </a>
-                </p>
+                </button>
               </div>
             </div>
           </div>
           {/* CHAT */}
-          <div className="bg-white w-3/12 rounded-md m-5">
+          <div className="bg-white rounded-md m-5 xl:w-3/12 ">
             <div
               style={{ backgroundColor: "rgb(17, 52, 82)" }}
               className="rounded-t-xl mb-5"
@@ -338,14 +339,21 @@ export default function Video() {
                         </div>
                         {comment.authorComment ? (
                           userObj.user._id === comment.authorComment._id ? (
-                            <button
-                              className="button"
-                              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                              type="submit"
-                              onClick={(e) => deleteComment4(e, comment._id)}
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                              }}
                             >
-                              Delete Comment
-                            </button>
+                              <button
+                                style={{ width: 130 }}
+                                className="bg-gray-700 text-xs hover:bg-red-700 text-white font-bold mx-2 py-2 px-2 rounded"
+                                type="submit"
+                                onClick={(e) => deleteComment4(e, comment._id)}
+                              >
+                                Delete Comment
+                              </button>
+                            </div>
                           ) : (
                             ""
                           )
@@ -361,7 +369,7 @@ export default function Video() {
               </div>
               <div
                 style={{ backgroundColor: "rgb(17, 52, 82)" }}
-                className="rounded-b-md"
+                className="rounded-b-xl"
               >
                 <div
                   style={{ display: "flex", justifyContent: "center" }}
@@ -380,7 +388,7 @@ export default function Video() {
                 >
                   <input
                     style={{ backgroundColor: "rgb(17, 52, 82)" }}
-                    className="border border-white text-sm rounded-l-md pl-3"
+                    className="text-white border border-white text-sm rounded-l-md pl-3"
                     type="text"
                     placeholder="New answer"
                     value={state.input2}
@@ -414,7 +422,7 @@ export default function Video() {
     ) : (
       Swal.fire({
         title: "Access to videos denied",
-        text: "You are not logged in. Please log in",
+        text: "You cannot login if you are not logged in. Please log in",
         icon: "warning",
         confirmButtonText: "Log in",
       }).then((result) => {

@@ -17,7 +17,7 @@ export const Videos = (props) => {
 
   let name = props.name;
   useEffect(() => {
-    // setPaginaActual(1);
+    setPaginaActual(1);
   }, [name]);
 
   let videos = props.videos;
@@ -29,7 +29,7 @@ export const Videos = (props) => {
   const ultimoVideo = paginaActual * videosPagina;
   const primerVideo = ultimoVideo - videosPagina;
 
-  const videosActuales = videos.slice(primerVideo, ultimoVideo);
+  const videosActuales = videos && videos.slice(primerVideo, ultimoVideo);
 
   // const prev = () => {
   //   if (paginaActual <= 1) {
