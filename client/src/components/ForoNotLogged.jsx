@@ -23,7 +23,7 @@ export default function ForoNotLogged() {
     <h1>Cargando Foro</h1>;
   } else {
     return (
-      <div className="bg-white w-7/12 rounded-md mb-10">
+      <div className="bg-white md:w-7/12 rounded-md mb-10">
       <div style={{backgroundColor: 'rgb(17, 52, 82)'}} className='rounded-t-xl'>
          <p style={{color: 'rgb(240, 240, 240)'}} className="text-center py-5 text-xl font-bold uppercase"> General Forum </p> 
       </div>

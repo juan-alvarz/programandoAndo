@@ -224,24 +224,24 @@ const RankUserHome = () => {
   }
   return (
     <div
-      className="flex justify-center items-center"
+      className="flex justify-center items-center "
       style={{ backgroundColor: "rgb(240, 240, 240)" }}
     >
-      <div style={{width: 500, backgroundColor: "#fff", borderRadius: 10, height: 600}} className="shadow-lg py-5" >
+      <div style={{backgroundColor: "#fff", borderRadius: 10, height: 600}} className="w-80 md:w-11/12  shadow-lg py-5" >
         <h2
-          className="text-center font-bold text-2xl pb-2 uppercase"
+          className="text-lg md:text-2xl text-center font-bold pb-2 uppercase"
           style={{ color: "#376D6D" }}
         >
           top 5 donators
         </h2>
         <div className=" flex justify-center">
-        <div  className="w-10/12">
+        <div  className="w-11/12">
           {userForHome ? (
             userForHome.map((elemento, index) => {
               return (
                 <div
                   key={index}
-                  className="m-3 py-4 px-5 rounded-md shadow-lg "
+                  className="m-2 py-3 lg:m-3 md:py-4 px-5 rounded-md shadow-lg "
                   style={{ backgroundColor: "rgb(17, 52, 82)" }}
                 >
                   <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
@@ -252,20 +252,20 @@ const RankUserHome = () => {
                             className="text-sm font-medium text-gray-900 truncate "
                             style={{
                               color: "rgb(201, 196, 184)",
-                              fontSize: 19,
+                              fontSize: 15,
                             }}
                           >
                             {elemento.name}
                           </p>
                           <p
-                            className="text-sm text-gray-500 truncate dark:text-gray-400"
+                            className="text-xs text-gray-500 truncate dark:text-gray-400"
                             style={{ color: "rgb(201, 196, 184)" }}
                           >
                             {elemento.username}
                           </p>
                         </div>
                         <div
-                          className="inline-flex items-center text-base font-semibold"
+                          className="text-xs md:text-md inline-flex items-center font-semibold"
                           style={{ color: "rgb(201, 196, 184)" }}
                         >
                           <img
@@ -285,8 +285,8 @@ const RankUserHome = () => {
                         <div>
                           <NavLink to="/userrank" state={elemento}>
                             <button
-                              style={{width: 130, backgroundColor: 'rgb(55, 109, 109)'}}
-                              className="bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-md"
+                              style={{backgroundColor: 'rgb(55, 109, 109)'}}
+                              className="w-16 lg:w-32 bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-md"
                               type="button"
                             >
                               More Detail
