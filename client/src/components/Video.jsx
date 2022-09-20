@@ -164,7 +164,7 @@ export default function Video() {
               {/* Video */}
               <div className="mb-10 flex flex-col sm:flex-row">
                 <iframe
-                  className=" sm:w-screen px-5"
+                  className="sm:w-screen px-5"
                   width="380"
                   height="515"
                   src={video.url}

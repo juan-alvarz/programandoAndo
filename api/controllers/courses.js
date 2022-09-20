@@ -111,9 +111,7 @@ const updateCourse = async (req, res) => {
         image: image ? image : course.image,
         videos: addVideos ? addVideos : course.videos,
         scores: body.scores ? [...course.scores, body.scores] : course.scores,
-        score: body.score
-          ? average([...course.scores, body.scores])
-          : course.score,
+        score: average([...course.scores, body.scores]),
       }
     );
 
