@@ -360,7 +360,14 @@ export default function AllCourses() {
               >
                 Course not found
               </h1>
-              <span>no results found, please try another course</span>
+              <span
+                style={{
+                  // fontSize: "2rem",
+                  paddingBottom: "30px",
+                }}
+              >
+                no results found, please try another course
+              </span>
             </div>
           </div>
         </div>
