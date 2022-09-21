@@ -537,21 +537,21 @@ const RankUserDonation = () => {
   
   
   const dispatch = useDispatch();
+  
   const { users } = useSelector((state) => state.programandoando);
   useEffect(() => {
     dispatch(getUsers());
+    
   }, [dispatch]);
   let rankingDB = [];
-  for (let i = 0; i < usuariosPrueba.length; i++) {
-    if (usuariosPrueba[i].contributor > 0) {
-      rankingDB.push(usuariosPrueba[i]);
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].contributor > 0) {
+      rankingDB.push(users[i]);
     }
   }
   rankingDB.sort((a, b) => b.contributor - a.contributor);
 
-
-
-
+ 
 
 
 
@@ -562,16 +562,16 @@ const RankUserDonation = () => {
 
 
   let ranking = [];
-  for (let i = 0; i < usuariosPrueba.length; i++) {
-    if (usuariosPrueba[i].contributor > 0) {
-      ranking.push(usuariosPrueba[i]);
+  for (let i = 0; i < users.length; i++) {
+    if (users[i].contributor > 0) {
+      ranking.push(users[i]);
     }
   }
   ranking.sort((a, b) => b.contributor - a.contributor);
 
   //PAGINADO
   const [paginaActual, setPaginaActual] = useState(1);
-  const [usersPagina] = useState(10);
+  const [usersPagina] = useState(6);
 
   const ultimoVideo = paginaActual * usersPagina;
   const primerVideo = ultimoVideo - usersPagina;

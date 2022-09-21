@@ -21,6 +21,7 @@ export const slice = createSlice({
     chat: {},
     scoring: [],
     ownPath: [],
+    usersHome:[]
   },
   reducers: {
     // ========= Courses ===========
@@ -112,6 +113,13 @@ export const slice = createSlice({
     // ========= users ===========
     getAllUsers: (state, action) => {
       state.users = action.payload;
+    },
+    getUsersHome: (state, action) => {
+      let usuarios=[]
+      for (let i = 0; i < 5; i++) {
+        usuarios.push(action.payload[i]);
+      }
+      state.usersHome = usuarios;
     },
     getUserById: (state, action) => {
       state.user = action.payload;
@@ -232,6 +240,7 @@ export const {
   getSchoolId,
   createSchool,
   getAllUsers,
+  getUsersHome,
   getUserById,
   createUser,
   getVideos,

@@ -33,6 +33,7 @@ import {
   getNotifications,
   getAllUsersBanned,
   getChat,
+  getUsersHome,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -217,6 +218,12 @@ export const getUsers = () => (dispatch) => {
   axios
     .get("http://localhost:3001/api/users")
     .then((res) => dispatch(getAllUsers(res.data)))
+    .catch((e) => console.log(e));
+};
+export const getUserHome = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/users")
+    .then((res) => dispatch(getUsersHome(res.data)))
     .catch((e) => console.log(e));
 };
 
