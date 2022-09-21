@@ -271,7 +271,7 @@ export default function AllCourses() {
       {/* <div style={{ display: "flex", alignItems: "center" }}>
               <span className="pr-2">A-Z</span>
               <label
-                for="default-toggle"
+                htmlFor="default-toggle"
                 className="inline-flex relative items-center cursor-pointer"
               >
                 <div></div>

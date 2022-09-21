@@ -187,7 +187,7 @@ export default function Video() {
                     className="pb-5 text-lg font-semibold"
                     style={{ fontSize: "15px", color: "rgb(17, 52, 82)" }}
                   >
-                    Autor:{" "}
+                    Author:{" "}
                     <a href={video.profile} target="_blank">
                       {video.author}
                     </a>
@@ -204,13 +204,13 @@ export default function Video() {
                   className="capitalize font-bold flex justify-end"
                   style={{ color: "rgb(55, 109, 109)" }}
                 >
-                  Nivel: {video.difficult}
+                  Level: {video.difficult}
                 </p>
                 <p
                   className="font-semibold flex justify-end py-2"
                   style={{ color: "rgb(55, 109, 109)" }}
                 >
-                  Tiempo: {video.duration}
+                  Time: {video.duration}
                 </p>
 
                 <button className="flex justify-end ">
