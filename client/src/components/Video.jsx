@@ -278,7 +278,7 @@ export default function Video() {
                                 </p>
                                   <p className="text-xs">{answer.content}</p>
 
-                                {answer.authorComment ? (
+                                {answer.authorComment ? ( 
                                   answer.authorComment._id ===
                                   userObj.user._id ? (
                                     <div
