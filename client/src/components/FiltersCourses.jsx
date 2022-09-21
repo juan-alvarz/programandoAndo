@@ -201,7 +201,7 @@ function FiltersCourses({
           >
             <span className="pr-2">A-Z</span>
             <label
-              for="default-toggle"
+              htmlFor="default-toggle"
               className="inline-flex relative items-center cursor-pointer"
             >
               <div></div>

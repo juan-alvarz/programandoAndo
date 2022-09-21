@@ -48,7 +48,7 @@ const Chat = () => {
         }}
         onClick={handleOpen}
       >
-        <img style={{ padding: 10 }} src={img} alt="chatbot image" />
+        <img style={{ padding: 10 }} src={img} alt="chatbotImage" />
       </button>
     </div>
   ) : (
@@ -163,7 +163,7 @@ const Chat = () => {
           }}
           onClick={handleOpen}
         >
-          <img style={{ padding: 10 }} src={img} alt="chatbot image" />
+          <img style={{ padding: 10 }} src={img} alt="chatbotImage" />
         </button>
       </div>
     </div>
