@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../redux/actions";
+import { getUserHome } from "../redux/actions";
 import oro from "../utils/images/oro.png";
 import plata from "../utils/images/plata.png";
 import bronce from "../utils/images/bronce.png";
@@ -206,22 +206,23 @@ let usuariosPrueba = [
 
 const RankUserHome = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.programandoando);
+
+  const { usersHome } = useSelector((state) => state.programandoando);
+  console.log(usersHome);
+
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getUserHome());
   }, [dispatch]);
+
   let ranking = [];
-  for (let i = 0; i < usuariosPrueba.length; i++) {
-    if (usuariosPrueba[i].contributor > 0) {
-      ranking.push(usuariosPrueba[i]);
+  for (let i = 0; i < usersHome.length; i++) {
+    if (usersHome[i].contributor > 0) {
+      ranking.push(usersHome[i]);
     }
   }
+
   ranking.sort((a, b) => b.contributor - a.contributor);
 
-  let userForHome = [];
-  for (let i = 0; i < 5; i++) {
-    userForHome.push(ranking[i]);
-  }
   return (
     <div
       className="flex justify-center items-center "
@@ -239,8 +240,12 @@ const RankUserHome = () => {
         </h2>
         <div className=" flex justify-center">
           <div className="w-11/12">
-            {userForHome ? (
-              userForHome.map((elemento, index) => {
+            {!ranking.length ? (
+              <span className="font-bold text-2xl text-white">
+                No hay usuarios
+              </span>
+            ) : (
+              ranking.map((elemento, index) => {
                 return (
                   <div
                     key={index}
@@ -302,10 +307,6 @@ const RankUserHome = () => {
                   </div>
                 );
               })
-            ) : (
-              <span className="font-bold text-2xl text-white">
-                No hay usuarios
-              </span>
             )}
             <div className="flex justify-center  divide-gray-200">
               <NavLink to="/rankusers">
