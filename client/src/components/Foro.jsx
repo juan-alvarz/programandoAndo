@@ -233,8 +233,9 @@ export default function Foro() {
                   style={{ display: "flex", justifyContent: "center" }}
                   className="my-5"
                 >
-                  <input
-                    className="border border-gray-300 rounded-l-md pl-3 text-xs"
+                  <textarea
+                    style={{ resize: "none" }}
+                    className="border border-gray-300 rounded-l-md p-2 text-xs"
                     type="text"
                     placeholder="Comment..."
                     data-commentid={comment._id}
@@ -297,9 +298,9 @@ export default function Foro() {
           style={{ display: "flex", justifyContent: "center" }}
           className="pb-5"
         >
-          <input
-            style={{ backgroundColor: "rgb(17, 52, 82)" }}
-            className="text-white border border-white text-sm rounded-l-md pl-3"
+          <textarea
+            style={{ backgroundColor: "rgb(17, 52, 82)", resize: "none" }}
+            className="text-white border border-white text-sm rounded-l-md p-2"
             type="text"
             placeholder="New answer"
             value={state.input2}

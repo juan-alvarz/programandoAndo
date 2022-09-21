@@ -144,7 +144,7 @@ export const createsCourse = (payload) => async (dispatch) => {
     .post("http://localhost:3001/api/courses", payload)
     .then(() => {
       Swal.fire({
-        text: "Create Video Successfully",
+        text: "Create Course Successfully",
         icon: "success",
         confirmButtonText: "OK",
       }).then((result) => {
