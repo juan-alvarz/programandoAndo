@@ -13,8 +13,7 @@ function AgeCharts() {
         dispatch(getUsers());
     }, [dispatch]);  
 
-    var birthdaysMillisec = [820497600000, 1104516000000, 1199188800000, 1483207200000, 1988128800000, 2461492800000]
-    // users.map(e => Date.parse(e.birthday))
+    var birthdaysMillisec = users.map(e => Date.parse(e.birthday))
 
     console.log(birthdaysMillisec)
 
