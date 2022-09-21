@@ -690,5 +690,11 @@ export const update_getChat = (id, payload) => async (dispatch) => {
 };
 
 export const create_getChat = (payload) => async (dispatch) => {
-  await axios.post(`http://localhost:3001/api/chat`, payload);
+  await axios
+    .post(`http://localhost:3001/api/chat`, payload)
+    .then(
+      async (r) =>
+        await axios.get(`http://localhost:3001/api/chat/${r.data._id}`)
+    )
+    .then((r) => dispatch(getChat(r.data)));
 };
