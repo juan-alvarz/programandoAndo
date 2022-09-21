@@ -48,10 +48,10 @@ export default function CreateCourse() {
 
   const onSubmit = (data) => {
     const get = getValues();
-    console.log(get);
+    // console.log(get);
 
     handleSelect(course);
-    console.log(data);
+    // console.log(data);
     dispatch(createSchoolUser(get, userObj.user._id));
 
     Swal.fire({
@@ -76,7 +76,7 @@ export default function CreateCourse() {
         "courses",
         [...course, value].map((e) => e.value)
       );
-      console.log(course);
+      // console.log(course);
     }
     // console.log(find);
   };

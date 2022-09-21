@@ -187,7 +187,7 @@ export default function Video() {
                     className="pb-5 text-lg font-semibold"
                     style={{ fontSize: "15px", color: "rgb(17, 52, 82)" }}
                   >
-                    Autor:{" "}
+                    Author:{" "}
                     <a href={video.profile} target="_blank">
                       {video.author}
                     </a>
@@ -204,13 +204,13 @@ export default function Video() {
                   className="capitalize font-bold flex justify-end"
                   style={{ color: "rgb(55, 109, 109)" }}
                 >
-                  Nivel: {video.difficult}
+                  Level: {video.difficult}
                 </p>
                 <p
                   className="font-semibold flex justify-end py-2"
                   style={{ color: "rgb(55, 109, 109)" }}
                 >
-                  Tiempo: {video.duration}
+                  Time: {video.duration}
                 </p>
 
                 <button className="flex justify-end ">
@@ -276,9 +276,9 @@ export default function Video() {
                                     ? answer.authorComment.name
                                     : "no se encuenta master"}
                                 </p>
-                                <p className="text-xs">{answer.content}</p>
+                                  <p className="text-xs">{answer.content}</p>
 
-                                {answer.authorComment ? (
+                                {answer.authorComment ? (  
                                   answer.authorComment._id ===
                                   userObj.user._id ? (
                                     <div
@@ -316,8 +316,8 @@ export default function Video() {
                           style={{ display: "flex", justifyContent: "center" }}
                           className="my-5"
                         >
-                          <input
-                            className="border border-gray-300 rounded-l-md pl-3 text-xs"
+                          <textarea
+                            className="border border-gray-300 rounded-l-md p-2 text-xs"
                             type="text"
                             placeholder="Comment..."
                             data-commentid={comment._id}
@@ -386,9 +386,9 @@ export default function Video() {
                   style={{ display: "flex", justifyContent: "center" }}
                   className="pb-5"
                 >
-                  <input
-                    style={{ backgroundColor: "rgb(17, 52, 82)" }}
-                    className="text-white border border-white text-sm rounded-l-md pl-3"
+                  <textarea
+                    style={{ backgroundColor: "rgb(17, 52, 82)", resize: 'none' }}
+                    className="text-white border border-white text-sm rounded-l-md p-2"
                     type="text"
                     placeholder="New answer"
                     value={state.input2}

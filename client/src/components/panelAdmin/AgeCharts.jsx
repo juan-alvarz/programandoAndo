@@ -13,20 +13,27 @@ function AgeCharts() {
         dispatch(getUsers());
     }, [dispatch]);  
 
-    var birthdaysMillisec = [820497600000, 1104516000000, 1199188800000, 1483207200000, 1988128800000, 2461492800000]
-    // users.map(e => Date.parse(e.birthday))
+    var birthdaysMillisec = users.map(e => Date.parse(e.birthday))
 
-    console.log(birthdaysMillisec)
+    const now = Date.now()
+
+    console.log(users)
+
+    var diferencia = []
+
+    for (let i = 0; i < birthdaysMillisec.length; i++){
+        diferencia.push (now - birthdaysMillisec[i])
+    }
+
 
     let ages = []
     
-    for (let i = 0; i < birthdaysMillisec.length; i++){
-        ages.push((birthdaysMillisec[i] / (31536000000)).toFixed(0))
+    for (let i = 0; i < diferencia.length; i++){
+        ages.push((diferencia[i] / (31536000000)).toFixed(0))
     }
 
     // 1000 * 60 * 60 * 24 * 365 = 31536000000
 
-    console.log(ages)
 
     let ages16to25 = []
     let ages26to35 = []
@@ -60,13 +67,6 @@ function AgeCharts() {
         } 
     }
 
-    console.log(ages16to25)
-    console.log(ages26to35)
-    console.log(ages36to45)
-    console.log(ages46to55)
-    console.log(ages56to65)
-    console.log(ages66to75)
-    console.log(moreTo76)
 
     const labels = ['16 - 25', '26 - 35', '36 - 45', '46 - 55', '56 - 65', '66 - 75', '75 - 100'];
     const data = {

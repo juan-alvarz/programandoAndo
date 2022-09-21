@@ -59,8 +59,36 @@ export default function CreateUser() {
 
   const onSubmit = (data) => {
     const get = getValues();
-
-    if (data.password !== data.rePassword || data.email !== data.reEmail) {
+    console.log(data.username);
+    const findUser =
+      users &&
+      users.find(
+        (item) =>
+          item.username.replace(/\s+/g, "").toLowerCase() ===
+          data.username.replace(/\s+/g, "").toLowerCase()
+      );
+    const findEmail =
+      users &&
+      users.find(
+        (item) => item.email.toLowerCase() === data.email.toLowerCase()
+      );
+    if (findUser && findUser.length > 0) {
+      return Swal.fire({
+        title: "This user already exists!",
+        icon: "error",
+        confirmButtonText: "ok",
+      });
+    } else if (findEmail && findEmail.lenght > 0) {
+      return Swal.fire({
+        title: "This email already exists!",
+        text: "Check the password or email input",
+        icon: "error",
+        confirmButtonText: "ok",
+      });
+    } else if (
+      data.password !== data.rePassword ||
+      data.email !== data.reEmail
+    ) {
       return Swal.fire({
         title: "Error in Email or Password",
         text: "Check the password or email input",
@@ -74,22 +102,15 @@ export default function CreateUser() {
         icon: "error",
         confirmButtonText: "Back",
       });
-    } else if (
-      users.find(
-        (item) =>
-          item.username.replace(/\s+/g, "").toLowerCase() ===
-          data.username.replace(/\s+/g, "").toLowerCase()
-      )
-    ) {
-      return Swal.fire({
-        title: "repeated user",
-        text: "Check the user exists!!",
-        icon: "error",
-        confirmButtonText: "Back",
-      });
     } else {
-      // console.log(data);
+      console.log(data);
       const infoUser = [get].map((user) => {
+        const dataUser = user.date;
+        console.log(dataUser);
+        const date = dataUser.split("-");
+        console.log(date);
+        const newDate = new Date(date[0], date[1] - 1, date[2]);
+        console.log(newDate);
         return {
           name: user.name,
           username: user.username,

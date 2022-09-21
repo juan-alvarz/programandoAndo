@@ -162,7 +162,7 @@ const createUser = async (req, res, next) => {
       ...body,
       password,
       confirmationCode: emailToken,
-      username,
+      username: body.username ? body.username : username,
       image: { url: defaultImg, public_id: "" },
     };
     const userData = await usersModel.create(newBody);

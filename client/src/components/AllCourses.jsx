@@ -196,7 +196,7 @@ export default function AllCourses() {
 
   let coursesPow = courses.length > 0 && courses.map((e) => durationCourse(e));
 
-  //=========== lógica del duration ==========
+  //=========== lÃ³gica del duration ==========
 
   //=========== handles =================
   // const handleFilterAlph = (e) => {
@@ -271,7 +271,7 @@ export default function AllCourses() {
       {/* <div style={{ display: "flex", alignItems: "center" }}>
               <span className="pr-2">A-Z</span>
               <label
-                for="default-toggle"
+                htmlFor="default-toggle"
                 className="inline-flex relative items-center cursor-pointer"
               >
                 <div></div>
@@ -487,7 +487,7 @@ export default function AllCourses() {
               </div>
             ))}
           </div>
-          <h2 className="bg-green-300 bg-gray-700">{favoritoAgregado}</h2>
+          <h2 className="bg-green-300 ">{favoritoAgregado}</h2>
         </div>
       )}
       {/* Cards */}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../redux/actions";
+import { getUserHome } from "../redux/actions";
 import oro from "../utils/images/oro.png";
 import plata from "../utils/images/plata.png";
 import bronce from "../utils/images/bronce.png";
@@ -206,28 +206,32 @@ let usuariosPrueba = [
 
 const RankUserHome = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.programandoando);
+
+  const { usersHome } = useSelector((state) => state.programandoando);
+  console.log(usersHome);
+
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getUserHome());
   }, [dispatch]);
+
   let ranking = [];
-  for (let i = 0; i < usuariosPrueba.length; i++) {
-    if (usuariosPrueba[i].contributor > 0) {
-      ranking.push(usuariosPrueba[i]);
+  for (let i = 0; i < usersHome.length; i++) {
+    if (usersHome[i].contributor > 0) {
+      ranking.push(usersHome[i]);
     }
   }
+
   ranking.sort((a, b) => b.contributor - a.contributor);
 
-  let userForHome = [];
-  for (let i = 0; i < 5; i++) {
-    userForHome.push(ranking[i]);
-  }
   return (
     <div
       className="flex justify-center items-center "
       style={{ backgroundColor: "rgb(240, 240, 240)" }}
     >
-      <div style={{backgroundColor: "#fff", borderRadius: 10, height: 600}} className="w-80 md:w-11/12  shadow-lg py-5" >
+      <div
+        style={{ backgroundColor: "#fff", borderRadius: 10, height: 600 }}
+        className="w-80 md:w-11/12  shadow-lg py-5"
+      >
         <h2
           className="text-lg md:text-2xl text-center font-bold pb-2 uppercase"
           style={{ color: "#376D6D" }}
@@ -235,87 +239,87 @@ const RankUserHome = () => {
           top 5 donators
         </h2>
         <div className=" flex justify-center">
-        <div  className="w-11/12">
-          {userForHome ? (
-            userForHome.map((elemento, index) => {
-              return (
-                <div
-                  key={index}
-                  className="m-2 py-3 lg:m-3 md:py-4 px-5 rounded-md shadow-lg "
-                  style={{ backgroundColor: "rgb(17, 52, 82)" }}
-                >
-                  <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-                    <li className="pb-3 sm:py-1">
-                      <div className="flex items-center space-x-4">
-                        <div className="flex-1 min-w-0">
-                          <p
-                            className="text-sm font-medium text-gray-900 truncate "
-                            style={{
-                              color: "rgb(201, 196, 184)",
-                              fontSize: 15,
-                            }}
-                          >
-                            {elemento.name}
-                          </p>
-                          <p
-                            className="text-xs text-gray-500 truncate dark:text-gray-400"
+          <div className="w-11/12">
+            {!ranking.length ? (
+              <span className="font-bold text-2xl text-white">
+                No hay usuarios
+              </span>
+            ) : (
+              ranking.map((elemento, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="m-2 py-3 lg:m-3 md:py-4 px-5 rounded-md shadow-lg "
+                    style={{ backgroundColor: "rgb(17, 52, 82)" }}
+                  >
+                    <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+                      <li className="pb-3 sm:py-1">
+                        <div className="flex items-center space-x-4">
+                          <div className="flex-1 min-w-0">
+                            <p
+                              className="text-sm font-medium text-gray-900 truncate "
+                              style={{
+                                color: "rgb(201, 196, 184)",
+                                fontSize: 15,
+                              }}
+                            >
+                              {elemento.name}
+                            </p>
+                            <p
+                              className="text-xs text-gray-500 truncate dark:text-gray-400"
+                              style={{ color: "rgb(201, 196, 184)" }}
+                            >
+                              {elemento.username}
+                            </p>
+                          </div>
+                          <div
+                            className="text-xs md:text-md inline-flex items-center font-semibold"
                             style={{ color: "rgb(201, 196, 184)" }}
                           >
-                            {elemento.username}
-                          </p>
+                            <img
+                              src={index === 0 ? oro : ""}
+                              className="pr-0.5"
+                            ></img>
+                            <img
+                              src={index === 1 ? plata : ""}
+                              className="pr-0.5"
+                            ></img>
+                            <img
+                              src={index === 2 ? bronce : ""}
+                              className="pr-0.5"
+                            ></img>
+                            {elemento.contributor}
+                          </div>
+                          <div>
+                            <NavLink to="/userrank" state={elemento}>
+                              <button
+                                style={{ backgroundColor: "rgb(55, 109, 109)" }}
+                                className="w-16 lg:w-32 bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-md"
+                                type="button"
+                              >
+                                More Detail
+                              </button>
+                            </NavLink>
+                          </div>
                         </div>
-                        <div
-                          className="text-xs md:text-md inline-flex items-center font-semibold"
-                          style={{ color: "rgb(201, 196, 184)" }}
-                        >
-                          <img
-                            src={index === 0 ? oro : ""}
-                            className="pr-0.5"
-                          ></img>
-                          <img
-                            src={index === 1 ? plata : ""}
-                            className="pr-0.5"
-                          ></img>
-                          <img
-                            src={index === 2 ? bronce : ""}
-                            className="pr-0.5"
-                          ></img>
-                          {elemento.contributor}
-                        </div>
-                        <div>
-                          <NavLink to="/userrank" state={elemento}>
-                            <button
-                              style={{backgroundColor: 'rgb(55, 109, 109)'}}
-                              className="w-16 lg:w-32 bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-md"
-                              type="button"
-                            >
-                              More Detail
-                            </button>
-                          </NavLink>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              );
-            })
-          ) : (
-            <span className="font-bold text-2xl text-white">
-              No hay usuarios
-            </span>
-          )}
-          <div className="flex justify-center  divide-gray-200">
-            <NavLink to="/rankusers">
-              <button
-                style={{width: 130, backgroundColor: 'rgb(55, 109, 109)'}}
-                className="my-2 bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-md"
-                type="button"
-              >
-                View More
-              </button>
-            </NavLink>
+                      </li>
+                    </ul>
+                  </div>
+                );
+              })
+            )}
+            <div className="flex justify-center  divide-gray-200">
+              <NavLink to="/rankusers">
+                <button
+                  style={{ width: 130, backgroundColor: "rgb(55, 109, 109)" }}
+                  className="my-2 bg-blue-500 text-xs hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-md"
+                  type="button"
+                >
+                  View More
+                </button>
+              </NavLink>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>

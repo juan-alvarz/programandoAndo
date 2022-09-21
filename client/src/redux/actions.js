@@ -33,6 +33,7 @@ import {
   getNotifications,
   getAllUsersBanned,
   getChat,
+  getUsersHome,
 } from "./slice";
 
 // ============================ Courses ============================
@@ -143,7 +144,7 @@ export const createsCourse = (payload) => async (dispatch) => {
     .post("http://localhost:3001/api/courses", payload)
     .then(() => {
       Swal.fire({
-        text: "Create Video Successfully",
+        text: "Create Course Successfully",
         icon: "success",
         confirmButtonText: "OK",
       }).then((result) => {
@@ -217,6 +218,12 @@ export const getUsers = () => (dispatch) => {
   axios
     .get("http://localhost:3001/api/users")
     .then((res) => dispatch(getAllUsers(res.data)))
+    .catch((e) => console.log(e));
+};
+export const getUserHome = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/api/users")
+    .then((res) => dispatch(getUsersHome(res.data)))
     .catch((e) => console.log(e));
 };
 

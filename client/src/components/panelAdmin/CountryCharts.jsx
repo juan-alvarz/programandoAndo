@@ -33,9 +33,9 @@ function CountryCharts() {
         }
     }
 
-    console.log(countryUsersOk)
-    console.log(unicosPaises)
-    console.log(almacenadorDeVecesRepetidas)
+    // console.log(countryUsersOk)
+    // console.log(unicosPaises)
+    // console.log(almacenadorDeVecesRepetidas)
 
     const labels = unicosPaises.map(e => e);
     const data = {
