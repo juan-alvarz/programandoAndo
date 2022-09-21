@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSchools } from "../redux/actions";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+// import PWA from "./PWA";
 
 const Footer = () => {
   const dispatch = useDispatch();
@@ -15,9 +16,16 @@ const Footer = () => {
   }, [dispatch]);
 
   let data = schools;
+  let dataCustomFalse = []
+  // console.log(data)
+  for (let i = 0; i < data.length; i++){
+    if (data[i].custom === false)
+      dataCustomFalse.push(data[i])
+  }
+
   return (
     <footer
-      style={{ backgroundColor: "rgb(17, 52, 82)" }}
+      style={{ backgroundColor: "rgb(17, 52, 82)"}}
       className="p-4 bg-gray-900 border border-solid border-gray-800 sm:p-6"
     >
       <div className="md:flex md:justify-evenly">
@@ -35,8 +43,8 @@ const Footer = () => {
               Schools
             </h2>
             <div>
-              {data ? (
-                data.map((elemento, index) => {
+              {dataCustomFalse ? (
+                dataCustomFalse.map((elemento, index) => {
                   let name = elemento.name;
                   return (
                     <div
@@ -65,27 +73,21 @@ const Footer = () => {
               style={{ color: "rgb(55, 109, 109)" }}
               className="mb-6 text-xs font-semibold text-yellow-300 uppercase"
             >
-              Follow us
+              Download
             </h2>
             <ul className="text-xs text-gray-400">
-              <li className="mb-2">
+              {/* <li className="mb-2">
+              {isReadyForInstall && (
                 <a
                   style={{ color: "rgb(201, 196, 184)" }}
                   href="https://github.com/"
                   className="hover:underline "
+                  onClick={downloadApp}
                 >
-                  Github
+                  Download PWA
                 </a>
-              </li>
-              <li>
-                <a
-                  style={{ color: "rgb(201, 196, 184)" }}
-                  href="https://discord.com/"
-                  className="hover:underline"
-                >
-                  Discord
-                </a>
-              </li>
+                )}
+              </li> */}
             </ul>
           </div>
         </div>

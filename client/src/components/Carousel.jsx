@@ -28,9 +28,6 @@ const Carousel = () => {
     }
   }
 
-  console.log(courses);
-  console.log(carouselCourses);
-
   return (
     <div className="container mx-auto">
       <div className="flex items-center justify-center w-full h-full py-24 sm:py-8 px-4">
@@ -128,6 +125,7 @@ const Carousel = () => {
                             </div>
                             <NavLink to={`/course/${e._id}`}>
                               <div
+                              className="z-30"
                                 style={{
                                   display: "flex",
                                   justifyContent: "center",
@@ -135,11 +133,12 @@ const Carousel = () => {
                                 }}
                               >
                                 <button
+                                
                                   style={{
                                     backgroundColor: "rgb(17, 52, 82)",
                                     color: "rgb(201, 196, 184)",
                                   }}
-                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                                  className="z-30 py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 >
                                   Read more
                                 </button>
@@ -215,7 +214,6 @@ const Carousel = () => {
               <Slider>
                 <div>
                   {carouselCourses.map((e) => {
-                    console.log(e);
                     return (
                       <Slide key={e._id}>
                         <div
@@ -272,6 +270,7 @@ const Carousel = () => {
                             </div>
                             <NavLink to={`/course/${e._id}`}>
                               <div
+                              className="z-30 "
                                 style={{
                                   display: "flex",
                                   justifyContent: "center",
@@ -359,7 +358,6 @@ const Carousel = () => {
               <Slider>
                 <div>
                   {carouselCourses.map((e) => {
-                    console.log(e);
                     return (
                       <Slide key={e._id}>
                         <div
@@ -415,6 +413,7 @@ const Carousel = () => {
                             </div>
                             <NavLink to={`/course/${e._id}`}>
                               <div
+                              className="z-30"
                                 style={{
                                   display: "flex",
                                   justifyContent: "center",
@@ -426,7 +425,7 @@ const Carousel = () => {
                                     backgroundColor: "rgb(17, 52, 82)",
                                     color: "rgb(201, 196, 184)",
                                   }}
-                                  className="py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+                                  className=" py-2.5 px-5 mr-2 mb-2 text-sm font-semi-bold focus:outline-none bg-blue-700 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                                 >
                                   Read more
                                 </button>

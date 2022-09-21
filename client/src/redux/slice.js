@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const slice = createSlice({
   name: "programandoando",
   initialState: {
+    userBanned: [],
     stateFilter: [],
     courses: [],
     course: {},
@@ -12,8 +13,15 @@ export const slice = createSlice({
     user: {},
     videos: [],
     video: {},
+    foro: {},
+    foros: [],
     filters: [],
     favoritesUser: [],
+    notifications: [],
+    chat: {},
+    scoring: [],
+    ownPath: [],
+    usersHome:[]
   },
   reducers: {
     // ========= Courses ===========
@@ -44,7 +52,7 @@ export const slice = createSlice({
     },
     //
     getCoursesByAZ: (state, action) => {
-      state.filters = action.payload.sort(function (a, b) {
+      state.filters = action.payload.sort(function(a, b) {
         if (a.name.toUpperCase() > b.name.toUpperCase()) {
           return 1;
         }
@@ -56,7 +64,7 @@ export const slice = createSlice({
       state.courses = action.payload;
     },
     getCoursesByZA: (state, action) => {
-      state.filters = action.payload.sort(function (a, b) {
+      state.filters = action.payload.sort(function(a, b) {
         if (a.name.toUpperCase() > b.name.toUpperCase()) {
           return -1;
         }
@@ -71,11 +79,16 @@ export const slice = createSlice({
       state.course = action.payload;
     },
 
-    favoriteCourse:(state,action)=>{
-      state.favoritesUser=action.payload
-    }
-    ,
+    getFavoriteCourse: (state, action) => {
+      state.favoritesUser = action.payload;
+    },
 
+    getScoringCourse: (state, action) => {
+      state.scoring = action.payload;
+    },
+    getownPath: (state, action) => {
+      state.ownPath = action.payload;
+    },
     createCourse: (state) => {
       return { ...state };
     },
@@ -100,6 +113,13 @@ export const slice = createSlice({
     // ========= users ===========
     getAllUsers: (state, action) => {
       state.users = action.payload;
+    },
+    getUsersHome: (state, action) => {
+      let usuarios=[]
+      for (let i = 0; i < 5; i++) {
+        usuarios.push(action.payload[i]);
+      }
+      state.usersHome = usuarios;
     },
     getUserById: (state, action) => {
       state.user = action.payload;
@@ -130,6 +150,14 @@ export const slice = createSlice({
     getVideosByName: (state, action) => {
       state.courses = action.payload;
     },
+
+    //======== foros ==============
+    getForos: (state, action) => {
+      state.foros = action.payload;
+    },
+    getForo: (state, action) => {
+      state.foro = action.payload;
+    },
     // getSchoolsByName: (state, action) => {
     //   state.courses = action.payload;
     // },
@@ -159,6 +187,20 @@ export const slice = createSlice({
 
       state.stateFilter = sortedAlf;
     },
+    // ============== Edit =====================
+    updateSchool: (state) => {
+      return { ...state };
+    },
+    updateCourse: (state) => {
+      return { ...state };
+    },
+    updateVideo: (state) => {
+      return { ...state };
+    },
+    updateUser: (state) => {
+      return { ...state };
+    },
+
     // ============== Delete ====================
     deleteSchool: (state) => {
       return { ...state };
@@ -175,6 +217,18 @@ export const slice = createSlice({
     deleteNotifications: (state) => {
       return { ...state };
     },
+    // ============== Notification ====================
+    getNotifications: (state, action) => {
+      state.notifications = action.payload;
+    },
+    // ============== Banned ==========================
+    getAllUsersBanned: (state, action) => {
+      state.userBanned = action.payload;
+    },
+    // ============== getChat ======================
+    getChat: (state, action) => {
+      state.chat = action.payload;
+    },
   },
 });
 
@@ -186,10 +240,13 @@ export const {
   getSchoolId,
   createSchool,
   getAllUsers,
+  getUsersHome,
   getUserById,
   createUser,
   getVideos,
   getVideo,
+  getForo,
+  getForos,
   createVideo,
   clearVideo,
   orderFilter,
@@ -203,12 +260,22 @@ export const {
   getCourse5h,
   getCourse3h,
   getSession,
-  favoriteCourse,
+  getFavoriteCourse,
+  getScoringCourse,
+  getownPath,
   deleteSchool,
   deleteCourse,
   deleteVideo,
   deleteUser,
   deleteNotifications,
+  getNotifications,
+  uppdateSchool,
+  uppdateCourse,
+  uppdateVideo,
+  uppdateUser,
+  favoriteCourse,
+  getAllUsersBanned,
+  getChat,
 } = slice.actions;
 
 export default slice.reducer;

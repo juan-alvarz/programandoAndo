@@ -23,8 +23,8 @@ router.get("/", getCourses);
 router.get("/:id", validatorGetCourse, getCourseById);
 
 router.post("/", validatorCreateCourse, createCourse);
-
-router.put("/:id", validatorGetCourse, updateCourse);
+// validatorGetCourse,
+router.put("/:id", updateCourse);
 
 router.delete("/:id", validatorGetCourse, softDeleteCourse);
 

@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { forgetPasswordUpdate, getUsers } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ForgetPassword() {
+  // let userLocal = window.localStorage.getItem("user");
+  // let userObj = userLocal && JSON.parse(userLocal);
+  // const userRole = userObj && userObj.user.role;
+  // const userId = userObj && userObj.user._id;
+
+  const { users } = useSelector((state) => state.programandoando);
+
+  console.log(users);
+
+  const dispatch = useDispatch();
+
+  const allEmail = users.map((e) => e.email);
+  const allId = users.map((i) => i._id);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
   const navigate = useNavigate();
   // react-hook-forms
   const {
@@ -13,9 +33,9 @@ export default function ForgetPassword() {
     setValue,
   } = useForm({
     defaultValues: {
-      email: "",
       password: "",
       rePassword: "",
+      email: "",
     },
   });
 
@@ -32,6 +52,8 @@ export default function ForgetPassword() {
   }
 
   const onSubmit = (data) => {
+    const allEmail = users.filter((e) => e.email === data.email);
+    console.log(data);
     if (data.password !== data.rePassword) {
       return Swal.fire({
         title: "Error in Email or Password",
@@ -39,34 +61,36 @@ export default function ForgetPassword() {
         icon: "error",
         confirmButtonText: "Back",
       });
-    } else {
-      console.log(data);
+    } else if (allEmail) {
+      dispatch(forgetPasswordUpdate({ email: data.email }));
+      handlelogout();
       return Swal.fire({
-        title: "Create User",
-        text: "Create User Successfully",
+        text: "Plase, checked your email",
         icon: "success",
         confirmButtonText: "Back",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login");
+          navigate("/");
         }
       });
     }
-    // } else if (
-    //   AllUsers.find(
-    //     (item) =>
-    //       item.username.replace(/\s+/g, "").toLowerCase() ===
-    //       data.username.replace(/\s+/g, "").toLowerCase()
-    //   )
-    // ) {
-    //   return Swal.fire({
-    //     title: "repeated user",
-    //     text: "Check the user exists!!",
-    //     icon: "error",
-    //     confirmButtonText: "Back",
-    //   });
   };
 
+  const handlelogout = () => {
+    window.localStorage.removeItem("user");
+  };
+
+  // if (!userRole) {
+  //   Swal.fire({
+  //     text: "Please, Login",
+  //     icon: "error",
+  //     confirmButtonText: "Back",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       navigate("/");
+  //     }
+  //   });
+  // } else {
   return (
     <div>
       <div className="flex flex-col items-center min-h-screen pt-6 sm:justify-center sm:pt-0 bg-gray-50">
@@ -79,13 +103,37 @@ export default function ForgetPassword() {
         <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-lg sm:rounded-lg">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-bold text-black undefined"
-              >
-                Email
-              </label>
-              <div className="flex flex-col items-start">
+              <div className="mt-4">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-bold text-black undefined"
+                >
+                  Email
+                </label>
+                <div className="flex flex-col items-start">
+                  <input
+                    type="email"
+                    name="email"
+                    className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    placeholder="Email"
+                    {...register("email", {
+                      required: true,
+                      pattern: /^[\w]+@{1}[\w]+\.[a-z]{2,3}$/,
+                    })}
+                  />
+                  {errors.email?.type === "required" && (
+                    <small className="text-red-600 font-bold">
+                      Email required
+                    </small>
+                  )}
+                  {errors.email?.type === "pattern" && (
+                    <small className="text-red-600 font-bold">
+                      You must enter your email correctly
+                    </small>
+                  )}
+                </div>
+              </div>
+              {/* <div className="flex flex-col items-start">
                 <input
                   type="email"
                   name="email"
@@ -106,26 +154,26 @@ export default function ForgetPassword() {
                     You must enter your email correctly
                   </small>
                 )}
-              </div>
+              </div> */}
             </div>
 
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <label
                 htmlFor="password"
                 className="block text-sm font-bold text-black undefined"
               >
-                Password
+                New Password
               </label>
               <div className="flex flex-col items-start">
                 <input
                   type={pass}
                   name="password"
                   className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                  placeholder="Password"
+                  placeholder="New Password"
+                  // onChange={(e) => handleChange(e)}
                   {...register("password", {
                     required: true,
-                    pattern:
-                      /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g,
+                    pattern: /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g,
                   })}
                 />
                 <div className="flex justify-end mt-0.5 w-full">
@@ -157,14 +205,15 @@ export default function ForgetPassword() {
                 htmlFor="password_confirmation"
                 className="block text-sm font-bold text-black undefined"
               >
-                Confirm Password
+                Confirm New Password
               </label>
               <div className="flex flex-col items-start">
                 <input
                   type={passTwo}
                   name="rePassword"
                   className="block w-full px-4 py-2 mt-2 text-black font-light bg-white border rounded-md focus:border-blue-500 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                  placeholder="Re-Password"
+                  placeholder="Confirm New Password"
+                  // onChange={(e) => handleChange(e)}
                   {...register("rePassword", { required: true })}
                 />
                 <div className="flex justify-end mt-0.5 w-full">
@@ -183,7 +232,7 @@ export default function ForgetPassword() {
                   </small>
                 )}
               </div>
-            </div>
+            </div>*/}
             <div className="flex items-center mt-4">
               <button
                 className="w-full px-4 py-2 tracking-wide font-bold text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
@@ -199,3 +248,4 @@ export default function ForgetPassword() {
     </div>
   );
 }
+// }
