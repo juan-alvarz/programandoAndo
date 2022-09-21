@@ -144,7 +144,10 @@ function ModifyProfileUser(prop) {
       let payloadEdu = { user: userRole, studyStatus: inputUser.studyStatus };
       dispatch(updateUser(payloadEdu, userId));
 
-      let payloadDate = { user: userRole, birthday: inputUser.birthday };
+      const data = inputUser.birthday;
+      const date = data.split("-");
+      const newDate = new Date(date[0], date[1] - 1, date[2]);
+      let payloadDate = { user: userRole, birthday: newDate };
       dispatch(updateUser(payloadDate, userId));
 
       let payloadNotification = {
