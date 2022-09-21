@@ -17,6 +17,7 @@ function AgeCharts() {
 
     const now = Date.now()
 
+    console.log(users)
 
     var diferencia = []
 

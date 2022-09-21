@@ -18,13 +18,13 @@ function Administrator() {
       <Sidebar />
       <div className="grid mx-auto max-w-screen-xl py-16">
         <div
-          style={{ width: 500, backgroundColor: "#fff" }}
+          style={{ width: 650, backgroundColor: "#fff" }}
           className="h-fit px-7 py-7 rounded-lg"
         >
           <AgeCharts />
         </div>
         <div
-          style={{ width: 500, backgroundColor: "#fff" }}
+          style={{ width: 650, backgroundColor: "#fff" }}
           className="h-fit px-7 py-7 rounded-lg"
         >
           <CountryCharts />
